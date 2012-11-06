@@ -16,8 +16,6 @@
 
     <link href="/rss.xml" rel="alternate" title="4oxmile blog" type="application/rss+xml">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Rokkitt:400,700' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Questrial' rel='stylesheet' type='text/css'>
 
     <!-- Le styles -->
     <link rel="canonical" href="http://4oxmile.github.com">
@@ -42,19 +40,16 @@
     <script src="/js/apps/github.js"></script>
     <script src="/js/apps/twitter.js"></script>
 </head>
+
 <body data-spy="scroll" data-target=".subnav" data-offset="50">
 
     <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container">
-            <header class="site-meta">
-                <span>{ </span><h1 class="title">haroopress</h1>by haroopress <span> }</span>
-            </header>
-          
             <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
             </a>
 
             <div class="nav-collapse">
@@ -72,70 +67,68 @@
                 
                 <a class="rss" href="/rss.xml">RSS</a>
             </div>
+            <form action="/search" id="search">
+                <input type="text" value="" placeholder="Search" name="q" id="search-text" class="placeholder">
+            </form>
         </div>
     </div>
 </div>
 
-    <div class="container page-author">
+    <div class="container">
     <div class="row">
-        <div class="span9 main">
-            <div class="well article">
-                <h1><img src="http://www.gravatar.com/avatar/a8618a255192bd842fdd62d099776735?r=pg&amp;s=128.jpg&amp;d=identicon" width="45" class="tmb"> haroopress's Articles</h1>
-                <div class="row">
-                    <div class="span8">
-                        <ul>
-                    
-                            <li>
-                                <h3>
-                                    <a href="/post/welcome-to-haroopress">Welcome to haroopress</a> <small>at Tuesday, February 21 2012 9:00 AM</small>
-                                </h3>
-                            </li>
-                    
-                        </ul>
-                    </div>
+        <div class="span9 articles">
+            <div class="well">
+                <div class="page-header">
+                    <h1>
+                        <img src="http://www.gravatar.com/avatar/a8618a255192bd842fdd62d099776735?r=pg&amp;s=128.jpg&amp;d=identicon" width="50" class="thumb" />
+                        haroopress's Articles
+                    </h1>
                 </div>
+
+                <ul class="lists">
+                    
+                    <li>
+                        <h3>
+                            <a href="/post/welcome-to-haroopress">Welcome to haroopress</a>
+                        </h3>
+                        <small>at Tuesday, February 21 2012 9:00 AM</small>
+                    </li>
+                    
+                </ul>
             </div>
         </div>
         <div class="span3 side">
                 
     <div class="well contributors">
-        <div class="pull-right">
-            <a href="/authors"><i class=" icon-info-sign"></i></a>
+        <h6 class="title"><a href="/authors">contributors</a></h6>
+        
+        <div class="row-fluid contributor">
+            <a href="/authors/4oxmile" title=""><img src="http://www.gravatar.com/avatar/38a34c632de2f7bbafacb8fcfc543f33?r=pg&amp;s=128.jpg&amp;d=identicon" /></a>
+            <p>
+                <strong>4oxmile</strong><br>
+                <span>@4oxmile</span>
+            </p>
         </div>
-        <h6 class="title">contributors</h6>
         
-        <ul>
-            <li>
-                <a class="pull-left" href="/authors/4oxmile" title="undefined">
-                    <img src="http://www.gravatar.com/avatar/38a34c632de2f7bbafacb8fcfc543f33?r=pg&amp;s=128.jpg&amp;d=identicon" />
-                </a>
-                <strong>4oxmile</strong><br/>
-                <a href="https://twitter.com/#!/4oxmile" target="_blank">@4oxmile</a>
-            </li>
-        </ul>
-        
-        <ul>
-            <li>
-                <a class="pull-left" href="/authors/haroopress" title="undefined">
-                    <img src="http://www.gravatar.com/avatar/a8618a255192bd842fdd62d099776735?r=pg&amp;s=128.jpg&amp;d=identicon" />
-                </a>
-                <strong>haroopress</strong><br/>
-                <a href="https://twitter.com/#!/haroopress" target="_blank">@haroopress</a>
-            </li>
-        </ul>
+        <div class="row-fluid contributor">
+            <a href="/authors/haroopress" title=""><img src="http://www.gravatar.com/avatar/a8618a255192bd842fdd62d099776735?r=pg&amp;s=128.jpg&amp;d=identicon" /></a>
+            <p>
+                <strong>haroopress</strong><br>
+                <span>@haroopress</span>
+            </p>
+        </div>
         
     </div>
     
-                        <div class="well">
+            			<div class="well category">
                 <ul class="nav nav-list">
                     <li class="nav-header title">Categories</li>
-                    <li class=""><a href="/category"><i class="icon-home"></i> Home</a></li>
+                    <li class="active"><a href="/category">Home</a></li>
                     
-                    <li><a href="/category/first"><i class="icon-book"></i> first</a></li>
+                    <li><a href="/category/first">first</a></li>
                     
                 </ul>
             </div>
-
         </div>
     </div>
 </div><!-- /container -->
@@ -143,12 +136,14 @@
 
         <footer class="footer">
         <div class="container">
-            <div class="bd">
-                <div class="well">
-                    <p class="pull-right"><a href="#" class="top">Back to top</a></p>
-                    <strong>haroopress</strong> developed by <a href="http://twitter.com/rhiokim" target="_blank">@rhiokim</a>,<a href="http://twitter.com/haroopress" target="_blank">@haroopress</a> and source in <a href="https://github.com/rhiokim/haroopress" target="_blank">github</a><br/>
-                    Designed and built with all the love in the world <a href="http://twitter.com/twitter" target="_blank">@twitter</a> by <a href="http://twitter.com/mdo" target="_blank">@mdo</a> and <a href="http://twitter.com/fat" target="_blank">@fat</a>.<br />
-                    Code licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License v2.0</a>. Documentation licensed under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+            <div class="row">
+                <div class="span12">
+                    <div class="well">
+                        <p class="pull-right"><a href="#" class="backtotop">Back to top</a></p>
+                            <strong>haroopress</strong> developed by <a href="http://twitter.com/rhiokim" target="_blank">@rhiokim</a>,<a href="http://twitter.com/haroopress" target="_blank">@haroopress</a> and source in <a href="https://github.com/rhiokim/haroopress" target="_blank">github</a><br/>
+                            Designed and built with all the love in the world <a href="http://twitter.com/twitter" target="_blank">@twitter</a> by <a href="http://twitter.com/mdo" target="_blank">@mdo</a> and <a href="http://twitter.com/fat" target="_blank">@fat</a>.<br />
+                            Code licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License v2.0</a>. Documentation licensed under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+                    </div>
                 </div>
             </div>
         </div>
