@@ -41,7 +41,8 @@
 </head>
 <body data-spy="scroll" data-target=".subnav" data-offset="50">
 
-        <div class="navbar navbar-fixed-top">
+    
+    <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
           <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -68,19 +69,21 @@
       </div>
     </div>
 
-    <div class="container page-main">
+    
+<link href="/css/code/default.css" rel="stylesheet">
+
+<div class="container page-main">
     <div class="row">
-        <div class="span3">
+        <div class="span3 _side">
             
             <div id="author" class="well">
                 <div>
                     <h3>About This Site</h3>
                     <p>
-                    이 사이트는 노드 기술을 공유하는 사이트로 <a href="http://haroopress.github.com" target="_blank">하루프레스</a>를 기반으로 구축되었습니다.  
+                        이 사이트는 <a href="http://github.com/rhiokim/haroopress" target="_target">haroopress</a> 엔진으로 구축되어진 사이트입니다.
                     </p>
                 </div>
             </div>
-
                         <div class="well">
                 <ul class="nav nav-list">
                     <li class="nav-header">Categories</li>
@@ -99,23 +102,19 @@
         <h6>contributors</h6>
         
         <div class="row-fluid">
-            <a class="pull-left" href="/authors/4oxmile" title="undefined">
-                <img src="http://www.gravatar.com/avatar/38a34c632de2f7bbafacb8fcfc543f33?r=pg&amp;s=128.jpg&amp;d=identicon" />
-            </a>
+            <a class="pull-left" href="/authors/4oxmile" title=""><img src="http://www.gravatar.com/avatar/38a34c632de2f7bbafacb8fcfc543f33?r=pg&amp;s=128.jpg&amp;d=identicon" /></a>
             <p>
                 <strong>4oxmile</strong><br/>
-                <a href="https://twitter.com/#!/4oxmile" target="_blank">@4oxmile</a>
+                <span>@4oxmile</span>
             </p>
         </div>
         <hr>
         
         <div class="row-fluid">
-            <a class="pull-left" href="/authors/haroopress" title="undefined">
-                <img src="http://www.gravatar.com/avatar/a8618a255192bd842fdd62d099776735?r=pg&amp;s=128.jpg&amp;d=identicon" />
-            </a>
+            <a class="pull-left" href="/authors/haroopress" title=""><img src="http://www.gravatar.com/avatar/a8618a255192bd842fdd62d099776735?r=pg&amp;s=128.jpg&amp;d=identicon" /></a>
             <p>
                 <strong>haroopress</strong><br/>
-                <a href="https://twitter.com/#!/haroopress" target="_blank">@haroopress</a>
+                <span>@haroopress</span>
             </p>
         </div>
         <hr>
@@ -160,45 +159,55 @@
         </div>
         <div class="span9">
             
-            <div class="well">
-                
-                <div class="page-header">
-                    <h1><a href="/post/first">첫번째</a></h1>
-                    <span class="pull-right">Tuesday, November 6 2012 8:01 PM</span>
-                </div>
-                <div class="pull-right">
-                    <ul class="thumbnails">
-                        <li class="thumbnail">
-                            <img src="http://www.gravatar.com/avatar/38a34c632de2f7bbafacb8fcfc543f33?r=pg&amp;s=128.jpg&amp;d=identicon"/>
-                        </li>
-                    </ul>
-                </div>
-                <div class="markdown-wrapper">
-                    <h1 id="toc_1">드디어</h1>
+            <div class="row">
+                <div class="span9">
+                    <div class="well bg">
+                        
+                        <div class="page-header">
+                            <h1><a href="/post/first">첫번째</a></h1>
+                            <span class="pull-right">Tuesday, November 6 2012 8:01 PM</span>
+                        </div>
+                        <div class="pull-right" style="padding: 0 10px 10px 10px;">
+                            <ul class="thumbnails">
+                                <li class="thumbnail">
+                                    <a>
+                                        <img src="http://www.gravatar.com/avatar/38a34c632de2f7bbafacb8fcfc543f33?r=pg&amp;s=128.jpg&amp;d=identicon" width="128"/>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="markdown-wrapper">
+                            <h1 id="toc_1">드디어</h1>
 <p>하루프레스 설치성공!!</p><p>생각보다 힘들었다.</p>
+                        </div>
+                        <hr/>
+                        <a class="pull-right" href="/post/first#disqus_thread" data-disqus-identifier="0"></a>
+                        <p>
+                            <a href="/post/first" class="btn btn-info">Read more...</a>
+                        </p>
+                    </div>
                 </div>
-                <hr/>
-                <a class="pull-right" href="/post/first#disqus_thread" data-disqus-identifier="0"></a>
-                <p>
-                    <a href="/post/first" class="btn btn-inverse">Read more...</a>
-                </p>
             </div>
             
-            <div class="well">
-                <div class="pull-right bookmark"></div>
-                <div class="page-header">
-                    <h1><a href="/post/welcome-to-haroopress">Welcome to haroopress</a></h1>
-                    <span class="pull-right">Tuesday, February 21 2012 9:00 AM</span>
-                </div>
-                <div class="pull-right">
-                    <ul class="thumbnails">
-                        <li class="thumbnail">
-                            <img src="http://www.gravatar.com/avatar/a8618a255192bd842fdd62d099776735?r=pg&amp;s=128.jpg&amp;d=identicon"/>
-                        </li>
-                    </ul>
-                </div>
-                <div class="markdown-wrapper">
-                    <h3 id="toc_9">환영합니다.</h3>
+            <div class="row">
+                <div class="span9">
+                    <div class="well bg">
+                        <div class="pull-right bookmark"></div>
+                        <div class="page-header">
+                            <h1><a href="/post/welcome-to-haroopress">Welcome to haroopress</a></h1>
+                            <span class="pull-right">Tuesday, February 21 2012 9:00 AM</span>
+                        </div>
+                        <div class="pull-right" style="padding: 0 10px 10px 10px;">
+                            <ul class="thumbnails">
+                                <li class="thumbnail">
+                                    <a>
+                                        <img src="http://www.gravatar.com/avatar/a8618a255192bd842fdd62d099776735?r=pg&amp;s=128.jpg&amp;d=identicon" width="128"/>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="markdown-wrapper">
+                            <h3 id="toc_9">환영합니다.</h3>
 
 <ul>
 <li>Welcome</li>
@@ -240,12 +249,14 @@
 <li><a href="https://github.com/rhiokim/haroopress/wiki/Change-History">변경 이력</a></li>
 </ul>
 
+                        </div>
+                        <hr/>
+                        <a class="pull-right" href="/post/welcome-to-haroopress#disqus_thread" data-disqus-identifier="1"></a>
+                        <p>
+                            <a href="/post/welcome-to-haroopress" class="btn btn-info">Read more...</a>
+                        </p>
+                    </div>
                 </div>
-                <hr/>
-                <a class="pull-right" href="/post/welcome-to-haroopress#disqus_thread" data-disqus-identifier="1"></a>
-                <p>
-                    <a href="/post/welcome-to-haroopress" class="btn btn-inverse">Read more...</a>
-                </p>
             </div>
             
         </div>
@@ -269,20 +280,22 @@
 
 
 
-        <footer class="footer">
+    
+
+    <footer class="footer">
         <div class="container">
             <div class="row">
                 <div class="span12 ">
-                    <div class="well">
+                    <div class="well-black">
                         <p class="pull-right"><a href="#">Back to top</a></p>
-                            Contact <a href="mailto:rhio.kim@gmail.com">rhio.kim@gmail.com</a><br/>
-                            Documentation licensed under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+                            <strong>haroopress</strong> developed by <a href="http://twitter.com/rhiokim" target="_blank">@rhiokim</a>,<a href="http://twitter.com/haroopress" target="_blank">@haroopress</a> and source in <a href="https://github.com/rhiokim/haroopress" target="_blank">github</a><br/>
+                            Designed and built with all the love in the world <a href="http://twitter.com/twitter" target="_blank">@twitter</a> by <a href="http://twitter.com/mdo" target="_blank">@mdo</a> and <a href="http://twitter.com/fat" target="_blank">@fat</a>.<br />
+                            Code licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License v2.0</a>. Documentation licensed under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
                     </div>
                 </div>
             </div>
         </div>
     </footer>
-
 
     
 
