@@ -15,8 +15,6 @@
     <![endif]-->
 
     <link href="/rss.xml" rel="alternate" title="4oxmile blog" type="application/rss+xml">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Rokkitt:400,700' rel='stylesheet' type='text/css'>
 
     <!-- Le styles -->
     <link rel="canonical" href="http://4oxmile.github.com">
@@ -43,92 +41,106 @@
 </head>
 <body data-spy="scroll" data-target=".subnav" data-offset="50">
 
-    <div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
+        <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
         <div class="container">
-            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </a>
-            <div class="social">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+
+          <a class="pull-right" href="/rss.xml"><img src="/img/buttons/rss.png" /></a>
+          
+
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li>
+                <a href="/">Home</a>
+              </li>
+              <li>
+                <a href="/archives">Archives</a>
+              </li>
                 
-                <a class="rss" href="/rss.xml">RSS</a>
-            </div>
-            
-
-            <div class="nav-collapse">
-                <ul class="nav">
-                    <li>
-                        <a href="/">Home</a>
-                    </li>
-                    <li>
-                        <a href="/archives">Archives</a>
-                    </li>
-                    
-                </ul>
-            </div>
-            <form action="/search" id="search">
-                <input type="text" value="" placeholder="Search" name="q" id="search-text" class="placeholder">
-            </form>
+            </ul>
+          </div>
         </div>
+      </div>
     </div>
-</div>
 
-    <div class="container">
+    <div class="container page-author">
     <div class="row">
-        <div class="span3 side">
+        <div class="span3">
 			    
     <div class="well contributors">
-        <h6 class="title"><a href="/authors">contributors</a></h6>
+        <div class="pull-right">
+            <a href="/authors"><i class=" icon-info-sign"></i></a>
+        </div>
+        <h6>contributors</h6>
         
-        <div class="row-fluid contributor">
-            <a href="/authors/4oxmile" title=""><img src="http://www.gravatar.com/avatar/38a34c632de2f7bbafacb8fcfc543f33?r=pg&amp;s=128.jpg&amp;d=identicon" /></a>
+        <div class="row-fluid">
+            <a class="pull-left" href="/authors/4oxmile" title="undefined">
+                <img src="http://www.gravatar.com/avatar/38a34c632de2f7bbafacb8fcfc543f33?r=pg&amp;s=128.jpg&amp;d=identicon" />
+            </a>
             <p>
-                <strong>4oxmile</strong><br>
-                <span>@4oxmile</span>
+                <strong>4oxmile</strong><br/>
+                <a href="https://twitter.com/#!/4oxmile" target="_blank">@4oxmile</a>
             </p>
         </div>
+        <hr>
         
-        <div class="row-fluid contributor">
-            <a href="/authors/haroopress" title=""><img src="http://www.gravatar.com/avatar/a8618a255192bd842fdd62d099776735?r=pg&amp;s=128.jpg&amp;d=identicon" /></a>
+        <div class="row-fluid">
+            <a class="pull-left" href="/authors/haroopress" title="undefined">
+                <img src="http://www.gravatar.com/avatar/a8618a255192bd842fdd62d099776735?r=pg&amp;s=128.jpg&amp;d=identicon" />
+            </a>
             <p>
-                <strong>haroopress</strong><br>
-                <span>@haroopress</span>
+                <strong>haroopress</strong><br/>
+                <a href="https://twitter.com/#!/haroopress" target="_blank">@haroopress</a>
             </p>
         </div>
+        <hr>
         
     </div>
     
-						<div class="well category">
+			            <div class="well">
                 <ul class="nav nav-list">
-                    <li class="nav-header title">Categories</li>
-                    <li class="active"><a href="/category">Home</a></li>
+                    <li class="nav-header">Categories</li>
+                    <li class=""><a href="/category"><i class="icon-home"></i> Home</a></li>
                     
-                    <li><a href="/category/first">first</a></li>
+                    <li><a href="/category/first"><i class="icon-book"></i> first</a></li>
                     
                 </ul>
             </div>
+
         </div>
-        <div class="span9 articles">
-            <div class="well">
+        <div class="span9">
+            <div class="well bg">
+                <div class="pull-right">
+                    <ul class="thumbnails">
+                        <li class="thumbnail">
+                            <a>
+                                <img src="http://www.gravatar.com/avatar/38a34c632de2f7bbafacb8fcfc543f33?r=pg&amp;s=128.jpg&amp;d=identicon" width="48"/>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
                 <div class="page-header">
-                    <h1>
-                        <img src="http://www.gravatar.com/avatar/38a34c632de2f7bbafacb8fcfc543f33?r=pg&amp;s=128.jpg&amp;d=identicon" width="50" class="thumb" />
-                        4oxmile's Articles
+                    <h1>4oxmile's Articles
                     </h1>
                 </div>
-
-                <ul class="lists">
+                <div class="row">
+                    <div class="span8">
+                        <ul>
                     
-                    <li>
-                        <h3>
-                            <a href="/post/first">첫번째</a>
-                        </h3>
-                        <small>at Tuesday, November 6 2012 8:01 PM</small>
-                    </li>
+                            <li>
+                                <h3>
+                                    <a href="/post/first">첫번째</a> <small>at Tuesday, November 6 2012 8:01 PM</small>
+                                </h3>
+                            </li>
                     
-                </ul>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -138,20 +150,20 @@
         <footer class="footer">
         <div class="container">
             <div class="row">
-                <div class="span9 offset3">
+                <div class="span12 ">
                     <div class="well">
-                        <p class="pull-right"><a href="#" class="backtotop">Back to top</a></p>
-                            <strong>haroopress</strong> developed by <a href="http://twitter.com/rhiokim" target="_blank">@rhiokim</a>,<a href="http://twitter.com/haroopress" target="_blank">@haroopress</a> and source in <a href="https://github.com/rhiokim/haroopress" target="_blank">github</a><br/>
-                            Designed and built with all the love in the world <a href="http://twitter.com/twitter" target="_blank">@twitter</a> by <a href="http://twitter.com/mdo" target="_blank">@mdo</a> and <a href="http://twitter.com/fat" target="_blank">@fat</a>.<br />
-                            Code licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License v2.0</a>. Documentation licensed under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+                        <p class="pull-right"><a href="#">Back to top</a></p>
+                            Contact <a href="mailto:rhio.kim@gmail.com">rhio.kim@gmail.com</a><br/>
+                            Documentation licensed under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
                     </div>
                 </div>
             </div>
         </div>
     </footer>
 
+
     
 
-
+    
 </body>
 </html>
