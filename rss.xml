@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[4oxmile blog]]></title><description><![CDATA[4oxmile]]></description><link>http://4oxmile.github.com</link><generator>NodeJS RSS Module</generator><lastBuildDate>Wed, 14 Nov 2012 11:54:34 GMT</lastBuildDate><atom:link href="http://4oxmile.github.com/rss.xml" rel="self" type="application/rss+xml"/><item><title><![CDATA[첫번째]]></title><description><![CDATA[<img src="http://www.gravatar.com/avatar/38a34c632de2f7bbafacb8fcfc543f33?r=pg&s=48.jpg&d=identicon"><br/><h1 id="toc_1">드디어</h1>
-<p>하루프레스 설치성공!!</p><p>생각보다 힘들었다.</p><pre><code class="javascript"></code></pre>]]></description><link>http://4oxmile.github.com/post/first</link><guid isPermaLink="false">first</guid><dc:creator><![CDATA[<a href="4oxmile" target="_blank">4oxmile</a>]]></dc:creator><pubDate>Tue, 06 Nov 2012 11:01:00 GMT</pubDate></item><item><title><![CDATA[Welcome to haroopress]]></title><description><![CDATA[<img src="http://www.gravatar.com/avatar/a8618a255192bd842fdd62d099776735?r=pg&s=48.jpg&d=identicon"><br/><h3 id="toc_9">환영합니다.</h3>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[4oxmile blog]]></title><description><![CDATA[4oxmile]]></description><link>http://4oxmile.github.com</link><generator>NodeJS RSS Module</generator><lastBuildDate>Wed, 14 Nov 2012 11:55:27 GMT</lastBuildDate><atom:link href="http://4oxmile.github.com/rss.xml" rel="self" type="application/rss+xml"/><item><title><![CDATA[Creating-a-random-chat-No0]]></title><description><![CDATA[<img src="http://www.gravatar.com/avatar/38a34c632de2f7bbafacb8fcfc543f33?r=pg&s=48.jpg&d=identicon"><br/><h1 id="toc_4">프로젝트 FoxChat</h1>
+<p>NodeJS와 Socketio를 이용한 랜덤 채팅 서버를 구축하고 배포해서
+누구나 자신의 서버에 랜덤 채팅서버를 구축 할 수있도록 자동화하는게 목표</p>
+<blockquote>
+<p>NodeJS와 SocketIO를 이용해서 만드는 개인 프로젝트</p></blockquote>
+
+<h2 id="toc_5">지향점</h2>
+]]></description><link>http://4oxmile.github.com/post/creating-a-random-chat-no0</link><guid isPermaLink="false">creating-a-random-chat-no0</guid><dc:creator><![CDATA[<a href="4oxmile" target="_blank">4oxmile</a>]]></dc:creator><pubDate>Wed, 14 Nov 2012 11:45:00 GMT</pubDate></item><item><title><![CDATA[첫번째]]></title><description><![CDATA[<img src="http://www.gravatar.com/avatar/38a34c632de2f7bbafacb8fcfc543f33?r=pg&s=48.jpg&d=identicon"><br/><h1 id="toc_7">드디어</h1>
+<p>하루프레스 설치성공!!</p><p>생각보다 힘들었다.</p><pre><code class="javascript"></code></pre>]]></description><link>http://4oxmile.github.com/post/first</link><guid isPermaLink="false">first</guid><dc:creator><![CDATA[<a href="4oxmile" target="_blank">4oxmile</a>]]></dc:creator><pubDate>Tue, 06 Nov 2012 11:01:00 GMT</pubDate></item><item><title><![CDATA[Welcome to haroopress]]></title><description><![CDATA[<img src="http://www.gravatar.com/avatar/a8618a255192bd842fdd62d099776735?r=pg&s=48.jpg&d=identicon"><br/><h3 id="toc_15">환영합니다.</h3>
 
 <ul>
 <li>Welcome</li>
@@ -14,9 +21,9 @@
 <li>добро пожаловать</li>
 </ul>
 
-<h3 id="toc_10">Intro</h3>
+<h3 id="toc_16">Intro</h3>
 <p>하루프레스는 하루의 이야기를 블로깅하기 위한 정적 페이지 블로그 엔진입니다.</p>
-<h3 id="toc_11">Haroopress?</h3>
+<h3 id="toc_17">Haroopress?</h3>
 
 <ul>
 <li><a href="http://haroopress.com/about/">하루프레스?</a></li>
@@ -25,7 +32,7 @@
 <li><a href="http://haroopress.com/diary">하루프레스 개발 다이어리</a></li>
 </ul>
 
-<h3 id="toc_12">Usage</h3>
+<h3 id="toc_18">Usage</h3>
 
 <ul>
 <li><a href="http://haroopress.com/post/haroopress-install-guide-movie/">5분만에 설치하는 하루프레스 동영상</a></li>
@@ -36,7 +43,7 @@
 <li><a href="http://haroopress.com/post/harupeureseu-hwangyeongseoljeong-hagi/">하루프레스 환경설정 하기</a></li>
 </ul>
 
-<h3 id="toc_13">History</h3>
+<h3 id="toc_19">History</h3>
 
 <ul>
 <li><a href="https://github.com/rhiokim/haroopress/wiki/Change-History">변경 이력</a></li>
