@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[4oxmile blog]]></title><description><![CDATA[4oxmile]]></description><link>http://4oxmile.github.com</link><generator>NodeJS RSS Module</generator><lastBuildDate>Wed, 14 Nov 2012 12:29:58 GMT</lastBuildDate><atom:link href="http://4oxmile.github.com/rss.xml" rel="self" type="application/rss+xml"/><item><title><![CDATA[Foxchat No.01]]></title><description><![CDATA[<img src="http://www.gravatar.com/avatar/38a34c632de2f7bbafacb8fcfc543f33?r=pg&s=48.jpg&d=identicon"><br/><h1 id="toc_9">랜덤 채팅만들기</h1>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[4oxmile blog]]></title><description><![CDATA[4oxmile]]></description><link>http://4oxmile.github.com</link><generator>NodeJS RSS Module</generator><lastBuildDate>Wed, 14 Nov 2012 12:31:51 GMT</lastBuildDate><atom:link href="http://4oxmile.github.com/rss.xml" rel="self" type="application/rss+xml"/><item><title><![CDATA[Foxchat No.01]]></title><description><![CDATA[<img src="http://www.gravatar.com/avatar/38a34c632de2f7bbafacb8fcfc543f33?r=pg&s=48.jpg&d=identicon"><br/><h1 id="toc_10">랜덤 채팅만들기</h1>
 <p>제대로 해본적이 없으니 차근차근 배우면서 만들겁니다.</p><p>음.. nodejs랑 npm은 깔아 놨고
 이제 express를 깔아야겠다.</p><p><img src="/post/foxchat-no-01/@img/1.png" alt="express">;</p><pre><code class=""><span class="title">express</span> FoxChat &amp;&amp; cd FoxChat
 </code></pre>]]></description><link>http://4oxmile.github.com/post/foxchat-no-01</link><guid isPermaLink="false">foxchat-no-01</guid><dc:creator><![CDATA[<a href="4oxmile" target="_blank">4oxmile</a>]]></dc:creator><pubDate>Wed, 14 Nov 2012 12:10:00 GMT</pubDate></item><item><title><![CDATA[FoxChat No.00]]></title><description><![CDATA[<img src="http://www.gravatar.com/avatar/38a34c632de2f7bbafacb8fcfc543f33?r=pg&s=48.jpg&d=identicon"><br/><h1 id="toc_6">프로젝트 FoxChat</h1>
@@ -10,7 +10,7 @@
 
 <h2 id="toc_7">지향점</h2>
 ]]></description><link>http://4oxmile.github.com/post/foxchat-no-00</link><guid isPermaLink="false">foxchat-no-00</guid><dc:creator><![CDATA[<a href="4oxmile" target="_blank">4oxmile</a>]]></dc:creator><pubDate>Wed, 14 Nov 2012 11:45:00 GMT</pubDate></item><item><title><![CDATA[첫번째]]></title><description><![CDATA[<img src="http://www.gravatar.com/avatar/38a34c632de2f7bbafacb8fcfc543f33?r=pg&s=48.jpg&d=identicon"><br/><h1 id="toc_1">드디어</h1>
-<p>하루프레스 설치성공!!</p><p>생각보다 힘들었다.</p><pre><code class="javascript"></code></pre>]]></description><link>http://4oxmile.github.com/post/first</link><guid isPermaLink="false">first</guid><dc:creator><![CDATA[<a href="4oxmile" target="_blank">4oxmile</a>]]></dc:creator><pubDate>Tue, 06 Nov 2012 11:01:00 GMT</pubDate></item><item><title><![CDATA[Welcome to haroopress]]></title><description><![CDATA[<img src="http://www.gravatar.com/avatar/a8618a255192bd842fdd62d099776735?r=pg&s=48.jpg&d=identicon"><br/><h3 id="toc_17">환영합니다.</h3>
+<p>하루프레스 설치성공!!</p><p>생각보다 힘들었다.</p><pre><code class="javascript"></code></pre>]]></description><link>http://4oxmile.github.com/post/first</link><guid isPermaLink="false">first</guid><dc:creator><![CDATA[<a href="4oxmile" target="_blank">4oxmile</a>]]></dc:creator><pubDate>Tue, 06 Nov 2012 11:01:00 GMT</pubDate></item><item><title><![CDATA[Welcome to haroopress]]></title><description><![CDATA[<img src="http://www.gravatar.com/avatar/a8618a255192bd842fdd62d099776735?r=pg&s=48.jpg&d=identicon"><br/><h3 id="toc_18">환영합니다.</h3>
 
 <ul>
 <li>Welcome</li>
@@ -24,9 +24,9 @@
 <li>добро пожаловать</li>
 </ul>
 
-<h3 id="toc_18">Intro</h3>
+<h3 id="toc_19">Intro</h3>
 <p>하루프레스는 하루의 이야기를 블로깅하기 위한 정적 페이지 블로그 엔진입니다.</p>
-<h3 id="toc_19">Haroopress?</h3>
+<h3 id="toc_20">Haroopress?</h3>
 
 <ul>
 <li><a href="http://haroopress.com/about/">하루프레스?</a></li>
@@ -35,7 +35,7 @@
 <li><a href="http://haroopress.com/diary">하루프레스 개발 다이어리</a></li>
 </ul>
 
-<h3 id="toc_20">Usage</h3>
+<h3 id="toc_21">Usage</h3>
 
 <ul>
 <li><a href="http://haroopress.com/post/haroopress-install-guide-movie/">5분만에 설치하는 하루프레스 동영상</a></li>
@@ -46,7 +46,7 @@
 <li><a href="http://haroopress.com/post/harupeureseu-hwangyeongseoljeong-hagi/">하루프레스 환경설정 하기</a></li>
 </ul>
 
-<h3 id="toc_21">History</h3>
+<h3 id="toc_22">History</h3>
 
 <ul>
 <li><a href="https://github.com/rhiokim/haroopress/wiki/Change-History">변경 이력</a></li>
