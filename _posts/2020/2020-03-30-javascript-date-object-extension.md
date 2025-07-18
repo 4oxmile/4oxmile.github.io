@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Javascript Date Object extention"
+title: "Javascript Date Object extension"
 tags: [javascript, date]
 comments: true
 ---
