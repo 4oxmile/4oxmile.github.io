@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Tetris</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Start Screen -->
+    <div id="start-screen" class="overlay">
+      <div class="overlay-content">
+        <h1 class="game-title">TETRIS</h1>
+        <p class="subtitle">탭하여 시작</p>
+        <div class="start-info">
+          <span>최고 점수: <span id="start-highscore">0</span></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game Over Screen -->
+    <div id="gameover-screen" class="overlay hidden">
+      <div class="overlay-content">
+        <h2 class="gameover-title">GAME OVER</h2>
+        <div class="final-score">
+          <div class="score-label">점수</div>
+          <div id="final-score-value" class="score-value">0</div>
+        </div>
+        <div class="final-stats">
+          <div class="stat">
+            <span class="stat-label">레벨</span>
+            <span id="final-level" class="stat-value">1</span>
+          </div>
+          <div class="stat">
+            <span class="stat-label">라인</span>
+            <span id="final-lines" class="stat-value">0</span>
+          </div>
+        </div>
+        <div id="new-record" class="new-record hidden">NEW RECORD!</div>
+        <p class="subtitle">탭하여 다시 시작</p>
+      </div>
+    </div>
+
+    <!-- Pause Screen -->
+    <div id="pause-screen" class="overlay hidden">
+      <div class="overlay-content">
+        <h2 class="pause-title">PAUSE</h2>
+        <p class="subtitle">탭하여 계속</p>
+      </div>
+    </div>
+
+    <!-- Game Content (grouped for centering) -->
+    <div id="game-content">
+      <!-- Game Header -->
+      <div id="game-header">
+        <div id="hold-area">
+          <span class="area-label">HOLD</span>
+          <canvas id="hold-canvas" width="80" height="80"></canvas>
+        </div>
+        <div id="score-area">
+          <div id="score-display">
+            <span class="score-num" id="score">0</span>
+          </div>
+          <div id="info-row">
+            <span class="info-item">LV.<span id="level">1</span></span>
+            <span class="info-divider"></span>
+            <span class="info-item"><span id="lines">0</span> Lines</span>
+          </div>
+        </div>
+        <div id="next-area">
+          <span class="area-label">NEXT</span>
+          <canvas id="next-canvas" width="80" height="160"></canvas>
+        </div>
+      </div>
+
+      <!-- Game Board -->
+      <div id="game-board-wrapper">
+        <canvas id="board-canvas"></canvas>
+      </div>
+
+      <!-- Controls -->
+      <div id="game-controls">
+        <div class="controls-row">
+          <button class="ctrl-btn" id="btn-left" aria-label="왼쪽">
+            <svg viewBox="0 0 24 24" width="28" height="28"><path d="M15 19l-7-7 7-7" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button class="ctrl-btn" id="btn-right" aria-label="오른쪽">
+            <svg viewBox="0 0 24 24" width="28" height="28"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button class="ctrl-btn ctrl-spacer" id="btn-rotate" aria-label="회전">
+            <svg viewBox="0 0 24 24" width="28" height="28"><path d="M1 4v6h6" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button class="ctrl-btn" id="btn-down" aria-label="소프트 드롭">
+            <svg viewBox="0 0 24 24" width="28" height="28"><path d="M12 5v14M5 12l7 7 7-7" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button class="ctrl-btn ctrl-drop" id="btn-drop" aria-label="하드 드롭">
+            <svg viewBox="0 0 24 24" width="28" height="28"><path d="M12 3v12M5 9l7 7 7-7M5 20h14" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/tetris.js"></script>
+</body>
+</html>

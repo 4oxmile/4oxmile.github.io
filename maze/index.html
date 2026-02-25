@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Maze Runner</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="app">
+    <!-- Start Screen -->
+    <div id="start-screen" class="overlay">
+      <div class="overlay-content">
+        <h1 class="game-title">MAZE</h1>
+        <p class="game-desc">기울여서 구슬을 굴려<br>출구까지 도달하세요!</p>
+        <button id="btn-start" class="primary-btn">게임 시작</button>
+        <div class="start-info">
+          <span>최고 기록: <span id="start-best">--:--.---</span></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Victory Screen -->
+    <div id="victory-screen" class="overlay hidden">
+      <div class="overlay-content">
+        <h2 class="victory-title">CLEAR!</h2>
+        <div class="final-time">
+          <div class="time-label">클리어 시간</div>
+          <div id="final-time-value" class="time-value">0:00.000</div>
+        </div>
+        <div id="new-record" class="new-record hidden">NEW RECORD!</div>
+        <button id="btn-restart" class="primary-btn">새로운 미로</button>
+        <div class="best-info">
+          <span>최고 기록: <span id="victory-best">--:--.---</span></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game Content -->
+    <div id="game-content">
+      <!-- Timer Header -->
+      <div id="game-header">
+        <div id="timer-area">
+          <span id="timer" class="timer-value">0:00.0</span>
+        </div>
+        <button id="btn-new-game" class="header-btn">새 게임</button>
+      </div>
+
+      <!-- Maze Board -->
+      <div id="maze-wrapper">
+        <canvas id="maze-canvas"></canvas>
+      </div>
+
+      <!-- Control Hint -->
+      <div id="control-hint" class="control-hint">
+        <span id="hint-text"></span>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/maze.js"></script>
+</body>
+</html>

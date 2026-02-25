@@ -1,0 +1,23 @@
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Claude Code / OMC
+.claude/
+.omc/
+
+# Node (if added later)
+node_modules/
+npm-debug.log*
+
+# Build output
+dist/
+build/
