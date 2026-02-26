@@ -412,37 +412,54 @@ function updatePlayer(dt) {
     const t = easeInOut(player.hopAnim);
     player.x = prevX + (targetX - prevX) * t;
     player.y = prevY + (targetY - prevY) * t;
-  } else {
-    player.x = targetX;
-    player.y = rowToScreenY(player.row);
-  }
-
-  // Log riding
-  const lane = world[player.row];
-  if (lane && lane.type === LANE_TYPES.RIVER && !player.isMoving) {
-    const log = findLogUnderPlayer(lane);
-    if (log) {
-      player.onLog = log;
-    } else {
-      killPlayer('drown');
-      return;
-    }
-  }
-
-  // Move with log
-  if (player.onLog && !player.isMoving) {
+  } else if (player.onLog) {
+    // Riding a log: move with it instead of snapping to grid
     const dx = player.onLog.speed * dt * 60;
     player.x += dx;
     player.col = Math.round((player.x - TILE / 2) / TILE);
+    player.y = rowToScreenY(player.row);
+
+    // Fell off screen
     if (player.x < -TILE * 0.5 || player.x > W + TILE * 0.5) {
       killPlayer('drown');
       return;
     }
+
+    // Verify still on a log
+    const lane = world[player.row];
+    if (lane && lane.type === LANE_TYPES.RIVER) {
+      const log = findLogUnderPlayer(lane);
+      if (log) {
+        player.onLog = log;
+      } else {
+        killPlayer('drown');
+        return;
+      }
+    } else {
+      // Moved off river lane somehow
+      player.onLog = null;
+    }
+  } else {
+    player.x = targetX;
+    player.y = rowToScreenY(player.row);
+
+    // Just landed on river — find a log
+    const lane = world[player.row];
+    if (lane && lane.type === LANE_TYPES.RIVER) {
+      const log = findLogUnderPlayer(lane);
+      if (log) {
+        player.onLog = log;
+      } else {
+        killPlayer('drown');
+        return;
+      }
+    }
   }
 
   // Coin collection
-  if (lane) {
-    for (const coin of lane.coins) {
+  const curLane = world[player.row];
+  if (curLane) {
+    for (const coin of curLane.coins) {
       if (!coin.collected && Math.abs(player.x - coin.x) < TILE * 0.55) {
         coin.collected = true;
         coins++;
@@ -454,9 +471,10 @@ function updatePlayer(dt) {
   }
 }
 
-function findLogUnderPlayer(lane) {
+function findLogUnderPlayer(lane, px) {
+  const checkX = px !== undefined ? px : player.x;
   return lane.entities.find(log =>
-    player.x >= log.x + 6 && player.x <= log.x + log.width - 6
+    checkX >= log.x + 2 && checkX <= log.x + log.width - 2
   ) || null;
 }
 
@@ -468,9 +486,12 @@ function checkLandingCollision() {
   const lane = world[player.row];
   if (!lane) return;
 
+  // Use exact grid-aligned landing position
+  const landX = player.col * TILE + TILE / 2;
+
   if (lane.type === LANE_TYPES.ROAD) {
     for (const car of lane.entities) {
-      if (player.x > car.x + 4 && player.x < car.x + car.width - 4) {
+      if (landX > car.x + 4 && landX < car.x + car.width - 4) {
         killPlayer('car');
         return;
       }
@@ -478,7 +499,11 @@ function checkLandingCollision() {
   }
 
   if (lane.type === LANE_TYPES.RIVER) {
-    if (!findLogUnderPlayer(lane)) {
+    const log = findLogUnderPlayer(lane, landX);
+    if (log) {
+      player.onLog = log;
+      player.x = landX;
+    } else {
       killPlayer('drown');
     }
   }

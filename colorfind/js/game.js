@@ -378,8 +378,8 @@ function showCombo(text) {
    EVENT LISTENERS
    ═══════════════════════════════════════════════ */
 
-/* Board tap */
-dom.board.addEventListener('click', e => {
+/* Board tap — handle both click (desktop) and touch (mobile) */
+function handleTileTap(e) {
   if (!state.running || state.paused || state.lockInput) return;
   const tile = e.target.closest('.tile');
   if (!tile) return;
@@ -389,10 +389,15 @@ dom.board.addEventListener('click', e => {
   } else {
     onWrong(tile);
   }
-});
+}
 
-/* Prevent double-tap zoom on board */
-dom.board.addEventListener('touchend', e => e.preventDefault(), { passive: false });
+dom.board.addEventListener('click', handleTileTap);
+
+/* On mobile: use touchend to handle tap and prevent double-tap zoom */
+dom.board.addEventListener('touchend', e => {
+  e.preventDefault();
+  handleTileTap(e);
+}, { passive: false });
 
 /* Start button */
 dom.btnStart.addEventListener('click', startGame);

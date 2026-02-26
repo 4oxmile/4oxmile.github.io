@@ -486,17 +486,6 @@ function getCanvasCoords(e) {
   };
 }
 
-canvas.addEventListener('click', (e) => {
-  const { x, y } = getCanvasCoords(e);
-  handleShot(x, y);
-});
-
-canvas.addEventListener('touchstart', (e) => {
-  e.preventDefault();
-  const { x, y } = getCanvasCoords(e);
-  handleShot(x, y);
-}, { passive: false });
-
 document.getElementById('startBtn').addEventListener('click', startGame);
 document.getElementById('restartBtn').addEventListener('click', startGame);
 
@@ -510,6 +499,18 @@ function init() {
   ctx    = canvas.getContext('2d');
 
   resizeCanvas();
+
+  // Canvas event listeners (must be after canvas is assigned)
+  canvas.addEventListener('click', (e) => {
+    const { x, y } = getCanvasCoords(e);
+    handleShot(x, y);
+  });
+
+  canvas.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    const { x, y } = getCanvasCoords(e);
+    handleShot(x, y);
+  }, { passive: false });
 
   // Show best score on start screen
   const hs = getHighScore();
