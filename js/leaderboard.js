@@ -8,6 +8,24 @@ window.Leaderboard = (() => {
   const NICKNAME_KEY  = 'lb_nickname';
   const SCORES_TABLE  = 'scores';
 
+  /* Game-specific options for ascending/format/label */
+  const GAME_OPTS = {
+    lights:      { ascending: true, label: '이동' },
+    memory:      { ascending: true, label: '이동' },
+    puzzle:      { ascending: true, label: '이동' },
+    sokoban:     { ascending: true, label: '이동' },
+    maze:        { ascending: true, format: 'time', label: '시간' },
+    minesweeper: { ascending: true, format: 'time', label: '시간' },
+    sudoku:      { ascending: true, format: 'time', label: '시간' },
+    reaction:    { ascending: true, format: 'ms',   label: '시간' },
+  };
+
+  /* All possible start screen element IDs across games */
+  const START_IDS = [
+    'start-screen', 'startScreen', 'start-overlay', 'startOverlay',
+    'overlay-start', 'overlayStart', 'screen-start',
+  ];
+
   let currentGame    = '';
   let currentScore   = 0;
   let opts           = { ascending: false, format: null, label: '점수' };
@@ -15,6 +33,7 @@ window.Leaderboard = (() => {
   let overlayEl      = null;
   let fabEl          = null;
   let submitted      = false;
+  let startRankEl    = null;
 
   /* ── Supabase client ───────────────────────────── */
   function getClient() {
@@ -244,6 +263,119 @@ window.Leaderboard = (() => {
       console.error('[Leaderboard] Fetch error:', e);
       statusEl.textContent = '랭킹을 불러올 수 없습니다';
     }
+  }
+
+  /* ── Start Screen Ranking ─────────────────────── */
+  function detectGame() {
+    var parts = window.location.pathname.split('/').filter(Boolean);
+    return parts[0] || '';
+  }
+
+  function findStartScreen() {
+    for (var i = 0; i < START_IDS.length; i++) {
+      var el = document.getElementById(START_IDS[i]);
+      if (el) return el;
+    }
+    return null;
+  }
+
+  function getGameOpts(game) {
+    return GAME_OPTS[game] || {};
+  }
+
+  function formatWithOpts(val, gameOpts) {
+    if (gameOpts.format === 'ms') {
+      return (val / 1000).toFixed(2) + '초';
+    }
+    if (gameOpts.format === 'time') {
+      var m = Math.floor(val / 60);
+      var s = val % 60;
+      return m > 0 ? m + '분 ' + s + '초' : s + '초';
+    }
+    return String(val);
+  }
+
+  function injectStartRanking() {
+    var game = detectGame();
+    if (!game) return;
+
+    var screen = findStartScreen();
+    if (!screen) return;
+
+    /* Find the inner content container */
+    var container = screen.querySelector('.overlay-content')
+                 || screen.querySelector('.screen-content')
+                 || screen;
+
+    /* Don't double-inject */
+    if (container.querySelector('.lb-start-ranking')) return;
+
+    startRankEl = document.createElement('div');
+    startRankEl.className = 'lb-start-ranking';
+    startRankEl.innerHTML =
+      '<div class="lb-start-title">TOP 5</div>' +
+      '<div class="lb-start-list"></div>' +
+      '<div class="lb-start-status">불러오는 중...</div>';
+    container.appendChild(startRankEl);
+
+    loadStartRanking(game);
+  }
+
+  async function loadStartRanking(game) {
+    if (!startRankEl) return;
+    var listEl   = startRankEl.querySelector('.lb-start-list');
+    var statusEl = startRankEl.querySelector('.lb-start-status');
+    var gameOpts = getGameOpts(game);
+    var asc      = gameOpts.ascending || false;
+
+    var db = getClient();
+    if (!db) {
+      statusEl.textContent = '';
+      statusEl.style.display = 'none';
+      return;
+    }
+
+    try {
+      var res = await db
+        .from(SCORES_TABLE)
+        .select('nickname, score')
+        .eq('game', game)
+        .order('score', { ascending: asc })
+        .limit(5);
+
+      if (res.error) throw res.error;
+
+      var data = res.data || [];
+      statusEl.style.display = 'none';
+
+      if (data.length === 0) {
+        statusEl.textContent = '아직 기록이 없습니다';
+        statusEl.style.display = 'block';
+        return;
+      }
+
+      var medals = ['🥇', '🥈', '🥉', '4', '5'];
+      for (var i = 0; i < data.length; i++) {
+        var row = document.createElement('div');
+        row.className = 'lb-start-row';
+        row.innerHTML =
+          '<span class="lb-start-rank">' + medals[i] + '</span>' +
+          '<span class="lb-start-name">' + esc(data[i].nickname) + '</span>' +
+          '<span class="lb-start-score">' + formatWithOpts(data[i].score, gameOpts) + '</span>';
+        listEl.appendChild(row);
+      }
+    } catch (e) {
+      console.warn('[Leaderboard] Start ranking fetch error:', e);
+      statusEl.textContent = '';
+      statusEl.style.display = 'none';
+    }
+  }
+
+  /* Auto-init on page load */
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', injectStartRanking);
+  } else {
+    injectStartRanking();
   }
 
   /* ── Public API ────────────────────────────────── */
