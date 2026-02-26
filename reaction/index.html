@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="theme-color" content="#0D1117" />
+  <title>REACTION - 반응속도 테스트</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div id="app">
+
+    <!-- ===== START OVERLAY ===== -->
+    <div class="overlay" id="start-screen">
+      <div class="game-icon">⚡</div>
+      <h1 class="game-title">REACTION</h1>
+      <p class="game-subtitle">초록색이 되면 탭하세요!<br>총 5라운드의 평균을 측정합니다</p>
+
+      <div class="best-record-badge" id="start-best-badge" style="display:none;">
+        <span>🏆 최고 기록</span>
+        <span class="record-value" id="start-best-value">—</span>
+      </div>
+
+      <button class="btn-start" id="btn-start">시작하기</button>
+    </div>
+
+    <!-- ===== GAME AREA ===== -->
+    <div id="game-area" class="state-idle">
+
+      <!-- Header -->
+      <div class="game-header">
+        <div class="round-indicator">
+          <div class="round-dot" data-round="0"></div>
+          <div class="round-dot" data-round="1"></div>
+          <div class="round-dot" data-round="2"></div>
+          <div class="round-dot" data-round="3"></div>
+          <div class="round-dot" data-round="4"></div>
+        </div>
+
+        <span class="header-title">REACTION</span>
+
+        <div class="header-best" id="best-display" style="display:none;">
+          🏆 <span id="best-value">—</span>
+        </div>
+      </div>
+
+      <!-- Center Content -->
+      <div class="game-content">
+        <div class="state-label" id="state-label"></div>
+        <div class="state-sublabel" id="state-sublabel"></div>
+
+        <div class="result-time-display" id="result-time-display" style="display:none;"></div>
+
+        <div class="rating-badge" id="rating-badge" style="display:none;"></div>
+
+        <div class="tap-hint" id="tap-hint" style="display:none;">탭하여 다음 라운드</div>
+      </div>
+
+      <!-- Round Log -->
+      <div class="round-log" id="round-log"></div>
+
+    </div>
+
+    <!-- ===== RESULTS OVERLAY ===== -->
+    <div class="overlay hidden" id="results-screen">
+      <h2 class="results-title">결과</h2>
+
+      <div class="results-avg-label">평균 반응속도</div>
+      <div class="results-avg-time" id="results-avg-time">—</div>
+      <div class="results-rating" id="results-rating">—</div>
+
+      <div class="new-record-banner" id="new-record-banner">🎉 새로운 최고 기록!</div>
+
+      <div class="results-cards">
+        <div class="result-card best">
+          <div class="result-card-label">최고 기록</div>
+          <div class="result-card-value" id="results-best-time">—</div>
+        </div>
+        <div class="result-card">
+          <div class="result-card-label">가장 빠른 라운드</div>
+          <div class="result-card-value" id="results-fastest-round">—</div>
+        </div>
+      </div>
+
+      <div class="rounds-list-title">라운드별 기록</div>
+      <div class="rounds-list" id="rounds-list"></div>
+
+      <button class="btn-retry" id="btn-retry">다시 하기</button>
+    </div>
+
+  </div>
+
+  <script src="js/game.js"></script>
+</body>
+</html>

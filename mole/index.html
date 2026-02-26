@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#0D1117" />
+  <title>MOLE</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<div id="app">
+
+  <!-- ── Start Overlay ─────────────────────────────── -->
+  <div id="start-overlay" class="overlay">
+    <h1 class="game-title">MOLE</h1>
+    <p class="game-subtitle">두더지를 빠르게 잡으세요!<br>콤보를 이어갈수록 더 많은 점수!</p>
+    <div class="divider"></div>
+    <button id="btn-start" class="btn primary">게임 시작</button>
+    <p class="game-subtitle" style="font-size:0.78rem; margin-top:-8px;">최고 기록: <strong id="best-score-start">0</strong></p>
+  </div>
+
+  <!-- ── Game Over Overlay ──────────────────────────── -->
+  <div id="gameover-overlay" class="overlay hidden">
+    <h2 class="game-title" style="font-size: clamp(2rem, 12vw, 3.5rem);">결과</h2>
+
+    <div class="score-card">
+      <div class="label">이번 점수</div>
+      <div id="final-score" class="value accent">0</div>
+      <div id="new-record-badge" class="new-record-badge" hidden>신기록!</div>
+    </div>
+
+    <div class="score-card">
+      <div class="label">최고 기록</div>
+      <div id="final-best" class="value">0</div>
+    </div>
+
+    <button id="btn-restart" class="btn primary">다시 하기</button>
+  </div>
+
+  <!-- ── HUD ───────────────────────────────────────── -->
+  <div id="hud">
+    <div class="hud-item">
+      <span class="hud-label">점수</span>
+      <span id="score-value" class="hud-value">0</span>
+    </div>
+    <div class="hud-item">
+      <span class="hud-label">시간</span>
+      <span id="timer-value" class="hud-value">30</span>
+    </div>
+  </div>
+
+  <!-- ── Combo Banner ───────────────────────────────── -->
+  <div id="combo-display"></div>
+
+  <!-- ── Board ─────────────────────────────────────── -->
+  <div id="board-wrap">
+    <div id="board"></div>
+  </div>
+
+  <!-- ── Bottom Bar ────────────────────────────────── -->
+  <div id="bottom-bar">
+    <p id="best-score-bar">최고 기록 &nbsp;<span id="best-score-bottom">0</span></p>
+  </div>
+
+</div>
+<script src="js/game.js"></script>
+</body>
+</html>

@@ -27,7 +27,7 @@
       }
     }
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html, body { width: 100%; height: 100%; }
+    html, body { width: 100%; min-height: 100%; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Pretendard', 'Segoe UI', Roboto, sans-serif;
       background: var(--bg-primary);
@@ -35,6 +35,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      padding: 20px 0;
     }
     .container {
       text-align: center;
@@ -122,6 +123,62 @@
         <div class="game-info">
           <div class="game-name">MAZE</div>
           <div class="game-desc">기울여서 구슬을 굴려 탈출하기</div>
+        </div>
+      </a>
+      <a href="/2048/" class="game-card">
+        <span class="game-icon">🔢</span>
+        <div class="game-info">
+          <div class="game-name">2048</div>
+          <div class="game-desc">스와이프로 숫자를 합쳐보세요</div>
+        </div>
+      </a>
+      <a href="/snake/" class="game-card">
+        <span class="game-icon">🐍</span>
+        <div class="game-info">
+          <div class="game-name">SNAKE</div>
+          <div class="game-desc">스와이프로 뱀을 조종하세요</div>
+        </div>
+      </a>
+      <a href="/flappy/" class="game-card">
+        <span class="game-icon">🐦</span>
+        <div class="game-info">
+          <div class="game-name">FLAPPY</div>
+          <div class="game-desc">탭하여 새를 날려보세요</div>
+        </div>
+      </a>
+      <a href="/mole/" class="game-card">
+        <span class="game-icon">🐹</span>
+        <div class="game-info">
+          <div class="game-name">MOLE</div>
+          <div class="game-desc">두더지를 빠르게 잡으세요</div>
+        </div>
+      </a>
+      <a href="/reaction/" class="game-card">
+        <span class="game-icon">⚡</span>
+        <div class="game-info">
+          <div class="game-name">REACTION</div>
+          <div class="game-desc">반응속도를 테스트해보세요</div>
+        </div>
+      </a>
+      <a href="/minesweeper/" class="game-card">
+        <span class="game-icon">💣</span>
+        <div class="game-info">
+          <div class="game-name">MINE</div>
+          <div class="game-desc">지뢰를 피해 모든 칸을 열어보세요</div>
+        </div>
+      </a>
+      <a href="/wordle/" class="game-card">
+        <span class="game-icon">📝</span>
+        <div class="game-info">
+          <div class="game-name">WORDLE</div>
+          <div class="game-desc">5글자 영단어를 맞춰보세요</div>
+        </div>
+      </a>
+      <a href="/lights/" class="game-card">
+        <span class="game-icon">💡</span>
+        <div class="game-info">
+          <div class="game-name">LIGHTS</div>
+          <div class="game-desc">모든 불을 꺼보세요</div>
         </div>
       </a>
     </div>

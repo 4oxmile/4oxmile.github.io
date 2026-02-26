@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>MINE</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Start Overlay -->
+  <div class="overlay" id="overlay-start">
+    <div class="overlay-content">
+      <div class="game-title">MINE</div>
+      <p class="overlay-desc">지뢰를 피해 모든 칸을 열어보세요!</p>
+      <div class="overlay-stats" id="start-best-display"></div>
+      <button class="btn-primary" id="btn-start">게임 시작</button>
+    </div>
+  </div>
+
+  <!-- Game Over Overlay -->
+  <div class="overlay hidden" id="overlay-gameover">
+    <div class="overlay-content">
+      <div class="overlay-icon">💥</div>
+      <div class="overlay-title">게임 오버</div>
+      <p class="overlay-desc">지뢰를 밟았습니다!</p>
+      <button class="btn-primary" id="btn-restart-lose">다시 시작</button>
+    </div>
+  </div>
+
+  <!-- Win Overlay -->
+  <div class="overlay hidden" id="overlay-win">
+    <div class="overlay-content">
+      <div class="overlay-icon" id="win-icon">🎉</div>
+      <div class="overlay-title">클리어!</div>
+      <div class="win-stats">
+        <div class="win-stat-row">
+          <span class="win-stat-label">클리어 시간</span>
+          <span class="win-stat-value" id="win-time">0:00</span>
+        </div>
+        <div class="win-stat-row" id="win-best-row">
+          <span class="win-stat-label">최고 기록</span>
+          <span class="win-stat-value" id="win-best">-</span>
+        </div>
+        <div class="new-record hidden" id="new-record-badge">🏆 신기록!</div>
+      </div>
+      <button class="btn-primary" id="btn-restart-win">다시 시작</button>
+    </div>
+  </div>
+
+  <!-- Main Game UI -->
+  <div class="game-wrapper">
+    <header class="game-header">
+      <div class="header-title">MINE</div>
+      <div class="header-stats">
+        <div class="stat-pill">
+          <span class="stat-icon">💣</span>
+          <span class="stat-value" id="mine-counter">10</span>
+        </div>
+        <div class="stat-pill">
+          <span class="stat-icon">⏱</span>
+          <span class="stat-value" id="timer">0:00</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="board-container">
+      <div class="board" id="board"></div>
+    </div>
+
+    <footer class="game-footer">
+      <button class="mode-toggle" id="mode-toggle" title="모드 전환">
+        <span class="mode-icon" id="mode-icon">🔍</span>
+        <span class="mode-label" id="mode-label">열기 모드</span>
+      </button>
+      <button class="btn-icon" id="btn-new-game" title="새 게임">
+        <span>↺</span>
+        <span class="btn-text">새 게임</span>
+      </button>
+    </footer>
+  </div>
+
+  <script src="js/game.js"></script>
+</body>
+</html>

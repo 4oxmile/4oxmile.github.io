@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>2048</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- Start Screen Overlay -->
+  <div id="start-screen" class="overlay active">
+    <div class="overlay-content">
+      <h1 class="game-title">2048</h1>
+      <p class="game-desc">숫자 타일을 합쳐<br />2048을 만드세요!</p>
+      <p class="game-hint">← → ↑ ↓ 또는 스와이프</p>
+      <button id="start-btn" class="cta-btn">탭하여 시작</button>
+    </div>
+  </div>
+
+  <!-- Game Over Screen Overlay -->
+  <div id="gameover-screen" class="overlay">
+    <div class="overlay-content">
+      <h2 class="over-title">게임 종료</h2>
+      <div id="new-record-badge" class="new-record hidden">🏆 신기록!</div>
+      <div class="score-summary">
+        <div class="score-row">
+          <span class="score-label">점수</span>
+          <span id="final-score" class="score-val">0</span>
+        </div>
+        <div class="score-row">
+          <span class="score-label">최고 점수</span>
+          <span id="final-best" class="score-val accent">0</span>
+        </div>
+      </div>
+      <button id="restart-btn" class="cta-btn">다시 시작</button>
+    </div>
+  </div>
+
+  <!-- Main Game UI -->
+  <div id="game-wrapper">
+    <header class="game-header">
+      <div class="title-area">
+        <span class="header-title">2048</span>
+      </div>
+      <div class="score-area">
+        <div class="score-box">
+          <div class="score-label">점수</div>
+          <div id="score" class="score-number">0</div>
+        </div>
+        <div class="score-box">
+          <div class="score-label">최고</div>
+          <div id="best-score" class="score-number">0</div>
+        </div>
+      </div>
+    </header>
+
+    <div class="controls">
+      <button id="new-game-btn" class="control-btn">새 게임</button>
+    </div>
+
+    <main class="board-wrapper">
+      <div id="board" class="board">
+        <!-- 4x4 background cells -->
+        <div class="grid-bg">
+          <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+          <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+          <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+          <div class="cell"></div><div class="cell"></div><div class="cell"></div><div class="cell"></div>
+        </div>
+        <!-- Tiles rendered by JS -->
+        <div id="tile-container" class="tile-container"></div>
+      </div>
+    </main>
+
+    <footer class="game-footer">
+      <p>방향키 또는 스와이프로 타일을 이동하세요</p>
+    </footer>
+  </div>
+
+  <script src="js/game.js"></script>
+</body>
+</html>

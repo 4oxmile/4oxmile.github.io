@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>SNAKE</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div id="app">
+
+    <!-- Header: live scores -->
+    <header class="header">
+      <div class="score-block">
+        <span class="score-label">점수</span>
+        <span class="score-value" id="score">0</span>
+      </div>
+
+      <span class="header-title">SNAKE</span>
+
+      <div class="score-block best">
+        <span class="score-label">최고</span>
+        <span class="score-value" id="best">0</span>
+      </div>
+    </header>
+
+    <!-- Game canvas -->
+    <div class="canvas-wrapper">
+      <canvas id="gameCanvas"></canvas>
+    </div>
+
+    <!-- D-pad -->
+    <div class="dpad-wrapper">
+      <div class="dpad">
+        <!-- row 1 -->
+        <div></div>
+        <button class="dpad-btn" id="dpad-up" aria-label="위">
+          <svg viewBox="0 0 24 24"><path d="M12 5l-8 8h5v6h6v-6h5z"/></svg>
+        </button>
+        <div></div>
+        <!-- row 2 -->
+        <button class="dpad-btn" id="dpad-left" aria-label="왼쪽">
+          <svg viewBox="0 0 24 24"><path d="M5 12l8-8v5h6v6h-6v5z"/></svg>
+        </button>
+        <div class="dpad-btn center"></div>
+        <button class="dpad-btn" id="dpad-right" aria-label="오른쪽">
+          <svg viewBox="0 0 24 24"><path d="M19 12l-8 8v-5H5v-6h6V4z"/></svg>
+        </button>
+        <!-- row 3 -->
+        <div></div>
+        <button class="dpad-btn" id="dpad-down" aria-label="아래">
+          <svg viewBox="0 0 24 24"><path d="M12 19l8-8h-5V5h-6v6H4z"/></svg>
+        </button>
+        <div></div>
+      </div>
+    </div>
+
+    <!-- Start overlay -->
+    <div class="overlay" id="startScreen">
+      <h1 class="game-title">SNAKE</h1>
+      <p class="subtitle">스와이프로 뱀을 조종하세요!</p>
+      <button class="start-btn" id="startBtn">
+        게임 시작
+        <span class="tap-hint">탭하여 시작</span>
+      </button>
+    </div>
+
+    <!-- Game over overlay -->
+    <div class="overlay hidden" id="gameOverScreen">
+      <h2 class="over-title">게임 오버</h2>
+
+      <div class="over-scores">
+        <div class="over-score-block">
+          <span class="label">점수</span>
+          <span class="value" id="overScore">0</span>
+        </div>
+        <div class="over-score-block highlight">
+          <span class="label">최고 기록</span>
+          <span class="value" id="overBest">0</span>
+        </div>
+      </div>
+
+      <div class="new-record-badge hidden" id="newRecord">신기록 달성!</div>
+
+      <button class="retry-btn" id="retryBtn">다시 시작</button>
+    </div>
+
+  </div>
+
+  <script src="js/game.js"></script>
+</body>
+</html>

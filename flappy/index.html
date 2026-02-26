@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#0D1117" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>Flappy Bird</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<div id="game-wrapper">
+
+  <!-- Score bar (always visible during play) -->
+  <div id="score-bar">
+    <div class="score-item">
+      <span class="score-label">점수</span>
+      <span class="score-value" id="score-value">0</span>
+    </div>
+    <div class="score-item">
+      <span class="score-label">최고</span>
+      <span class="score-value" id="best-value">0</span>
+    </div>
+  </div>
+
+  <!-- Pause button -->
+  <button id="pause-btn" aria-label="일시정지">⏸</button>
+
+  <!-- Game canvas -->
+  <canvas id="gameCanvas"></canvas>
+
+  <!-- Difficulty bar -->
+  <div class="difficulty-bar">
+    <span class="diff-label">난이도</span>
+    <div class="diff-track">
+      <div class="diff-fill" id="diff-fill" style="width:0%"></div>
+    </div>
+  </div>
+
+  <!-- ── Start overlay ─────────────────────────────────── -->
+  <div class="overlay" id="start-overlay">
+    <div class="bird-preview"></div>
+
+    <div class="game-title">FLAPPY</div>
+
+    <p class="game-subtitle">
+      탭하여 새를 날려보세요!<br />
+      파이프 사이를 통과할 때마다 점수가 오릅니다.
+    </p>
+
+    <div class="tap-hint">
+      <span class="tap-hint-icon">👆</span>
+      <span class="tap-hint-text">탭하여 시작</span>
+    </div>
+
+    <div class="controls-info">
+      <div class="control-badge">
+        <span class="key-icon">SPACE</span>
+        <span>점프</span>
+      </div>
+      <div class="control-badge">
+        <span class="key-icon">P</span>
+        <span>일시정지</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Game over overlay ──────────────────────────────── -->
+  <div class="overlay hidden" id="gameover-overlay">
+    <div class="game-title">게임 오버</div>
+
+    <div class="result-card">
+      <div class="result-row">
+        <span class="result-label">이번 점수</span>
+        <span class="result-score" id="go-score">0</span>
+      </div>
+      <div class="result-divider"></div>
+      <div class="result-row">
+        <span class="result-label">최고 기록</span>
+        <span class="result-best" id="go-best">0</span>
+      </div>
+    </div>
+
+    <div class="new-record-badge" id="new-record" style="display:none">
+      ✦ 신기록 달성!
+    </div>
+
+    <div class="btn-group">
+      <button class="btn btn-primary" id="btn-restart">다시 시작</button>
+      <button class="btn btn-secondary" id="btn-menu">처음으로</button>
+    </div>
+  </div>
+
+  <!-- ── Pause overlay ──────────────────────────────────── -->
+  <div class="overlay hidden" id="pause-overlay">
+    <div class="game-title">일시정지</div>
+    <p class="pause-desc">게임이 멈췄습니다.<br />계속하려면 탭하거나 P를 누르세요.</p>
+    <div class="btn-group">
+      <button class="btn btn-primary" id="btn-resume">계속하기</button>
+      <button class="btn btn-secondary" id="btn-pause-menu">처음으로</button>
+    </div>
+  </div>
+
+</div>
+
+<script src="js/game.js"></script>
+</body>
+</html>
