@@ -595,6 +595,7 @@ function showLoseOverlay(scores) {
   document.getElementById('lose-best').textContent  = scores.length ? scores[0].score.toLocaleString() : score.toLocaleString();
   document.getElementById('lose-scores').innerHTML  = buildScoresHTML(scores);
   showOverlay('overlay-lose');
+  if(typeof Leaderboard!=='undefined')Leaderboard.ready('breakout',score);
 }
 
 // ─── Pause / Resume ───────────────────────────────────────────────────────────
@@ -656,6 +657,7 @@ function handleTouchEnd(e) {
 
 // ─── Boot ─────────────────────────────────────────────────────────────────────
 function startNewGame() {
+  if(typeof Leaderboard!=='undefined')Leaderboard.hide();
   score = 0;
   lives = 3;
   hideAllOverlays();

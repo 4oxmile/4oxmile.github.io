@@ -660,6 +660,7 @@ class Game {
   }
 
   _loadLevel(idx) {
+    if(typeof Leaderboard!=='undefined')Leaderboard.hide();
     this.currentLevel = idx;
     const parsed = this.levels[idx];
     this.state = cloneState(parsed);
@@ -759,6 +760,7 @@ class Game {
     if (!allOn) return;
 
     this.isComplete = true;
+    if(typeof Leaderboard!=='undefined')Leaderboard.ready('sokoban',this.moves,{ascending:true,label:'이동'});
     const isNewBest = setBest(this.currentLevel, this.moves);
 
     // Populate victory screen

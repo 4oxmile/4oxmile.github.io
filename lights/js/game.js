@@ -219,6 +219,7 @@ function pressCell(idx) {
 // ─── Victory ─────────────────────────────────────────────────────────────────
 function handleVictory() {
   gameActive = false;
+  if(typeof Leaderboard!=='undefined')Leaderboard.ready('lights',moves,{ascending:true,label:'이동'});
   const store = loadStorage();
 
   // Update stats
@@ -247,6 +248,7 @@ function handleVictory() {
 
 // ─── New Game / Next Level ────────────────────────────────────────────────────
 function startGame(lv) {
+  if(typeof Leaderboard!=='undefined')Leaderboard.hide();
   level = lv;
   moves = 0;
   hintsLeft = MAX_HINTS;

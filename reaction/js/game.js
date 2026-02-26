@@ -123,6 +123,7 @@ function showContent(opts = {}) {
 // ===== GAME FLOW =====
 
 function startGame() {
+  if(typeof Leaderboard!=='undefined')Leaderboard.hide();
   currentRound = 0;
   roundTimes = [];
 
@@ -284,6 +285,7 @@ function showResults() {
   // Show results overlay
   resultsScreen.classList.remove('hidden');
   updateBestDisplay();
+  if(typeof Leaderboard!=='undefined')Leaderboard.ready('reaction',avg,{ascending:true,format:'ms',label:'시간'});
 }
 
 // ===== EVENT LISTENERS =====

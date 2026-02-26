@@ -193,6 +193,7 @@ function restartSpawnLoop() {
 
 /* ─── Game Lifecycle ────────────────────────────────── */
 function startGame() {
+  if(typeof Leaderboard!=='undefined')Leaderboard.hide();
   score    = 0;
   combo    = 0;
   timeLeft = GAME_DURATION;
@@ -248,6 +249,7 @@ function endGame() {
   finalBest.textContent  = bestScore;
   newRecordBadge.hidden  = !isRecord;
   gameoverOverlay.classList.remove('hidden');
+  if(typeof Leaderboard!=='undefined')Leaderboard.ready('mole',score);
 }
 
 /* ─── Button Listeners ──────────────────────────────── */

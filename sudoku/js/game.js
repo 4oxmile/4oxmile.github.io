@@ -338,6 +338,7 @@ function updateNumpadCompletion() {
    GAME LOGIC
    ============================================================ */
 function newGame(difficulty) {
+  if(typeof Leaderboard!=='undefined')Leaderboard.hide();
   state.difficulty = difficulty;
   state.hintsLeft  = MAX_HINTS;
   state.notesMode  = false;
@@ -436,6 +437,7 @@ function checkVictory() {
 
   stopTimer();
   state.running = false;
+  if(typeof Leaderboard!=='undefined')Leaderboard.ready('sudoku',state.timerSecs,{ascending:true,format:'time',label:'시간'});
 
   const isNew = saveBestTime(state.difficulty, state.timerSecs);
   const best  = state.bestTimes[state.difficulty];

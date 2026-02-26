@@ -229,6 +229,7 @@ function updateProgress() {
 
 // ─── VICTORY ──────────────────────────────────────────────────────────────────
 function showVictory() {
+  if(typeof Leaderboard!=='undefined')Leaderboard.ready('memory',state.moves,{ascending:true,label:'이동'});
   const size = state.selectedSize;
   const moves = state.moves;
   const time  = state.elapsedSeconds;
@@ -291,6 +292,7 @@ function renderStartScreen() {
 
 // ─── NEW GAME ─────────────────────────────────────────────────────────────────
 function startNewGame(size) {
+  if(typeof Leaderboard!=='undefined')Leaderboard.hide();
   stopTimer();
   state.selectedSize = size;
   buildBoard(size);

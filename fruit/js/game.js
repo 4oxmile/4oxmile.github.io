@@ -526,6 +526,7 @@ function startTimer() {
 
 // ─── GAME CONTROL ─────────────────────────────────────────────────────────────
 function startGame() {
+  if(typeof Leaderboard!=='undefined')Leaderboard.hide();
   state.score = 0;
   state.lives = MAX_LIVES;
   state.timeLeft = GAME_DURATION;
@@ -601,6 +602,7 @@ function endGame(reason, timeUp = false) {
   }
 
   showOverlay('overlay-gameover');
+  if(typeof Leaderboard!=='undefined')Leaderboard.ready('fruit',state.score);
 }
 
 // ─── INPUT ────────────────────────────────────────────────────────────────────

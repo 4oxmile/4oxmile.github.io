@@ -210,6 +210,7 @@ function clearTimer() {
    ═══════════════════════════════════════════════ */
 
 function startGame() {
+  if(typeof Leaderboard!=='undefined')Leaderboard.hide();
   loadHS();
   state.level     = 1;
   state.score     = 0;
@@ -318,6 +319,7 @@ function endGame() {
   dom.goRecord.classList.toggle('visible', isNew);
 
   showScreen('gameover');
+  if(typeof Leaderboard!=='undefined')Leaderboard.ready('colorfind',state.score);
 }
 
 function pauseGame() {

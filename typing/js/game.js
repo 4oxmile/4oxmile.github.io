@@ -572,6 +572,7 @@ function updateSpawnTimer() {
 //  Game Lifecycle
 // ─────────────────────────────────────────────
 function startGame() {
+  if(typeof Leaderboard!=='undefined')Leaderboard.hide();
   // Clear board
   ui.board.innerHTML = '';
   ui.input.value = '';
@@ -616,6 +617,7 @@ function endGame() {
   ui.goNewScore.style.display = newHS  ? 'block' : 'none';
   ui.goNewWPM.style.display   = newWPM ? 'block' : 'none';
 
+  if(typeof Leaderboard!=='undefined')Leaderboard.ready('typing',state.score,{});
   showScreen('gameover');
 }
 

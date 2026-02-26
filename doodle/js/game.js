@@ -134,6 +134,7 @@ function hideAllOverlays() {
 
 // ─── Game lifecycle ───────────────────────────────────────────────────────────
 function startGame() {
+  if(typeof Leaderboard!=='undefined')Leaderboard.hide();
   score = 0;
   cameraY = 0;
   tiltX = 0;
@@ -179,6 +180,7 @@ function gameOver() {
 
   pauseBtn().style.display = 'none';
   showOverlay('result');
+  if(typeof Leaderboard!=='undefined')Leaderboard.ready('doodle',score);
 
   if (animId) {
     cancelAnimationFrame(animId);

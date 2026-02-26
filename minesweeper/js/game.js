@@ -400,6 +400,7 @@ function triggerWin() {
     winBestEl.textContent = isNewRecord ? fmtTime(clearTime) : fmtTime(best);
     newRecordBadge.classList.toggle('hidden', !isNewRecord);
     overlayWin.classList.remove('hidden');
+    if(typeof Leaderboard!=='undefined')Leaderboard.ready('minesweeper',clearTime,{ascending:true,format:'time',label:'시간'});
   }, delay + 200);
 }
 
@@ -483,6 +484,7 @@ function attachCellEvents(el, r, c) {
    START / RESTART
    ============================================================ */
 function startGame() {
+  if(typeof Leaderboard!=='undefined')Leaderboard.hide();
   overlayStart.classList.add('hidden');
   overlayGameOver.classList.add('hidden');
   overlayWin.classList.add('hidden');

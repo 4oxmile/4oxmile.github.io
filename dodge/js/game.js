@@ -547,6 +547,7 @@ function triggerDeath() {
   bestVal.textContent     = Math.max(finalScore, prev);
   newRecordEl.classList.toggle('hidden', !isNew);
 
+  if(typeof Leaderboard!=='undefined')Leaderboard.ready('dodge',finalScore,{});
   overlayDead.classList.remove('hidden');
 }
 
@@ -565,6 +566,7 @@ function loop(ts) {
 
 // ── Start / Restart ───────────────────────────────────────────────────────────
 function startGame() {
+  if(typeof Leaderboard!=='undefined')Leaderboard.hide();
   overlayStart.classList.add('hidden');
   overlayDead.classList.add('hidden');
   initGame();

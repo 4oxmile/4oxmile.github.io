@@ -254,6 +254,7 @@ function pressedFire() {
 }
 
 function startPlay() {
+  if(typeof Leaderboard!=='undefined')Leaderboard.hide();
   newGame();
   showScreen('none');
   beginPlay();
@@ -459,6 +460,7 @@ function gameOver() {
   goScoreEl.textContent = score;
   goHighEl.textContent  = highScore;
   showScreen('gameover');
+  if(typeof Leaderboard!=='undefined')Leaderboard.ready('invaders',score);
 }
 
 function doLevelUp() {

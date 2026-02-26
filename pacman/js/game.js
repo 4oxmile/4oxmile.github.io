@@ -829,9 +829,11 @@ function showGameOver() {
   el.querySelector('.final-score').textContent = score;
   el.querySelector('.final-hs').textContent    = highScore;
   showOnly('overlayGameover');
+  if(typeof Leaderboard!=='undefined')Leaderboard.ready('pacman',score);
 }
 
 function startGame(fresh) {
+  if(typeof Leaderboard!=='undefined')Leaderboard.hide();
   showOnly(null);
   if (fresh) { score = 0; lives = 3; level = 1; }
   initLevel();

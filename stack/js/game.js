@@ -100,6 +100,7 @@ function onTap() {
 
 // ─── Game lifecycle ───────────────────────────────────────────────────────────
 function startGame() {
+  if(typeof Leaderboard!=='undefined')Leaderboard.hide();
   hideOverlay(overlayStart);
   hideOverlay(overlayOver);
   phase = 'playing';
@@ -250,6 +251,7 @@ function triggerGameOver() {
   overScoreEl.textContent = score;
   overBestEl.textContent  = '최고 기록: ' + bestScore;
   bestEl.textContent = bestScore;
+  if(typeof Leaderboard!=='undefined')Leaderboard.ready('stack',score);
   setTimeout(() => showOverlay(overlayOver), 320);
 }
 

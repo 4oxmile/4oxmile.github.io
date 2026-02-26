@@ -275,10 +275,12 @@ function triggerGameOver() {
   bestEl.textContent = bestScore;
 
   gameOverScreen.classList.remove('hidden');
+  if(typeof Leaderboard!=='undefined')Leaderboard.ready('snake',score);
 }
 
 // ── Start / restart ────────────────────────────────────────────────────────────
 function startGame() {
+  if(typeof Leaderboard!=='undefined')Leaderboard.hide();
   sizeCanvas();
   initGame();
   gameActive = true;

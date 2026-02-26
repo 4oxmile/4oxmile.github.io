@@ -414,6 +414,7 @@ function showOverlay(el) {
 }
 
 function startGame() {
+  if(typeof Leaderboard!=='undefined')Leaderboard.hide();
   score = 0;
   pipes = [];
   pipeTimer = 0;
@@ -449,6 +450,7 @@ function triggerDeath() {
   // Brief delay before showing game over
   setTimeout(() => {
     showOverlay(gameoverOverlay);
+    if(typeof Leaderboard!=='undefined')Leaderboard.ready('flappy',score);
   }, 600);
 }
 

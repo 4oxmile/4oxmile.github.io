@@ -397,6 +397,7 @@ function startCountdown() {
 
 // ── Game lifecycle ────────────────────────────────────────────────────────
 function startGame() {
+  if(typeof Leaderboard!=='undefined')Leaderboard.hide();
   // Reset state
   score     = 0;
   hits      = 0;
@@ -457,6 +458,7 @@ function endGame() {
 
   highscoreBadge.classList.toggle('visible', isNew);
 
+  if(typeof Leaderboard!=='undefined')Leaderboard.ready('target',score,{});
   resultOverlay.classList.remove('hidden');
 }
 

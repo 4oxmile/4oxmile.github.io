@@ -387,6 +387,7 @@ function isGameOver() {
    Game Lifecycle
    =========================== */
 function startGame() {
+  if(typeof Leaderboard!=='undefined')Leaderboard.hide();
   bestScore = parseInt(localStorage.getItem(STORAGE_KEY) || '0', 10);
   bestScoreEl.textContent = bestScore;
   score = 0;
@@ -414,6 +415,7 @@ function endGame() {
   finalBestEl.textContent  = bestScore;
   newRecordBadge.classList.toggle('hidden', !isNewRecord);
   showOverlay(gameoverScreen);
+  if(typeof Leaderboard!=='undefined')Leaderboard.ready('2048',score);
 }
 
 function showOverlay(el) {

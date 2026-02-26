@@ -313,6 +313,7 @@ function onTileClick(clickedIndex) {
 function onVictory() {
   stopTimer();
   state.gameActive = false;
+  if(typeof Leaderboard!=='undefined')Leaderboard.ready('puzzle',state.moves,{ascending:true,label:'이동'});
 
   // Pulse all tiles
   Array.from(board.children).forEach((el, i) => {
@@ -347,6 +348,7 @@ function onVictory() {
    Game init / shuffle
    =========================== */
 function initGame(size) {
+  if(typeof Leaderboard!=='undefined')Leaderboard.hide();
   state.size = size;
   stopTimer();
 

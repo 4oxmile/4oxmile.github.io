@@ -761,6 +761,7 @@
 
   // ── Game State Transitions ────────────────────────────────
   function startGame() {
+    if(typeof Leaderboard!=='undefined')Leaderboard.hide();
     state = 'playing';
     score = 0;
     speed = BASE_SPEED;
@@ -815,6 +816,7 @@
     const isNew = Math.floor(score) >= hiScore;
     document.getElementById('deadHiscore').classList.toggle('accent', isNew);
     document.getElementById('overlayDead').classList.remove('hidden');
+    if(typeof Leaderboard!=='undefined')Leaderboard.ready('dino',Math.floor(score));
   }
 
   // ── Input Handling ────────────────────────────────────────

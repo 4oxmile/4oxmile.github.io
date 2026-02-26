@@ -915,6 +915,7 @@ function initWorld() {
 }
 
 function startGame() {
+  if(typeof Leaderboard!=='undefined')Leaderboard.hide();
   score = 0;
   coins = 0;
   totalCoins = 0;
@@ -971,6 +972,7 @@ function quitToMenu() {
 
 function showGameOver() {
   state = State.GAMEOVER;
+  if(typeof Leaderboard!=='undefined')Leaderboard.ready('crossy',score);
   document.getElementById('idle-warning').classList.remove('visible');
   document.getElementById('pause-btn').classList.add('hidden');
 

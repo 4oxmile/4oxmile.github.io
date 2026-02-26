@@ -379,6 +379,7 @@ function gameTime() {
 }
 
 function startGame(song) {
+  if(typeof Leaderboard!=='undefined')Leaderboard.hide();
   audio.resume();
 
   State.song          = song;
@@ -700,6 +701,7 @@ function endGame(failed = false) {
   DOM.resultMiss.textContent      = State.grades.MISS;
   DOM.resultMaxCombo.textContent  = State.maxCombo;
 
+  if(typeof Leaderboard!=='undefined')Leaderboard.ready('rhythm',finalScore,{});
   showScreen('result');
   buildSongList(); // refresh best scores
 }

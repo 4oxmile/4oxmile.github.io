@@ -620,6 +620,7 @@ function doGameOver() {
   document.getElementById('go-level').textContent      = G.level;
   document.getElementById('go-level-badge').textContent= G.level;
   showOverlay(overlayGameover);
+  if(typeof Leaderboard!=='undefined')Leaderboard.ready('frogger',G.score);
 }
 
 function nextLevel() {
@@ -648,6 +649,7 @@ function showOverlay(el) {
 
 // ─── Game start / restart ─────────────────────────────────────────────────────
 function startGame() {
+  if(typeof Leaderboard!=='undefined')Leaderboard.hide();
   G.score     = 0;
   G.level     = 1;
   G.lives     = MAX_LIVES;

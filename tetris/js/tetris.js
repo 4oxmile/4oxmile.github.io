@@ -1045,6 +1045,7 @@ class App {
   }
 
   _startGame() {
+    if(typeof Leaderboard!=='undefined')Leaderboard.hide();
     this.sound.init();
     this.game.init();
     this.game.lastDropTime = performance.now();
@@ -1095,6 +1096,7 @@ class App {
       this.game.highScore.toLocaleString();
 
     document.getElementById('gameover-screen').classList.remove('hidden');
+    if(typeof Leaderboard!=='undefined')Leaderboard.ready('tetris',this.game.score);
   }
 
   _gameLoop() {

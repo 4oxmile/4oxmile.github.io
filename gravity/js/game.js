@@ -184,6 +184,7 @@
   /* Overlay buttons wired in HTML via onclick */
   window.startGame = function () {
     if (state !== 'start') return;
+    if(typeof Leaderboard!=='undefined')Leaderboard.hide();
     showOverlay(null);
     state = 'playing';
     initGame();
@@ -192,6 +193,7 @@
 
   window.restartGame = function () {
     if (state !== 'dead') return;
+    if(typeof Leaderboard!=='undefined')Leaderboard.hide();
     showOverlay(null);
     state = 'playing';
     initGame();
@@ -331,6 +333,7 @@
     startHiScore.textContent = hiScore;
     hudBest.innerHTML = `최고 <span>${hiScore}</span>`;
 
+    if(typeof Leaderboard!=='undefined')Leaderboard.ready('gravity',finalScore,{});
     setTimeout(() => {
       showOverlay('gameover-overlay');
     }, 350);
