@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>PUZZLE - 슬라이딩 퍼즐</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Start Screen -->
+  <div id="screen-start" class="screen active">
+    <div class="screen-content">
+      <div class="title-block">
+        <h1 class="game-title">PUZZLE</h1>
+        <p class="game-subtitle">슬라이딩 퍼즐</p>
+      </div>
+
+      <div class="size-selector">
+        <p class="selector-label">게임 크기</p>
+        <div class="size-buttons">
+          <button class="size-btn" data-size="3">3×3</button>
+          <button class="size-btn active" data-size="4">4×4</button>
+          <button class="size-btn" data-size="5">5×5</button>
+        </div>
+      </div>
+
+      <div id="best-records" class="best-records">
+        <!-- filled by JS -->
+      </div>
+
+      <button id="btn-start" class="btn-primary">게임 시작</button>
+
+      <div class="how-to">
+        <p>빈 칸 옆의 타일을 탭하여 이동시키세요.</p>
+        <p>1부터 순서대로 정렬하면 클리어!</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Game Screen -->
+  <div id="screen-game" class="screen">
+    <div class="game-wrapper">
+      <div class="game-header">
+        <button id="btn-back" class="icon-btn" aria-label="돌아가기">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+        <div class="stats">
+          <div class="stat">
+            <span class="stat-label">이동</span>
+            <span id="move-count" class="stat-value">0</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <span class="stat-label">시간</span>
+            <span id="timer-display" class="stat-value">0:00</span>
+          </div>
+        </div>
+        <button id="btn-shuffle" class="icon-btn" aria-label="섞기">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="16 3 21 3 21 8"></polyline>
+            <line x1="4" y1="20" x2="21" y2="3"></line>
+            <polyline points="21 16 21 21 16 21"></polyline>
+            <line x1="15" y1="15" x2="21" y2="21"></line>
+          </svg>
+        </button>
+      </div>
+
+      <div id="board-container" class="board-container">
+        <div id="board" class="board"></div>
+      </div>
+
+      <div class="game-footer">
+        <div id="size-indicator" class="size-indicator"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Victory Screen -->
+  <div id="screen-victory" class="screen">
+    <div class="screen-content">
+      <div class="victory-icon">🎉</div>
+      <h2 class="victory-title">클리어!</h2>
+      <p class="victory-subtitle">퍼즐을 완성했습니다</p>
+
+      <div class="result-card">
+        <div class="result-row">
+          <span class="result-label">이동 횟수</span>
+          <span id="result-moves" class="result-value"></span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">걸린 시간</span>
+          <span id="result-time" class="result-value"></span>
+        </div>
+        <div id="result-best" class="result-best"></div>
+      </div>
+
+      <div class="victory-actions">
+        <button id="btn-play-again" class="btn-primary">다시 도전</button>
+        <button id="btn-to-menu" class="btn-secondary">메뉴로</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/game.js"></script>
+</body>
+</html>

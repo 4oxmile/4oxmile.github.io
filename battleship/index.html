@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#0D1117" />
+  <title>BATTLESHIP</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ================= TOAST ================= -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- ================= START SCREEN ================= -->
+  <div class="screen active" id="start-screen">
+    <div class="screen-content">
+      <div>
+        <h1 class="game-title">BATTLESHIP</h1>
+        <p class="game-subtitle">전략 해전 게임 · 1P vs AI</p>
+      </div>
+
+      <div class="stats-panel">
+        <div class="stat-item">
+          <span class="stat-value" id="stat-wins">0</span>
+          <span class="stat-label">승리</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value" id="stat-losses">0</span>
+          <span class="stat-label">패배</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-value" id="stat-games">0</span>
+          <span class="stat-label">총 게임</span>
+        </div>
+      </div>
+
+      <button class="btn btn-primary btn-full" id="btn-new-game" style="font-size:1rem;padding:14px 20px;">
+        ⚓ 새 게임 시작
+      </button>
+
+      <p style="font-size:0.78rem;color:var(--text-muted);text-align:center;line-height:1.6;">
+        함선을 배치하고 적 함선을 모두 격침시키면 승리!<br/>
+        먼저 모든 적 함선을 파괴하는 쪽이 이깁니다.
+      </p>
+    </div>
+  </div>
+
+  <!-- ================= PLACE SCREEN ================= -->
+  <div class="screen" id="place-screen">
+    <div class="screen-content" style="max-width:480px;">
+      <h2 class="screen-title">함선 배치</h2>
+
+      <div class="ship-list" id="ship-list"></div>
+
+      <!-- Place board -->
+      <div class="board-wrapper" style="width:100%;">
+        <div class="board-label">
+          <span class="indicator"></span>내 해역
+        </div>
+        <div class="board-grid place-board" id="place-board"></div>
+      </div>
+
+      <div class="btn-group">
+        <button class="btn btn-sm" id="btn-rotate">회전 (가로)</button>
+        <button class="btn btn-sm" id="btn-auto-place">자동 배치</button>
+        <button class="btn btn-sm btn-danger" id="btn-reset-place">초기화</button>
+      </div>
+
+      <button class="btn btn-primary btn-full" id="btn-start-game" disabled>
+        전투 시작
+      </button>
+    </div>
+  </div>
+
+  <!-- ================= GAME SCREEN ================= -->
+  <div class="screen" id="game-screen">
+    <div class="game-container">
+
+      <!-- Header -->
+      <div class="game-header">
+        <span class="game-header-title">BATTLESHIP</span>
+        <span class="turn-indicator player-turn" id="turn-indicator">내 차례</span>
+      </div>
+
+      <!-- Status -->
+      <div class="status-bar" id="status-bar">공격할 적 함선을 선택하세요</div>
+
+      <!-- Boards -->
+      <div class="boards-section">
+
+        <!-- Enemy board (attack target) -->
+        <div class="board-wrapper">
+          <div class="board-label active" id="enemy-board-label">
+            <span class="indicator"></span>적 해역 (공격)
+          </div>
+          <div class="board-grid enemy-board" id="enemy-board"></div>
+        </div>
+
+        <!-- Player board (own ships) -->
+        <div class="board-wrapper">
+          <div class="board-label" id="player-board-label">
+            <span class="indicator"></span>내 해역 (방어)
+          </div>
+          <div class="board-grid" id="player-board"></div>
+        </div>
+
+      </div>
+
+      <!-- HUD: ship tracker -->
+      <div class="ships-hud">
+        <div class="hud-label">적 함선 현황</div>
+        <div class="ships-row" id="enemy-ships-row"></div>
+      </div>
+
+      <div class="ships-hud">
+        <div class="hud-label">내 함선 현황</div>
+        <div class="ships-row" id="player-ships-row"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ================= RESULT SCREEN ================= -->
+  <div class="screen" id="result-screen">
+    <div class="screen-content">
+      <div class="result-emoji" id="result-emoji">🏆</div>
+      <h2 class="result-title win" id="result-title">승리!</h2>
+      <p class="result-desc" id="result-desc">모든 적 함선을 격침했습니다!</p>
+
+      <div class="result-stats">
+        <div class="result-stat">
+          <span class="result-stat-val" id="result-shots">0</span>
+          <span class="result-stat-label">총 공격 횟수</span>
+        </div>
+        <div class="result-stat">
+          <span class="result-stat-val" id="result-accuracy">0%</span>
+          <span class="result-stat-label">명중률</span>
+        </div>
+        <div class="result-stat">
+          <span class="result-stat-val" id="result-total-wins">0</span>
+          <span class="result-stat-label">누적 승리</span>
+        </div>
+        <div class="result-stat">
+          <span class="result-stat-val" id="result-total-losses">0</span>
+          <span class="result-stat-label">누적 패배</span>
+        </div>
+      </div>
+
+      <div class="btn-group">
+        <button class="btn btn-primary" id="btn-play-again">다시 하기</button>
+        <button class="btn" id="btn-home">처음으로</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/game.js"></script>
+</body>
+</html>

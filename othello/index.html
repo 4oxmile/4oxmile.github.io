@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>OTHELLO</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div id="app">
+
+    <!-- ── Start Screen ──────────────────────────────────────── -->
+    <div id="start-screen" class="overlay">
+
+      <div>
+        <h1 class="game-title">OTHELLO</h1>
+        <p class="game-subtitle">오델로 · 리버시</p>
+      </div>
+
+      <!-- Win/loss stats -->
+      <div class="stats-row">
+        <div class="stat-box">
+          <span class="stat-value" id="start-stat-wins">0</span>
+          <span class="stat-label">승리</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-value" id="start-stat-draws">0</span>
+          <span class="stat-label">무승부</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-value" id="start-stat-losses">0</span>
+          <span class="stat-label">패배</span>
+        </div>
+      </div>
+
+      <!-- Difficulty selector -->
+      <div class="difficulty-group">
+        <span class="difficulty-label">난이도</span>
+        <div class="difficulty-pills">
+          <button class="diff-btn" data-diff="easy">쉬움</button>
+          <button class="diff-btn active" data-diff="normal">보통</button>
+          <button class="diff-btn" data-diff="hard">어려움</button>
+        </div>
+      </div>
+
+      <button id="start-btn" class="btn btn-primary">게임 시작</button>
+
+    </div>
+
+    <!-- ── Result Screen ─────────────────────────────────────── -->
+    <div id="result-screen" class="overlay hidden">
+
+      <div class="result-icon" id="result-icon">🏆</div>
+      <div class="result-title" id="result-title">승리!</div>
+      <p class="result-score">
+        나 (흑)&nbsp;<strong id="result-black">0</strong>
+        &nbsp;:&nbsp;
+        <strong id="result-white">0</strong>&nbsp;AI (백)
+      </p>
+
+      <!-- Updated stats after game -->
+      <div class="stats-row">
+        <div class="stat-box">
+          <span class="stat-value" id="result-stat-wins">0</span>
+          <span class="stat-label">승리</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-value" id="result-stat-draws">0</span>
+          <span class="stat-label">무승부</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-value" id="result-stat-losses">0</span>
+          <span class="stat-label">패배</span>
+        </div>
+      </div>
+
+      <button id="play-again-btn" class="btn btn-primary">다시 하기</button>
+      <button id="home-btn" class="btn">처음으로</button>
+
+    </div>
+
+    <!-- ── Game Screen ───────────────────────────────────────── -->
+    <div id="game-screen">
+
+      <!-- Header -->
+      <div class="game-header">
+        <button id="game-home-btn" class="icon-btn" title="홈으로">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+        </button>
+        <span class="header-title">OTHELLO</span>
+        <button id="game-restart-btn" class="icon-btn" title="새 게임">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="23 4 23 10 17 10"/>
+            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Score panel -->
+      <div class="score-panel">
+
+        <!-- Player (Black) -->
+        <div class="player-score black-side active">
+          <div class="disc-icon black"></div>
+          <div class="player-info">
+            <span class="player-name">나 (흑)</span>
+            <span class="player-count" id="black-count">2</span>
+          </div>
+        </div>
+
+        <!-- Turn indicator -->
+        <div class="score-divider">
+          <span class="turn-indicator">차례</span>
+          <div class="turn-dot black" id="turn-dot"></div>
+        </div>
+
+        <!-- AI (White) -->
+        <div class="player-score white-side right">
+          <div class="disc-icon white"></div>
+          <div class="player-info">
+            <span class="player-name">AI (백)</span>
+            <span class="player-count" id="white-count">2</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Status message -->
+      <div class="status-bar" id="status-bar">게임을 시작하세요</div>
+
+      <!-- Board -->
+      <div class="board-wrap">
+        <div id="board"></div>
+      </div>
+
+      <!-- Footer -->
+      <div class="game-footer">
+        <button class="footer-btn" id="footer-new-game-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2.5"
+               stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="23 4 23 10 17 10"/>
+            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+          </svg>
+          새 게임
+        </button>
+      </div>
+
+    </div><!-- /game-screen -->
+
+  </div><!-- /app -->
+
+  <script src="js/game.js"></script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0D1117" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>Color Find — 색깔 찾기</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div id="app">
+
+    <!-- ══ START SCREEN ══ -->
+    <section id="start-screen" class="screen" role="main" aria-label="시작 화면">
+      <div class="title-block">
+        <h1 class="game-title">COLOR</h1>
+        <p class="game-subtitle">색깔 찾기</p>
+      </div>
+
+      <div class="high-score-display" aria-label="최고 점수">
+        <span class="hs-label">최고 점수</span>
+        <span class="hs-value" id="hs-value">0</span>
+      </div>
+
+      <button class="btn-primary" id="btn-start" aria-label="게임 시작">시작하기</button>
+
+      <p class="rules-text">
+        색이 다른 타일을 탭하세요.<br />
+        레벨이 올라갈수록 차이가 작아집니다.<br />
+        5초 안에 찾지 못하면 목숨을 잃습니다.<br />
+        목숨 3개로 최대한 높은 레벨을 노리세요!
+      </p>
+    </section>
+
+    <!-- ══ GAME SCREEN ══ -->
+    <section id="game-screen" class="screen hidden" aria-label="게임 화면">
+
+      <!-- HUD -->
+      <header class="hud" aria-label="게임 정보">
+        <div class="hud-stat" aria-label="점수">
+          <span class="hud-label">점수</span>
+          <span class="hud-value" id="score-value" aria-live="polite">0</span>
+        </div>
+
+        <div id="lives-display" class="lives-display" aria-label="남은 목숨" aria-live="polite">
+          <!-- Hearts injected by JS -->
+        </div>
+
+        <div class="hud-stat" style="align-items: flex-end;">
+          <span class="hud-label">시간</span>
+          <span class="hud-value" id="timer-value" aria-live="polite" aria-label="남은 시간">5</span>
+        </div>
+
+        <button class="btn-icon" id="btn-pause" aria-label="일시정지">⏸</button>
+      </header>
+
+      <!-- Timer bar -->
+      <div class="timer-bar-wrap" role="progressbar" aria-label="라운드 타이머" aria-valuemin="0" aria-valuemax="5">
+        <div class="timer-bar" id="timer-bar"></div>
+      </div>
+
+      <!-- Board area -->
+      <div class="board-wrap">
+        <div class="level-badge" id="level-badge" aria-label="현재 레벨">레벨 1</div>
+
+        <!-- Hidden level value for JS reference -->
+        <span id="level-value" style="display:none">1</span>
+
+        <div id="board" aria-label="색깔 타일 격자" role="grid"></div>
+
+        <!-- Combo popup -->
+        <div id="combo-display" aria-live="polite" aria-atomic="true"></div>
+      </div>
+
+    </section>
+
+    <!-- ══ PAUSE SCREEN ══ -->
+    <section id="pause-screen" class="screen hidden" aria-label="일시정지" aria-modal="true">
+      <div class="overlay-title">⏸</div>
+      <h2 class="overlay-title" style="font-size:32px;">일시정지</h2>
+      <p class="overlay-subtitle">게임이 멈췄습니다</p>
+
+      <button class="btn-primary" id="btn-resume" aria-label="게임 재개">계속하기</button>
+      <button class="btn-secondary" id="btn-quit-pause" aria-label="처음으로">처음으로</button>
+    </section>
+
+    <!-- ══ GAME OVER SCREEN ══ -->
+    <section id="gameover-screen" class="screen hidden" aria-label="게임 종료" aria-modal="true">
+      <h2 class="overlay-title">게임 종료</h2>
+
+      <div class="new-record-badge" id="go-record" aria-live="polite">신기록!</div>
+
+      <div class="score-block">
+        <div class="score-item highlight">
+          <span class="label">내 점수</span>
+          <span class="value" id="go-score" aria-live="polite">0</span>
+        </div>
+        <div class="score-item">
+          <span class="label">최고 점수</span>
+          <span class="value" id="go-hs">0</span>
+        </div>
+      </div>
+
+      <button class="btn-primary" id="btn-restart" aria-label="다시 시작">다시 하기</button>
+      <button class="btn-secondary" id="btn-quit-go" aria-label="처음으로">처음으로</button>
+    </section>
+
+  </div><!-- /#app -->
+
+  <!-- Full-screen feedback flash -->
+  <div id="feedback-flash" aria-hidden="true"></div>
+
+  <script src="js/game.js"></script>
+</body>
+</html>

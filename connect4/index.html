@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Connect 4</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ══ START OVERLAY ══ -->
+  <div class="overlay" id="start-overlay">
+    <h1 class="game-title">CONNECT4</h1>
+    <p class="game-subtitle">4개를 연결하라</p>
+
+    <!-- Stats -->
+    <div class="stats-bar">
+      <div class="stat-item wins">
+        <span class="stat-label">승리</span>
+        <span class="stat-value" id="stat-wins">0</span>
+      </div>
+      <div class="stat-item draws">
+        <span class="stat-label">무승부</span>
+        <span class="stat-value" id="stat-draws">0</span>
+      </div>
+      <div class="stat-item losses">
+        <span class="stat-label">패배</span>
+        <span class="stat-value" id="stat-losses">0</span>
+      </div>
+    </div>
+
+    <!-- Difficulty -->
+    <span class="section-label">난이도 선택</span>
+    <div class="difficulty-row">
+      <button class="diff-btn" data-diff="easy">쉬움</button>
+      <button class="diff-btn active" data-diff="normal">보통</button>
+      <button class="diff-btn" data-diff="hard">어려움</button>
+    </div>
+
+    <button class="btn-primary" id="start-btn">게임 시작</button>
+  </div>
+
+  <!-- ══ RESULT OVERLAY ══ -->
+  <div class="overlay hidden" id="result-overlay">
+    <div class="result-icon" id="result-icon">🏆</div>
+    <h2 class="result-title win" id="result-title">승리!</h2>
+    <p class="result-subtitle" id="result-subtitle">4개를 연결했습니다!</p>
+
+    <button class="btn-primary" id="play-again-btn">다시 하기</button>
+    <button class="btn-secondary" id="back-btn">메인으로</button>
+  </div>
+
+  <!-- ══ GAME ══ -->
+  <div id="game-container">
+
+    <!-- Header -->
+    <div class="game-header">
+      <span class="header-title">CONNECT4</span>
+      <div class="mini-stats">
+        <div class="mini-stat">
+          <div class="dot red"></div>
+          <span class="mini-stat-val">0</span>
+        </div>
+        <div class="mini-stat">
+          <div class="dot yellow"></div>
+          <span class="mini-stat-val">0</span>
+        </div>
+        <div class="mini-stat" style="gap:2px; color: var(--text-muted);">
+          <span style="font-size:11px">무</span>
+          <span class="mini-stat-val">0</span>
+        </div>
+      </div>
+      <div class="header-controls">
+        <button class="icon-btn" id="restart-btn" title="재시작">↺</button>
+        <button class="icon-btn" id="menu-btn" title="메인 메뉴">☰</button>
+      </div>
+    </div>
+
+    <!-- Turn Indicator -->
+    <div class="turn-indicator">
+      <div class="turn-disc player" id="turn-disc"></div>
+      <span class="turn-text" id="turn-text">당신의 차례</span>
+      <span class="turn-hint" id="turn-hint"></span>
+    </div>
+
+    <!-- Board -->
+    <div class="board-wrapper">
+      <div id="board"></div>
+    </div>
+
+  </div>
+
+  <script src="js/game.js"></script>
+</body>
+</html>

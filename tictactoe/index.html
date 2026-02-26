@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0D1117" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)" />
+  <title>TICTACTOE</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ── START SCREEN ─────────────────────────── -->
+  <div class="screen" id="start-screen">
+    <div class="screen-content">
+      <div class="game-logo">🎮</div>
+      <h1 class="game-title">TICTACTOE</h1>
+
+      <div class="difficulty-section">
+        <p class="section-label">난이도 선택</p>
+        <div class="difficulty-buttons">
+          <button class="diff-btn" data-diff="easy">쉬움</button>
+          <button class="diff-btn" data-diff="medium">보통</button>
+          <button class="diff-btn active" data-diff="hard">어려움</button>
+        </div>
+      </div>
+
+      <button class="btn-primary" id="btn-start">게임 시작</button>
+    </div>
+  </div>
+
+  <!-- ── RESULT SCREEN ────────────────────────── -->
+  <div class="screen hidden" id="result-screen">
+    <div class="screen-content">
+      <div class="result-emoji" id="result-emoji">🏆</div>
+      <h2 class="result-title win" id="result-title">승리!</h2>
+      <p class="result-subtitle" id="result-subtitle">AI를 이겼습니다!</p>
+      <div class="result-buttons">
+        <button class="btn-primary" id="btn-result-new">다시 하기</button>
+        <button class="btn-secondary" id="btn-result-menu">메인 메뉴</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── GAME SCREEN ──────────────────────────── -->
+  <main class="app">
+    <header class="game-header">
+      <span class="header-title">TICTACTOE</span>
+      <span class="header-diff" id="current-diff">어려움</span>
+    </header>
+
+    <!-- Score board -->
+    <div class="scoreboard">
+      <div class="score-player">
+        <span class="score-label">플레이어</span>
+        <span class="score-name">나 (X)</span>
+        <span class="score-value x-color" id="score-wins">0</span>
+      </div>
+
+      <div class="score-divider">
+        <span class="score-draw-label">무</span>
+        <span class="score-draw-value" id="score-draws">0</span>
+      </div>
+
+      <div class="score-player">
+        <span class="score-label">컴퓨터</span>
+        <span class="score-name">AI (O)</span>
+        <span class="score-value o-color" id="score-losses">0</span>
+      </div>
+    </div>
+
+    <!-- Status -->
+    <div class="status-bar">
+      <div class="status-indicator" id="status-dot"></div>
+      <span class="status-text" id="status-text">게임을 시작하세요</span>
+    </div>
+
+    <!-- Board -->
+    <div class="board-wrapper">
+      <div class="board" id="board">
+        <div class="cell" data-idx="0"><span class="cell-mark"></span></div>
+        <div class="cell" data-idx="1"><span class="cell-mark"></span></div>
+        <div class="cell" data-idx="2"><span class="cell-mark"></span></div>
+        <div class="cell" data-idx="3"><span class="cell-mark"></span></div>
+        <div class="cell" data-idx="4"><span class="cell-mark"></span></div>
+        <div class="cell" data-idx="5"><span class="cell-mark"></span></div>
+        <div class="cell" data-idx="6"><span class="cell-mark"></span></div>
+        <div class="cell" data-idx="7"><span class="cell-mark"></span></div>
+        <div class="cell" data-idx="8"><span class="cell-mark"></span></div>
+      </div>
+
+      <!-- Win line SVG overlay -->
+      <div class="win-line-overlay" id="win-line-overlay"></div>
+    </div>
+
+    <!-- Controls -->
+    <div class="game-controls">
+      <button class="btn-icon" id="btn-new">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+          <path d="M3 3v5h5"/>
+        </svg>
+        새 게임
+      </button>
+      <button class="btn-icon" id="btn-menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+        메뉴
+      </button>
+    </div>
+  </main>
+
+  <script src="js/game.js"></script>
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#0D1117" />
+  <title>FROGGER</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div id="app">
+
+    <!-- Header -->
+    <header id="header">
+      <div class="header-info">
+        <span class="label">점수</span>
+        <span class="value accent" id="score-val">0</span>
+      </div>
+      <div class="header-info" style="align-items:center;">
+        <span class="label">생명</span>
+        <div id="lives-display"></div>
+      </div>
+      <div class="header-info" style="align-items:flex-end;">
+        <span class="label">레벨&nbsp;<span id="level-val">1</span></span>
+        <span class="value" id="timer-val">60</span>
+      </div>
+    </header>
+
+    <!-- Canvas -->
+    <div id="canvas-wrapper">
+      <canvas id="gameCanvas"></canvas>
+
+      <!-- Start Screen -->
+      <div class="overlay" id="overlay-start">
+        <div class="game-title">FROGGER</div>
+        <div class="game-subtitle">개구리 횡단 게임</div>
+
+        <div class="overlay-card">
+          <div class="overlay-card-title">최고 기록</div>
+          <div class="best-row">
+            <span>베스트 스코어</span>
+            <span class="best-val" id="best-start">0</span>
+          </div>
+          <div class="hint-list">
+            <div class="hint-item">
+              <span class="hint-key">↑↓←→</span>
+              <span>방향키로 이동</span>
+            </div>
+            <div class="hint-item">
+              <span class="hint-key">WASD</span>
+              <span>또는 WASD</span>
+            </div>
+            <div class="hint-item">
+              <span class="hint-key">스와이프</span>
+              <span>터치 스와이프</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="overlay-card" style="margin-bottom:0">
+          <div class="overlay-card-title">게임 방법</div>
+          <div class="hint-list">
+            <div class="hint-item"><span class="hint-key">🚗</span><span>차에 치이면 생명 감소</span></div>
+            <div class="hint-item"><span class="hint-key">🪵</span><span>통나무·거북이를 타고 건너기</span></div>
+            <div class="hint-item"><span class="hint-key">🏠</span><span>집 칸 5개를 모두 채우면 클리어</span></div>
+          </div>
+        </div>
+
+        <br />
+        <button class="btn-primary" id="btn-start">게임 시작</button>
+      </div>
+
+      <!-- Dead (respawn) overlay - shown briefly -->
+      <div class="overlay hidden" id="overlay-dead">
+        <div class="result-icon">💀</div>
+        <div class="result-title">앗!</div>
+        <div class="result-sub">잠시 후 재시작됩니다…</div>
+        <div class="overlay-card" style="margin-bottom:0">
+          <div class="score-grid">
+            <div class="score-item">
+              <span class="score-label">현재 점수</span>
+              <span class="score-value" id="dead-score">0</span>
+            </div>
+            <div class="score-item">
+              <span class="score-label">최고 기록</span>
+              <span class="score-value accent" id="dead-best">0</span>
+            </div>
+          </div>
+        </div>
+        <br />
+        <button class="btn-primary" id="btn-restart-dead">바로 재시작</button>
+      </div>
+
+      <!-- Win overlay -->
+      <div class="overlay hidden" id="overlay-win">
+        <div class="result-icon">🎉</div>
+        <div class="result-title">레벨 클리어!</div>
+        <div class="result-sub">모든 집을 채웠습니다</div>
+        <div class="overlay-card">
+          <div class="overlay-card-title">결과</div>
+          <div class="score-grid">
+            <div class="score-item">
+              <span class="score-label">점수</span>
+              <span class="score-value accent" id="win-score">0</span>
+            </div>
+            <div class="score-item">
+              <span class="score-label">최고 기록</span>
+              <span class="score-value" id="win-best">0</span>
+            </div>
+            <div class="score-item">
+              <span class="score-label">남은 시간</span>
+              <span class="score-value" id="win-time">0초</span>
+            </div>
+            <div class="score-item">
+              <span class="score-label">시간 보너스</span>
+              <span class="score-value" id="win-bonus">+0</span>
+            </div>
+          </div>
+        </div>
+        <button class="btn-primary" id="btn-next-level">다음 레벨</button>
+        <button class="btn-secondary" id="btn-restart-win">처음부터</button>
+      </div>
+
+      <!-- Game Over overlay -->
+      <div class="overlay hidden" id="overlay-gameover">
+        <div class="result-icon">🐸</div>
+        <div class="result-title">게임 오버</div>
+        <div class="result-sub">생명이 모두 소진되었습니다</div>
+        <div class="overlay-card">
+          <div class="overlay-card-title">최종 결과</div>
+          <div class="score-grid">
+            <div class="score-item">
+              <span class="score-label">최종 점수</span>
+              <span class="score-value accent" id="go-score">0</span>
+            </div>
+            <div class="score-item">
+              <span class="score-label">최고 기록</span>
+              <span class="score-value" id="go-best">0</span>
+            </div>
+            <div class="score-item">
+              <span class="score-label">도달 레벨</span>
+              <span class="score-value" id="go-level">1</span>
+            </div>
+            <div class="score-item">
+              <span class="score-label">레벨</span>
+              <div class="level-badge"><span class="dot"></span><span id="go-level-badge">1</span></div>
+            </div>
+          </div>
+        </div>
+        <button class="btn-primary" id="btn-restart-go">다시 도전</button>
+      </div>
+
+    </div><!-- end canvas-wrapper -->
+
+    <!-- Controls -->
+    <div id="controls">
+      <div class="stats-mini">
+        <div class="stat-row">
+          <span class="stat-icon">🏠</span>
+          <span class="stat-text">집: <span id="homes-filled">0</span>/5</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-icon">⭐</span>
+          <span class="stat-text">베스트: <span id="best-mini">0</span></span>
+        </div>
+      </div>
+
+      <div id="dpad">
+        <div></div>
+        <button class="dpad-btn" data-dir="up" aria-label="위">▲</button>
+        <div></div>
+        <button class="dpad-btn" data-dir="left" aria-label="왼쪽">◀</button>
+        <div class="dpad-btn dpad-center">🐸</div>
+        <button class="dpad-btn" data-dir="right" aria-label="오른쪽">▶</button>
+        <div></div>
+        <button class="dpad-btn" data-dir="down" aria-label="아래">▼</button>
+        <div></div>
+      </div>
+
+      <div class="stats-mini" style="align-items:flex-end;">
+        <div class="stat-row">
+          <span class="stat-icon">🎯</span>
+          <span class="stat-text">레벨 <span id="level-mini">1</span></span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-icon">⏱</span>
+          <span class="stat-text"><span id="timer-mini">60</span>초</span>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end app -->
+  <script src="js/game.js"></script>
+</body>
+</html>

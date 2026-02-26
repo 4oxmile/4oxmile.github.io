@@ -1,0 +1,725 @@
+:root {
+  --bg-primary: #0D1117;
+  --bg-secondary: #161B22;
+  --bg-tertiary: #21262D;
+  --text-primary: #F0F6FC;
+  --text-secondary: #8B949E;
+  --text-muted: #484F58;
+  --accent: #3B82F6;
+  --border: #30363D;
+  --btn-bg: #21262D;
+  --btn-active: #30363D;
+  --overlay-bg: rgba(0, 0, 0, 0.85);
+  --board-bg: #0A0E14;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg-primary: #FFFFFF;
+    --bg-secondary: #F6F8FA;
+    --bg-tertiary: #E9ECF0;
+    --text-primary: #1B1E28;
+    --text-secondary: #57606A;
+    --text-muted: #8C959F;
+    --accent: #3182F6;
+    --border: #D0D7DE;
+    --btn-bg: #E9ECF0;
+    --btn-active: #D0D7DE;
+    --overlay-bg: rgba(255, 255, 255, 0.9);
+    --board-bg: #F0F2F5;
+  }
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Pretendard', 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow-x: hidden;
+}
+
+/* ===================== OVERLAY SCREENS ===================== */
+.screen {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: var(--bg-primary);
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 24px;
+}
+
+.screen.active {
+  display: flex;
+}
+
+.screen-content {
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+/* ===================== START SCREEN ===================== */
+#start-screen {
+  backdrop-filter: blur(12px);
+}
+
+.game-title {
+  font-size: clamp(2.4rem, 10vw, 3.6rem);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  background: linear-gradient(135deg, var(--accent) 0%, #60A5FA 50%, #93C5FD 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-align: center;
+  line-height: 1.1;
+  filter: drop-shadow(0 0 24px rgba(59, 130, 246, 0.4));
+}
+
+.game-subtitle {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  text-align: center;
+  letter-spacing: 0.04em;
+}
+
+.stats-panel {
+  width: 100%;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-around;
+  gap: 12px;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.stat-value {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  letter-spacing: 0.03em;
+}
+
+/* ===================== PLACE SCREEN ===================== */
+#place-screen {
+  overflow-y: auto;
+}
+
+.screen-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+.ship-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ship-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.875rem;
+  transition: border-color 0.2s;
+}
+
+.ship-item.placed {
+  border-color: var(--accent);
+  opacity: 0.7;
+}
+
+.ship-item.current {
+  border-color: var(--accent);
+  background: var(--bg-tertiary);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+
+.ship-name {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.ship-size-dots {
+  display: flex;
+  gap: 4px;
+}
+
+.ship-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  background: var(--text-muted);
+}
+
+.ship-item.placed .ship-dot,
+.ship-item.current .ship-dot {
+  background: var(--accent);
+}
+
+.ship-status {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  min-width: 40px;
+  text-align: right;
+}
+
+.ship-item.placed .ship-status {
+  color: var(--accent);
+}
+
+/* ===================== GAME SCREEN ===================== */
+#game-screen {
+  background: var(--bg-primary);
+  z-index: 10;
+  position: relative;
+  overflow-y: auto;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.game-container {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  min-height: 100dvh;
+}
+
+.game-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 0;
+}
+
+.game-header-title {
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  background: linear-gradient(135deg, var(--accent), #60A5FA);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.turn-indicator {
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  transition: all 0.3s;
+}
+
+.turn-indicator.player-turn {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.status-bar {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  text-align: center;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+
+.status-bar.hit { border-color: #EF4444; color: #EF4444; }
+.status-bar.miss { border-color: var(--text-muted); color: var(--text-secondary); }
+.status-bar.sunk { border-color: #F97316; color: #F97316; font-weight: 600; }
+.status-bar.ai { border-color: var(--border); color: var(--text-secondary); }
+
+/* ===================== BOARDS ===================== */
+.boards-section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.board-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.board-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0 2px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.board-label span.indicator {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  display: inline-block;
+}
+
+.board-label.active span.indicator {
+  background: var(--accent);
+  box-shadow: 0 0 6px var(--accent);
+}
+
+.board-grid {
+  display: grid;
+  grid-template-columns: 20px repeat(10, 1fr);
+  grid-template-rows: 20px repeat(10, 1fr);
+  background: var(--board-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  aspect-ratio: 11/11;
+  user-select: none;
+}
+
+.axis-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.corner { background: var(--bg-secondary); }
+
+.cell {
+  border: 0.5px solid var(--border);
+  position: relative;
+  cursor: default;
+  transition: background 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cell::after {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  border-radius: 1px;
+  transition: all 0.15s;
+}
+
+/* Ship cells on player board */
+.cell.ship {
+  background: rgba(59, 130, 246, 0.12);
+}
+
+.cell.ship::after {
+  background: rgba(59, 130, 246, 0.35);
+  border-radius: 2px;
+}
+
+/* Preview during placement */
+.cell.preview-valid {
+  background: rgba(59, 130, 246, 0.18);
+}
+
+.cell.preview-valid::after {
+  background: rgba(59, 130, 246, 0.5);
+}
+
+.cell.preview-invalid {
+  background: rgba(239, 68, 68, 0.12);
+}
+
+.cell.preview-invalid::after {
+  background: rgba(239, 68, 68, 0.4);
+}
+
+/* Hit / Miss */
+.cell.hit {
+  background: rgba(239, 68, 68, 0.15);
+}
+
+.cell.hit::after {
+  content: '';
+  background: none;
+}
+
+.cell.hit .marker {
+  color: #EF4444;
+  font-size: 1.1em;
+  font-weight: 900;
+  line-height: 1;
+  z-index: 2;
+}
+
+.cell.miss::after {
+  background: var(--text-muted);
+  border-radius: 50%;
+  inset: 35%;
+  opacity: 0.6;
+}
+
+/* Sunk ship overlay */
+.cell.sunk {
+  background: rgba(249, 115, 22, 0.15);
+}
+
+.cell.sunk .marker {
+  color: #F97316;
+  font-size: 1.1em;
+  font-weight: 900;
+  line-height: 1;
+  z-index: 2;
+}
+
+/* Enemy board - clickable cells */
+.enemy-board .cell:not(.hit):not(.miss):not(.sunk) {
+  cursor: crosshair;
+}
+
+.enemy-board .cell:not(.hit):not(.miss):not(.sunk):hover {
+  background: rgba(59, 130, 246, 0.1);
+}
+
+.enemy-board .cell:not(.hit):not(.miss):not(.sunk):active {
+  background: rgba(59, 130, 246, 0.2);
+}
+
+/* Placement board */
+.place-board .cell {
+  cursor: crosshair;
+}
+
+.place-board .cell:hover:not(.ship) {
+  background: rgba(59, 130, 246, 0.08);
+}
+
+/* ===================== SHIP TRACK (BOTTOM HUD) ===================== */
+.ships-hud {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.hud-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ships-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.ship-badge {
+  display: flex;
+  gap: 3px;
+  align-items: center;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 4px 7px;
+  transition: all 0.3s;
+}
+
+.ship-badge.sunk {
+  opacity: 0.4;
+  border-style: dashed;
+}
+
+.ship-badge .block {
+  width: 8px;
+  height: 8px;
+  border-radius: 1px;
+  background: var(--accent);
+}
+
+.ship-badge.sunk .block {
+  background: var(--text-muted);
+}
+
+/* ===================== BUTTONS ===================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 12px 20px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--btn-bg);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.18s;
+  letter-spacing: 0.02em;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn:hover {
+  background: var(--btn-active);
+  border-color: var(--accent);
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn-primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: #2563EB;
+  border-color: #2563EB;
+}
+
+.btn-sm {
+  padding: 8px 14px;
+  font-size: 0.8rem;
+  border-radius: 8px;
+}
+
+.btn-danger {
+  border-color: #EF4444;
+  color: #EF4444;
+}
+
+.btn-danger:hover {
+  background: rgba(239, 68, 68, 0.1);
+}
+
+.btn-group {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+
+.btn-group .btn {
+  flex: 1;
+}
+
+.btn-full {
+  width: 100%;
+}
+
+/* ===================== RESULT SCREEN ===================== */
+#result-screen .screen-content {
+  gap: 20px;
+}
+
+.result-emoji {
+  font-size: 4rem;
+  line-height: 1;
+  filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.3));
+}
+
+.result-title {
+  font-size: 2rem;
+  font-weight: 800;
+  text-align: center;
+  letter-spacing: 0.04em;
+}
+
+.result-title.win {
+  background: linear-gradient(135deg, #3B82F6, #60A5FA, #93C5FD);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.result-title.lose {
+  color: var(--text-secondary);
+}
+
+.result-desc {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  text-align: center;
+  line-height: 1.5;
+}
+
+.result-stats {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.result-stat {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.result-stat-val {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.result-stat-label {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* ===================== TOAST ===================== */
+.toast-container {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: none;
+  width: 90%;
+  max-width: 360px;
+}
+
+.toast {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 0.875rem;
+  color: var(--text-primary);
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  animation: toastIn 0.3s ease, toastOut 0.3s ease 1.7s forwards;
+  backdrop-filter: blur(8px);
+}
+
+.toast.sunk-toast {
+  border-color: #F97316;
+  color: #F97316;
+  background: rgba(249, 115, 22, 0.08);
+}
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translateY(-12px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes toastOut {
+  from { opacity: 1; }
+  to   { opacity: 0; transform: translateY(-8px); }
+}
+
+/* ===================== AI THINKING ANIMATION ===================== */
+.thinking-dots {
+  display: inline-flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.thinking-dots span {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--text-muted);
+  animation: bounce 0.9s infinite;
+}
+
+.thinking-dots span:nth-child(2) { animation-delay: 0.15s; }
+.thinking-dots span:nth-child(3) { animation-delay: 0.3s; }
+
+@keyframes bounce {
+  0%, 80%, 100% { transform: scale(0.7); opacity: 0.4; }
+  40% { transform: scale(1); opacity: 1; }
+}
+
+/* ===================== SUNK SHIP FLASH ===================== */
+@keyframes sunkFlash {
+  0%, 100% { background: rgba(249, 115, 22, 0.15); }
+  50% { background: rgba(249, 115, 22, 0.35); }
+}
+
+.cell.sunk-flash {
+  animation: sunkFlash 0.4s ease 3;
+}
+
+/* ===================== SCROLLBAR ===================== */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+/* ===================== RESPONSIVE FINE-TUNE ===================== */
+@media (max-height: 700px) {
+  .game-container { gap: 8px; padding: 10px; }
+  .boards-section { gap: 8px; }
+}
+
+@media (max-width: 360px) {
+  .btn { padding: 10px 14px; font-size: 0.82rem; }
+}

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#0D1117" />
+  <title>PONG</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div id="app">
+
+    <!-- Header: title + live score -->
+    <header id="header">
+      <span id="header-title">PONG</span>
+      <div id="score-display">
+        <div class="score-block">
+          <span class="player-label">나</span>
+          <span id="player-score">0</span>
+        </div>
+        <span class="score-separator">:</span>
+        <div class="score-block">
+          <span class="player-label">AI</span>
+          <span id="ai-score">0</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Canvas -->
+    <div id="canvas-container">
+      <canvas id="gameCanvas"></canvas>
+
+      <!-- ── START SCREEN ── -->
+      <div id="start-screen" class="overlay">
+        <h1 class="game-title">PONG</h1>
+        <p class="game-subtitle">1인 플레이 vs AI</p>
+
+        <div class="difficulty-section">
+          <p class="difficulty-label">난이도 선택</p>
+          <div class="difficulty-buttons">
+            <button class="diff-btn" data-diff="easy">쉬움</button>
+            <button class="diff-btn active" data-diff="normal">보통</button>
+            <button class="diff-btn" data-diff="hard">어려움</button>
+          </div>
+        </div>
+
+        <button class="btn-primary" id="start-btn">게임 시작</button>
+
+        <div class="best-badge">
+          최고 점수: <span id="start-best-value">0</span>
+        </div>
+      </div>
+
+      <!-- ── PAUSE SCREEN ── -->
+      <div id="pause-screen" class="overlay hidden">
+        <p class="pause-title">일시정지</p>
+        <p class="pause-hint">재개 버튼을 누르거나 Esc를 눌러 계속하세요</p>
+        <button class="btn-primary" id="resume-btn">재개하기</button>
+        <button class="btn-secondary" id="pause-menu-btn">메인 메뉴</button>
+      </div>
+
+      <!-- ── GAME OVER SCREEN ── -->
+      <div id="gameover-screen" class="overlay hidden">
+        <p id="result-title" class="result-title win">승리!</p>
+        <p id="final-score" class="final-score">11 : 7</p>
+        <p id="result-subtitle" class="result-subtitle">완벽한 플레이! 🎉</p>
+
+        <div class="best-badge" style="margin-top:4px">
+          최고 점수: <span id="best-badge-value">0</span>
+        </div>
+
+        <div class="gameover-buttons">
+          <button class="btn-primary" id="restart-btn">다시 시작</button>
+          <button class="btn-secondary" id="menu-btn">메인 메뉴</button>
+        </div>
+      </div>
+
+    </div><!-- /canvas-container -->
+
+    <!-- Footer controls hint -->
+    <footer id="controls-hint">
+      <span class="hint-text">↑↓ 키 또는 드래그로 패들 이동</span>
+      <button id="pause-btn">일시정지</button>
+    </footer>
+
+  </div><!-- /app -->
+
+  <script src="js/game.js"></script>
+</body>
+</html>

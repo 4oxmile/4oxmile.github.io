@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0D1117" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)" />
+  <title>MEMORY</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ════════════════════════════════════════
+       START SCREEN
+  ════════════════════════════════════════ -->
+  <div id="start-screen" class="overlay" role="dialog" aria-labelledby="main-title">
+
+    <div class="title-wrap">
+      <h1 id="main-title" class="title">MEMORY</h1>
+      <p class="subtitle">카드 짝 맞추기 게임</p>
+    </div>
+
+    <!-- Size selector -->
+    <div class="size-section">
+      <span class="size-label">난이도 선택</span>
+      <div class="size-buttons">
+        <button class="size-btn" data-size="3x4" aria-label="쉬움: 3×4 격자">
+          <span class="size-name">3×4</span>
+          <span class="size-desc">쉬움 · 12장</span>
+        </button>
+        <button class="size-btn active" data-size="4x4" aria-label="보통: 4×4 격자">
+          <span class="size-name">4×4</span>
+          <span class="size-desc">보통 · 16장</span>
+        </button>
+        <button class="size-btn" data-size="4x5" aria-label="어려움: 4×5 격자">
+          <span class="size-name">4×5</span>
+          <span class="size-desc">어려움 · 20장</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Best records -->
+    <div id="best-records" class="best-records" aria-label="최고 기록"></div>
+
+    <!-- Start -->
+    <button id="start-btn" class="start-btn">게임 시작</button>
+
+  </div>
+
+  <!-- ════════════════════════════════════════
+       VICTORY SCREEN
+  ════════════════════════════════════════ -->
+  <div id="victory-screen" class="overlay hidden" role="dialog" aria-labelledby="victory-heading">
+
+    <div class="victory-emoji" aria-hidden="true">🎉</div>
+    <h2 id="victory-heading" class="victory-title">완성!</h2>
+
+    <div class="victory-stats">
+      <div class="stat-row">
+        <span class="stat-label">격자 크기</span>
+        <span class="stat-value" id="v-size">4×4</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label">이동 횟수</span>
+        <span class="stat-value" id="v-moves">0번</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label">걸린 시간</span>
+        <span class="stat-value" id="v-time">00:00</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label">최고 기록</span>
+        <span class="stat-value" id="v-best">0번</span>
+        <span class="new-best-badge" id="v-best-badge" style="display:none" aria-label="신기록">NEW</span>
+      </div>
+    </div>
+
+    <div class="victory-actions">
+      <button class="btn-secondary" id="v-menu-btn">사이즈 변경</button>
+      <button class="btn-primary" id="v-again-btn">다시 하기</button>
+    </div>
+
+  </div>
+
+  <!-- ════════════════════════════════════════
+       GAME SCREEN
+  ════════════════════════════════════════ -->
+  <div id="game-screen">
+
+    <!-- Header -->
+    <header class="game-header">
+      <div class="header-left">
+        <button class="icon-btn" id="home-btn" aria-label="홈으로">⌂</button>
+        <span class="header-title">MEMORY</span>
+        <span id="header-size-label" style="font-size:0.78rem; color:var(--text-muted); letter-spacing:0.04em; font-weight:600;">4×4</span>
+      </div>
+      <button class="icon-btn" id="restart-icon-btn" aria-label="다시 시작">↺</button>
+    </header>
+
+    <!-- Stats bar -->
+    <div class="stats-bar" role="status" aria-live="polite" aria-label="게임 현황">
+      <div class="stat-chip">
+        <div class="stat-chip-label">이동</div>
+        <div class="stat-chip-value" id="moves-val">0</div>
+      </div>
+      <div class="stat-chip">
+        <div class="stat-chip-label">시간</div>
+        <div class="stat-chip-value" id="timer-val">00:00</div>
+      </div>
+    </div>
+
+    <!-- Progress -->
+    <div class="progress-wrap" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="진행률">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+    </div>
+
+    <!-- Board -->
+    <div class="board-wrap">
+      <div class="board grid-4x4" id="board" role="grid" aria-label="카드 보드"></div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="game-footer">
+      <button class="restart-btn" id="restart-btn">다시 시작</button>
+    </footer>
+
+  </div>
+
+  <script src="js/game.js"></script>
+</body>
+</html>

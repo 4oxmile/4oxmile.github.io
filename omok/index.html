@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#0D1117" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+  <title>오목 - OMOK</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ── Start Screen ── -->
+  <div class="overlay" id="start-screen">
+    <div class="game-title">OMOK</div>
+    <div class="game-subtitle">오목 · Gomoku</div>
+
+    <div class="stats-box">
+      <div class="stat-item">
+        <div class="stat-value" id="stat-win">0</div>
+        <div class="stat-label">승</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <div class="stat-value" id="stat-loss">0</div>
+        <div class="stat-label">패</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <div class="stat-value" id="stat-total">0</div>
+        <div class="stat-label">판</div>
+      </div>
+    </div>
+
+    <button class="btn btn-primary" id="btn-start">게임 시작</button>
+  </div>
+
+  <!-- ── Result Screen ── -->
+  <div class="overlay hidden" id="result-screen">
+    <div class="result-emoji" id="result-emoji">🎉</div>
+    <div class="result-title win" id="result-title">승리!</div>
+    <div class="result-subtitle" id="result-subtitle">축하합니다! AI를 이겼습니다.</div>
+    <button class="btn btn-primary" id="btn-play-again">다시 하기</button>
+    <button class="btn" id="btn-home-result">홈으로</button>
+  </div>
+
+  <!-- ── Game Screen (always rendered) ── -->
+  <div id="game-screen">
+
+    <!-- Header -->
+    <div class="game-header">
+      <div class="header-title">OMOK</div>
+      <div class="header-actions">
+        <button class="btn btn-small" id="btn-undo" title="무르기">← 무르기</button>
+        <button class="btn btn-small" id="btn-restart" title="새 게임">새 게임</button>
+        <button class="btn btn-small" id="btn-home" title="홈">홈</button>
+      </div>
+    </div>
+
+    <!-- Status bar -->
+    <div class="status-bar">
+      <div class="turn-indicator">
+        <div class="stone-dot black" id="turn-dot"></div>
+        <span id="turn-label">당신 (흑)</span>
+      </div>
+      <div class="status-text" id="status-text">흑이 먼저 시작합니다</div>
+    </div>
+
+    <!-- Board -->
+    <div class="canvas-wrapper">
+      <canvas id="board"></canvas>
+    </div>
+
+    <!-- Mini stats -->
+    <div class="mini-stats">
+      <div class="mini-stat wins">
+        <div class="val" id="mini-win">0</div>
+        <div class="lbl">승</div>
+      </div>
+      <div class="mini-stat losses">
+        <div class="val" id="mini-loss">0</div>
+        <div class="lbl">패</div>
+      </div>
+      <div class="mini-stat games">
+        <div class="val" id="mini-total">0</div>
+        <div class="lbl">판</div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="js/game.js"></script>
+</body>
+</html>
