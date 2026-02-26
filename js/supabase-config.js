@@ -5,5 +5,5 @@
  * 2. SQL Editor 에서 supabase-setup.sql 실행
  * 3. Settings → API 에서 URL 과 anon key 복사
  */
-window.SUPABASE_URL      = 'YOUR_SUPABASE_URL';
-window.SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+window.SUPABASE_URL = "https://ldpvjfcmhpiiifvlhkcs.supabase.co";
+window.SUPABASE_ANON_KEY = "sb_publishable_D-BGfS9fr5tUFdte47k04g_H7YzOPUg";
