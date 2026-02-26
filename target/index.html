@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>TARGET</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div id="app">
+
+    <!-- Canvas -->
+    <canvas id="gameCanvas"></canvas>
+
+    <!-- HUD -->
+    <div id="hud">
+      <div class="hud-stat">
+        <span class="hud-label">점수</span>
+        <span class="hud-value" id="scoreValue">0</span>
+      </div>
+      <div class="hud-stat">
+        <span class="hud-label">시간</span>
+        <span class="hud-value" id="timerValue">30</span>
+      </div>
+      <div class="hud-stat">
+        <span class="hud-label">미스</span>
+        <span class="hud-value" id="missValue">0</span>
+      </div>
+      <div class="hud-stat">
+        <span class="hud-label">정확도</span>
+        <span class="hud-value" id="accuracyValue">100%</span>
+      </div>
+    </div>
+
+    <!-- Combo display -->
+    <div id="comboDisplay"></div>
+
+    <!-- Start Overlay -->
+    <div id="startOverlay" class="overlay">
+      <h1 class="game-title">TARGET</h1>
+      <p class="game-subtitle">반응속도를 테스트하세요</p>
+
+      <div class="stats-card">
+        <div class="stat-row">
+          <span class="stat-row-label">최고 점수</span>
+          <span class="stat-row-value highlight" id="startHs">0</span>
+        </div>
+      </div>
+
+      <button id="startBtn" class="btn btn-primary">게임 시작</button>
+
+      <div class="instructions">
+        <div class="inst-row">
+          <div class="inst-dot bullseye"></div>
+          <span>정중앙(불스아이) 명중 — <strong>+100점</strong></span>
+        </div>
+        <div class="inst-row">
+          <div class="inst-dot inner"></div>
+          <span>내부 링 명중 — <strong>+50점</strong></span>
+        </div>
+        <div class="inst-row">
+          <div class="inst-dot outer"></div>
+          <span>외부 링 명중 — <strong>+25점</strong></span>
+        </div>
+        <div class="inst-row" style="margin-top:4px;padding-top:10px;border-top:1px solid var(--border);">
+          <span style="font-size:18px;line-height:1;">⏱</span>
+          <span>30초 안에 최대한 많이 맞추세요</span>
+        </div>
+        <div class="inst-row">
+          <span style="font-size:18px;line-height:1;">🔥</span>
+          <span>5연속 콤보 달성 시 +50 보너스!</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Result Overlay -->
+    <div id="resultOverlay" class="overlay hidden">
+      <div class="highscore-badge" id="highscoreBadge">🏆 신기록!</div>
+      <h2 class="result-title">결과</h2>
+      <p class="new-record" id="newRecord"></p>
+
+      <div class="stats-card">
+        <div class="stat-row">
+          <span class="stat-row-label">최종 점수</span>
+          <span class="stat-row-value highlight" id="resScore">0</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-row-label">명중</span>
+          <span class="stat-row-value" id="resHits">0</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-row-label">미스</span>
+          <span class="stat-row-value" id="resMisses">0</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-row-label">정확도</span>
+          <span class="stat-row-value" id="resAccuracy">0%</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-row-label">최대 콤보</span>
+          <span class="stat-row-value" id="resCombo">x0</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-row-label">최고 기록</span>
+          <span class="stat-row-value highlight" id="resHighscore">0</span>
+        </div>
+      </div>
+
+      <button id="restartBtn" class="btn btn-primary">다시 하기</button>
+    </div>
+
+  </div><!-- /#app -->
+
+  <script src="js/game.js"></script>
+</body>
+</html>

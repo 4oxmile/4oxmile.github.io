@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>JUMP</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div id="app">
+    <div id="game-wrapper">
+      <!-- Canvas -->
+      <canvas id="game-canvas"></canvas>
+
+      <!-- HUD -->
+      <div id="hud">
+        <div id="score-display">
+          <span class="hud-label">점수</span>
+          <span class="hud-value" id="score-value">0</span>
+        </div>
+        <div id="best-display">
+          <span class="hud-label">최고</span>
+          <span class="hud-value" id="best-value">0</span>
+        </div>
+      </div>
+
+      <!-- Pause button -->
+      <button id="pause-btn" style="display:none;">⏸ 일시정지</button>
+
+      <!-- Tilt indicator -->
+      <div id="tilt-indicator">
+        <span>←</span>
+        <div id="tilt-bar-bg">
+          <div id="tilt-bar"></div>
+        </div>
+        <span>→</span>
+      </div>
+
+      <!-- Start overlay -->
+      <div class="overlay" id="start-overlay">
+        <h1 class="game-title">JUMP</h1>
+        <p class="game-subtitle">끝없이 올라가세요!</p>
+
+        <button class="btn btn-primary" id="start-btn">시작하기</button>
+
+        <div class="controls-hint">
+          <div class="hint-item">
+            <span class="hint-icon">⬅➡</span>
+            <span>키보드 방향키</span>
+          </div>
+          <div class="hint-item">
+            <span class="hint-icon">↕️</span>
+            <span>기기 기울이기</span>
+          </div>
+          <div class="hint-item">
+            <span class="hint-icon">👆</span>
+            <span>화면 드래그</span>
+          </div>
+        </div>
+
+        <div class="platform-legend">
+          <div class="legend-item">
+            <div class="legend-dot normal"></div>
+            <span>일반 플랫폼</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot moving"></div>
+            <span>이동 플랫폼</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-dot breakable"></div>
+            <span>부서지는 플랫폼</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Result overlay -->
+      <div class="overlay hidden" id="result-overlay">
+        <h1 class="game-title" style="margin-bottom:6px;">게임 오버</h1>
+        <p id="result-msg" style="color:var(--text-secondary);font-size:14px;margin-bottom:24px;">다시 도전해보세요!</p>
+
+        <div class="result-row">
+          <div class="score-card">
+            <div class="score-card-label">이번 점수</div>
+            <div class="score-card-value" id="result-score">0</div>
+          </div>
+          <div class="score-card">
+            <div class="score-card-label">최고 기록</div>
+            <div class="score-card-value accent" id="result-best">0</div>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-primary" id="restart-btn">다시 하기</button>
+          <button class="btn" id="menu-btn">메인 화면</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/game.js"></script>
+</body>
+</html>

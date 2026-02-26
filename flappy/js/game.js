@@ -600,6 +600,19 @@ window.addEventListener('keydown', e => {
 canvas.addEventListener('click', () => handleInput());
 canvas.addEventListener('touchstart', e => { e.preventDefault(); handleInput(); }, { passive: false });
 
+// Allow tapping overlays to trigger input (mobile fix)
+[startOverlay, gameoverOverlay, pauseOverlay].forEach(el => {
+  el.addEventListener('click', e => {
+    if (e.target.closest('button')) return; // let buttons handle themselves
+    handleInput();
+  });
+  el.addEventListener('touchstart', e => {
+    if (e.target.closest('button')) return;
+    e.preventDefault();
+    handleInput();
+  }, { passive: false });
+});
+
 pauseBtn.addEventListener('click', e => {
   e.stopPropagation();
   togglePause();

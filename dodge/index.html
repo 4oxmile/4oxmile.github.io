@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0D1117" />
+  <title>DODGE</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div id="app">
+    <div id="game-wrapper">
+
+      <!-- Canvas -->
+      <canvas id="game-canvas"></canvas>
+
+      <!-- HUD (always visible during play) -->
+      <div id="hud">
+        <div class="hud-item">
+          <span class="hud-label">시간</span>
+          <span class="hud-value" id="hud-score">000</span>
+        </div>
+        <div class="hud-item">
+          <span class="hud-label">최고</span>
+          <span class="hud-value accent" id="hud-best">000</span>
+        </div>
+      </div>
+
+      <!-- Power-up display -->
+      <div id="powerup-display">
+        <div class="powerup-badge shield" id="badge-shield">
+          <span>🛡</span>
+          <span>방어막</span>
+        </div>
+        <div class="powerup-badge slow" id="badge-slow">
+          <span>⏱</span>
+          <span>슬로우</span>
+        </div>
+      </div>
+
+      <!-- ── Start Screen ── -->
+      <div class="overlay" id="overlay-start">
+        <div class="game-title">DODGE</div>
+        <div class="game-subtitle">화살을 피하라</div>
+
+        <div class="highscore-row">
+          <span class="highscore-icon">🏆</span>
+          <span class="highscore-label">최고 기록</span>
+          <span class="highscore-value" id="start-best">0</span>
+          <span class="highscore-label">초</span>
+        </div>
+
+        <button class="btn btn-primary" id="btn-start">
+          <span>▶</span>
+          <span>게임 시작</span>
+        </button>
+
+        <div class="divider"></div>
+
+        <div class="tips-row">
+          <div class="tip-pill">
+            <span>⌨</span>
+            <span>WASD / 방향키</span>
+          </div>
+          <div class="tip-pill">
+            <span>👆</span>
+            <span>터치 드래그</span>
+          </div>
+        </div>
+        <div class="tips-row">
+          <div class="tip-pill">
+            <span>🛡</span>
+            <span>방어막 수집</span>
+          </div>
+          <div class="tip-pill">
+            <span>⏱</span>
+            <span>슬로우 수집</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Game Over Screen ── -->
+      <div class="overlay hidden" id="overlay-dead">
+        <div class="game-title" style="font-size: clamp(32px,9vw,52px);">GAME OVER</div>
+
+        <div class="score-block">
+          <span class="score-label">생존 시간</span>
+          <span class="score-value" id="result-score">0</span>
+          <span class="score-unit">초</span>
+        </div>
+
+        <span class="new-record hidden" id="new-record">★ 신기록 달성! ★</span>
+
+        <div class="highscore-row">
+          <span class="highscore-icon">🏆</span>
+          <span class="highscore-label">최고 기록</span>
+          <span class="highscore-value" id="result-best">0</span>
+          <span class="highscore-label">초</span>
+        </div>
+
+        <button class="btn btn-primary" id="btn-restart">
+          <span>↺</span>
+          <span>다시 시작</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="js/game.js"></script>
+</body>
+</html>

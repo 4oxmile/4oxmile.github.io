@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>DINO - 공룡 달리기</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <div class="game-wrapper">
+
+    <!-- Header -->
+    <header class="header">
+      <span class="header-title">DINO</span>
+      <div class="score-display">
+        <span class="score-current" id="scoreVal">00000</span>
+        <span class="score-best">최고 <span id="hiscoreVal">0</span></span>
+      </div>
+    </header>
+
+    <!-- Night badge -->
+    <div class="night-badge" id="nightBadge">🌙</div>
+
+    <!-- Canvas -->
+    <div class="canvas-area">
+      <canvas id="gameCanvas"></canvas>
+    </div>
+
+    <!-- Controls -->
+    <div class="controls">
+      <button class="ctrl-btn duck" id="btnDuck" aria-label="웅크리기">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="7 13 12 18 17 13"/>
+          <line x1="12" y1="6" x2="12" y2="18"/>
+        </svg>
+        웅크리기
+      </button>
+      <button class="ctrl-btn primary" id="btnJump" aria-label="점프">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="17 11 12 6 7 11"/>
+          <line x1="12" y1="18" x2="12" y2="6"/>
+        </svg>
+        점프
+      </button>
+    </div>
+
+    <!-- Overlay: Start Screen -->
+    <div class="overlay" id="overlayStart">
+      <div class="overlay-icon">🦕</div>
+      <div class="overlay-title">DINO</div>
+      <div class="overlay-subtitle">
+        공룡을 조종해 장애물을 피하세요!<br>
+        스페이스바 · 위 방향키 · 화면 탭으로 점프
+      </div>
+      <div class="overlay-stats">
+        <div class="stat-block">
+          <span class="stat-label">최고 점수</span>
+          <span class="stat-value accent" id="startHiscore">0</span>
+        </div>
+      </div>
+      <button class="overlay-btn" id="btnStart">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="5 3 19 12 5 21 5 3"/>
+        </svg>
+        게임 시작
+      </button>
+      <p class="overlay-hint">스페이스바로도 시작할 수 있어요</p>
+    </div>
+
+    <!-- Overlay: Game Over Screen -->
+    <div class="overlay hidden" id="overlayDead">
+      <div class="overlay-icon">💀</div>
+      <div class="overlay-title">게임 오버</div>
+      <div class="overlay-subtitle">아쉬워요! 다시 도전해 보세요.</div>
+      <div class="overlay-stats">
+        <div class="stat-block">
+          <span class="stat-label">이번 점수</span>
+          <span class="stat-value" id="deadScore">00000</span>
+        </div>
+        <div class="stat-block">
+          <span class="stat-label">최고 점수</span>
+          <span class="stat-value" id="deadHiscore">00000</span>
+        </div>
+      </div>
+      <button class="overlay-btn" id="btnRestart">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="1 4 1 10 7 10"/>
+          <path d="M3.51 15a9 9 0 1 0 .49-4.95"/>
+        </svg>
+        다시 시작
+      </button>
+      <p class="overlay-hint">스페이스바를 눌러도 재시작할 수 있어요</p>
+    </div>
+
+  </div><!-- .game-wrapper -->
+
+  <script>
+    // Sync start overlay hi-score with localStorage
+    document.getElementById('startHiscore').textContent =
+      localStorage.getItem('dino_hi') || '0';
+  </script>
+  <script src="js/game.js"></script>
+</body>
+</html>

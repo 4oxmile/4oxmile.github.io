@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="theme-color" content="#0D1117" />
+  <title>RHYTHM TAP</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div id="app">
+
+    <!-- ═══ GAME BOARD (canvas) ═══════════════════════════════════ -->
+    <div id="game-board">
+      <canvas id="game-canvas"></canvas>
+    </div>
+
+    <!-- ═══ HUD (always rendered, above canvas) ══════════════════ -->
+    <div id="game-hud">
+      <div id="hud-combo">
+        <span id="combo-value">0</span>
+        <span id="combo-label">콤보</span>
+      </div>
+
+      <div id="hud-center">
+        <span id="hud-song-name">—</span>
+        <div id="health-bar-track">
+          <div id="health-bar-fill"></div>
+        </div>
+      </div>
+
+      <div id="hud-score">
+        <span id="score-value">0</span>
+        <span id="score-label">점수</span>
+      </div>
+    </div>
+
+    <!-- Pause button (only shown while playing) -->
+    <button id="btn-pause" aria-label="일시정지">⏸</button>
+
+    <!-- ═══ COUNTDOWN ════════════════════════════════════════════ -->
+    <div id="countdown"></div>
+
+    <!-- ════════════════════════════════════════════════════════════
+         SCREEN: START
+    ═════════════════════════════════════════════════════════════ -->
+    <div id="screen-start" class="screen">
+      <h1 class="game-title">RHYTHM</h1>
+      <p class="game-subtitle">4키 리듬 게임 · 타이밍이 전부다</p>
+
+      <button id="btn-play" class="btn btn-primary">
+        ▶ 게임 시작
+      </button>
+
+      <p style="font-size:12px;color:var(--text-muted);text-align:center;line-height:1.6;max-width:280px;">
+        키보드: <strong style="color:var(--text-secondary)">A S D F</strong> 또는 화살표키<br />
+        모바일: 각 레인을 탭하세요
+      </p>
+    </div>
+
+    <!-- ════════════════════════════════════════════════════════════
+         SCREEN: SONG SELECT
+    ═════════════════════════════════════════════════════════════ -->
+    <div id="screen-select" class="screen hidden">
+      <h2 style="font-size:22px;font-weight:800;color:var(--text-primary);">곡 선택</h2>
+
+      <div id="song-list" class="song-list"></div>
+
+      <button id="btn-start-song" class="btn btn-primary">
+        ▶ 선택 곡 시작
+      </button>
+      <button id="btn-select-back" class="btn">
+        ← 돌아가기
+      </button>
+    </div>
+
+    <!-- ════════════════════════════════════════════════════════════
+         SCREEN: PAUSE
+    ═════════════════════════════════════════════════════════════ -->
+    <div id="screen-pause" class="screen hidden">
+      <h2 style="font-size:22px;font-weight:800;color:var(--text-primary);">일시정지</h2>
+
+      <div style="text-align:center;">
+        <div style="font-size:12px;color:var(--text-muted);letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px;">현재 점수</div>
+        <div id="pause-score" class="pause-score">0점</div>
+      </div>
+
+      <button id="btn-resume" class="btn btn-primary">
+        ▶ 계속하기
+      </button>
+      <button id="btn-quit" class="btn btn-danger">
+        ✕ 곡 선택으로
+      </button>
+    </div>
+
+    <!-- ════════════════════════════════════════════════════════════
+         SCREEN: RESULT
+    ═════════════════════════════════════════════════════════════ -->
+    <div id="screen-result" class="screen hidden">
+      <h2 id="result-title" class="result-title">결과</h2>
+
+      <div class="result-score-block">
+        <div class="result-score-label">최종 점수</div>
+        <div id="result-score-value" class="result-score-value">0</div>
+        <div id="result-new-best" class="result-new-best" style="display:none;">★ 신기록!</div>
+      </div>
+
+      <div class="result-stats">
+        <div class="result-stat">
+          <div id="result-perfect" class="result-stat-count grade-perfect">0</div>
+          <div class="result-stat-label">PERFECT</div>
+        </div>
+        <div class="result-stat">
+          <div id="result-great" class="result-stat-count grade-great">0</div>
+          <div class="result-stat-label">GREAT</div>
+        </div>
+        <div class="result-stat">
+          <div id="result-good" class="result-stat-count grade-good">0</div>
+          <div class="result-stat-label">GOOD</div>
+        </div>
+        <div class="result-stat">
+          <div id="result-miss" class="result-stat-count grade-miss">0</div>
+          <div class="result-stat-label">MISS</div>
+        </div>
+      </div>
+
+      <div style="font-size:13px;color:var(--text-secondary);">
+        최대 콤보: <strong id="result-max-combo" style="color:var(--accent);">0</strong>
+      </div>
+
+      <button id="btn-retry" class="btn btn-primary">
+        ↺ 다시 도전
+      </button>
+      <button id="btn-back-to-select" class="btn">
+        ← 곡 선택
+      </button>
+    </div>
+
+  </div><!-- /#app -->
+
+  <script src="js/game.js"></script>
+</body>
+</html>

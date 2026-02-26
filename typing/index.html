@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>TYPING</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div id="app">
+
+    <!-- ── Start Screen ── -->
+    <div id="screen-start" class="screen">
+      <div class="title-gradient">TYPING</div>
+      <p class="screen-subtitle">단어가 화면 아래로 떨어지기 전에<br />타이핑하여 없애세요!</p>
+
+      <div class="score-block">
+        <div class="score-item">
+          <span class="score-label">최고 점수</span>
+          <span class="score-value" id="start-highscore">0</span>
+        </div>
+        <div class="score-item">
+          <span class="score-label">최고 WPM</span>
+          <span class="score-value" id="start-bestwpm">0</span>
+        </div>
+      </div>
+
+      <div class="how-to-play">
+        <h3>플레이 방법</h3>
+        <ul>
+          <li>단어가 화면 위에서 아래로 떨어집니다</li>
+          <li>단어를 입력하고 Enter를 눌러 제거하세요</li>
+          <li>단어가 바닥에 닿으면 목숨 1개를 잃습니다</li>
+          <li>연속으로 맞추면 콤보 보너스를 받습니다</li>
+          <li>레벨이 오를수록 속도가 빨라집니다</li>
+        </ul>
+      </div>
+
+      <button id="btn-start" class="btn btn-primary">게임 시작</button>
+    </div>
+
+    <!-- ── Game Over Screen ── -->
+    <div id="screen-gameover" class="screen hidden">
+      <div class="title-gradient" style="font-size: clamp(1.8rem, 9vw, 3rem);">GAME OVER</div>
+
+      <div class="gameover-stats">
+        <div class="stat-card highlight">
+          <span class="stat-label">점수</span>
+          <span class="stat-value" id="go-score">0</span>
+          <span class="new-record-badge" id="go-new-score" style="display:none;">NEW RECORD!</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">타이핑한 단어</span>
+          <span class="stat-value" id="go-words">0</span>
+        </div>
+        <div class="stat-card highlight">
+          <span class="stat-label">WPM</span>
+          <span class="stat-value" id="go-wpm">0</span>
+          <span class="new-record-badge" id="go-new-wpm" style="display:none;">최고 기록!</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">도달 레벨</span>
+          <span class="stat-value" id="go-level">1</span>
+        </div>
+      </div>
+
+      <div style="display:flex; gap:12px;">
+        <button id="btn-restart" class="btn btn-primary">다시 시작</button>
+        <button id="btn-quit" class="btn">메인으로</button>
+      </div>
+    </div>
+
+    <!-- ── Pause Screen ── -->
+    <div id="screen-pause" class="screen hidden">
+      <div class="title-gradient" style="font-size: clamp(2rem, 10vw, 3.5rem);">PAUSE</div>
+      <p class="screen-subtitle">게임이 일시정지되었습니다</p>
+      <div style="display:flex; gap:12px;">
+        <button id="btn-resume" class="btn btn-primary">계속하기</button>
+        <button id="btn-quit-pause" class="btn" style="display:none;">종료</button>
+      </div>
+    </div>
+
+    <!-- ── Game Header ── -->
+    <div id="game-header">
+      <div class="header-stat">
+        <span class="label">점수</span>
+        <span class="value accent" id="score-val">0</span>
+      </div>
+
+      <div class="header-stat">
+        <span class="label">WPM</span>
+        <span class="value" id="wpm-val">0</span>
+      </div>
+
+      <div id="lives-display"></div>
+
+      <div id="combo-display"></div>
+
+      <div id="level-badge">LV 1</div>
+
+      <button id="pause-btn">⏸ 일시정지</button>
+    </div>
+
+    <!-- ── Game Board ── -->
+    <div id="game-board"></div>
+
+    <!-- ── Input Area ── -->
+    <div id="input-area">
+      <input
+        type="text"
+        id="word-input"
+        autocomplete="off"
+        autocorrect="off"
+        autocapitalize="off"
+        spellcheck="false"
+        placeholder="단어를 입력하고 Enter..."
+        aria-label="단어 입력"
+      />
+    </div>
+
+  </div>
+
+  <script src="js/game.js"></script>
+</body>
+</html>

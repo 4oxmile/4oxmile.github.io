@@ -17,7 +17,7 @@ function getDelta(level) {
 
 /* Grid size: 2×2 → 3×3 → ... capped at 8×8 */
 function getGridSize(level) {
-  return Math.min(2 + Math.floor((level - 1) / 2), 8);
+  return Math.min(2 + Math.floor((level - 1) / 2), 6);
 }
 
 /* ── State ── */

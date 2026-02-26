@@ -302,7 +302,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 20px;
+  padding: 12px;
   background: var(--bg-primary);
 }
 
@@ -318,13 +318,13 @@ body {
 /* ── Grid Board ── */
 #board {
   display: grid;
-  gap: 6px;
+  gap: 8px;
   background: var(--board-bg);
-  padding: 8px;
+  padding: 10px;
   border-radius: 16px;
   border: 1px solid var(--border);
   width: 100%;
-  max-width: 380px;
+  max-width: 440px;
   aspect-ratio: 1;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
@@ -337,6 +337,8 @@ body {
   position: relative;
   overflow: hidden;
   will-change: transform;
+  min-width: 48px;
+  min-height: 48px;
 }
 
 .tile::after {

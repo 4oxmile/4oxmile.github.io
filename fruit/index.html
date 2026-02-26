@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Fruit Ninja</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div id="app">
+    <div id="game-wrapper">
+
+      <!-- Canvas -->
+      <canvas id="game-canvas"></canvas>
+
+      <!-- Bomb Flash -->
+      <div id="bomb-flash"></div>
+
+      <!-- HUD -->
+      <div id="hud">
+        <!-- Score -->
+        <div class="hud-block">
+          <span class="hud-label">점수</span>
+          <span class="hud-value" id="hud-score">0</span>
+        </div>
+
+        <!-- Timer (center) -->
+        <div class="hud-block center">
+          <div class="timer-ring">
+            <svg class="timer-svg" viewBox="0 0 48 48">
+              <circle class="timer-track" cx="24" cy="24" r="18" />
+              <circle class="timer-progress" id="timer-progress" cx="24" cy="24" r="18" />
+            </svg>
+            <div class="timer-text" id="timer-text">60</div>
+          </div>
+          <!-- Lives -->
+          <div class="lives-display" id="lives-display">
+            <span class="life-icon">❤️</span>
+            <span class="life-icon">❤️</span>
+            <span class="life-icon">❤️</span>
+          </div>
+        </div>
+
+        <!-- High Score -->
+        <div class="hud-block" style="align-items:flex-end">
+          <span class="hud-label">최고</span>
+          <span class="hud-value accent" id="hud-highscore">0</span>
+        </div>
+      </div>
+
+      <!-- Combo Display -->
+      <div class="combo-display" id="combo-display">2x COMBO!</div>
+
+      <!-- Pause Button -->
+      <button id="pause-btn" aria-label="일시정지">⏸</button>
+
+      <!-- ── START OVERLAY ─────────────────────────────────── -->
+      <div class="overlay" id="overlay-start">
+        <div class="fruit-banner">🍎 🍊 🍋 🍇 🍉</div>
+        <div class="game-title">FRUIT</div>
+        <div class="game-subtitle">슬라이스 챌린지</div>
+
+        <div class="highscore-box">
+          <div class="highscore-label">최고 기록</div>
+          <div class="highscore-value" id="start-highscore">0</div>
+        </div>
+
+        <button class="btn-primary" id="btn-start">게임 시작</button>
+
+        <div style="font-size:12px; color:var(--text-muted); margin-top:8px; text-align:center; line-height:1.6;">
+          마우스 드래그 또는 터치로 과일을 잘라보세요<br/>
+          💣 폭탄을 피하세요!
+        </div>
+      </div>
+
+      <!-- ── GAME OVER OVERLAY ──────────────────────────────── -->
+      <div class="overlay hidden" id="overlay-gameover">
+        <div class="game-over-title" id="go-title">게임 오버</div>
+        <div class="game-over-reason" id="go-reason">과일을 놓쳤습니다!</div>
+
+        <div class="result-score-label">최종 점수</div>
+        <div class="result-score-value" id="result-score">0</div>
+        <div class="result-new-record" id="result-record">최고 기록 갱신!</div>
+
+        <div class="result-stats">
+          <div class="stat-block">
+            <div class="stat-label">슬라이스</div>
+            <div class="stat-value" id="result-sliced">0</div>
+          </div>
+          <div class="stat-block">
+            <div class="stat-label">최대 콤보</div>
+            <div class="stat-value" id="result-combo">0</div>
+          </div>
+        </div>
+
+        <button class="btn-primary" id="btn-restart">다시 시작</button>
+        <button class="btn-secondary" id="btn-menu">처음으로</button>
+      </div>
+
+      <!-- ── PAUSE OVERLAY ──────────────────────────────────── -->
+      <div class="overlay hidden" id="overlay-pause">
+        <div class="pause-title">일시정지</div>
+        <div class="pause-subtitle">게임이 멈췄습니다</div>
+        <button class="btn-primary" id="btn-resume">계속하기</button>
+        <button class="btn-secondary" id="btn-quit">메뉴로</button>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="js/game.js"></script>
+</body>
+</html>
