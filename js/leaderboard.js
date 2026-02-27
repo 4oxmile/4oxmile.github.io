@@ -10,7 +10,6 @@ window.Leaderboard = (() => {
 
   /* Game-specific options for ascending/format/label */
   const GAME_OPTS = {
-    lights:      { ascending: true, label: '이동' },
     memory:      { ascending: true, label: '이동' },
     puzzle:      { ascending: true, label: '이동' },
     sokoban:     { ascending: true, label: '이동' },
