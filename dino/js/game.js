@@ -41,6 +41,7 @@
   let particles   = [];
   let raf         = null;
   let lastTime    = 0;
+  let flashInterval = null;
 
   // Update displayed hi-score immediately
   document.getElementById('hiscoreVal').textContent = hiScore;
@@ -761,6 +762,7 @@
 
   // ── Game State Transitions ────────────────────────────────
   function startGame() {
+    if (flashInterval) { clearInterval(flashInterval); flashInterval = null; }
     if(typeof Leaderboard!=='undefined')Leaderboard.hide();
     state = 'playing';
     score = 0;
@@ -789,7 +791,8 @@
 
     // Flash effect
     let flashes = 0;
-    const flashInterval = setInterval(() => {
+    if (flashInterval) clearInterval(flashInterval);
+    flashInterval = setInterval(() => {
       if (++flashes > 5) {
         clearInterval(flashInterval);
         showDeadOverlay();

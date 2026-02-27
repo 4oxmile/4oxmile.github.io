@@ -669,6 +669,9 @@ function endGame(won) {
     $('result-total-losses').textContent = stats.losses;
 
     showScreen('result');
+    if (won && typeof Leaderboard !== 'undefined') {
+      Leaderboard.ready('battleship', state.playerShots, { ascending: true, label: '공격 횟수' });
+    }
   }, 400);
 }
 
@@ -688,6 +691,7 @@ function initGame() {
 }
 
 function goToPlaceScreen() {
+  if (typeof Leaderboard !== 'undefined') Leaderboard.hide();
   state = freshState();
   state.phase = 'place';
   showScreen('place');

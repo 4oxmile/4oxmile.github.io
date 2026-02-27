@@ -210,6 +210,56 @@ body {
 }
 
 /* ============================================================
+   DIFFICULTY SELECTOR
+   ============================================================ */
+.difficulty-selector {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+
+.diff-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 12px 8px;
+  background: var(--bg-tertiary);
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s, box-shadow 0.15s, transform 0.1s;
+  font-family: inherit;
+}
+
+.diff-btn:hover {
+  background: var(--btn-active);
+}
+
+.diff-btn:active {
+  transform: scale(0.96);
+}
+
+.diff-btn.selected {
+  border-color: var(--accent);
+  box-shadow: 0 0 12px var(--accent-glow);
+  background: var(--bg-secondary);
+}
+
+.diff-label {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.diff-info {
+  font-size: 11px;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/* ============================================================
    BUTTONS
    ============================================================ */
 .btn-primary {
@@ -324,6 +374,14 @@ body {
   aspect-ratio: 1;
 }
 
+.board[data-size="medium"] {
+  gap: 2px;
+}
+
+.board[data-size="hard"] {
+  gap: 2px;
+}
+
 /* ============================================================
    CELLS
    ============================================================ */
@@ -371,6 +429,32 @@ body {
 .cell.flagged::after {
   content: '🚩';
   font-size: clamp(10px, 2.5vw, 15px);
+}
+
+.board[data-size="medium"] .cell {
+  font-size: clamp(9px, 2.2vw, 14px);
+  border-radius: 4px;
+}
+
+.board[data-size="hard"] .cell {
+  font-size: clamp(8px, 1.8vw, 12px);
+  border-radius: 3px;
+}
+
+.board[data-size="medium"] .cell.flagged::after,
+.board[data-size="medium"] .cell.mine-hit::after,
+.board[data-size="medium"] .cell.mine-revealed::after,
+.board[data-size="medium"] .cell.wrong-flag::after,
+.board[data-size="medium"] .cell.correct-flag::after {
+  font-size: clamp(8px, 2vw, 12px);
+}
+
+.board[data-size="hard"] .cell.flagged::after,
+.board[data-size="hard"] .cell.mine-hit::after,
+.board[data-size="hard"] .cell.mine-revealed::after,
+.board[data-size="hard"] .cell.wrong-flag::after,
+.board[data-size="hard"] .cell.correct-flag::after {
+  font-size: clamp(7px, 1.5vw, 10px);
 }
 
 /* Revealed mine (game over) */

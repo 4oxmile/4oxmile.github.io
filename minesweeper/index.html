@@ -15,6 +15,20 @@
     <div class="overlay-content">
       <div class="game-title">MINE</div>
       <p class="overlay-desc">지뢰를 피해 모든 칸을 열어보세요!</p>
+      <div class="difficulty-selector">
+        <button class="diff-btn selected" data-diff="easy">
+          <span class="diff-label">초급</span>
+          <span class="diff-info">9×9 · 💣10</span>
+        </button>
+        <button class="diff-btn" data-diff="medium">
+          <span class="diff-label">중급</span>
+          <span class="diff-info">13×13 · 💣30</span>
+        </button>
+        <button class="diff-btn" data-diff="hard">
+          <span class="diff-label">고급</span>
+          <span class="diff-info">16×16 · 💣50</span>
+        </button>
+      </div>
       <div class="overlay-stats" id="start-best-display"></div>
       <button class="btn-primary" id="btn-start">게임 시작</button>
     </div>

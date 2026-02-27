@@ -3,11 +3,17 @@
 /* ============================================================
    CONSTANTS
    ============================================================ */
-const ROWS = 9;
-const COLS = 9;
-const TOTAL_MINES = 10;
+const DIFFICULTIES = {
+  easy:   { rows: 9,  cols: 9,  mines: 10, label: '초급' },
+  medium: { rows: 13, cols: 13, mines: 30, label: '중급' },
+  hard:   { rows: 16, cols: 16, mines: 50, label: '고급' },
+};
+let currentDifficulty = 'easy';
+let ROWS = 9;
+let COLS = 9;
+let TOTAL_MINES = 10;
 const LONG_PRESS_MS = 500;
-const LS_BEST_KEY = 'mine_best_time';
+function lsBestKey() { return `mine_best_time_${currentDifficulty}`; }
 
 /* ============================================================
    STATE
@@ -57,12 +63,12 @@ function fmtTime(s) {
 }
 
 function getBestTime() {
-  const v = localStorage.getItem(LS_BEST_KEY);
+  const v = localStorage.getItem(lsBestKey());
   return v !== null ? parseInt(v, 10) : null;
 }
 
 function saveBestTime(t) {
-  localStorage.setItem(LS_BEST_KEY, t);
+  localStorage.setItem(lsBestKey(), t);
 }
 
 function clamp(v, lo, hi) {
@@ -107,6 +113,14 @@ function stopTimer() {
 /* ============================================================
    BOARD INIT
    ============================================================ */
+function applyDifficulty(diff) {
+  const d = DIFFICULTIES[diff];
+  currentDifficulty = diff;
+  ROWS = d.rows;
+  COLS = d.cols;
+  TOTAL_MINES = d.mines;
+}
+
 function initBoard() {
   board = [];
   mineSet.clear();
@@ -122,6 +136,9 @@ function initBoard() {
   mineCounterEl.textContent = TOTAL_MINES;
 
   boardEl.innerHTML = '';
+  boardEl.style.gridTemplateColumns = `repeat(${COLS}, 1fr)`;
+  boardEl.style.gridTemplateRows = `repeat(${ROWS}, 1fr)`;
+  boardEl.dataset.size = currentDifficulty;
 
   for (let r = 0; r < ROWS; r++) {
     board[r] = [];
@@ -400,7 +417,7 @@ function triggerWin() {
     winBestEl.textContent = isNewRecord ? fmtTime(clearTime) : fmtTime(best);
     newRecordBadge.classList.toggle('hidden', !isNewRecord);
     overlayWin.classList.remove('hidden');
-    if(typeof Leaderboard!=='undefined')Leaderboard.ready('minesweeper',clearTime,{ascending:true,format:'time',label:'시간'});
+    if(typeof Leaderboard!=='undefined')Leaderboard.ready('minesweeper_'+currentDifficulty,clearTime,{ascending:true,format:'time',label:'시간'});
   }, delay + 200);
 }
 
@@ -492,6 +509,10 @@ function startGame() {
 }
 
 function showStartScreen() {
+  updateBestDisplay();
+}
+
+function updateBestDisplay() {
   const best = getBestTime();
   if (best !== null) {
     startBestEl.textContent = `최고 기록: ${fmtTime(best)}`;
@@ -499,6 +520,17 @@ function showStartScreen() {
     startBestEl.textContent = '';
   }
 }
+
+/* Difficulty selector */
+const diffBtns = document.querySelectorAll('.diff-btn');
+diffBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    diffBtns.forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    applyDifficulty(btn.dataset.diff);
+    updateBestDisplay();
+  });
+});
 
 document.getElementById('btn-start').addEventListener('click', startGame);
 document.getElementById('btn-restart-lose').addEventListener('click', startGame);

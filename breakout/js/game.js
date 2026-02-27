@@ -126,7 +126,7 @@ function initGame(lv) {
 
 function launchBall() {
   const angle = rand(-Math.PI * 0.65, -Math.PI * 0.35);
-  const spd   = 280 + level * 20;
+  const spd   = (280 + level * 20) * 1.3;
   ball = {
     x:        W / 2,
     y:        paddle.y - BALL_R - 2,
@@ -289,7 +289,7 @@ function update(dt) {
 
   // Speed cap
   const spd = Math.hypot(ball.vx, ball.vy);
-  if (spd > 560) { ball.vx = ball.vx / spd * 560; ball.vy = ball.vy / spd * 560; }
+  if (spd > 728) { ball.vx = ball.vx / spd * 728; ball.vy = ball.vy / spd * 728; }
 
   // Particles
   particles = particles.filter(p => p.life > 0);
