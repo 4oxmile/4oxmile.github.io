@@ -213,8 +213,8 @@ body {
 #game-screen {
   background: var(--bg-primary);
   z-index: 10;
-  position: relative;
-  overflow-y: auto;
+  position: static;
+  overflow: visible;
   align-items: flex-start;
   justify-content: flex-start;
 }
