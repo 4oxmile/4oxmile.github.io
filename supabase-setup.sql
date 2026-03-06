@@ -63,3 +63,26 @@ create policy "rooms_delete" on battleship_rooms
 -- 10분 이상 된 방 자동 정리용 인덱스
 create index if not exists idx_rooms_created
   on battleship_rooms (created_at);
+
+-- ═══════════════════════════════════════════════════
+-- 게임 클릭 수 추적 — 인기순 정렬용
+-- ═══════════════════════════════════════════════════
+
+create table if not exists game_clicks (
+  game   text primary key,
+  clicks int  not null default 0
+);
+
+alter table game_clicks enable row level security;
+
+create policy "clicks_select" on game_clicks
+  for select using (true);
+
+-- 클릭 수 증가 함수 (atomic upsert)
+create or replace function increment_click(game_name text)
+returns void as $$
+begin
+  insert into game_clicks (game, clicks) values (game_name, 1)
+  on conflict (game) do update set clicks = game_clicks.clicks + 1;
+end;
+$$ language plpgsql security definer;
