@@ -17,10 +17,10 @@ const WEIGHT_TABLE = [
   [120, -20,  20,  5,  5,  20, -20, 120],
 ];
 
-// Difficulty configs: { depth, useRandom }
+// Difficulty configs: { depth, noise (random move chance) }
 const DIFFICULTY = {
-  easy:   { depth: 1, noise: 0.6 },
-  normal: { depth: 3, noise: 0.0 },
+  easy:   { depth: 1, noise: 0.9 },
+  normal: { depth: 2, noise: 0.15 },
   hard:   { depth: 5, noise: 0.0 },
 };
 
