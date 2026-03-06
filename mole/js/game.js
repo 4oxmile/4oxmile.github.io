@@ -3,15 +3,33 @@ const GAME_DURATION   = 30;     // seconds
 const HOLES           = 9;
 const LS_KEY          = 'mole_best';
 
-/* Speed schedule: [elapsed seconds, mole visible ms, interval ms] */
-const SPEED_SCHEDULE = [
-  { after:  0, visibleMs: 1100, intervalMs: 1200 },
-  { after:  5, visibleMs:  950, intervalMs: 1050 },
-  { after: 10, visibleMs:  800, intervalMs:  900 },
-  { after: 15, visibleMs:  650, intervalMs:  750 },
-  { after: 20, visibleMs:  520, intervalMs:  620 },
-  { after: 25, visibleMs:  400, intervalMs:  500 },
-];
+/* Speed schedules per difficulty */
+const SPEED_SCHEDULES = {
+  easy: [
+    { after:  0, visibleMs: 1500, intervalMs: 1600 },
+    { after:  8, visibleMs: 1300, intervalMs: 1400 },
+    { after: 16, visibleMs: 1100, intervalMs: 1200 },
+    { after: 24, visibleMs:  900, intervalMs: 1000 },
+  ],
+  normal: [
+    { after:  0, visibleMs: 1100, intervalMs: 1200 },
+    { after:  5, visibleMs:  950, intervalMs: 1050 },
+    { after: 10, visibleMs:  800, intervalMs:  900 },
+    { after: 15, visibleMs:  650, intervalMs:  750 },
+    { after: 20, visibleMs:  520, intervalMs:  620 },
+    { after: 25, visibleMs:  400, intervalMs:  500 },
+  ],
+  hard: [
+    { after:  0, visibleMs:  800, intervalMs:  900 },
+    { after:  5, visibleMs:  650, intervalMs:  750 },
+    { after: 10, visibleMs:  500, intervalMs:  600 },
+    { after: 15, visibleMs:  400, intervalMs:  500 },
+    { after: 20, visibleMs:  320, intervalMs:  420 },
+    { after: 25, visibleMs:  260, intervalMs:  350 },
+  ],
+};
+
+let difficulty = 'normal';
 
 /* ─── State ─────────────────────────────────────────── */
 let score     = 0;
@@ -153,8 +171,9 @@ function updateBestBar() {
 /* ─── Spawn ─────────────────────────────────────────── */
 function currentSpeedConfig() {
   const elapsed = GAME_DURATION - timeLeft;
-  let cfg = SPEED_SCHEDULE[0];
-  for (const s of SPEED_SCHEDULE) {
+  const schedule = SPEED_SCHEDULES[difficulty] || SPEED_SCHEDULES.normal;
+  let cfg = schedule[0];
+  for (const s of schedule) {
     if (elapsed >= s.after) cfg = s;
   }
   return cfg;
@@ -253,6 +272,14 @@ function endGame() {
 }
 
 /* ─── Button Listeners ──────────────────────────────── */
+document.querySelectorAll('.diff-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.diff-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    difficulty = btn.dataset.diff;
+  });
+});
+
 $('btn-start').addEventListener('click', startGame);
 $('btn-restart').addEventListener('click', startGame);
 

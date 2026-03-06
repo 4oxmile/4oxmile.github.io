@@ -392,6 +392,35 @@ body {
   font-weight: 700;
 }
 
+/* ─── Difficulty ────────────────────────────────────── */
+.diff-group {
+  display: flex;
+  gap: 8px;
+}
+
+.diff-btn {
+  padding: 8px 18px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--btn-bg);
+  color: var(--text-secondary);
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.diff-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.diff-btn:active {
+  transform: scale(0.95);
+}
+
 /* ─── Misc ──────────────────────────────────────────── */
 .divider {
   width: 100%;
