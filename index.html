@@ -330,10 +330,19 @@
       return card.getAttribute('href').replace(/\//g, '');
     }
 
-    // Track click
+    // Track click (keepalive ensures request survives page navigation)
     cards.forEach(card => {
       card.addEventListener('click', () => {
-        sb.rpc('increment_click', { game_name: gameKey(card) }).catch(() => {});
+        fetch(window.SUPABASE_URL + '/rest/v1/rpc/increment_click', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': window.SUPABASE_ANON_KEY,
+            'Authorization': 'Bearer ' + window.SUPABASE_ANON_KEY
+          },
+          body: JSON.stringify({ game_name: gameKey(card) }),
+          keepalive: true
+        }).catch(() => {});
       });
     });
 
