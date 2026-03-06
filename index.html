@@ -325,12 +325,15 @@
     const list = document.querySelector('.game-list');
     const cards = [...list.querySelectorAll('.game-card')];
 
-    // Extract game key from href (e.g. "/tetris/" → "tetris")
+    // Hide list until sorted
+    list.style.opacity = '0';
+    list.style.transition = 'opacity 0.3s';
+
     function gameKey(card) {
       return card.getAttribute('href').replace(/\//g, '');
     }
 
-    // Track click (keepalive ensures request survives page navigation)
+    // Track click
     cards.forEach(card => {
       card.addEventListener('click', () => {
         fetch(window.SUPABASE_URL + '/rest/v1/rpc/increment_click', {
@@ -346,13 +349,17 @@
       });
     });
 
-    // Fetch counts and sort
+    // Fetch counts, sort, then reveal
     sb.from('game_clicks').select('game, clicks').then(({ data }) => {
-      if (!data || data.length === 0) return;
-      const counts = {};
-      data.forEach(r => counts[r.game] = r.clicks);
-      cards.sort((a, b) => (counts[gameKey(b)] || 0) - (counts[gameKey(a)] || 0));
-      cards.forEach(card => list.appendChild(card));
+      if (data && data.length > 0) {
+        const counts = {};
+        data.forEach(r => counts[r.game] = r.clicks);
+        cards.sort((a, b) => (counts[gameKey(b)] || 0) - (counts[gameKey(a)] || 0));
+        cards.forEach(card => list.appendChild(card));
+      }
+      list.style.opacity = '1';
+    }).catch(() => {
+      list.style.opacity = '1';
     });
   })();
   </script>
