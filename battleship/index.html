@@ -144,36 +144,32 @@
       <!-- Status -->
       <div class="status-bar" id="status-bar">공격할 적 함선을 선택하세요</div>
 
-      <!-- Boards -->
-      <div class="boards-section">
-
-        <!-- Enemy board (attack target) -->
-        <div class="board-wrapper">
-          <div class="board-label active" id="enemy-board-label">
-            <span class="indicator"></span>적 해역 (공격)
-          </div>
-          <div class="board-grid enemy-board" id="enemy-board"></div>
+      <!-- Enemy board (attack target) -->
+      <div class="board-wrapper">
+        <div class="board-label active" id="enemy-board-label">
+          <span class="indicator"></span>적 해역 (공격)
         </div>
-
-        <!-- Player board (own ships) -->
-        <div class="board-wrapper">
-          <div class="board-label" id="player-board-label">
-            <span class="indicator"></span>내 해역 (방어)
-          </div>
-          <div class="board-grid" id="player-board"></div>
-        </div>
-
+        <div class="board-grid enemy-board" id="enemy-board"></div>
       </div>
 
-      <!-- HUD: ship tracker -->
-      <div class="ships-hud">
-        <div class="hud-label">적 함선 현황</div>
-        <div class="ships-row" id="enemy-ships-row"></div>
+      <!-- HUD: ship tracker (between boards) -->
+      <div class="ships-hud-row">
+        <div class="ships-hud">
+          <div class="hud-label">적 함선</div>
+          <div class="ships-row" id="enemy-ships-row"></div>
+        </div>
+        <div class="ships-hud">
+          <div class="hud-label">내 함선</div>
+          <div class="ships-row" id="player-ships-row"></div>
+        </div>
       </div>
 
-      <div class="ships-hud">
-        <div class="hud-label">내 함선 현황</div>
-        <div class="ships-row" id="player-ships-row"></div>
+      <!-- Player board (own ships, compact) -->
+      <div class="board-wrapper board-wrapper-mini">
+        <div class="board-label" id="player-board-label">
+          <span class="indicator"></span>내 해역 (방어)
+        </div>
+        <div class="board-grid" id="player-board"></div>
       </div>
 
     </div>

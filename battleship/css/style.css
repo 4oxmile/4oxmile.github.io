@@ -289,16 +289,23 @@ body {
 .status-bar.ai { border-color: var(--border); color: var(--text-secondary); }
 
 /* ===================== BOARDS ===================== */
-.boards-section {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
 .board-wrapper {
   display: flex;
   flex-direction: column;
   gap: 6px;
+}
+
+.board-wrapper-mini {
+  width: 200px;
+}
+
+.board-wrapper-mini .board-grid {
+  grid-template-columns: 14px repeat(10, 1fr);
+  grid-template-rows: 14px repeat(10, 1fr);
+}
+
+.board-wrapper-mini .axis-label {
+  font-size: 0.45rem;
 }
 
 .board-label {
@@ -454,7 +461,22 @@ body {
   background: rgba(59, 130, 246, 0.08);
 }
 
-/* ===================== SHIP TRACK (BOTTOM HUD) ===================== */
+/* ===================== SHIP TRACK (HUD) ===================== */
+.ships-hud-row {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+
+.ships-hud-row .ships-hud {
+  flex: 1;
+  min-width: 0;
+}
+
 .ships-hud {
   display: flex;
   flex-direction: column;
