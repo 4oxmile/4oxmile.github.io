@@ -435,6 +435,10 @@ function updateShipBadge(prefix, idx, sunk) {
 
 // ── Attack logic ──────────────────────────────────────────────
 function handleEnemyClick(r, c) {
+  if (typeof Online !== 'undefined' && Online.isActive()) {
+    Online.handleEnemyClick(r, c);
+    return;
+  }
   if (state.turn !== 'player') return;
   if (state.phase !== 'game') return;
   const board = state.enemyBoard;
@@ -691,6 +695,7 @@ function initGame() {
 }
 
 function goToPlaceScreen() {
+  if (typeof Online !== 'undefined') Online.cleanup();
   if (typeof Leaderboard !== 'undefined') Leaderboard.hide();
   state = freshState();
   state.phase = 'place';
@@ -700,6 +705,7 @@ function goToPlaceScreen() {
 }
 
 function goToStartScreen() {
+  if (typeof Online !== 'undefined') Online.cleanup();
   initGame();
 }
 
@@ -719,6 +725,10 @@ document.addEventListener('DOMContentLoaded', () => {
   $('btn-start-game').addEventListener('click', () => {
     if (state.currentShipIdx < SHIPS_CONFIG.length) {
       toast('모든 함선을 배치해주세요');
+      return;
+    }
+    if (typeof Online !== 'undefined' && Online.isActive()) {
+      Online.onReady();
       return;
     }
     startGame();

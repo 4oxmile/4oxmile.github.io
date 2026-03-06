@@ -34,3 +34,32 @@ create index if not exists idx_scores_game_score
 
 create index if not exists idx_scores_game_score_asc
   on scores (game, score asc);
+
+-- ═══════════════════════════════════════════════════
+-- Battleship 온라인 대전 — 대기방 테이블
+-- ═══════════════════════════════════════════════════
+
+create table if not exists battleship_rooms (
+  code       text primary key,
+  host_name  text not null default '대기 중',
+  created_at timestamptz default now()
+);
+
+alter table battleship_rooms enable row level security;
+
+-- 누구나 조회/삽입/삭제 가능
+create policy "rooms_select" on battleship_rooms
+  for select using (true);
+
+create policy "rooms_insert" on battleship_rooms
+  for insert with check (
+    char_length(code) = 4
+    and char_length(host_name) between 1 and 12
+  );
+
+create policy "rooms_delete" on battleship_rooms
+  for delete using (true);
+
+-- 10분 이상 된 방 자동 정리용 인덱스
+create index if not exists idx_rooms_created
+  on battleship_rooms (created_at);
