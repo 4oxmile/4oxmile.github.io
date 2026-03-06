@@ -212,11 +212,16 @@ body {
 /* ===================== GAME SCREEN ===================== */
 #game-screen {
   background: var(--bg-primary);
-  z-index: 10;
-  position: static;
-  overflow: visible;
+  z-index: 100;
+  overflow-y: auto;
   align-items: flex-start;
   justify-content: flex-start;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+#game-screen::-webkit-scrollbar {
+  display: none;
 }
 
 .game-container {
@@ -697,6 +702,69 @@ body {
 @keyframes bounce {
   0%, 80%, 100% { transform: scale(0.7); opacity: 0.4; }
   40% { transform: scale(1); opacity: 1; }
+}
+
+/* ===================== ATTACK FX ===================== */
+.attack-fx {
+  position: absolute;
+  inset: -40%;
+  z-index: 10;
+  pointer-events: none;
+  border-radius: 50%;
+}
+
+/* Hit: explosion burst */
+.hit-fx {
+  animation: hitBlast 0.65s ease-out forwards;
+}
+
+@keyframes hitBlast {
+  0% {
+    background: radial-gradient(circle, #FFF 0%, rgba(255,120,0,0.9) 25%, transparent 60%);
+    transform: scale(0.2);
+    opacity: 1;
+  }
+  30% {
+    background: radial-gradient(circle, #FFFBE0 0%, #FF6600 30%, rgba(255,60,0,0.6) 55%, transparent 75%);
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  60% {
+    background: radial-gradient(circle, #FF4400 0%, rgba(180,40,0,0.4) 40%, transparent 70%);
+    transform: scale(1.3);
+    opacity: 0.6;
+  }
+  100% {
+    background: radial-gradient(circle, transparent 0%, transparent 100%);
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* Miss: water splash ripple */
+.miss-fx {
+  animation: missSplash 0.55s ease-out forwards;
+}
+
+@keyframes missSplash {
+  0% {
+    background: radial-gradient(circle, rgba(255,255,255,0.7) 0%, transparent 50%);
+    box-shadow: 0 0 0 0 rgba(96,165,250,0.5);
+    transform: scale(0.15);
+    opacity: 1;
+  }
+  40% {
+    background: radial-gradient(circle, rgba(200,220,255,0.3) 0%, transparent 60%);
+    box-shadow: 0 0 0 6px rgba(96,165,250,0.3);
+    transform: scale(0.7);
+    opacity: 0.8;
+  }
+  100% {
+    background: transparent;
+    box-shadow: 0 0 0 14px rgba(96,165,250,0);
+    transform: scale(1);
+    opacity: 0;
+  }
 }
 
 /* ===================== SUNK SHIP FLASH ===================== */

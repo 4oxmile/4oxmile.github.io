@@ -325,6 +325,7 @@ const Online = (() => {
       }
 
       renderPlayerBoard();
+      playAttackFx('player-board', r, c, true);
       const gameOver = allSunk(state.playerShips);
 
       channel.send({
@@ -340,6 +341,7 @@ const Online = (() => {
     } else {
       board[r][c] = -1;
       renderPlayerBoard();
+      playAttackFx('player-board', r, c, false);
       setStatus('상대방의 공격이 빗나감');
 
       channel.send({
@@ -371,12 +373,14 @@ const Online = (() => {
         state.enemyShips[shipIdx].cells = shipCells;
         updateShipBadge('enemy', shipIdx, true);
         renderEnemyBoard();
+        playAttackFx('enemy-board', r, c, true);
         flashSunkCells('enemy-board', state.enemyShips[shipIdx]);
         toast(`적 ${shipName} 격침!`, 'sunk-toast');
         setStatus(`적 ${shipName} 격침!`, 'sunk');
       } else {
         setStatus('명중!', 'hit');
         renderEnemyBoard();
+        playAttackFx('enemy-board', r, c, true);
       }
 
       if (gameOver) {
@@ -387,6 +391,7 @@ const Online = (() => {
       board[r][c] = -1;
       setStatus('빗나감', 'miss');
       renderEnemyBoard();
+      playAttackFx('enemy-board', r, c, false);
     }
 
     myTurn = false;

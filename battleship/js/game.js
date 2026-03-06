@@ -433,6 +433,16 @@ function updateShipBadge(prefix, idx, sunk) {
   }
 }
 
+// ── Attack animation ─────────────────────────────────────
+function playAttackFx(boardId, r, c, hit) {
+  const cell = getCell(boardId, r, c);
+  if (!cell) return;
+  const fx = document.createElement('div');
+  fx.className = hit ? 'attack-fx hit-fx' : 'attack-fx miss-fx';
+  cell.appendChild(fx);
+  fx.addEventListener('animationend', () => fx.remove());
+}
+
 // ── Attack logic ──────────────────────────────────────────────
 function handleEnemyClick(r, c) {
   if (typeof Online !== 'undefined' && Online.isActive()) {
@@ -467,6 +477,7 @@ function handleEnemyClick(r, c) {
       setStatus('명중!', 'hit');
     }
     renderEnemyBoard();
+    playAttackFx('enemy-board', r, c, true);
 
     if (allSunk(state.enemyShips)) {
       endGame(true);
@@ -476,6 +487,7 @@ function handleEnemyClick(r, c) {
     board[r][c] = -1;
     setStatus('빗나갔습니다', 'miss');
     renderEnemyBoard();
+    playAttackFx('enemy-board', r, c, false);
   }
 
   // Switch to AI turn
@@ -540,6 +552,7 @@ function aiTurn() {
       ai.candidates = buildCandidates(ai.hits, board);
     }
     renderPlayerBoard();
+    playAttackFx('player-board', r, c, true);
 
     if (allSunk(state.playerShips)) {
       endGame(false);
@@ -554,6 +567,7 @@ function aiTurn() {
       ai.hits = [];
     }
     renderPlayerBoard();
+    playAttackFx('player-board', r, c, false);
   }
 
   state.turn = 'player';
