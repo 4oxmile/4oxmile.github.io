@@ -13,9 +13,13 @@ const FRUIT_COLORS = {
 };
 const GAME_DURATION = 60;
 const MAX_LIVES = 3;
-const GRAVITY = 0.45;
+const GRAVITY = 0.26;
 const FRUIT_SCORE = 10;
 const COMBO_WINDOW = 400; // ms
+const MAX_ACTIVE_FRUITS = 8;
+const MIN_SPAWN_GAP = 68;
+const LAUNCH_SPEED_MIN = 16.5;
+const LAUNCH_SPEED_MAX = 21.5;
 
 // ─── STATE ────────────────────────────────────────────────────────────────────
 let state = {
@@ -49,6 +53,13 @@ const canvas = document.getElementById('game-canvas');
 const ctx = canvas.getContext('2d');
 let W = 0, H = 0;
 
+function clamp(v, min, max) {
+  return Math.max(min, Math.min(max, v));
+}
+
+function randomRange(min, max) {
+  return min + Math.random() * (max - min);
+}
 function resizeCanvas() {
   const wrapper = document.getElementById('game-wrapper');
   W = wrapper.clientWidth;
@@ -123,20 +134,30 @@ function hideAllOverlays() {
 let fruitIdCounter = 0;
 
 class Fruit {
-  constructor() {
+  constructor(opts = {}) {
     this.id = fruitIdCounter++;
-    this.isBomb = Math.random() < 0.12;
+    this.isBomb = opts.isBomb ?? (Math.random() < 0.12);
     this.emoji = this.isBomb ? '💣' : FRUITS[Math.floor(Math.random() * FRUITS.length)];
     this.color = this.isBomb ? '#6B7280' : (FRUIT_COLORS[this.emoji] || '#fff');
     this.radius = 28 + Math.random() * 8;
-    this.x = this.radius + Math.random() * (W - this.radius * 2);
+
+    const minX = this.radius + 6;
+    const maxX = W - this.radius - 6;
+    const initialX = typeof opts.x === 'number'
+      ? opts.x
+      : this.radius + Math.random() * (W - this.radius * 2);
+
+    this.x = clamp(initialX, minX, maxX);
     this.y = H + this.radius;
 
     // Arc trajectory: toss up from bottom
-    const angle = -Math.PI / 2 + (Math.random() - 0.5) * 1.1; // mostly upward
-    const speed = 10 + Math.random() * 7;
-    this.vx = Math.cos(angle) * speed;
-    this.vy = Math.sin(angle) * speed;
+    const angle = typeof opts.angle === 'number'
+      ? opts.angle
+      : -Math.PI / 2 + (Math.random() - 0.5) * 1.1;
+    const speed = typeof opts.speed === 'number' ? opts.speed : (LAUNCH_SPEED_MIN + Math.random() * (LAUNCH_SPEED_MAX - LAUNCH_SPEED_MIN));
+
+    this.vx = typeof opts.vx === 'number' ? opts.vx : Math.cos(angle) * speed;
+    this.vy = typeof opts.vy === 'number' ? opts.vy : Math.sin(angle) * speed;
 
     this.rotation = Math.random() * Math.PI * 2;
     this.rotSpeed = (Math.random() - 0.5) * 0.12;
@@ -281,9 +302,39 @@ class Particle {
 
 // ─── SPAWN ────────────────────────────────────────────────────────────────────
 function spawnFruit() {
-  const count = Math.random() < 0.25 ? 2 : 1;
-  for (let i = 0; i < count; i++) {
-    state.fruits.push(new Fruit());
+  const activeFruits = state.fruits.filter(f => f instanceof Fruit && f.alive && !f.sliced);
+  const availableSlots = MAX_ACTIVE_FRUITS - activeFruits.length;
+  if (availableSlots <= 0) return;
+
+  const spawnCount = Math.min(availableSlots, Math.random() < 0.22 ? 2 : 1);
+  const launchZoneXs = activeFruits
+    .filter(f => f.y > H * 0.58)
+    .map(f => f.x);
+
+  const chosenXs = [];
+  const left = 30;
+  const right = Math.max(left + 1, W - 30);
+
+  for (let i = 0; i < spawnCount; i++) {
+    let x = randomRange(left, right);
+    let tries = 0;
+
+    while (tries < 12) {
+      const tooCloseToExisting = launchZoneXs.some(px => Math.abs(px - x) < MIN_SPAWN_GAP);
+      const tooCloseToNew = chosenXs.some(px => Math.abs(px - x) < MIN_SPAWN_GAP);
+      if (!tooCloseToExisting && !tooCloseToNew) break;
+      x = randomRange(left, right);
+      tries++;
+    }
+
+    chosenXs.push(x);
+
+    // Slightly curve toss direction toward center to reduce overlap in trajectory.
+    const centerBias = (W / 2 - x) / (W / 2);
+    const angle = -Math.PI / 2 + centerBias * 0.2 + randomRange(-0.22, 0.22);
+    const speed = randomRange(LAUNCH_SPEED_MIN, LAUNCH_SPEED_MAX);
+
+    state.fruits.push(new Fruit({ x, angle, speed }));
   }
 }
 
@@ -293,9 +344,9 @@ function checkSlice(x1, y1, x2, y2) {
   const sliceLength = Math.hypot(x2 - x1, y2 - y1);
   if (sliceLength < 10) return;
 
-  let slicedThisFrame = 0;
-
   for (const fruit of state.fruits) {
+    // Score/collision applies only to original Fruit, not sliced halves.
+    if (!(fruit instanceof Fruit)) continue;
     if (!fruit.alive || fruit.sliced) continue;
 
     // Line-circle intersection
@@ -309,7 +360,6 @@ function checkSlice(x1, y1, x2, y2) {
       }
 
       // Slice fruit
-      slicedThisFrame++;
       state.totalSliced++;
 
       // Halves
@@ -542,9 +592,12 @@ function startGame() {
   state.frameCount = 0;
   state.phase = 'playing';
   state.gameOverReason = '';
+  fruitIdCounter = 0;
 
   cancelAnimationFrame(state.animId);
+  cancelAnimationFrame(idleAnimId);
   clearInterval(state.timerInterval);
+  clearTimeout(state.comboTimeout);
 
   hideAllOverlays();
   updateHUD();
@@ -664,18 +717,24 @@ document.getElementById('btn-menu').addEventListener('click', () => {
   state.phase = 'start';
   cancelAnimationFrame(state.animId);
   clearInterval(state.timerInterval);
+  clearTimeout(state.comboTimeout);
   state.highScore = parseInt(localStorage.getItem('fruitHighScore') || '0');
   startHighScore.textContent = state.highScore;
   showOverlay('overlay-start');
+  cancelAnimationFrame(idleAnimId);
+  idleLoop();
 });
 document.getElementById('btn-resume').addEventListener('click', resumeGame);
 document.getElementById('btn-quit').addEventListener('click', () => {
   state.phase = 'start';
   cancelAnimationFrame(state.animId);
   clearInterval(state.timerInterval);
+  clearTimeout(state.comboTimeout);
   state.highScore = parseInt(localStorage.getItem('fruitHighScore') || '0');
   startHighScore.textContent = state.highScore;
   showOverlay('overlay-start');
+  cancelAnimationFrame(idleAnimId);
+  idleLoop();
 });
 document.getElementById('pause-btn').addEventListener('click', pauseGame);
 
@@ -736,6 +795,7 @@ function init() {
   startHighScore.textContent = state.highScore;
   updateTimerRing(GAME_DURATION);
   showOverlay('overlay-start');
+  cancelAnimationFrame(idleAnimId);
   idleLoop();
 }
 
