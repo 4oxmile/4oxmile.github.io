@@ -651,8 +651,9 @@ function handleTouchMove(e) {
 }
 
 function handleTouchEnd(e) {
+  if (gameState !== 'playing') return;
   e.preventDefault();
-  if (ball && ball.attached && gameState === 'playing') ball.attached = false;
+  if (ball && ball.attached) ball.attached = false;
 }
 
 // ─── Boot ─────────────────────────────────────────────────────────────────────
