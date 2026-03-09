@@ -7,6 +7,7 @@ window.Leaderboard = (() => {
 
   const NICKNAME_KEY  = 'lb_nickname';
   const SCORES_TABLE  = 'scores';
+  const MAX_SCORE     = 10000000;
 
   /* Game-specific options for ascending/format/label */
   const GAME_OPTS = {
@@ -60,6 +61,20 @@ window.Leaderboard = (() => {
 
   function saveNickname(name) {
     localStorage.setItem(NICKNAME_KEY, name.trim());
+  }
+
+  function sanitizeNickname(name) {
+    return String(name || '').replace(/\s+/g, ' ').trim().slice(0, 12);
+  }
+
+  function isValidNickname(name) {
+    return /^[0-9A-Za-z가-힣 _-]{1,12}$/.test(name);
+  }
+
+  function safeScore(value) {
+    var n = Number(value);
+    if (!Number.isFinite(n)) return 0;
+    return Math.max(0, Math.min(MAX_SCORE, Math.round(n)));
   }
 
   /* ── Format score ──────────────────────────────── */
@@ -162,14 +177,17 @@ window.Leaderboard = (() => {
   async function handleSubmit() {
     var input = overlayEl.querySelector('.lb-input');
     var btn   = overlayEl.querySelector('.lb-submit-btn');
-    var nickname = input.value.trim();
+    var nickname = sanitizeNickname(input.value);
 
-    if (!nickname) {
+    if (!nickname || !isValidNickname(nickname)) {
       input.focus();
       input.style.borderColor = '#EF4444';
       setTimeout(function () { input.style.borderColor = ''; }, 1000);
       return;
     }
+
+    if (submitted) return;
+    var scoreToSubmit = safeScore(currentScore);
 
     saveNickname(nickname);
     btn.textContent = '등록 중...';
@@ -186,7 +204,7 @@ window.Leaderboard = (() => {
       var result = await db.from(SCORES_TABLE).insert({
         game: currentGame,
         nickname: nickname,
-        score: currentScore,
+        score: scoreToSubmit,
       });
 
       if (result.error) throw result.error;
@@ -403,6 +421,10 @@ window.Leaderboard = (() => {
       }
       submitted = false;
       showFAB();
+
+      // Open ranking input immediately after game over by default.
+      var autoOpen = !options || options.autoOpen !== false;
+      if (autoOpen) openOverlay();
     },
 
     hide: function () {
@@ -413,3 +435,6 @@ window.Leaderboard = (() => {
     show: openOverlay,
   };
 })();
+
+
+

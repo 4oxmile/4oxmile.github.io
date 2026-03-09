@@ -31,6 +31,7 @@ let state = {
   fruits: [],
   particles: [],
   slashTrail: [],
+  slashBursts: [],
   sliceVelocity: { x: 0, y: 0 },
   lastMousePos: null,
   isDragging: false,
@@ -60,6 +61,17 @@ function clamp(v, min, max) {
 function randomRange(min, max) {
   return min + Math.random() * (max - min);
 }
+
+function hexToRgba(hex, alpha) {
+  const clean = String(hex || '').replace('#', '');
+  if (clean.length !== 6) return `rgba(255,255,255,${alpha})`;
+  const num = parseInt(clean, 16);
+  const r = (num >> 16) & 255;
+  const g = (num >> 8) & 255;
+  const b = num & 255;
+  return `rgba(${r},${g},${b},${alpha})`;
+}
+
 function resizeCanvas() {
   const wrapper = document.getElementById('game-wrapper');
   W = wrapper.clientWidth;
@@ -188,22 +200,48 @@ class Fruit {
     ctx.translate(this.x, this.y);
     ctx.rotate(this.rotation);
 
-    // glow
+    // soft shadow
+    ctx.beginPath();
+    ctx.arc(2, 5, this.radius * 0.95, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(0,0,0,0.28)';
+    ctx.fill();
+
+    // vivid color plate under emoji so fruits don't look dull.
+    if (!this.isBomb) {
+      const aura = ctx.createRadialGradient(
+        -this.radius * 0.25, -this.radius * 0.35, this.radius * 0.12,
+        0, 0, this.radius * 1.05
+      );
+      aura.addColorStop(0, hexToRgba(this.color, 0.6));
+      aura.addColorStop(0.55, hexToRgba(this.color, 0.32));
+      aura.addColorStop(1, hexToRgba(this.color, 0));
+
+      ctx.beginPath();
+      ctx.arc(0, 0, this.radius * 0.98, 0, Math.PI * 2);
+      ctx.fillStyle = aura;
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.arc(0, 0, this.radius * 0.95, 0, Math.PI * 2);
+      ctx.strokeStyle = hexToRgba(this.color, 0.55);
+      ctx.lineWidth = 1.6;
+      ctx.stroke();
+
+      // top highlight
+      ctx.beginPath();
+      ctx.ellipse(-this.radius * 0.22, -this.radius * 0.28, this.radius * 0.2, this.radius * 0.1, -0.4, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255,255,255,0.35)';
+      ctx.fill();
+    }
+
     if (this.glowAlpha > 0) {
-      ctx.shadowBlur = 20;
+      ctx.shadowBlur = 24;
       ctx.shadowColor = this.color;
       ctx.globalAlpha = this.glowAlpha;
       this.glowAlpha *= 0.85;
+    } else {
+      ctx.globalAlpha = 1;
     }
-
-    // shadow circle
-    ctx.beginPath();
-    ctx.arc(2, 4, this.radius, 0, Math.PI * 2);
-    ctx.fillStyle = 'rgba(0,0,0,0.25)';
-    ctx.fill();
-
-    ctx.globalAlpha = 1;
-    ctx.shadowBlur = 0;
 
     // emoji
     ctx.font = `${this.radius * 1.8}px serif`;
@@ -222,7 +260,8 @@ class FruitHalf {
     this.x = fruit.x + (side === 'left' ? -8 : 8);
     this.y = fruit.y;
     this.vx = fruit.vx * 0.4 + (side === 'left' ? -3 : 3);
-    this.vy = fruit.vy * 0.4 - 2;
+    // Keep pieces from unnaturally popping upward on slice.
+    this.vy = Math.max(0.6, fruit.vy * 0.3 + 1.1);
     this.rotation = fruit.rotation;
     this.rotSpeed = fruit.rotSpeed + (side === 'left' ? -0.12 : 0.12);
     this.radius = fruit.radius * 0.85;
@@ -300,6 +339,63 @@ class Particle {
   }
 }
 
+class SlashBurst {
+  constructor(x, y, angle, length = 90) {
+    this.x = x;
+    this.y = y;
+    this.angle = angle;
+    this.length = length;
+    this.width = 10;
+    this.life = 1;
+    this.alive = true;
+  }
+
+  update() {
+    this.life -= 0.12;
+    this.length *= 0.92;
+    this.width *= 0.88;
+    if (this.life <= 0.02) this.alive = false;
+  }
+
+  draw() {
+    if (!this.alive) return;
+    const alpha = Math.max(0, this.life);
+
+    ctx.save();
+    ctx.translate(this.x, this.y);
+    ctx.rotate(this.angle);
+
+    const grad = ctx.createLinearGradient(-this.length / 2, 0, this.length / 2, 0);
+    grad.addColorStop(0, `rgba(255,255,255,0)`);
+    grad.addColorStop(0.35, `rgba(255,255,255,${0.75 * alpha})`);
+    grad.addColorStop(0.7, `rgba(130,220,255,${0.95 * alpha})`);
+    grad.addColorStop(1, `rgba(255,255,255,0)`);
+
+    ctx.strokeStyle = grad;
+    ctx.lineCap = 'round';
+    ctx.lineWidth = this.width;
+    ctx.shadowBlur = 16;
+    ctx.shadowColor = `rgba(120,210,255,${0.65 * alpha})`;
+    ctx.beginPath();
+    ctx.moveTo(-this.length * 0.5, 0);
+    ctx.lineTo(this.length * 0.5, 0);
+    ctx.stroke();
+
+    ctx.shadowBlur = 0;
+    ctx.lineWidth = Math.max(1.2, this.width * 0.3);
+    ctx.strokeStyle = `rgba(255,255,255,${0.9 * alpha})`;
+    ctx.beginPath();
+    ctx.moveTo(-this.length * 0.42, 0);
+    ctx.lineTo(this.length * 0.42, 0);
+    ctx.stroke();
+
+    ctx.restore();
+  }
+}
+
+function spawnSlashBurst(x, y, angle, length) {
+  state.slashBursts.push(new SlashBurst(x, y, angle, length));
+}
 // ─── SPAWN ────────────────────────────────────────────────────────────────────
 function spawnFruit() {
   const activeFruits = state.fruits.filter(f => f instanceof Fruit && f.alive && !f.sliced);
@@ -351,6 +447,8 @@ function checkSlice(x1, y1, x2, y2) {
 
     // Line-circle intersection
     if (lineIntersectsCircle(x1, y1, x2, y2, fruit.x, fruit.y, fruit.radius * 0.85)) {
+      const slashAngle = Math.atan2(y2 - y1, x2 - x1);
+      spawnSlashBurst(fruit.x, fruit.y, slashAngle, fruit.radius * 2.1);
       fruit.sliced = true;
       fruit.alive = false;
 
@@ -525,6 +623,14 @@ function gameLoop() {
     state.slashTrail.shift();
   }
 
+  // Update and draw slash bursts
+  for (let i = state.slashBursts.length - 1; i >= 0; i--) {
+    const slash = state.slashBursts[i];
+    slash.update();
+    slash.draw();
+    if (!slash.alive) state.slashBursts.splice(i, 1);
+  }
+
   // Update and draw particles
   for (let i = state.particles.length - 1; i >= 0; i--) {
     state.particles[i].update();
@@ -583,6 +689,7 @@ function startGame() {
   state.fruits = [];
   state.particles = [];
   state.slashTrail = [];
+  state.slashBursts = [];
   state.isDragging = false;
   state.combo = 0;
   state.maxCombo = 0;
