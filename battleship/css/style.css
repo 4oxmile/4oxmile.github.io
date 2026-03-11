@@ -253,19 +253,61 @@ body {
 }
 
 .turn-indicator {
-  font-size: 0.8rem;
-  font-weight: 600;
-  padding: 4px 10px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 6px 14px;
   border-radius: 20px;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border);
-  color: var(--text-secondary);
-  transition: all 0.3s;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1.5px solid rgba(239, 68, 68, 0.4);
+  color: #EF4444;
+  transition: all 0.4s ease;
+  letter-spacing: 0.03em;
 }
 
 .turn-indicator.player-turn {
-  border-color: var(--accent);
-  color: var(--accent);
+  background: rgba(16, 185, 129, 0.15);
+  border-color: #10B981;
+  color: #10B981;
+  animation: turnPulse 1.5s ease-in-out infinite;
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.3);
+}
+
+@keyframes turnPulse {
+  0%, 100% { box-shadow: 0 0 8px rgba(16, 185, 129, 0.2); }
+  50% { box-shadow: 0 0 18px rgba(16, 185, 129, 0.5); }
+}
+
+/* Board glow when it's player's turn */
+.enemy-board.my-turn {
+  box-shadow: 0 0 16px rgba(16, 185, 129, 0.25), inset 0 0 8px rgba(16, 185, 129, 0.05);
+  border-color: rgba(16, 185, 129, 0.4);
+}
+
+.enemy-board.waiting {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+/* Turn change flash overlay */
+.turn-flash {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  pointer-events: none;
+  animation: turnFlash 0.5s ease-out forwards;
+}
+
+.turn-flash.my-turn {
+  background: radial-gradient(circle at center, rgba(16, 185, 129, 0.2), transparent 70%);
+}
+
+.turn-flash.opponent-turn {
+  background: radial-gradient(circle at center, rgba(239, 68, 68, 0.12), transparent 70%);
+}
+
+@keyframes turnFlash {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
 }
 
 .status-bar {

@@ -387,18 +387,32 @@ function setTurnIndicator() {
   const el = $('turn-indicator');
   const enemyLabel = $('enemy-board-label');
   const playerLabel = $('player-board-label');
+  const enemyBoard = $('enemy-board');
 
   if (state.turn === 'player') {
-    el.textContent = '내 차례';
+    el.textContent = '▶ 내 차례';
     el.className = 'turn-indicator player-turn';
     enemyLabel.classList.add('active');
     playerLabel.classList.remove('active');
+    enemyBoard.classList.add('my-turn');
+    enemyBoard.classList.remove('waiting');
+    showTurnFlash('my-turn');
   } else {
-    el.textContent = 'AI 차례';
+    el.textContent = '⏳ AI 차례';
     el.className = 'turn-indicator';
     playerLabel.classList.add('active');
     enemyLabel.classList.remove('active');
+    enemyBoard.classList.remove('my-turn');
+    enemyBoard.classList.add('waiting');
+    showTurnFlash('opponent-turn');
   }
+}
+
+function showTurnFlash(type) {
+  const flash = document.createElement('div');
+  flash.className = 'turn-flash ' + type;
+  document.body.appendChild(flash);
+  flash.addEventListener('animationend', () => flash.remove());
 }
 
 // ── Ships HUD ─────────────────────────────────────────────────

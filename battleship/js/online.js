@@ -255,19 +255,26 @@ const Online = (() => {
     const el = $('turn-indicator');
     const enemyLabel = $('enemy-board-label');
     const playerLabel = $('player-board-label');
+    const enemyBoard = $('enemy-board');
 
     if (myTurn) {
-      el.textContent = '내 차례';
+      el.textContent = '▶ 내 차례';
       el.className = 'turn-indicator player-turn';
       enemyLabel.classList.add('active');
       playerLabel.classList.remove('active');
+      enemyBoard.classList.add('my-turn');
+      enemyBoard.classList.remove('waiting');
       setStatus('공격할 위치를 선택하세요');
+      showTurnFlash('my-turn');
     } else {
-      el.textContent = '상대 차례';
+      el.textContent = '⏳ 상대 차례';
       el.className = 'turn-indicator';
       playerLabel.classList.add('active');
       enemyLabel.classList.remove('active');
+      enemyBoard.classList.remove('my-turn');
+      enemyBoard.classList.add('waiting');
       setStatus('상대방의 공격을 기다리는 중...');
+      showTurnFlash('opponent-turn');
     }
   }
 
