@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>MARIO - 슈퍼 마리오</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="/css/leaderboard.css">
+  <link rel="stylesheet" href="/css/game-icons.css">
+</head>
+<body>
+
+  <div class="game-wrapper">
+
+    <!-- Header -->
+    <header class="header">
+      <span class="header-title">MARIO</span>
+      <div class="score-display">
+        <span class="score-label">COIN</span>
+        <span class="score-coins" id="coinVal">×0</span>
+        <span class="score-label">HI</span>
+        <span class="score-hi" id="hiscoreVal">0</span>
+        <span class="score-current" id="scoreVal">0</span>
+      </div>
+    </header>
+
+    <!-- Canvas -->
+    <div class="canvas-area">
+      <canvas id="gameCanvas"></canvas>
+    </div>
+
+    <!-- Controls -->
+    <div class="controls">
+      <div class="dpad">
+        <button class="ctrl-btn dir" id="btnLeft" aria-label="왼쪽">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"/>
+          </svg>
+        </button>
+        <button class="ctrl-btn dir" id="btnRight" aria-label="오른쪽">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 6 15 12 9 18"/>
+          </svg>
+        </button>
+      </div>
+      <button class="ctrl-btn primary" id="btnJump" aria-label="점프">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="17 11 12 6 7 11"/>
+          <line x1="12" y1="18" x2="12" y2="6"/>
+        </svg>
+        점프
+      </button>
+    </div>
+
+    <!-- Overlay: Start -->
+    <div class="overlay" id="overlayStart">
+      <div class="game-logo-css"><span class="icon-mario"></span></div>
+      <div class="overlay-title">SUPER MARIO</div>
+      <div class="overlay-subtitle">
+        코인을 모으고 적을 밟아 처치하세요!<br>
+        방향키로 이동, 스페이스바로 점프
+      </div>
+      <div class="overlay-stats">
+        <div class="stat-block">
+          <span class="stat-label">최고 점수</span>
+          <span class="stat-value accent" id="startHiscore">0</span>
+        </div>
+      </div>
+      <button class="overlay-btn" id="btnStart">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <polygon points="5 3 19 12 5 21 5 3"/>
+        </svg>
+        게임 시작
+      </button>
+      <p class="overlay-hint">스페이스바로도 시작할 수 있어요</p>
+    </div>
+
+    <!-- Overlay: Dead -->
+    <div class="overlay hidden" id="overlayDead">
+      <div class="overlay-icon">💀</div>
+      <div class="overlay-title">GAME OVER</div>
+      <div class="overlay-subtitle">아쉬워요! 다시 도전해 보세요.</div>
+      <div class="overlay-stats">
+        <div class="stat-block">
+          <span class="stat-label">점수</span>
+          <span class="stat-value" id="deadScore">0</span>
+        </div>
+        <div class="stat-block">
+          <span class="stat-label">최고 점수</span>
+          <span class="stat-value" id="deadHiscore">0</span>
+        </div>
+      </div>
+      <button class="overlay-btn" id="btnRestart">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="1 4 1 10 7 10"/>
+          <path d="M3.51 15a9 9 0 1 0 .49-4.95"/>
+        </svg>
+        다시 시작
+      </button>
+      <p class="overlay-hint">스페이스바를 눌러도 재시작할 수 있어요</p>
+    </div>
+
+    <!-- Overlay: Clear -->
+    <div class="overlay hidden" id="overlayClear">
+      <div class="overlay-icon">⭐</div>
+      <div class="overlay-title">STAGE CLEAR!</div>
+      <div class="overlay-subtitle">축하합니다! 다음 스테이지로!</div>
+      <div class="overlay-stats">
+        <div class="stat-block">
+          <span class="stat-label">점수</span>
+          <span class="stat-value accent" id="clearScore">0</span>
+        </div>
+        <div class="stat-block">
+          <span class="stat-label">코인</span>
+          <span class="stat-value" id="clearCoins">0</span>
+        </div>
+      </div>
+      <button class="overlay-btn" id="btnNext">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 6 15 12 9 18"/>
+        </svg>
+        다음 스테이지
+      </button>
+    </div>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/js/supabase-config.js"></script>
+  <script src="/js/leaderboard.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>
