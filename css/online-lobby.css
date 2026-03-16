@@ -11,6 +11,7 @@
   justify-content: center;
   gap: 6px;
   width: 100%;
+  max-width: 320px;
   padding: 14px 20px;
   border: 1px solid #059669;
   border-radius: 12px;
