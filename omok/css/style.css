@@ -93,6 +93,18 @@ body {
 /* ──────────────────────────────────────
    START SCREEN
 ────────────────────────────────────── */
+.game-logo {
+  font-size: 64px;
+  line-height: 1;
+  filter: drop-shadow(0 4px 16px rgba(59, 130, 246, 0.4));
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
 .game-title {
   font-size: 36px;
   font-weight: 800;
@@ -109,7 +121,7 @@ body {
   color: var(--text-secondary);
   text-align: center;
   letter-spacing: 0.5px;
-  margin-top: -16px;
+  margin-top: 0;
 }
 
 .stats-box {
