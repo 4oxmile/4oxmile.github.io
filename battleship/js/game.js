@@ -726,10 +726,11 @@ function goToPlaceScreen() {
   if (typeof Online !== 'undefined') Online.cleanup();
   if (typeof Leaderboard !== 'undefined') Leaderboard.hide();
   state = freshState();
-  state.phase = 'place';
-  showScreen('place');
-  renderPlaceScreen();
-  setStatus('배치할 위치를 선택하세요');
+  // Auto-place player ships and start immediately
+  state.playerShips = randomPlacement(state.playerBoard, SHIPS_CONFIG);
+  state.placedCount = SHIPS_CONFIG.length;
+  state.currentShipIdx = SHIPS_CONFIG.length;
+  startGame();
 }
 
 function goToStartScreen() {
