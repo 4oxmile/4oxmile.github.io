@@ -487,31 +487,30 @@
   height: 36px;
   animation: float 2.6s ease-in-out infinite;
 }
-/* grid */
+/* main black stone */
 .icon-omok::before {
   content: '';
   position: absolute;
   width: 28px;
   height: 28px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #555, #111);
+  box-shadow:
+    0 2px 8px rgba(0,0,0,0.6),
+    inset 0 -2px 4px rgba(0,0,0,0.4);
   top: 4px;
   left: 4px;
-  background:
-    linear-gradient(#6B7280, #6B7280) 9px 0 / 2px 100% no-repeat,
-    linear-gradient(#6B7280, #6B7280) 18px 0 / 2px 100% no-repeat,
-    linear-gradient(#6B7280, #6B7280) 0 9px / 100% 2px no-repeat,
-    linear-gradient(#6B7280, #6B7280) 0 18px / 100% 2px no-repeat;
 }
-/* black stone */
+/* highlight gloss */
 .icon-omok::after {
   content: '';
   position: absolute;
   width: 12px;
-  height: 12px;
+  height: 8px;
   border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, #4B5563, #111827);
-  box-shadow: 12px 12px 0 11px #F1F5F9, 12px 12px 0 13px #9CA3AF;
-  top: 5px;
-  left: 5px;
+  background: radial-gradient(ellipse, rgba(255,255,255,0.35), transparent);
+  top: 8px;
+  left: 10px;
 }
 
 /* ─── 14. Puzzle ────────────────────────────────────────────── */
@@ -703,31 +702,35 @@
   position: relative;
   width: 36px;
   height: 36px;
-  animation: float 2s ease-in-out infinite;
+  animation: float 2.5s ease-in-out infinite;
 }
-/* ship hull */
+/* hull — boat shape using clip-path */
 .icon-battleship::before {
   content: '';
   position: absolute;
-  width: 30px;
-  height: 12px;
-  background: linear-gradient(180deg, #475569, #1E293B);
-  border-radius: 2px 2px 8px 8px;
-  bottom: 6px;
-  left: 3px;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.4), inset -2px -2px 4px rgba(0,0,0,0.3);
+  width: 34px;
+  height: 16px;
+  background: linear-gradient(180deg, #64748B, #334155);
+  clip-path: polygon(8% 0%, 92% 0%, 100% 100%, 0% 100%);
+  bottom: 4px;
+  left: 1px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.4);
 }
-/* turret / superstructure */
+/* cabin + chimney + flag */
 .icon-battleship::after {
   content: '';
   position: absolute;
-  width: 14px;
-  height: 10px;
-  background: linear-gradient(180deg, #64748B, #334155);
-  border-radius: 3px 3px 0 0;
-  bottom: 16px;
-  left: 8px;
-  box-shadow: 14px 0 0 2px #475569;
+  width: 12px;
+  height: 8px;
+  background: #475569;
+  border-radius: 2px 2px 0 0;
+  bottom: 18px;
+  left: 12px;
+  box-shadow:
+    /* chimney */ 3px -7px 0 1px #374151,
+    /* smoke */ 3px -12px 0 2px rgba(148,163,184,0.5),
+    /* flag pole */ -6px -10px 0 0.5px #94A3B8,
+    /* flag */ -9px -14px 0 2px #EF4444;
 }
 
 /* ─── 20. Connect4 ──────────────────────────────────────────── */
@@ -838,34 +841,41 @@
   position: relative;
   width: 36px;
   height: 36px;
-  animation: dino-run 0.7s ease-in-out infinite;
+  animation: dino-run 0.6s ease-in-out infinite;
 }
-/* body */
+/* body + tail */
 .icon-dino::before {
   content: '';
   position: absolute;
-  width: 20px;
-  height: 18px;
-  background: radial-gradient(circle at 40% 35%, #6B7280, #374151);
-  border-radius: 8px 12px 6px 4px;
-  top: 6px;
-  left: 6px;
-  box-shadow: 0 0 8px rgba(55,65,81,0.5);
+  width: 18px;
+  height: 14px;
+  background: #4B5563;
+  border-radius: 4px 6px 3px 3px;
+  top: 10px;
+  left: 4px;
+  box-shadow:
+    /* tail */ -6px -2px 0 2px #374151,
+    /* tail tip */ -10px -5px 0 1px #374151,
+    /* leg back */ 3px 13px 0 1.5px #4B5563,
+    /* foot back */ 3px 16px 0 1px #374151,
+    /* leg front */ 11px 13px 0 1.5px #4B5563,
+    /* foot front */ 11px 16px 0 1px #374151;
 }
-/* head + tiny arm + legs */
+/* head + eye + arm */
 .icon-dino::after {
   content: '';
   position: absolute;
-  width: 12px;
+  width: 14px;
   height: 12px;
-  background: radial-gradient(circle at 35% 35%, #9CA3AF, #4B5563);
-  border-radius: 4px 8px 4px 2px;
+  background: #6B7280;
+  border-radius: 3px 6px 2px 2px;
   top: 4px;
-  right: 4px;
+  left: 16px;
   box-shadow:
-    /* eye */ -2px 2px 0 3px #0F172A,
-    /* leg1 */ -8px 22px 0 3px #4B5563,
-    /* leg2 */ 2px 22px 0 3px #374151;
+    /* eye */ 5px 2px 0 1.5px #F0F6FC,
+    /* pupil */ 5.5px 2.5px 0 0.8px #0F172A,
+    /* mouth line */ 8px 6px 0 0.5px #374151,
+    /* arm */ -2px 10px 0 1px #4B5563;
 }
 
 /* ─── 24. Rhythm ────────────────────────────────────────────── */
@@ -1076,6 +1086,52 @@
   animation: slide-x 1.8s ease-in-out infinite;
 }
 
+
+/* ─── 30. Mario ────────────────────────────────────────────── */
+@keyframes mario-run {
+  0%, 100% { transform: translateX(0) translateY(0); }
+  25% { transform: translateX(2px) translateY(-4px); }
+  50% { transform: translateX(4px) translateY(0); }
+  75% { transform: translateX(2px) translateY(-3px); }
+}
+.icon-mario {
+  display: block;
+  position: relative;
+  width: 36px;
+  height: 36px;
+  animation: mario-run 0.8s ease-in-out infinite;
+}
+/* body + hat */
+.icon-mario::before {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 12px;
+  background: linear-gradient(180deg, #E52521 50%, #3B3BFF 50%);
+  border-radius: 4px 4px 2px 2px;
+  bottom: 6px;
+  left: 10px;
+  box-shadow:
+    /* hat */ 0px -10px 0 4px #E52521,
+    /* hat brim */ 2px -6px 0 6px #E52521,
+    0 0 10px rgba(229,37,33,0.4);
+}
+/* head + face */
+.icon-mario::after {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 10px;
+  background: radial-gradient(circle at 50% 40%, #FFB899, #E8956E);
+  border-radius: 50% 50% 40% 40%;
+  top: 7px;
+  left: 12px;
+  box-shadow:
+    /* eye */ 3px 1px 0 2px #0F172A,
+    /* mustache */ 2px 5px 0 2px #6B3300,
+    /* shoe L */ -4px 21px 0 3px #6B3300,
+    /* shoe R */ 8px 21px 0 3px #6B3300;
+}
 
 /* ─── Game Logo (for start screens) ──────────────────────────── */
 .game-logo-css {
