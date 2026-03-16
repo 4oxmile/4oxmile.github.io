@@ -46,6 +46,29 @@ const newRecordBanner = document.getElementById('new-record-banner');
 const btnRetry = document.getElementById('btn-retry');
 const btnStart = document.getElementById('btn-start');
 
+// ===== AUDIO =====
+
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+function playBeep() {
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  osc.connect(gain);
+  gain.connect(audioCtx.destination);
+  osc.frequency.value = 880;
+  osc.type = 'square';
+  gain.gain.value = 0.3;
+  osc.start();
+  gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.15);
+  osc.stop(audioCtx.currentTime + 0.15);
+}
+
+function vibrate() {
+  if (navigator.vibrate) {
+    navigator.vibrate(100);
+  }
+}
+
 // ===== UTILS =====
 
 function getRating(ms) {
@@ -166,6 +189,10 @@ function triggerGo() {
   clearContent();
 
   goStartTime = performance.now();
+
+  // 비프음 + 진동으로 알림
+  playBeep();
+  vibrate();
 
   void stateLabel.offsetWidth; // reflow to restart animation
   stateLabel.classList.add('pulse-go');
@@ -292,11 +319,13 @@ function showResults() {
 
 btnStart.addEventListener('click', (e) => {
   e.stopPropagation();
+  if (audioCtx.state === 'suspended') audioCtx.resume();
   startGame();
 });
 
 btnRetry.addEventListener('click', (e) => {
   e.stopPropagation();
+  if (audioCtx.state === 'suspended') audioCtx.resume();
   startGame();
 });
 
