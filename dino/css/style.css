@@ -11,6 +11,8 @@
   --btn-active: #30363D;
   --overlay-bg: rgba(0, 0, 0, 0.85);
   --board-bg: #0A0E14;
+  --dino-fg: #c4c4c4;
+  --dino-bg: #0A0E14;
 }
 
 @media (prefers-color-scheme: light) {
@@ -27,6 +29,8 @@
     --btn-active: #D0D7DE;
     --overlay-bg: rgba(255, 255, 255, 0.9);
     --board-bg: #F0F2F5;
+    --dino-fg: #535353;
+    --dino-bg: #f7f7f7;
   }
 }
 
@@ -61,13 +65,11 @@ body {
   height: 100dvh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   background: var(--bg-secondary);
   overflow: hidden;
 }
 
-/* ---------- Header Bar ---------- */
+/* ---------- Header ---------- */
 .header {
   position: absolute;
   top: 0;
@@ -94,25 +96,32 @@ body {
 
 .score-display {
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 1px;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Courier New', monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+.score-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+}
+
+.score-hi {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-muted);
 }
 
 .score-current {
   font-size: 14px;
   font-weight: 700;
   color: var(--text-primary);
-  font-variant-numeric: tabular-nums;
 }
 
-.score-best {
-  font-size: 11px;
-  color: var(--text-muted);
-  font-variant-numeric: tabular-nums;
-}
-
-/* ---------- Canvas Area ---------- */
+/* ---------- Canvas ---------- */
 .canvas-area {
   position: relative;
   width: 100%;
@@ -120,8 +129,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-top: 56px;
-  padding-bottom: 64px;
+  padding-top: 50px;
+  padding-bottom: 60px;
 }
 
 #gameCanvas {
@@ -132,7 +141,7 @@ body {
   touch-action: none;
 }
 
-/* ---------- Controls Bar ---------- */
+/* ---------- Controls ---------- */
 .controls {
   position: absolute;
   bottom: 0;
@@ -204,7 +213,6 @@ body {
   -webkit-backdrop-filter: blur(6px);
   z-index: 20;
   padding: 24px;
-  gap: 0;
   transition: opacity 0.25s;
 }
 
@@ -301,10 +309,10 @@ body {
   text-align: center;
 }
 
-/* ---------- Night mode indicator ---------- */
+/* ---------- Night badge ---------- */
 .night-badge {
   position: absolute;
-  top: 60px;
+  top: 56px;
   right: 12px;
   font-size: 16px;
   opacity: 0;
@@ -317,22 +325,9 @@ body {
   opacity: 1;
 }
 
-/* ---------- Responsive touch buttons ---------- */
-.touch-jump-zone {
-  position: absolute;
-  bottom: 64px;
-  left: 0;
-  right: 0;
-  height: calc(100% - 120px);
-  z-index: 8;
-  cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-}
-
-/* ---------- Duck button ---------- */
+/* ---------- Misc ---------- */
 .ctrl-btn.duck {
   flex-shrink: 0;
 }
 
-/* Scrollbar hide */
 ::-webkit-scrollbar { display: none; }

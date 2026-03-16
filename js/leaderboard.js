@@ -80,7 +80,7 @@ window.Leaderboard = (() => {
   /* ── Format score ──────────────────────────────── */
   function formatScore(val) {
     if (opts.format === 'ms') {
-      return (val / 1000).toFixed(2) + '초';
+      return (val / 1000).toFixed(3) + '초';
     }
     if (opts.format === 'time') {
       const m = Math.floor(val / 60);
@@ -302,7 +302,7 @@ window.Leaderboard = (() => {
 
   function formatWithOpts(val, gameOpts) {
     if (gameOpts.format === 'ms') {
-      return (val / 1000).toFixed(2) + '초';
+      return (val / 1000).toFixed(3) + '초';
     }
     if (gameOpts.format === 'time') {
       var m = Math.floor(val / 60);

@@ -459,6 +459,8 @@ function setStatus(text, thinking) {
 function showScreen(which) {
   startScreen.classList.toggle('hidden', which !== 'start');
   resultScreen.classList.toggle('hidden', which !== 'result');
+  const lobbyScreen = document.getElementById('lobby-screen');
+  if (lobbyScreen) lobbyScreen.classList.toggle('hidden', which !== 'lobby');
   // game screen is always visible
 }
 
@@ -508,6 +510,10 @@ function getCell(clientX, clientY) {
 }
 
 function handleTap(clientX, clientY) {
+  if (typeof Online !== 'undefined' && Online.isActive()) {
+    Online.handleTap(clientX, clientY);
+    return;
+  }
   if (gameOver || aiThinking || currentPlayer !== BLACK) return;
   const cell = getCell(clientX, clientY);
   if (!cell) return;

@@ -121,14 +121,32 @@ function renderScore() {
 function showScreen(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
   if (id) {
-    document.getElementById(id).classList.remove('hidden');
+    const el = document.getElementById(id);
+    if (el) el.classList.remove('hidden');
   }
 }
 
 function goToMenu() {
   clearAiTimer();
   gameActive = false;
+  if (typeof Online !== 'undefined' && Online.isActive()) {
+    Online.cleanup();
+    restoreNormalHeader();
+  }
   showScreen('start-screen');
+}
+
+function restoreNormalHeader() {
+  const headerTitle = document.querySelector('.header-title');
+  if (headerTitle) headerTitle.textContent = 'TICTACTOE';
+  const headerDiff = document.getElementById('current-diff');
+  if (headerDiff) headerDiff.textContent = DIFFICULTY_LABEL[difficulty] || '어려움';
+  const scoreLabels = document.querySelectorAll('.score-label');
+  const scoreNames  = document.querySelectorAll('.score-name');
+  if (scoreLabels.length >= 2 && scoreNames.length >= 2) {
+    scoreLabels[1].textContent = '컴퓨터';
+    scoreNames[1].textContent  = 'AI (O)';
+  }
 }
 
 // ──────────────────────────────────────
@@ -156,6 +174,10 @@ function clearBoard() {
 }
 
 function handleCellClick(idx) {
+  if (typeof Online !== 'undefined' && Online.isActive()) {
+    Online.handleCellClick(idx);
+    return;
+  }
   if (!gameActive) return;
   if (currentTurn !== PLAYER) return;
   if (board[idx] !== EMPTY) return;

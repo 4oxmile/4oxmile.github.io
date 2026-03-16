@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>DINO - 공룡 달리기</title>
+  <title>DINO - 크롬 공룡 게임</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="/css/leaderboard.css">
@@ -16,8 +16,9 @@
     <header class="header">
       <span class="header-title">DINO</span>
       <div class="score-display">
+        <span class="score-label">HI</span>
+        <span class="score-hi" id="hiscoreVal">00000</span>
         <span class="score-current" id="scoreVal">00000</span>
-        <span class="score-best">최고 <span id="hiscoreVal">0</span></span>
       </div>
     </header>
 
@@ -47,13 +48,14 @@
       </button>
     </div>
 
-    <!-- Overlay: Start Screen -->
+    <!-- Overlay: Start -->
     <div class="overlay" id="overlayStart">
-      <div class="overlay-icon">🦕</div>
-      <div class="overlay-title">DINO</div>
+      <div class="overlay-icon">🦖</div>
+      <div class="overlay-title">DINO RUN</div>
       <div class="overlay-subtitle">
-        공룡을 조종해 장애물을 피하세요!<br>
-        스페이스바 · 위 방향키 · 화면 탭으로 점프
+        장애물을 피해 달리세요!<br>
+        스페이스바 · 위 방향키 · 탭으로 점프<br>
+        아래 방향키로 웅크리기
       </div>
       <div class="overlay-stats">
         <div class="stat-block">
@@ -70,14 +72,14 @@
       <p class="overlay-hint">스페이스바로도 시작할 수 있어요</p>
     </div>
 
-    <!-- Overlay: Game Over Screen -->
+    <!-- Overlay: Dead -->
     <div class="overlay hidden" id="overlayDead">
       <div class="overlay-icon">💀</div>
-      <div class="overlay-title">게임 오버</div>
+      <div class="overlay-title">GAME OVER</div>
       <div class="overlay-subtitle">아쉬워요! 다시 도전해 보세요.</div>
       <div class="overlay-stats">
         <div class="stat-block">
-          <span class="stat-label">이번 점수</span>
+          <span class="stat-label">점수</span>
           <span class="stat-value" id="deadScore">00000</span>
         </div>
         <div class="stat-block">
@@ -95,16 +97,11 @@
       <p class="overlay-hint">스페이스바를 눌러도 재시작할 수 있어요</p>
     </div>
 
-  </div><!-- .game-wrapper -->
+  </div>
 
-  <script>
-    // Sync start overlay hi-score with localStorage
-    document.getElementById('startHiscore').textContent =
-      localStorage.getItem('dino_hi') || '0';
-  </script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="/js/supabase-config.js"></script>
-<script src="/js/leaderboard.js"></script>
-<script src="js/game.js"></script>
+  <script src="/js/supabase-config.js"></script>
+  <script src="/js/leaderboard.js"></script>
+  <script src="js/game.js"></script>
 </body>
 </html>

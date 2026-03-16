@@ -102,7 +102,58 @@ grant select, insert, delete on table public.battleship_rooms to anon, authentic
 create index if not exists idx_rooms_created
   on public.battleship_rooms (created_at);
 
--- 3) GAME CLICKS
+-- 3) GAME ROOMS (generic for tictactoe, omok, etc.)
+create table if not exists public.game_rooms (
+  id         bigint generated always as identity primary key,
+  game       text not null,
+  code       text not null,
+  host_name  text not null default '대기 중',
+  created_at timestamptz default now()
+);
+
+alter table public.game_rooms
+  alter column game set not null,
+  alter column code set not null,
+  alter column host_name set not null;
+
+alter table public.game_rooms drop constraint if exists game_rooms_game_chk;
+alter table public.game_rooms add constraint game_rooms_game_chk
+  check (game ~ '^[a-z0-9_-]{1,30}$');
+
+alter table public.game_rooms drop constraint if exists game_rooms_code_chk;
+alter table public.game_rooms add constraint game_rooms_code_chk
+  check (code ~ '^[A-Z0-9]{4}$');
+
+alter table public.game_rooms drop constraint if exists game_rooms_host_name_chk;
+alter table public.game_rooms add constraint game_rooms_host_name_chk
+  check (char_length(btrim(host_name)) between 1 and 12);
+
+alter table public.game_rooms enable row level security;
+alter table public.game_rooms force row level security;
+
+drop policy if exists game_rooms_select on public.game_rooms;
+create policy game_rooms_select on public.game_rooms
+  for select using (true);
+
+drop policy if exists game_rooms_insert on public.game_rooms;
+create policy game_rooms_insert on public.game_rooms
+  for insert with check (
+    game ~ '^[a-z0-9_-]{1,30}$'
+    and code ~ '^[A-Z0-9]{4}$'
+    and char_length(btrim(host_name)) between 1 and 12
+  );
+
+drop policy if exists game_rooms_delete on public.game_rooms;
+create policy game_rooms_delete on public.game_rooms
+  for delete using (true);
+
+revoke all on table public.game_rooms from anon, authenticated;
+grant select, insert, delete on table public.game_rooms to anon, authenticated;
+
+create index if not exists idx_game_rooms_game_created
+  on public.game_rooms (game, created_at);
+
+-- 4) GAME CLICKS
 create table if not exists public.game_clicks (
   game   text primary key,
   clicks int  not null default 0

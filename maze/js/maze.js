@@ -798,7 +798,7 @@ class App {
 
   _showVictory() {
     this.state = 'victory';
-    if(typeof Leaderboard!=='undefined')Leaderboard.ready('maze',this.game.elapsedTime,{ascending:true,format:'time',label:'시간'});
+    if(typeof Leaderboard!=='undefined')Leaderboard.ready('maze',Math.round(this.game.elapsedTime/1000),{ascending:true,format:'time',label:'시간'});
 
     const time = this.game.elapsedTime;
     document.getElementById('final-time-value').textContent = formatTime(time);
