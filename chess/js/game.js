@@ -628,6 +628,7 @@ class ChessUI {
     // Start screen
     app.innerHTML = `
       <div id="start-screen" class="screen">
+        <div class="game-logo-css"><span class="icon-chess"></span></div>
         <div class="game-title">CHESS</div>
         <div class="game-subtitle">1인 플레이 · AI 대전</div>
 
