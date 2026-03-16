@@ -281,7 +281,7 @@ function showResults() {
   updateBestDisplay();
 
   if (typeof Leaderboard !== 'undefined') {
-    Leaderboard.ready('reaction2', Math.round(avg * 10), { ascending: true, format: 'ms10', label: '시간' });
+    Leaderboard.ready('aim', Math.round(avg * 10), { ascending: true, format: 'ms10', label: '시간' });
   }
 }
 
