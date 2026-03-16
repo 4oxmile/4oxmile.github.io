@@ -1,6 +1,6 @@
 'use strict';
 
-const TOTAL_ROUNDS = 10;
+const TOTAL_ROUNDS = 5;
 const MIN_DELAY    = 800;
 const MAX_DELAY    = 2500;
 const TARGET_SIZE  = 60;
