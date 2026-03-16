@@ -1,0 +1,434 @@
+/* ═══════════════════════════════════════════
+   online-lobby.css — Shared lobby UI for all online games
+   Include after the game's own style.css
+   ═══════════════════════════════════════════ */
+
+/* ── Online button (start screen) ── */
+.btn-online,
+.btn-online-start {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  padding: 14px 20px;
+  border: 1px solid #059669;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #059669, #10B981);
+  color: #fff;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn-online:hover,
+.btn-online-start:hover {
+  background: linear-gradient(135deg, #047857, #059669);
+  border-color: #047857;
+}
+
+.btn-online:active,
+.btn-online-start:active {
+  transform: scale(0.98);
+}
+
+/* ── Lobby screen ── */
+#lobby-screen {
+  overflow-y: auto;
+}
+
+.lobby-title {
+  font-size: clamp(1.8rem, 7vw, 2.4rem);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  background: linear-gradient(135deg, var(--accent, #3B82F6), #a78bfa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-align: center;
+  line-height: 1.2;
+}
+
+.lobby-subtitle {
+  font-size: 0.85rem;
+  color: var(--text-secondary, #8B949E);
+  text-align: center;
+}
+
+#lobby-main {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ── Room list ── */
+.room-list-section {
+  width: 100%;
+}
+
+.room-list-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.room-list-title {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-secondary, #8B949E);
+  letter-spacing: 0.04em;
+}
+
+#btn-refresh-rooms {
+  padding: 4px 10px;
+  border: 1px solid var(--border, #30363D);
+  border-radius: 6px;
+  background: var(--btn-bg, #21262D);
+  color: var(--text-secondary, #8B949E);
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+#btn-refresh-rooms:hover {
+  border-color: var(--accent, #3B82F6);
+  color: var(--text-primary, #F0F6FC);
+}
+
+.room-list {
+  width: 100%;
+  background: var(--bg-secondary, #161B22);
+  border: 1px solid var(--border, #30363D);
+  border-radius: 10px;
+  padding: 6px;
+  max-height: 180px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.room-list-empty {
+  text-align: center;
+  color: var(--text-muted, #484F58);
+  font-size: 0.82rem;
+  padding: 16px 8px;
+}
+
+.room-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  padding: 10px 12px;
+  background: var(--bg-tertiary, #21262D);
+  border: 1px solid var(--border, #30363D);
+  border-radius: 8px;
+  cursor: pointer;
+  font-family: inherit;
+  color: var(--text-primary, #F0F6FC);
+  transition: all 0.15s;
+}
+
+.room-item:hover {
+  border-color: var(--accent, #3B82F6);
+  background: rgba(59, 130, 246, 0.08);
+}
+
+.room-item:active {
+  transform: scale(0.98);
+}
+
+.room-item-code {
+  font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.15em;
+  color: var(--accent, #3B82F6);
+}
+
+.room-item-info {
+  flex: 1;
+  font-size: 0.8rem;
+  color: var(--text-secondary, #8B949E);
+  text-align: center;
+}
+
+.room-item-time {
+  font-size: 0.72rem;
+  color: var(--text-muted, #484F58);
+  white-space: nowrap;
+}
+
+/* ── Divider ── */
+.lobby-divider {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--text-muted, #484F58);
+  font-size: 0.8rem;
+}
+
+.lobby-divider::before,
+.lobby-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border, #30363D);
+}
+
+/* ── Actions ── */
+.lobby-actions {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#btn-create-room {
+  width: 100%;
+  padding: 14px 20px;
+  border: 1px solid var(--accent, #3B82F6);
+  border-radius: 10px;
+  background: var(--accent, #3B82F6);
+  color: #fff;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+#btn-create-room:hover {
+  opacity: 0.9;
+}
+
+#btn-create-room:active {
+  transform: scale(0.98);
+}
+
+.join-input-group {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+
+#btn-join-room {
+  flex-shrink: 0;
+  padding: 12px 20px;
+  border: 1px solid var(--accent, #3B82F6);
+  border-radius: 10px;
+  background: var(--accent, #3B82F6);
+  color: #fff;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+#btn-join-room:hover {
+  opacity: 0.9;
+}
+
+.code-input {
+  flex: 1;
+  min-width: 0;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: 1px solid var(--border, #30363D);
+  background: var(--bg-secondary, #161B22);
+  color: var(--text-primary, #F0F6FC);
+  font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-align: center;
+  text-transform: uppercase;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.code-input:focus {
+  border-color: var(--accent, #3B82F6);
+}
+
+.code-input::placeholder {
+  color: var(--text-muted, #484F58);
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  font-size: 0.9rem;
+  font-family: inherit;
+}
+
+.join-error {
+  font-size: 0.78rem;
+  color: #EF4444;
+  min-height: 18px;
+}
+
+/* ── Waiting panel ── */
+.lobby-waiting,
+.lobby-waiting-container {
+  display: none;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.waiting-panel {
+  width: 100%;
+  background: var(--bg-secondary, #161B22);
+  border: 1px solid var(--border, #30363D);
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.room-code-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.room-code-label {
+  font-size: 0.75rem;
+  color: var(--text-muted, #484F58);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.room-code {
+  font-size: 2.4rem;
+  font-weight: 800;
+  letter-spacing: 0.25em;
+  color: var(--accent, #3B82F6);
+  font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+}
+
+.waiting-text {
+  font-size: 0.9rem;
+  color: var(--text-secondary, #8B949E);
+}
+
+.waiting-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.waiting-dots span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent, #3B82F6);
+  animation: lobbyWaitPulse 1.4s infinite;
+}
+
+.waiting-dots span:nth-child(2) { animation-delay: 0.2s; }
+.waiting-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes lobbyWaitPulse {
+  0%, 80%, 100% { opacity: 0.2; transform: scale(0.8); }
+  40% { opacity: 1; transform: scale(1); }
+}
+
+/* ── Lobby small buttons ── */
+#btn-copy-code,
+#btn-waiting-cancel,
+#btn-lobby-back {
+  padding: 6px 14px;
+  border: 1px solid var(--border, #30363D);
+  border-radius: 8px;
+  background: var(--btn-bg, #21262D);
+  color: var(--text-secondary, #8B949E);
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+#btn-copy-code:hover,
+#btn-waiting-cancel:hover,
+#btn-lobby-back:hover {
+  border-color: var(--accent, #3B82F6);
+  color: var(--text-primary, #F0F6FC);
+}
+
+#btn-copy-code:active,
+#btn-waiting-cancel:active,
+#btn-lobby-back:active {
+  transform: scale(0.97);
+}
+
+#btn-lobby-back {
+  margin-top: 8px;
+}
+
+/* ── Toast notifications ── */
+.toast-container {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: none;
+  width: 90%;
+  max-width: 360px;
+}
+
+.toast {
+  background: var(--bg-secondary, #161B22);
+  border: 1px solid var(--border, #30363D);
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 0.875rem;
+  color: var(--text-primary, #F0F6FC);
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  animation: lobbyToastIn 0.3s ease, lobbyToastOut 0.3s ease 1.7s forwards;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.toast.sunk-toast {
+  border-color: #F97316;
+  color: #F97316;
+  background: rgba(249, 115, 22, 0.08);
+}
+
+@keyframes lobbyToastIn {
+  from { opacity: 0; transform: translateY(-12px) scale(0.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes lobbyToastOut {
+  from { opacity: 1; }
+  to   { opacity: 0; transform: translateY(-8px); }
+}
+
+/* ── Responsive ── */
+@media (max-height: 700px) {
+  .lobby-title { font-size: 1.5rem; }
+  .lobby-subtitle { display: none; }
+  .room-list { max-height: 120px; }
+  .waiting-panel { padding: 16px; gap: 12px; }
+  .room-code { font-size: 2rem; }
+}
