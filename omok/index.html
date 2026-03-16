@@ -18,81 +18,87 @@
 
   <!-- ── Start Screen ── -->
   <div class="overlay" id="start-screen">
-    <div class="game-title">OMOK</div>
-    <div class="game-subtitle">오목 · Gomoku</div>
+    <div class="screen-content">
+      <div class="game-title">OMOK</div>
+      <div class="game-subtitle">오목 · Gomoku</div>
 
-    <div class="stats-box">
-      <div class="stat-item">
-        <div class="stat-value" id="stat-win">0</div>
-        <div class="stat-label">승</div>
+      <div class="stats-box">
+        <div class="stat-item">
+          <div class="stat-value" id="stat-win">0</div>
+          <div class="stat-label">승</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <div class="stat-value" id="stat-loss">0</div>
+          <div class="stat-label">패</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <div class="stat-value" id="stat-total">0</div>
+          <div class="stat-label">판</div>
+        </div>
       </div>
-      <div class="stat-divider"></div>
-      <div class="stat-item">
-        <div class="stat-value" id="stat-loss">0</div>
-        <div class="stat-label">패</div>
-      </div>
-      <div class="stat-divider"></div>
-      <div class="stat-item">
-        <div class="stat-value" id="stat-total">0</div>
-        <div class="stat-label">판</div>
-      </div>
+
+      <button class="btn btn-primary" id="btn-start">게임 시작</button>
+      <button class="btn-online" id="btn-online">🌐 온라인 대전</button>
     </div>
-
-    <button class="btn btn-primary" id="btn-start">게임 시작</button>
-    <button class="btn btn-online" id="btn-online">🌐 온라인 대전</button>
   </div>
 
   <!-- ── Lobby Screen ── -->
   <div class="overlay hidden" id="lobby-screen">
-    <div class="lobby-title">ONLINE</div>
-    <div class="lobby-subtitle">친구와 실시간 오목 대전</div>
+    <div class="screen-content">
+      <div class="lobby-title">ONLINE</div>
+      <div class="lobby-subtitle">친구와 실시간 오목 대전</div>
 
-    <div id="lobby-main" style="width:100%;max-width:360px;">
-      <div class="room-list-section">
-        <div class="room-list-header">
-          <span class="room-list-title">대기 중인 방</span>
-          <button class="btn btn-small" id="btn-refresh-rooms">새로고침</button>
+      <div id="lobby-main">
+        <div class="room-list-section">
+          <div class="room-list-header">
+            <span class="room-list-title">대기 중인 방</span>
+            <button id="btn-refresh-rooms">새로고침</button>
+          </div>
+          <div class="room-list" id="room-list">
+            <p class="room-list-empty">불러오는 중...</p>
+          </div>
         </div>
-        <div class="room-list" id="room-list">
-          <p class="room-list-empty">불러오는 중...</p>
+
+        <div class="lobby-divider"><span>또는 직접</span></div>
+
+        <div class="lobby-actions">
+          <button id="btn-create-room">방 만들기</button>
+          <div class="join-input-group">
+            <input type="text" id="join-code-input" class="code-input" maxlength="4" placeholder="코드 입력" autocomplete="off" spellcheck="false" />
+            <button id="btn-join-room">참가</button>
+          </div>
+          <p class="join-error" id="join-error"></p>
         </div>
       </div>
 
-      <div class="lobby-divider"><span>또는 직접</span></div>
-
-      <div class="lobby-actions">
-        <button class="btn btn-primary" id="btn-create-room" style="width:100%;">방 만들기</button>
-        <div class="join-input-group">
-          <input type="text" id="join-code-input" class="code-input" maxlength="4" placeholder="코드 입력" autocomplete="off" spellcheck="false" />
-          <button class="btn btn-primary" id="btn-join-room">참가</button>
+      <div id="lobby-waiting" class="lobby-waiting">
+        <div class="waiting-panel">
+          <div class="room-code-display">
+            <span class="room-code-label">방 코드</span>
+            <span class="room-code" id="waiting-code">XXXX</span>
+            <button id="btn-copy-code">복사</button>
+          </div>
+          <p class="waiting-text" id="waiting-msg">상대방을 기다리는 중...</p>
+          <div class="waiting-dots"><span></span><span></span><span></span></div>
         </div>
-        <p class="join-error" id="join-error"></p>
+        <button id="btn-waiting-cancel">취소</button>
       </div>
+
+      <button id="btn-lobby-back">돌아가기</button>
     </div>
-
-    <div id="lobby-waiting" class="lobby-waiting">
-      <div class="waiting-panel">
-        <div class="room-code-display">
-          <span class="room-code-label">방 코드</span>
-          <span class="room-code" id="waiting-code">XXXX</span>
-          <button class="btn btn-small" id="btn-copy-code">복사</button>
-        </div>
-        <p class="waiting-text" id="waiting-msg">상대방을 기다리는 중...</p>
-        <div class="waiting-dots"><span></span><span></span><span></span></div>
-      </div>
-      <button class="btn btn-small" id="btn-waiting-cancel">취소</button>
-    </div>
-
-    <button class="btn btn-small" id="btn-lobby-back">돌아가기</button>
   </div>
 
   <!-- ── Result Screen ── -->
   <div class="overlay hidden" id="result-screen">
-    <div class="result-emoji" id="result-emoji">🎉</div>
-    <div class="result-title win" id="result-title">승리!</div>
-    <div class="result-subtitle" id="result-subtitle">축하합니다! AI를 이겼습니다.</div>
-    <button class="btn btn-primary" id="btn-play-again">다시 하기</button>
-    <button class="btn" id="btn-home-result">홈으로</button>
+    <div class="screen-content">
+      <div class="result-emoji" id="result-emoji">🎉</div>
+      <div class="result-title win" id="result-title">승리!</div>
+      <div class="result-subtitle" id="result-subtitle">축하합니다! AI를 이겼습니다.</div>
+      <button class="btn btn-primary" id="btn-play-again">다시 하기</button>
+      <button class="btn" id="btn-home-result">홈으로</button>
+    </div>
   </div>
 
   <!-- ── Game Screen (always rendered) ── -->
