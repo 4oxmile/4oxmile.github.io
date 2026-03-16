@@ -17,7 +17,7 @@ window.Leaderboard = (() => {
     maze:        { ascending: true, format: 'time', label: '시간' },
     minesweeper: { ascending: true, format: 'time', label: '시간' },
     sudoku:      { ascending: true, format: 'time', label: '시간' },
-    reaction:    { ascending: true, format: 'ms',   label: '시간' },
+    reaction:    { ascending: true, format: 'ms10', label: '시간' },
   };
 
   /* All possible start screen element IDs across games */
@@ -79,6 +79,9 @@ window.Leaderboard = (() => {
 
   /* ── Format score ──────────────────────────────── */
   function formatScore(val) {
+    if (opts.format === 'ms10') {
+      return (val / 10000).toFixed(4) + '초';
+    }
     if (opts.format === 'ms') {
       return (val / 1000).toFixed(3) + '초';
     }
@@ -301,6 +304,9 @@ window.Leaderboard = (() => {
   }
 
   function formatWithOpts(val, gameOpts) {
+    if (gameOpts.format === 'ms10') {
+      return (val / 10000).toFixed(4) + '초';
+    }
     if (gameOpts.format === 'ms') {
       return (val / 1000).toFixed(3) + '초';
     }

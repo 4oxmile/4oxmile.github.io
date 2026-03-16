@@ -87,7 +87,7 @@ function getRatingShort(ms) {
 
 function loadBest() {
   const val = localStorage.getItem(STORAGE_KEY);
-  return val ? parseInt(val, 10) : null;
+  return val ? parseFloat(val) : null;
 }
 
 function saveBest(ms) {
@@ -98,9 +98,9 @@ function updateBestDisplay() {
   const best = loadBest();
   if (best) {
     startBestBadge.style.display = 'flex';
-    startBestValue.textContent = best + 'ms';
+    startBestValue.textContent = best.toFixed(1) + 'ms';
     bestDisplay.style.display = 'flex';
-    bestValue.textContent = best + 'ms';
+    bestValue.textContent = best.toFixed(1) + 'ms';
   } else {
     startBestBadge.style.display = 'none';
     bestDisplay.style.display = 'none';
@@ -220,14 +220,14 @@ function handleTap() {
   }
 
   if (state === GameState.GO) {
-    const elapsed = Math.round(performance.now() - goStartTime);
+    const elapsed = Math.round((performance.now() - goStartTime) * 10) / 10;
     roundTimes.push(elapsed);
 
     state = GameState.RESULT;
     setGameAreaState('go'); // keep green
 
     // Update result display
-    resultTimeDisplay.innerHTML = elapsed + '<span class="result-time-unit">ms</span>';
+    resultTimeDisplay.innerHTML = elapsed.toFixed(1) + '<span class="result-time-unit">ms</span>';
     ratingBadge.textContent = getRating(elapsed);
 
     showContent({ showTime: true });
@@ -270,19 +270,19 @@ function addRoundLogItem(round, ms) {
   if (prev) prev.classList.remove('latest');
 
   item.classList.add('latest');
-  item.textContent = `R${round}: ${ms}ms`;
+  item.textContent = `R${round}: ${ms.toFixed(1)}ms`;
   roundLog.appendChild(item);
 }
 
 function showResults() {
-  const avg = Math.round(roundTimes.reduce((a, b) => a + b, 0) / roundTimes.length);
+  const avg = Math.round((roundTimes.reduce((a, b) => a + b, 0) / roundTimes.length) * 10) / 10;
   const best = Math.min(...roundTimes);
   const bestRoundIndex = roundTimes.indexOf(best);
 
-  resultsAvgTime.innerHTML = avg + '<span class="results-avg-unit"> ms</span>';
+  resultsAvgTime.innerHTML = avg.toFixed(1) + '<span class="results-avg-unit"> ms</span>';
   resultsRating.textContent = getRating(avg);
 
-  resultsBestTime.innerHTML = best + '<span class="unit"> ms</span>';
+  resultsBestTime.innerHTML = best.toFixed(1) + '<span class="unit"> ms</span>';
   resultsFastestRound.textContent = `R${bestRoundIndex + 1}`;
 
   // Build rounds list
@@ -294,7 +294,7 @@ function showResults() {
 
     row.innerHTML = `
       <span class="round-row-label">라운드 ${i + 1}${i === bestRoundIndex ? ' 🏆' : ''}</span>
-      <span class="round-row-time">${t}<span class="unit"> ms</span></span>
+      <span class="round-row-time">${t.toFixed(1)}<span class="unit"> ms</span></span>
     `;
     roundsList.appendChild(row);
   });
@@ -312,7 +312,7 @@ function showResults() {
   // Show results overlay
   resultsScreen.classList.remove('hidden');
   updateBestDisplay();
-  if(typeof Leaderboard!=='undefined')Leaderboard.ready('reaction',avg,{ascending:true,format:'ms',label:'시간'});
+  if(typeof Leaderboard!=='undefined')Leaderboard.ready('reaction',Math.round(avg*10),{ascending:true,format:'ms10',label:'시간'});
 }
 
 // ===== EVENT LISTENERS =====
