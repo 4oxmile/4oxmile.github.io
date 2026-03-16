@@ -18,6 +18,7 @@ window.Leaderboard = (() => {
     minesweeper: { ascending: true, format: 'time', label: '시간' },
     sudoku:      { ascending: true, format: 'time', label: '시간' },
     reaction:    { ascending: true, format: 'ms10', label: '시간' },
+    reaction2:   { ascending: true, format: 'ms10', label: '시간' },
   };
 
   /* All possible start screen element IDs across games */
