@@ -391,6 +391,7 @@ function startGame(song) {
   State.grades        = { PERFECT: 0, GREAT: 0, GOOD: 0, MISS: 0 };
   State.elapsedPaused = 0;
   State.pauseStart    = 0;
+  State.countdownMode = true;
 
   resizeCanvas();
   updateHUD();
@@ -398,10 +399,21 @@ function startGame(song) {
   DOM.healthFill.style.width  = '100%';
   DOM.healthFill.classList.remove('low');
 
+  // countdown duration: 3 beats × 700ms + GO! 400ms = 2500ms
+  const countdownMs = 3 * 700 + 400;
+
+  // Set startTime in the future so gameTime() is negative during countdown.
+  // Notes approach naturally and arrive at hitY right when countdown ends.
+  State.startTime = performance.now() + countdownMs;
+
   showScreen('playing');
+  // Start rendering immediately so player can see notes approaching
+  loop();
+
   runCountdown(3, () => {
+    // Fine-tune startTime to actual play moment
     State.startTime = performance.now();
-    loop();
+    State.countdownMode = false;
   });
 }
 
@@ -449,8 +461,8 @@ function loop() {
     const travelTime = note.hitTime - t;
     note.y = hitY - (travelTime / 1000) * speed;
 
-    // Auto-miss if note falls past the window
-    if (t > note.hitTime + WINDOW.MISS) {
+    // Auto-miss if note falls past the window (skip during countdown)
+    if (!State.countdownMode && t > note.hitTime + WINDOW.MISS) {
       note.missed = true;
       registerGrade(note.lane, 'MISS', note.y);
     }
@@ -458,7 +470,7 @@ function loop() {
 
   // ── End of song ──
   const allDone = State.notes.every(n => n.hit || n.missed);
-  if (allDone && t > (State.song.duration - 1500)) {
+  if (!State.countdownMode && allDone && t > (State.song.duration - 1500)) {
     endGame();
     return;
   }
@@ -548,7 +560,7 @@ function drawRoundRect(ctx, x, y, w, h, r, fill, stroke, sw) {
 // ─── Input Handling ───────────────────────────────────────────────
 
 function handleLaneTap(lane) {
-  if (State.phase !== 'playing') return;
+  if (State.phase !== 'playing' || State.countdownMode) return;
   audio.resume();
 
   const t = gameTime();
@@ -666,7 +678,7 @@ function updateHUD() {
 // ─── Pause / Resume ───────────────────────────────────────────────
 
 function pauseGame() {
-  if (State.phase !== 'playing') return;
+  if (State.phase !== 'playing' || State.countdownMode) return;
   State.phase      = 'paused';
   State.pauseStart = performance.now();
   cancelAnimationFrame(State.animId);
