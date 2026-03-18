@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>NONOGRAM</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="/css/game-icons.css" />
+</head>
+<body>
+
+  <!-- Start Overlay -->
+  <div class="overlay" id="overlay-start">
+    <div class="overlay-content">
+      <div class="game-logo-css"><span class="icon-nonogram"></span></div>
+      <div class="game-title">NONOGRAM</div>
+      <p class="overlay-desc">힌트 숫자를 보고 칸을 채워 그림을 완성하세요!</p>
+      <div class="difficulty-selector">
+        <button class="diff-btn selected" data-diff="easy">
+          <span class="diff-label">초급</span>
+          <span class="diff-info">5×5</span>
+        </button>
+        <button class="diff-btn" data-diff="medium">
+          <span class="diff-label">중급</span>
+          <span class="diff-info">10×10</span>
+        </button>
+        <button class="diff-btn" data-diff="hard">
+          <span class="diff-label">고급</span>
+          <span class="diff-info">15×15</span>
+        </button>
+      </div>
+      <div class="overlay-stats" id="start-best-display"></div>
+      <button class="btn-primary" id="btn-start">게임 시작</button>
+    </div>
+  </div>
+
+  <!-- Win Overlay -->
+  <div class="overlay hidden" id="overlay-win">
+    <div class="overlay-content">
+      <div class="overlay-icon">🎉</div>
+      <div class="overlay-title">클리어!</div>
+      <div class="win-stats">
+        <div class="win-stat-row">
+          <span class="win-stat-label">클리어 시간</span>
+          <span class="win-stat-value" id="win-time">0:00</span>
+        </div>
+        <div class="win-stat-row">
+          <span class="win-stat-label">최고 기록</span>
+          <span class="win-stat-value" id="win-best">-</span>
+        </div>
+        <div class="new-record hidden" id="new-record-badge">🏆 신기록!</div>
+      </div>
+      <button class="btn-primary" id="btn-next">다음 퍼즐</button>
+      <button class="btn-secondary" id="btn-restart-win">다시 시작</button>
+    </div>
+  </div>
+
+  <!-- Main Game UI -->
+  <div class="game-wrapper">
+    <header class="game-header">
+      <div class="header-title">NONOGRAM</div>
+      <div class="header-stats">
+        <div class="stat-pill">
+          <span class="stat-icon">📐</span>
+          <span class="stat-value" id="puzzle-number">1/10</span>
+        </div>
+        <div class="stat-pill">
+          <span class="stat-icon">⏱</span>
+          <span class="stat-value" id="timer">0:00</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="board-container">
+      <div class="nonogram-board" id="nonogram-board">
+        <div class="corner-spacer" id="corner-spacer"></div>
+        <div class="col-clues" id="col-clues"></div>
+        <div class="row-clues" id="row-clues"></div>
+        <div class="grid" id="grid"></div>
+      </div>
+    </div>
+
+    <footer class="game-footer">
+      <button class="mode-toggle" id="mode-toggle" title="모드 전환">
+        <span class="mode-icon" id="mode-icon">✏️</span>
+        <span class="mode-label" id="mode-label">채우기 모드</span>
+      </button>
+      <button class="btn-icon" id="btn-reset" title="초기화">
+        <span>↺</span>
+        <span class="btn-text">초기화</span>
+      </button>
+    </footer>
+  </div>
+
+  <script src="js/game.js"></script>
+</body>
+</html>
