@@ -248,6 +248,12 @@ body {
   background: rgba(139,92,246,0.08);
 }
 
+.level-card.locked {
+  opacity: 0.4;
+  cursor: default;
+  pointer-events: none;
+}
+
 .level-num {
   font-size: 18px;
   font-weight: 700;

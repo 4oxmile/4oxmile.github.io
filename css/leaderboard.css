@@ -306,6 +306,73 @@
   margin-bottom: 10px;
 }
 
+.lb-lv-groups {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  justify-content: center;
+  margin-bottom: 6px;
+}
+
+.lb-lv-group {
+  height: 24px;
+  padding: 0 8px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: transparent;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: inherit;
+}
+
+.lb-lv-group:hover {
+  border-color: rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.lb-lv-group.active {
+  background: rgba(59, 130, 246, 0.2);
+  border-color: rgba(59, 130, 246, 0.4);
+  color: #fff;
+}
+
+.lb-lv-selector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.lb-lv-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: transparent;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s;
+  font-family: inherit;
+  padding: 0;
+}
+
+.lb-lv-btn:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.lb-lv-btn.active {
+  background: rgba(59, 130, 246, 0.25);
+  border-color: rgba(59, 130, 246, 0.5);
+  color: #fff;
+}
+
 .lb-start-row {
   display: flex;
   align-items: center;
@@ -374,6 +441,32 @@
   .lb-start-ranking {
     background: rgba(0, 0, 0, 0.05);
     border-color: rgba(0, 0, 0, 0.1);
+  }
+  .lb-lv-group {
+    border-color: rgba(0, 0, 0, 0.1);
+    color: rgba(0, 0, 0, 0.35);
+  }
+  .lb-lv-group:hover {
+    border-color: rgba(0, 0, 0, 0.2);
+    color: rgba(0, 0, 0, 0.6);
+  }
+  .lb-lv-group.active {
+    background: rgba(49, 130, 246, 0.12);
+    border-color: rgba(49, 130, 246, 0.3);
+    color: #1B1E28;
+  }
+  .lb-lv-btn {
+    border-color: rgba(0, 0, 0, 0.12);
+    color: rgba(0, 0, 0, 0.4);
+  }
+  .lb-lv-btn:hover {
+    border-color: rgba(0, 0, 0, 0.25);
+    color: rgba(0, 0, 0, 0.7);
+  }
+  .lb-lv-btn.active {
+    background: rgba(49, 130, 246, 0.15);
+    border-color: rgba(49, 130, 246, 0.4);
+    color: #1B1E28;
   }
   .lb-start-title { color: rgba(0, 0, 0, 0.4); }
   .lb-start-row:nth-child(odd) { background: rgba(0, 0, 0, 0.03); }
