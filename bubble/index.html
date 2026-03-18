@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#0D1117">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>BUBBLE</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="/css/leaderboard.css">
+  <link rel="stylesheet" href="/css/game-icons.css">
+</head>
+<body>
+  <div id="app">
+
+    <!-- Header -->
+    <div id="header">
+      <div class="header-stat">
+        <span class="stat-label">점수</span>
+        <span class="stat-value accent" id="score-val">0</span>
+      </div>
+      <div class="header-stat level-badge">
+        <span class="stat-label">레벨</span>
+        <span class="stat-value" id="level-val">1</span>
+      </div>
+      <div class="header-stat">
+        <span class="stat-label">최고</span>
+        <span class="stat-value" id="best-val">0</span>
+      </div>
+    </div>
+
+    <!-- Canvas area -->
+    <div id="canvas-wrapper">
+      <canvas id="gameCanvas"></canvas>
+
+      <!-- Start Overlay -->
+      <div class="overlay" id="overlay-start">
+        <div class="game-logo-css"><span class="icon-bubble"></span></div>
+        <div class="overlay-title">BUBBLE</div>
+        <div class="overlay-subtitle">
+          같은 색 버블 3개 이상을 맞춰 터뜨리세요!<br>
+          버블이 바닥에 닿으면 게임 오버.
+        </div>
+        <button class="btn btn-primary" id="btn-start">게임 시작</button>
+        <div class="controls-hint">
+          터치 · ← → 방향키로 조준, 스페이스로 발사
+        </div>
+      </div>
+
+      <!-- Pause Overlay -->
+      <div class="overlay hidden" id="overlay-pause">
+        <div class="overlay-title" style="font-size:36px">일시정지</div>
+        <div class="overlay-subtitle">게임이 일시정지 되었습니다.</div>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center">
+          <button class="btn btn-primary" id="btn-resume">계속하기</button>
+          <button class="btn" id="btn-quit">처음으로</button>
+        </div>
+      </div>
+
+      <!-- Game Over Overlay -->
+      <div class="overlay hidden" id="overlay-lose">
+        <div class="overlay-title" style="background:linear-gradient(135deg,#F43F5E,#FB923C,#FACC15);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">
+          게임 오버
+        </div>
+        <div class="overlay-subtitle">
+          레벨 <span id="lose-level">1</span>에서 탈락했습니다.<br>
+          다시 도전해보세요!
+        </div>
+        <div class="overlay-score-box">
+          <div class="overlay-score-label">최종 점수</div>
+          <div class="overlay-score-value" id="lose-score">0</div>
+          <div class="overlay-best">최고 기록: <span id="lose-best">0</span></div>
+        </div>
+        <button class="btn btn-primary" id="btn-restart">다시 시작</button>
+      </div>
+
+    </div>
+
+    <!-- Controls -->
+    <div id="game-controls">
+      <div class="controls-row">
+        <div class="next-bubble-wrap">
+          <span class="area-label">NEXT</span>
+          <canvas id="nextBubbleCanvas" width="40" height="40"></canvas>
+        </div>
+        <button class="ctrl-btn" id="btn-left" aria-label="왼쪽">
+          <svg viewBox="0 0 24 24" width="28" height="28"><path d="M15 19l-7-7 7-7" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="ctrl-btn ctrl-shoot" id="btn-shoot" aria-label="발사">
+          <svg viewBox="0 0 24 24" width="28" height="28"><path d="M12 19V5M5 12l7-7 7 7" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="ctrl-btn" id="btn-right" aria-label="오른쪽">
+          <svg viewBox="0 0 24 24" width="28" height="28"><path d="M9 5l7 7-7 7" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/js/supabase-config.js"></script>
+  <script src="/js/leaderboard.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>
