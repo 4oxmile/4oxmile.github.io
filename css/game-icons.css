@@ -1140,6 +1140,121 @@
     /* shoe R */ 8px 21px 0 3px #6B3300;
 }
 
+/* ─── 31. Bubble ───────────────────────────────────────────── */
+@keyframes bubble-float {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50%       { transform: translateY(-4px) scale(1.05); }
+}
+.icon-bubble {
+  display: block;
+  position: relative;
+  width: 36px;
+  height: 36px;
+  animation: bubble-float 2s ease-in-out infinite;
+}
+/* main bubble */
+.icon-bubble::before {
+  content: '';
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #93C5FD, #3B82F6);
+  box-shadow:
+    0 0 10px rgba(59,130,246,0.5),
+    -14px 10px 0 6px #EF4444,
+    10px 12px 0 4px #22C55E;
+  top: 2px;
+  left: 8px;
+}
+/* shine highlight */
+.icon-bubble::after {
+  content: '';
+  position: absolute;
+  width: 7px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.5);
+  top: 5px;
+  left: 13px;
+}
+
+/* ─── 32. Nonogram ─────────────────────────────────────────── */
+.icon-nonogram {
+  display: block;
+  position: relative;
+  width: 36px;
+  height: 36px;
+  animation: pulse-scale 2.4s ease-in-out infinite;
+}
+/* 3x3 grid with some filled cells */
+.icon-nonogram::before {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  background: #3B82F6;
+  top: 2px;
+  left: 2px;
+  box-shadow:
+    12px 0 0 #3B82F6,
+    0 12px 0 #3B82F6,
+    12px 12px 0 rgba(59,130,246,0.2),
+    24px 12px 0 #3B82F6,
+    12px 24px 0 #3B82F6,
+    24px 24px 0 #3B82F6;
+}
+/* top-right empty cell outline + clue hint */
+.icon-nonogram::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border: 2px solid rgba(59,130,246,0.3);
+  border-radius: 2px;
+  top: 2px;
+  left: 26px;
+  box-shadow:
+    -24px 24px 0 0 rgba(59,130,246,0.3);
+}
+
+/* ─── Solitaire ─────────────────────────────────────────────── */
+.icon-solitaire {
+  display: block;
+  position: relative;
+  width: 36px;
+  height: 36px;
+  animation: float 2.4s ease-in-out infinite;
+}
+/* Fanned card stack */
+.icon-solitaire::before {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 26px;
+  background: #f8f8f0;
+  border: 2px solid #d0d0c8;
+  border-radius: 3px;
+  top: 5px;
+  left: 5px;
+  box-shadow:
+    4px -2px 0 -1px #f8f8f0,
+    4px -2px 0 0 #d0d0c8,
+    8px -4px 0 -1px #f8f8f0,
+    8px -4px 0 0 #d0d0c8;
+}
+/* Red heart on front card */
+.icon-solitaire::after {
+  content: '♥';
+  position: absolute;
+  top: 8px;
+  left: 9px;
+  font-size: 14px;
+  color: #DC2626;
+  line-height: 1;
+}
+
 /* ─── Game Logo (for start screens) ──────────────────────────── */
 .game-logo-css {
   width: 64px;
@@ -1148,6 +1263,31 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* ─── Match 3 ──────────────────────────────────────────────── */
+.icon-match3 {
+  display: block; position: relative; width: 36px; height: 36px;
+}
+.icon-match3::before {
+  content: '';
+  position: absolute;
+  top: 2px; left: 2px;
+  width: 14px; height: 14px;
+  border-radius: 3px;
+  background: linear-gradient(135deg, #F87171, #DC2626);
+  box-shadow: 18px 0 0 #4ADE80, 0 18px 0 #60A5FA, 18px 18px 0 #FDE047;
+  animation: pulse-scale 2s ease-in-out infinite;
+}
+.icon-match3::after {
+  content: '';
+  position: absolute;
+  top: 10px; left: 10px;
+  width: 16px; height: 16px;
+  background: linear-gradient(135deg, #C084FC, #9333EA);
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(192, 132, 252, 0.6);
+  animation: float 2.5s ease-in-out infinite;
 }
 
 .game-logo-css > [class^="icon-"] {
