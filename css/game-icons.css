@@ -1255,6 +1255,42 @@
   line-height: 1;
 }
 
+/* ─── FreeCell ──────────────────────────────────────────────── */
+.icon-freecell {
+  display: block;
+  position: relative;
+  width: 36px;
+  height: 36px;
+  animation: float 2.4s ease-in-out infinite;
+}
+.icon-freecell::before {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 26px;
+  background: #f8f8f0;
+  border: 2px solid #d0d0c8;
+  border-radius: 3px;
+  top: 5px;
+  left: 2px;
+  box-shadow:
+    5px -3px 0 -1px #f8f8f0,
+    5px -3px 0 0 #d0d0c8,
+    10px -6px 0 -1px #f8f8f0,
+    10px -6px 0 0 #d0d0c8,
+    15px -9px 0 -1px #f8f8f0,
+    15px -9px 0 0 #d0d0c8;
+}
+.icon-freecell::after {
+  content: '♠';
+  position: absolute;
+  top: 9px;
+  left: 6px;
+  font-size: 13px;
+  color: #1a1a2e;
+  line-height: 1;
+}
+
 /* ─── Game Logo (for start screens) ──────────────────────────── */
 .game-logo-css {
   width: 64px;

@@ -1,0 +1,272 @@
+/* ═══════════════════════════════════════════════════════════════════
+   Shared Card Styles — CSS-only playing card design (no images)
+   Used by: solitaire, freecell
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ─── Card tokens (consumers must define these in :root) ───
+   --card-w, --card-h, --card-radius
+   --suit-red, --suit-black
+   --card-front-bg, --card-front-border
+   --card-back-a, --card-back-b
+   --card-shadow
+   --accent
+─────────────────────────────────────────────────────────────── */
+
+/* ─── Base card ─── */
+.card {
+  width: var(--card-w);
+  height: var(--card-h);
+  border-radius: var(--card-radius);
+  position: absolute;
+  cursor: pointer;
+  touch-action: none;
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+/* Cards in top piles fill the slot */
+.pile-slot .card {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Tableau card positioning — JS sets top & z-index */
+.tableau-col .card {
+  left: 0;
+  width: 100%;
+}
+
+/* ─── Card inner wrapper ─── */
+.card-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: var(--card-radius);
+  position: relative;
+  box-shadow: var(--card-shadow);
+  overflow: hidden;
+}
+
+/* ─── Face-down (back) ─── */
+.card.face-down .card-face {
+  display: none;
+}
+
+.card.face-down .card-inner {
+  background:
+    repeating-linear-gradient(
+      60deg,
+      rgba(255,255,255,0.04) 0px,
+      rgba(255,255,255,0.04) 1px,
+      transparent 1px,
+      transparent 9px
+    ),
+    repeating-linear-gradient(
+      -60deg,
+      rgba(255,255,255,0.04) 0px,
+      rgba(255,255,255,0.04) 1px,
+      transparent 1px,
+      transparent 9px
+    ),
+    linear-gradient(135deg, var(--card-back-a) 0%, var(--card-back-b) 100%);
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
+}
+
+.card.face-down .card-inner::before {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border-radius: calc(var(--card-radius) - 2px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background:
+    repeating-linear-gradient(
+      45deg,
+      rgba(255,255,255,0.03) 0px,
+      rgba(255,255,255,0.03) 2px,
+      transparent 2px,
+      transparent 8px
+    );
+}
+
+.card.face-down .card-inner::after {
+  content: '✦';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.1);
+}
+
+/* ─── Face-up (front) ─── */
+.card.face-up .card-inner {
+  background: var(--card-front-bg);
+  border: 1.5px solid var(--card-front-border);
+}
+
+/* Suit colour classes */
+.card.suit-red .card-face   { color: var(--suit-red); }
+.card.suit-black .card-face { color: var(--suit-black); }
+
+/* Card face layout */
+.card-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--card-radius);
+}
+
+/* Corner — top-left */
+.card-corner-tl {
+  position: absolute;
+  top: 3px;
+  left: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
+}
+
+.card-rank {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.card-suit-corner {
+  font-size: 0.6rem;
+  line-height: 1;
+}
+
+/* Corner — bottom-right (mirrored 180°) */
+.card-corner-br {
+  position: absolute;
+  bottom: 3px;
+  right: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
+  transform: rotate(180deg);
+}
+
+/* Center suit symbol */
+.card-suit-center {
+  font-size: 1.5rem;
+  line-height: 1;
+  opacity: 0.9;
+}
+
+.card.face-card .card-suit-center { font-size: 1.8rem; }
+.card.rank-A .card-suit-center    { font-size: 2rem; }
+
+/* ─── Interaction states ─── */
+
+.card.selected .card-inner {
+  box-shadow:
+    var(--card-shadow),
+    0 0 0 2px var(--accent),
+    0 0 12px rgba(59, 130, 246, 0.5);
+  transform: translateY(-4px);
+}
+
+.card.hint-source .card-inner,
+.card.hint .card-inner {
+  animation: hintPulse 0.9s ease-in-out infinite;
+}
+
+.hint-target {
+  box-shadow: 0 0 0 2px #22c55e, 0 0 14px rgba(34, 197, 94, 0.5) !important;
+  border-radius: var(--card-radius);
+}
+
+@keyframes hintPulse {
+  0%, 100% {
+    box-shadow: var(--card-shadow), 0 0 0 2px #f59e0b, 0 0 10px rgba(245, 158, 11, 0.4);
+  }
+  50% {
+    box-shadow: var(--card-shadow), 0 0 0 3px #f59e0b, 0 0 20px rgba(245, 158, 11, 0.7);
+  }
+}
+
+.card.drop-target .card-inner,
+.pile-slot.drop-target,
+.tableau-col.drop-target {
+  box-shadow: 0 0 0 2px #22c55e, 0 0 12px rgba(34, 197, 94, 0.4);
+}
+
+.card.dragging {
+  opacity: 0.85;
+  z-index: 999 !important;
+  cursor: grabbing;
+  transform: scale(1.04) rotate(1.5deg);
+  transition: none;
+  pointer-events: none;
+}
+
+.card.moving {
+  transition: top 0.18s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              left 0.18s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 0.15s ease;
+  z-index: 500 !important;
+}
+
+/* ─── Empty placeholder ─── */
+.empty-placeholder {
+  width: 100%;
+  height: 100%;
+  border: 2px dashed rgba(255, 255, 255, 0.2);
+  border-radius: var(--card-radius);
+  background: rgba(0, 0, 0, 0.15);
+  position: relative;
+}
+
+/* Foundation suit symbols on empty placeholder */
+.foundation-slot[data-suit="hearts"] .empty-placeholder::after   { content: '♥'; color: var(--suit-red); }
+.foundation-slot[data-suit="diamonds"] .empty-placeholder::after { content: '♦'; color: var(--suit-red); }
+.foundation-slot[data-suit="clubs"] .empty-placeholder::after    { content: '♣'; }
+.foundation-slot[data-suit="spades"] .empty-placeholder::after   { content: '♠'; }
+.foundation-slot .empty-placeholder::after {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+/* ─── Auto-complete fly animation ─── */
+.card.autocomplete-fly {
+  animation: flyToFoundation 0.45s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation-delay: var(--delay, 0ms);
+  z-index: 600 !important;
+  pointer-events: none;
+}
+
+@keyframes flyToFoundation {
+  0%   { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 1; }
+  40%  { transform: translate(calc(var(--tx) * 0.6), calc(var(--ty) * 0.6)) scale(1.08); opacity: 1; }
+  100% { transform: translate(var(--tx), var(--ty)) scale(1) rotate(0deg); opacity: 1; }
+}
+
+/* ─── Touch / a11y ─── */
+.card, .pile-slot, .tableau-col {
+  -webkit-touch-callout: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .card.face-up .card-inner {
+    transition: box-shadow 0.15s ease, transform 0.15s ease;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card.autocomplete-fly { animation-duration: 0.01ms !important; }
+  .card.hint .card-inner, .card.hint-source .card-inner { animation: none; }
+}

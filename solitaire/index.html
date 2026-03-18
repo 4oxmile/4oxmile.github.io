@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#0D1117" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+  <title>SOLITAIRE</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="/css/leaderboard.css">
+  <link rel="stylesheet" href="/css/game-icons.css">
+</head>
+<body>
+  <div id="app">
+
+    <!-- ════════════════════════════════════════
+         START SCREEN
+    ════════════════════════════════════════ -->
+    <div id="start-screen" class="screen">
+      <div class="title-wrap">
+        <div class="game-logo-css"><span class="icon-solitaire"></span></div>
+        <h1 class="screen-title">SOLITAIRE</h1>
+        <p class="screen-subtitle">클래식 카드 게임</p>
+      </div>
+      <div class="start-cards-preview">
+        <div class="preview-card">A<span class="suit-center">♥</span></div>
+        <div class="preview-card">K<span class="suit-center">♠</span></div>
+        <div class="preview-card">Q<span class="suit-center">♦</span></div>
+        <div class="preview-card">J<span class="suit-center">♣</span></div>
+      </div>
+      <button class="start-btn">게임 시작</button>
+    </div>
+
+    <!-- ════════════════════════════════════════
+         WIN SCREEN
+    ════════════════════════════════════════ -->
+    <div id="win-screen" class="screen">
+      <div class="win-icon">🏆</div>
+      <h2 class="win-title">축하합니다!</h2>
+      <div class="win-stats">
+        <div class="stat-row">
+          <span class="stat-label">이동 횟수</span>
+          <span class="stat-value" id="win-moves">0</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">걸린 시간</span>
+          <span class="stat-value" id="win-time">00:00</span>
+        </div>
+      </div>
+      <div class="win-actions">
+        <button class="btn-primary" id="win-again-btn">다시 하기</button>
+      </div>
+    </div>
+
+    <!-- ════════════════════════════════════════
+         GAME SCREEN
+    ════════════════════════════════════════ -->
+    <div id="game-screen">
+      <!-- Header -->
+      <header id="game-header">
+        <div class="header-left">
+          <button class="icon-btn" id="home-btn" onclick="location.href='/'" aria-label="홈으로">⌂</button>
+          <span class="header-title">SOLITAIRE</span>
+        </div>
+        <div class="header-controls">
+          <button class="icon-btn" id="restart-icon-btn" aria-label="다시 시작">↺</button>
+        </div>
+      </header>
+
+      <!-- Stats bar -->
+      <div class="stats-bar">
+        <div class="stat-chip">
+          <div class="stat-chip-label">이동</div>
+          <div class="stat-chip-value" id="moves-val">0</div>
+        </div>
+        <div class="stat-chip">
+          <div class="stat-chip-label">시간</div>
+          <div class="stat-chip-value" id="timer-val">00:00</div>
+        </div>
+      </div>
+
+      <!-- Game area -->
+      <div id="game-area">
+        <!-- Top row: stock, waste, spacer, 4 foundations -->
+        <div id="top-row">
+          <div id="stock-pile" class="pile-slot">
+            <div class="empty-placeholder stock-placeholder"></div>
+          </div>
+          <div id="waste-pile" class="pile-slot"></div>
+          <div class="pile-spacer"></div>
+          <div id="foundation-0" class="pile-slot foundation-slot" data-suit="hearts">
+            <div class="empty-placeholder"></div>
+          </div>
+          <div id="foundation-1" class="pile-slot foundation-slot" data-suit="diamonds">
+            <div class="empty-placeholder"></div>
+          </div>
+          <div id="foundation-2" class="pile-slot foundation-slot" data-suit="clubs">
+            <div class="empty-placeholder"></div>
+          </div>
+          <div id="foundation-3" class="pile-slot foundation-slot" data-suit="spades">
+            <div class="empty-placeholder"></div>
+          </div>
+        </div>
+
+        <!-- Tableau: 7 columns -->
+        <div id="tableau">
+          <div id="tableau-0" class="tableau-col"></div>
+          <div id="tableau-1" class="tableau-col"></div>
+          <div id="tableau-2" class="tableau-col"></div>
+          <div id="tableau-3" class="tableau-col"></div>
+          <div id="tableau-4" class="tableau-col"></div>
+          <div id="tableau-5" class="tableau-col"></div>
+          <div id="tableau-6" class="tableau-col"></div>
+        </div>
+      </div>
+
+      <!-- Bottom controls -->
+      <div id="bottom-controls">
+        <button class="ctrl-btn" id="restart-btn">
+          <span class="ctrl-btn-icon">🔄</span>
+          <span class="ctrl-btn-label">새 게임</span>
+        </button>
+        <button class="ctrl-btn" id="undo-btn">
+          <span class="ctrl-btn-icon">↩</span>
+          <span class="ctrl-btn-label">되돌리기</span>
+        </button>
+        <button class="ctrl-btn" id="hint-btn">
+          <span class="ctrl-btn-icon">💡</span>
+          <span class="ctrl-btn-label">힌트</span>
+        </button>
+        <button class="ctrl-btn" id="auto-btn">
+          <span class="ctrl-btn-icon">⚡</span>
+          <span class="ctrl-btn-label">자동완성</span>
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/js/supabase-config.js"></script>
+  <script src="/js/leaderboard.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>
