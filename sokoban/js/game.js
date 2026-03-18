@@ -1774,7 +1774,10 @@ class Game {
     if (!allOn) return;
 
     this.isComplete = true;
-    if(typeof Leaderboard!=='undefined')Leaderboard.ready('sokoban_lv'+(this.currentLevel+1),this.moves,{ascending:true,label:'이동'});
+    if(typeof Leaderboard!=='undefined'){
+      const maxLevel = Math.max(this.currentLevel + 1, ...getCompletedLevels().map(i => i + 1));
+      Leaderboard.ready('sokoban', maxLevel, {ascending:false, label:'레벨'});
+    }
     const isNewBest = setBest(this.currentLevel, this.moves);
 
     // Populate victory screen

@@ -13,7 +13,7 @@ window.Leaderboard = (() => {
   const GAME_OPTS = {
     memory:      { ascending: true, label: '이동' },
     puzzle:      { ascending: true, label: '이동' },
-    sokoban:     { ascending: true, label: '이동', perLevel: true },
+    sokoban:     { ascending: false, label: '레벨' },
     maze:        { ascending: true, format: 'time', label: '시간' },
     minesweeper: { ascending: true, format: 'time', label: '시간' },
     sudoku:      { ascending: true, format: 'time', label: '시간' },
@@ -301,11 +301,7 @@ window.Leaderboard = (() => {
   }
 
   function getGameOpts(game) {
-    if (GAME_OPTS[game]) return GAME_OPTS[game];
-    /* Match per-level keys like sokoban_lv3 -> sokoban */
-    var base = game.replace(/_lv\d+$/, '');
-    if (GAME_OPTS[base] && GAME_OPTS[base].perLevel) return GAME_OPTS[base];
-    return {};
+    return GAME_OPTS[game] || {};
   }
 
   function formatWithOpts(val, gameOpts) {
@@ -323,11 +319,6 @@ window.Leaderboard = (() => {
     return String(val);
   }
 
-  /* Games that use per-level leaderboards */
-  var PER_LEVEL_GAMES = {
-    sokoban: { levels: 100, prefix: 'sokoban_lv' }
-  };
-
   function injectStartRanking() {
     var game = detectGame();
     if (!game) return;
@@ -343,76 +334,15 @@ window.Leaderboard = (() => {
     /* Don't double-inject */
     if (container.querySelector('.lb-start-ranking')) return;
 
-    var perLevel = PER_LEVEL_GAMES[game];
-
     startRankEl = document.createElement('div');
     startRankEl.className = 'lb-start-ranking';
+    startRankEl.innerHTML =
+      '<div class="lb-start-title">TOP 5</div>' +
+      '<div class="lb-start-list"></div>' +
+      '<div class="lb-start-status">불러오는 중...</div>';
+    container.appendChild(startRankEl);
 
-    if (perLevel) {
-      /* Group selector (1-10, 11-20, ...) + level buttons */
-      var totalGroups = Math.ceil(perLevel.levels / 10);
-      var groupHtml = '<div class="lb-lv-groups">';
-      for (var g = 0; g < totalGroups; g++) {
-        var from = g * 10 + 1;
-        var to = Math.min((g + 1) * 10, perLevel.levels);
-        groupHtml += '<button class="lb-lv-group' + (g === 0 ? ' active' : '') + '" data-g="' + g + '">' + from + '-' + to + '</button>';
-      }
-      groupHtml += '</div>';
-
-      var btnsHtml = '<div class="lb-lv-selector">';
-      for (var lv = 1; lv <= 10; lv++) {
-        btnsHtml += '<button class="lb-lv-btn' + (lv === 1 ? ' active' : '') + '" data-lv="' + lv + '">' + lv + '</button>';
-      }
-      btnsHtml += '</div>';
-
-      startRankEl.innerHTML =
-        '<div class="lb-start-title">TOP 5</div>' +
-        groupHtml + btnsHtml +
-        '<div class="lb-start-list"></div>' +
-        '<div class="lb-start-status">불러오는 중...</div>';
-      container.appendChild(startRankEl);
-
-      var groupSelector = startRankEl.querySelector('.lb-lv-groups');
-      var lvSelector = startRankEl.querySelector('.lb-lv-selector');
-
-      /* Rebuild level buttons for selected group */
-      function setGroup(groupIdx) {
-        var from = groupIdx * 10 + 1;
-        var to = Math.min((groupIdx + 1) * 10, perLevel.levels);
-        var html = '';
-        for (var l = from; l <= to; l++) {
-          html += '<button class="lb-lv-btn' + (l === from ? ' active' : '') + '" data-lv="' + l + '">' + l + '</button>';
-        }
-        lvSelector.innerHTML = html;
-        loadStartRanking(perLevel.prefix + from);
-      }
-
-      groupSelector.addEventListener('click', function (e) {
-        var btn = e.target.closest('.lb-lv-group');
-        if (!btn) return;
-        groupSelector.querySelector('.active').classList.remove('active');
-        btn.classList.add('active');
-        setGroup(Number(btn.dataset.g));
-      });
-
-      lvSelector.addEventListener('click', function (e) {
-        var btn = e.target.closest('.lb-lv-btn');
-        if (!btn) return;
-        var prev = lvSelector.querySelector('.active');
-        if (prev) prev.classList.remove('active');
-        btn.classList.add('active');
-        loadStartRanking(perLevel.prefix + btn.dataset.lv);
-      });
-
-      loadStartRanking(perLevel.prefix + '1');
-    } else {
-      startRankEl.innerHTML =
-        '<div class="lb-start-title">TOP 5</div>' +
-        '<div class="lb-start-list"></div>' +
-        '<div class="lb-start-status">불러오는 중...</div>';
-      container.appendChild(startRankEl);
-      loadStartRanking(game);
-    }
+    loadStartRanking(game);
   }
 
   async function loadStartRanking(game) {
