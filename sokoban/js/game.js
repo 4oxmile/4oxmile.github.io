@@ -1227,6 +1227,20 @@ function cloneState(state) {
 
 // ── Storage helpers ─────────────────────────────────────
 const STORAGE_KEY = 'sokoban_best';
+const MAX_LEVEL_KEY = 'sokoban_max_level';
+
+function getMaxLevel() {
+  return Number(localStorage.getItem(MAX_LEVEL_KEY) || '0');
+}
+
+function setMaxLevel(level) {
+  const prev = getMaxLevel();
+  if (level > prev) {
+    localStorage.setItem(MAX_LEVEL_KEY, String(level));
+    return true; // new record
+  }
+  return false;
+}
 
 function getBest(levelIdx) {
   try {
@@ -1774,11 +1788,12 @@ class Game {
     if (!allOn) return;
 
     this.isComplete = true;
-    if(typeof Leaderboard!=='undefined'){
-      const maxLevel = Math.max(this.currentLevel + 1, ...getCompletedLevels().map(i => i + 1));
-      Leaderboard.ready('sokoban', maxLevel, {ascending:false, label:'레벨'});
-    }
     const isNewBest = setBest(this.currentLevel, this.moves);
+    const clearedLevel = this.currentLevel + 1;
+    const isNewMax = setMaxLevel(clearedLevel);
+    if(typeof Leaderboard!=='undefined' && isNewMax){
+      Leaderboard.ready('sokoban', clearedLevel, {ascending:false, label:'레벨'});
+    }
 
     // Populate victory screen
     document.getElementById('victory-level-num').textContent = this.currentLevel + 1;
