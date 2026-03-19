@@ -626,7 +626,7 @@ class Renderer {
     this.holdSize = holdSize;
   }
 
-  drawBoard(game) {
+  drawBoard(game, showGhost = true) {
     const ctx = this.boardCtx;
     const cs = this.cellSize;
     const w = cs * COLS;
@@ -675,7 +675,7 @@ class Renderer {
 
     // Draw ghost piece
     const ghostY = game.getGhostY();
-    if (ghostY !== game.currentY) {
+    if (showGhost && ghostY !== game.currentY) {
       ctx.globalAlpha = 0.2;
       const piece = game.currentPiece;
       for (let r = 0; r < piece.length; r++) {
@@ -1002,7 +1002,10 @@ class App {
       pause: () => this._togglePause(),
     });
 
+    this.showGhost = localStorage.getItem('tetris_ghost_guide') !== 'false';
+
     this._bindOverlays();
+    this._initGhostToggle();
 
     // Display high score on start screen
     document.getElementById('start-highscore').textContent =
@@ -1142,7 +1145,7 @@ class App {
   }
 
   _render() {
-    this.renderer.drawBoard(this.game);
+    this.renderer.drawBoard(this.game, this.showGhost);
     this.renderer.drawHold(this.game.holdType);
     this.renderer.drawNext(this.game.nextQueue);
   }
@@ -1198,6 +1201,17 @@ class App {
       this.sound.play('rotate');
       this.sound.haptic('light');
     }
+  }
+
+  _initGhostToggle() {
+    const btn = document.getElementById('btn-ghost');
+    btn.classList.toggle('active', this.showGhost);
+    btn.addEventListener('click', () => {
+      this.showGhost = !this.showGhost;
+      localStorage.setItem('tetris_ghost_guide', String(this.showGhost));
+      btn.classList.toggle('active', this.showGhost);
+      this._render();
+    });
   }
 
   _onHold() {
