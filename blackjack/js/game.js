@@ -434,6 +434,8 @@
 
   // ─── Init & Events ──────────────────────────────────────────────────────────
   function initGame() {
+    if (typeof Leaderboard !== 'undefined') Leaderboard.hide();
+
     buildShoe();
     chips    = 1000;
     maxChips = 1000;
