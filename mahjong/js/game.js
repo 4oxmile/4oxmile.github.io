@@ -416,9 +416,5 @@
       if (tiles.length > 0) renderBoard();
     });
 
-    // Load leaderboard on start screen (no score submission)
-    if (typeof Leaderboard !== 'undefined') {
-      Leaderboard.ready('mahjong', null, { ascending: true, format: 'time', label: '시간' });
-    }
   });
 })();

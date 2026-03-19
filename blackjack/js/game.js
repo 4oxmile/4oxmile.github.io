@@ -488,7 +488,5 @@
     document.getElementById('double-btn').addEventListener('click', doubleDown);
     document.getElementById('split-btn').addEventListener('click', split);
 
-    // Leaderboard init
-    Leaderboard.ready('blackjack', null, { ascending: false, label: '칩' });
   });
 })();
