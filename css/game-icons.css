@@ -1281,6 +1281,102 @@
   animation: float 2.5s ease-in-out infinite;
 }
 
+/* ─── Pipe Puzzle ─────────────────────────────────────────── */
+.icon-pipe {
+  display: block; position: relative; width: 36px; height: 36px;
+}
+.icon-pipe::before {
+  content: '';
+  position: absolute;
+  /* Horizontal bar across the middle */
+  top: 50%; left: 2px;
+  width: calc(100% - 4px); height: 8px;
+  transform: translateY(-50%);
+  background: linear-gradient(90deg, #22C55E, #3B82F6);
+  border-radius: 4px;
+}
+.icon-pipe::after {
+  content: '';
+  position: absolute;
+  /* Vertical bar forming a cross */
+  left: 50%; top: 2px;
+  height: calc(100% - 4px); width: 8px;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, #3B82F6, #22C55E);
+  border-radius: 4px;
+  animation: spin-slow 4s linear infinite;
+  transform-origin: center center;
+}
+
+/* ─── Yacht Dice ──────────────────────────────────────────── */
+.icon-yacht {
+  display: block; position: relative; width: 36px; height: 36px;
+}
+.icon-yacht::before {
+  content: '';
+  position: absolute;
+  top: 4px; left: 4px;
+  width: 28px; height: 28px;
+  background: #F8FAFC;
+  border-radius: 6px;
+  box-shadow:
+    /* dots: 3-face pattern */
+    -6px -6px 0 2px #1E293B,
+    0px 0px 0 2px #1E293B,
+    6px 6px 0 2px #1E293B,
+    2px 2px 8px rgba(0,0,0,0.3);
+}
+.icon-yacht::after {
+  content: '';
+  position: absolute;
+  top: 1px; left: 1px;
+  width: 14px; height: 14px;
+  background: #F8FAFC;
+  border-radius: 4px;
+  box-shadow:
+    0px 0px 0 2px #1E293B inset,
+    4px 1px 0 1px #1E293B,
+    10px 1px 0 1px #1E293B;
+  opacity: 0.5;
+  animation: dice-bounce 1.5s ease-in-out infinite;
+}
+@keyframes dice-bounce {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-3px) rotate(10deg); }
+}
+
+/* ─── Simon ───────────────────────────────────────────────── */
+.icon-simon {
+  display: block; position: relative; width: 36px; height: 36px;
+}
+.icon-simon::before {
+  content: '';
+  position: absolute;
+  top: 2px; left: 2px;
+  width: 14px; height: 14px;
+  background: #EF4444;
+  border-radius: 4px 2px 2px 2px;
+  box-shadow:
+    /* blue */ 17px 0 0 0 #3B82F6,
+    /* green */ 0 17px 0 0 #10B981,
+    /* yellow */ 17px 17px 0 0 #EAB308;
+}
+.icon-simon::after {
+  content: '';
+  position: absolute;
+  width: 14px; height: 14px;
+  border-radius: 4px;
+  top: 2px; left: 2px;
+  background: transparent;
+  animation: simon-flash 2s ease-in-out infinite;
+}
+@keyframes simon-flash {
+  0%, 100% { box-shadow: 0 0 8px rgba(239,68,68,0.8); }
+  25% { box-shadow: 17px 0 8px rgba(59,130,246,0.8); }
+  50% { box-shadow: 0 17px 8px rgba(16,185,129,0.8); }
+  75% { box-shadow: 17px 17px 8px rgba(234,179,8,0.8); }
+}
+
 .game-logo-css > [class^="icon-"] {
   transform: scale(1.78);
   transform-origin: center;

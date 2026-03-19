@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+  <meta name="theme-color" content="#0a0e14">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>요트 다이스 - 4ox.kr</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎲</text></svg>">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="/css/leaderboard.css">
+</head>
+<body>
+  <div id="app">
+
+    <!-- ════════ START SCREEN ════════ -->
+    <div id="start-screen" class="screen active">
+      <div class="start-content">
+        <div class="start-logo">🎲</div>
+        <h1 class="start-title">요트 다이스</h1>
+        <p class="start-sub">YACHT DICE</p>
+
+        <div class="best-score-display" id="start-best-wrap" style="display:none;">
+          <span class="best-score-label">최고 점수</span>
+          <span class="best-score-val" id="start-best-val">0</span>
+        </div>
+
+        <button id="btn-start" class="btn btn-primary">
+          <span class="btn-icon">▶</span>
+          게임 시작
+        </button>
+
+        <div class="start-rules">
+          <p>5개의 주사위를 최대 3번 굴려</p>
+          <p>12개의 카테고리에 점수를 기록하세요</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════ GAME SCREEN ════════ -->
+    <div id="game-screen" class="screen hidden">
+
+      <!-- Header -->
+      <div class="game-header">
+        <button id="btn-menu" class="icon-btn" title="메뉴">←</button>
+        <div class="turn-info">
+          <span class="turn-label">턴</span>
+          <span id="turn-num" class="turn-num">1</span>
+          <span class="turn-sep">/</span>
+          <span class="turn-total">12</span>
+        </div>
+        <div class="header-score">
+          <span class="score-label">점수</span>
+          <span id="current-score" class="score-val">0</span>
+        </div>
+      </div>
+
+      <!-- Main layout: dice area + scorecard -->
+      <div class="game-layout">
+
+        <!-- Left: dice + controls -->
+        <div class="dice-panel">
+
+          <!-- Dice area -->
+          <div class="dice-area">
+            <div class="dice-row" id="dice-row">
+              <div class="die-wrap" data-idx="0">
+                <div class="die" id="die-0">
+                  <div class="die-face" id="face-0"></div>
+                </div>
+                <div class="hold-label">잠금</div>
+              </div>
+              <div class="die-wrap" data-idx="1">
+                <div class="die" id="die-1">
+                  <div class="die-face" id="face-1"></div>
+                </div>
+                <div class="hold-label">잠금</div>
+              </div>
+              <div class="die-wrap" data-idx="2">
+                <div class="die" id="die-2">
+                  <div class="die-face" id="face-2"></div>
+                </div>
+                <div class="hold-label">잠금</div>
+              </div>
+              <div class="die-wrap" data-idx="3">
+                <div class="die" id="die-3">
+                  <div class="die-face" id="face-3"></div>
+                </div>
+                <div class="hold-label">잠금</div>
+              </div>
+              <div class="die-wrap" data-idx="4">
+                <div class="die" id="die-4">
+                  <div class="die-face" id="face-4"></div>
+                </div>
+                <div class="hold-label">잠금</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Roll controls -->
+          <div class="roll-area">
+            <button id="btn-roll" class="btn btn-roll">
+              <span class="btn-icon">🎲</span>
+              <span id="roll-label">주사위 굴리기</span>
+              <span class="roll-count" id="roll-count-badge">(1/3)</span>
+            </button>
+            <div class="roll-pips">
+              <div class="roll-pip active" id="pip-1"></div>
+              <div class="roll-pip" id="pip-2"></div>
+              <div class="roll-pip" id="pip-3"></div>
+            </div>
+            <p class="roll-hint" id="roll-hint">주사위를 클릭하면 잠글 수 있어요</p>
+          </div>
+
+          <!-- Mobile scorecard toggle -->
+          <button id="btn-toggle-score" class="btn btn-ghost mobile-only">
+            점수표 보기 ▼
+          </button>
+        </div>
+
+        <!-- Right: scorecard -->
+        <div class="score-panel" id="score-panel">
+          <div class="score-panel-inner">
+            <h3 class="score-panel-title">점수표</h3>
+
+            <!-- Upper section -->
+            <div class="score-section">
+              <div class="section-header">상단</div>
+              <div class="score-rows" id="upper-rows">
+                <div class="score-row" data-cat="ones">
+                  <span class="cat-name">1 (에이스)</span>
+                  <span class="cat-score" id="score-ones">-</span>
+                </div>
+                <div class="score-row" data-cat="twos">
+                  <span class="cat-name">2 (투스)</span>
+                  <span class="cat-score" id="score-twos">-</span>
+                </div>
+                <div class="score-row" data-cat="threes">
+                  <span class="cat-name">3 (쓰리스)</span>
+                  <span class="cat-score" id="score-threes">-</span>
+                </div>
+                <div class="score-row" data-cat="fours">
+                  <span class="cat-name">4 (포스)</span>
+                  <span class="cat-score" id="score-fours">-</span>
+                </div>
+                <div class="score-row" data-cat="fives">
+                  <span class="cat-name">5 (파이브스)</span>
+                  <span class="cat-score" id="score-fives">-</span>
+                </div>
+                <div class="score-row" data-cat="sixes">
+                  <span class="cat-name">6 (식스스)</span>
+                  <span class="cat-score" id="score-sixes">-</span>
+                </div>
+              </div>
+              <div class="bonus-row">
+                <span class="bonus-label">상단 합계</span>
+                <span id="upper-sum" class="bonus-val">0</span>
+              </div>
+              <div class="bonus-row bonus-highlight">
+                <span class="bonus-label">보너스 (+35)</span>
+                <span id="upper-bonus" class="bonus-val">63점 이상 시</span>
+              </div>
+            </div>
+
+            <!-- Lower section -->
+            <div class="score-section">
+              <div class="section-header">하단</div>
+              <div class="score-rows" id="lower-rows">
+                <div class="score-row" data-cat="choice">
+                  <span class="cat-name">찬스</span>
+                  <span class="cat-score" id="score-choice">-</span>
+                </div>
+                <div class="score-row" data-cat="fourkind">
+                  <span class="cat-name">포커</span>
+                  <span class="cat-score" id="score-fourkind">-</span>
+                </div>
+                <div class="score-row" data-cat="fullhouse">
+                  <span class="cat-name">풀하우스</span>
+                  <span class="cat-score" id="score-fullhouse">-</span>
+                </div>
+                <div class="score-row" data-cat="sstraight">
+                  <span class="cat-name">스몰 스트레이트</span>
+                  <span class="cat-score" id="score-sstraight">-</span>
+                </div>
+                <div class="score-row" data-cat="lstraight">
+                  <span class="cat-name">라지 스트레이트</span>
+                  <span class="cat-score" id="score-lstraight">-</span>
+                </div>
+                <div class="score-row" data-cat="yacht">
+                  <span class="cat-name">요트 🚢</span>
+                  <span class="cat-score" id="score-yacht">-</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Total -->
+            <div class="total-row">
+              <span class="total-label">총점</span>
+              <span id="total-score-display" class="total-val">0</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════ RESULT OVERLAY ════════ -->
+    <div id="result-screen" class="screen overlay-screen hidden">
+      <div class="result-content">
+        <div class="result-icon" id="result-icon">🏆</div>
+        <h2 class="result-title">게임 종료!</h2>
+        <div class="result-score-main">
+          <span id="result-total" class="result-score-num">0</span>
+          <span class="result-score-unit">점</span>
+        </div>
+
+        <div class="result-best-wrap" id="result-best-wrap">
+          <span class="result-best-label">최고 기록</span>
+          <span id="result-best-val" class="result-best-val">0</span>
+          <span id="new-best-badge" class="new-best-badge hidden">NEW BEST!</span>
+        </div>
+
+        <!-- Score breakdown -->
+        <div class="result-breakdown">
+          <div class="breakdown-section">
+            <div class="breakdown-header">상단</div>
+            <div id="breakdown-upper" class="breakdown-rows"></div>
+            <div class="breakdown-bonus" id="breakdown-bonus-row"></div>
+          </div>
+          <div class="breakdown-section">
+            <div class="breakdown-header">하단</div>
+            <div id="breakdown-lower" class="breakdown-rows"></div>
+          </div>
+        </div>
+
+        <div class="result-buttons">
+          <button id="btn-restart" class="btn btn-primary">
+            <span class="btn-icon">↺</span>
+            다시 하기
+          </button>
+          <button id="btn-home" class="btn btn-ghost">
+            처음으로
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="/js/supabase-config.js"></script>
+  <script src="/js/leaderboard.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>

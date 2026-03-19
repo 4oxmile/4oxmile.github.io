@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+  <title>사이먼 - 4ox.kr</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Start Screen -->
+  <div id="start-screen" class="overlay">
+    <div class="overlay-content">
+      <h1 class="game-title">사이먼</h1>
+      <p class="game-subtitle">색상 순서를 기억하세요</p>
+      <div class="best-score-display">
+        <span class="best-label">최고 기록</span>
+        <span id="start-best-score" class="best-value">0</span>
+      </div>
+      <button id="start-btn" class="btn-primary">시작</button>
+    </div>
+  </div>
+
+  <!-- Game Over Screen -->
+  <div id="gameover-screen" class="overlay hidden">
+    <div class="overlay-content">
+      <h2 class="gameover-title">틀렸습니다!</h2>
+      <div class="score-block">
+        <div class="score-row">
+          <span class="score-label">점수</span>
+          <span id="final-score" class="score-value">0</span>
+        </div>
+        <div class="score-row">
+          <span class="score-label">최고 기록</span>
+          <span id="final-best-score" class="score-value best">0</span>
+        </div>
+      </div>
+      <button id="retry-btn" class="btn-primary">다시 시작</button>
+    </div>
+  </div>
+
+  <!-- Game Area -->
+  <div id="game-area" class="hidden">
+    <header class="game-header">
+      <div class="header-info">
+        <span class="header-label">점수</span>
+        <span id="score-display" class="header-value">0</span>
+      </div>
+      <div class="header-info">
+        <span class="header-label">최고</span>
+        <span id="best-display" class="header-value">0</span>
+      </div>
+    </header>
+
+    <div id="status-text" class="status-text">준비...</div>
+
+    <div class="simon-container">
+      <!-- 2x2 grid of colored buttons -->
+      <div class="simon-grid">
+        <button class="simon-btn" id="btn-red"    data-color="red"    aria-label="빨강"></button>
+        <button class="simon-btn" id="btn-blue"   data-color="blue"   aria-label="파랑"></button>
+        <button class="simon-btn" id="btn-green"  data-color="green"  aria-label="초록"></button>
+        <button class="simon-btn" id="btn-yellow" data-color="yellow" aria-label="노랑"></button>
+        <div class="center-display">
+          <span id="round-display" class="round-number">1</span>
+          <span class="round-label">라운드</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/supabase-config.js"></script>
+  <script src="/js/leaderboard.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>

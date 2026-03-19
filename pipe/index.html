@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+  <title>파이프 퍼즐 - 4ox.kr</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="/css/leaderboard.css">
+</head>
+<body>
+  <div id="app">
+
+    <!-- Start Screen -->
+    <div id="start-screen" class="screen">
+      <div class="screen-content">
+        <div class="game-logo">
+          <div class="logo-pipe logo-h"></div>
+          <div class="logo-pipe logo-cross"></div>
+          <div class="logo-pipe logo-h"></div>
+        </div>
+        <h1 class="game-title">파이프 퍼즐</h1>
+        <p class="game-desc">타일을 회전해 물길을 연결하세요!</p>
+
+        <div class="difficulty-group">
+          <button class="diff-btn active" data-difficulty="easy">
+            <span class="diff-label">쉬움</span>
+            <span class="diff-grid">5 × 5</span>
+          </button>
+          <button class="diff-btn" data-difficulty="medium">
+            <span class="diff-label">보통</span>
+            <span class="diff-grid">7 × 7</span>
+          </button>
+          <button class="diff-btn" data-difficulty="hard">
+            <span class="diff-label">어려움</span>
+            <span class="diff-grid">9 × 9</span>
+          </button>
+        </div>
+
+        <button id="btn-start" class="primary-btn">게임 시작</button>
+
+        <div class="best-records">
+          <div class="best-item">쉬움: <span id="best-easy">--:--</span></div>
+          <div class="best-item">보통: <span id="best-medium">--:--</span></div>
+          <div class="best-item">어려움: <span id="best-hard">--:--</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="game-screen" class="screen hidden">
+      <div id="game-header">
+        <button id="btn-menu" class="icon-btn" title="메뉴">&#8592;</button>
+        <div class="stats">
+          <div class="stat-item">
+            <span class="stat-label">시간</span>
+            <span id="timer" class="stat-value">0:00</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">이동</span>
+            <span id="move-counter" class="stat-value">0</span>
+          </div>
+        </div>
+        <button id="btn-new" class="icon-btn" title="새 게임">&#8635;</button>
+      </div>
+
+      <div id="grid-wrapper">
+        <div id="grid"></div>
+      </div>
+
+      <div id="hint-bar">타일을 클릭하면 90° 회전합니다</div>
+    </div>
+
+    <!-- Victory Overlay -->
+    <div id="victory-overlay" class="overlay hidden">
+      <div class="overlay-box">
+        <div class="victory-icon">&#10003;</div>
+        <h2 class="victory-title">완성!</h2>
+        <div class="result-rows">
+          <div class="result-row">
+            <span class="result-label">시간</span>
+            <span id="result-time" class="result-value">0:00</span>
+          </div>
+          <div class="result-row">
+            <span class="result-label">이동 횟수</span>
+            <span id="result-moves" class="result-value">0</span>
+          </div>
+        </div>
+        <div id="new-record" class="new-record hidden">신기록!</div>
+        <div class="overlay-btns">
+          <button id="btn-play-again" class="primary-btn">다시 하기</button>
+          <button id="btn-back-menu" class="secondary-btn">메뉴</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="/js/supabase-config.js"></script>
+  <script src="/js/leaderboard.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>
