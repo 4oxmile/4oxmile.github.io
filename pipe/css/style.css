@@ -507,7 +507,7 @@ body {
 
 /* ---- Rotation animation ---- */
 .tile.rotating {
-  animation: tile-rotate 0.18s ease forwards;
+  animation: tile-rotate 0.18s ease;
 }
 
 @keyframes tile-rotate {

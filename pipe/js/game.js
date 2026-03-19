@@ -51,6 +51,7 @@ let seconds = 0;
 let moves = 0;
 let solved = false;
 let animationQueue = null;  // setTimeout id for water animation
+let rotateTimers = {};      // per-cell rotate-end timers keyed by r*size+c
 
 // ---------------------------------------------------------------------------
 // Cell object factory
@@ -401,21 +402,27 @@ function onTileClick(r, c) {
   if (solved) return;
 
   const cell = grid[r][c];
+  const cellKey = r * gridSize + c;
+
   cell.rotation = (cell.rotation + 1) % 4;
   moves++;
   document.getElementById('move-counter').textContent = moves;
 
-  // Update visual
-  renderTileContents(cell.el, cell);
+  // Cancel any pending visual-update timer for this cell (rapid clicks)
+  if (rotateTimers[cellKey]) clearTimeout(rotateTimers[cellKey]);
 
-  // Brief flash animation
+  // Play rotation animation with the OLD pipe content still showing
   cell.el.classList.remove('rotating');
-  void cell.el.offsetWidth; // reflow
+  void cell.el.offsetWidth; // force reflow to restart animation
   cell.el.classList.add('rotating');
-  setTimeout(() => cell.el.classList.remove('rotating'), 200);
 
-  // Check solution
-  checkSolution();
+  // After animation ends: update pipe visuals, remove class, check solution
+  rotateTimers[cellKey] = setTimeout(() => {
+    delete rotateTimers[cellKey];
+    cell.el.classList.remove('rotating');
+    renderTileContents(cell.el, cell);
+    checkSolution();
+  }, 180);
 }
 
 // ---------------------------------------------------------------------------
@@ -566,8 +573,10 @@ function startGame() {
   solved         = false;
   moves          = 0;
 
-  // Clear previous animation
+  // Clear previous animation and any pending rotate timers
   if (animationQueue) { clearTimeout(animationQueue); animationQueue = null; }
+  Object.keys(rotateTimers).forEach(k => clearTimeout(rotateTimers[k]));
+  rotateTimers = {};
 
   stopTimer();
 
