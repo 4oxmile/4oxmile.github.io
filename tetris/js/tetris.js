@@ -701,7 +701,7 @@ class Renderer {
     }
   }
 
-  drawHold(type) {
+  drawHold(type, holdUsed = false) {
     const ctx = this.holdCtx;
     const cs = this.previewCell;
     const size = this.holdSize;
@@ -709,8 +709,10 @@ class Renderer {
     ctx.clearRect(0, 0, size, size);
 
     if (!type) return;
+    if (holdUsed) ctx.globalAlpha = 0.35;
     const shape = SHAPES[type];
     this._drawPreviewPiece(ctx, shape, type, size, cs);
+    ctx.globalAlpha = 1;
   }
 
   drawNext(queue) {
@@ -855,6 +857,7 @@ class InputHandler {
       el.addEventListener('mouseleave', stop);
     };
 
+    bind('btn-hold', () => this.cb.hold());
     bind('btn-left', () => this.cb.moveLeft(), true);
     bind('btn-right', () => this.cb.moveRight(), true);
     bind('btn-down', () => this.cb.softDrop(), true);
@@ -1146,7 +1149,7 @@ class App {
 
   _render() {
     this.renderer.drawBoard(this.game, this.showGhost);
-    this.renderer.drawHold(this.game.holdType);
+    this.renderer.drawHold(this.game.holdType, this.game.holdUsed);
     this.renderer.drawNext(this.game.nextQueue);
   }
 

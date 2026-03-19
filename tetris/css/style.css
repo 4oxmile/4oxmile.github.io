@@ -349,7 +349,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 6px;
 }
 
 .ctrl-btn {
@@ -377,6 +377,18 @@ body {
 
 .ctrl-spacer {
   margin: 0 4px;
+}
+
+.ctrl-hold {
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.ctrl-hold:active {
+  background: var(--btn-active);
 }
 
 .ctrl-drop {
