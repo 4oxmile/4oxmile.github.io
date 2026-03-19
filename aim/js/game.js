@@ -12,6 +12,7 @@ let currentRound = 0;
 let roundTimes   = [];
 let goStartTime  = null;
 let waitTimeout  = null;
+let _gameStartTs = 0;
 
 // ── DOM ──
 const startScreen    = document.getElementById('start-screen');
@@ -148,6 +149,7 @@ function startGame() {
 
   currentRound = 0;
   roundTimes = [];
+  _gameStartTs = Date.now();
   roundLog.innerHTML = '';
 
   startScreen.classList.add('hidden');
@@ -281,6 +283,7 @@ function showResults() {
   updateBestDisplay();
 
   if (typeof Leaderboard !== 'undefined') {
+    Leaderboard._setProof({game:'aim',rounds:roundTimes.slice(),startTs:_gameStartTs});
     Leaderboard.ready('aim', Math.round(avg * 10), { ascending: true, format: 'ms10', label: '시간' });
   }
 }

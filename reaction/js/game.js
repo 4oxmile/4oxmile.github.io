@@ -19,6 +19,7 @@ let roundTimes = [];
 let goStartTime = null;
 let waitTimeout = null;
 let earlyTimeout = null;
+let _gameStartTs = 0;
 
 // DOM refs
 const startScreen = document.getElementById('start-screen');
@@ -149,6 +150,7 @@ function startGame() {
   if(typeof Leaderboard!=='undefined')Leaderboard.hide();
   currentRound = 0;
   roundTimes = [];
+  _gameStartTs = Date.now();
 
   // Hide overlays
   startScreen.classList.add('hidden');
@@ -312,7 +314,10 @@ function showResults() {
   // Show results overlay
   resultsScreen.classList.remove('hidden');
   updateBestDisplay();
-  if(typeof Leaderboard!=='undefined')Leaderboard.ready('reaction',Math.round(avg*10),{ascending:true,format:'ms10',label:'시간'});
+  if(typeof Leaderboard!=='undefined'){
+    Leaderboard._setProof({game:'reaction',rounds:roundTimes.slice(),startTs:_gameStartTs});
+    Leaderboard.ready('reaction',Math.round(avg*10),{ascending:true,format:'ms10',label:'시간'});
+  }
 }
 
 // ===== EVENT LISTENERS =====

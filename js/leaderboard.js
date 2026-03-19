@@ -21,6 +21,70 @@ window.Leaderboard = (() => {
     aim:         { ascending: true, format: 'ms10', label: '시간' },
   };
 
+  /* ── Anti-cheat: score limits & integrity ─── */
+  const SCORE_LIMITS = {
+    reaction:           { min: 1000 },    // 100ms avg minimum (human limit)
+    aim:                { min: 1200 },    // 120ms avg minimum (need mouse move)
+    target:             { max: 15000 },   // 30s game, reasonable cap
+    minesweeper_easy:   { min: 3 },       // can't clear in < 3s
+    minesweeper_medium: { min: 10 },
+    minesweeper_hard:   { min: 20 },
+    sudoku:             { min: 15 },      // can't solve in < 15s
+    maze:               { min: 2 },
+  };
+
+  let _proof = null;
+  let _gameStartTs = 0;
+
+  function _validateProof(game, score) {
+    var p = _proof;
+    if (!p || p.game !== game) return false;
+
+    // Check game start timestamp (must have played for some time)
+    if (!p.startTs || Date.now() - p.startTs < 2000) return false;
+
+    if (game === 'reaction' || game === 'aim') {
+      var rounds = p.rounds;
+      if (!Array.isArray(rounds) || rounds.length < 5) return false;
+
+      // Each round must be above physical human minimum
+      var minRound = game === 'reaction' ? 80 : 100;
+      for (var i = 0; i < rounds.length; i++) {
+        if (rounds[i] < minRound) return false;
+      }
+
+      // Average must match submitted score (ms*10 format)
+      var sum = 0;
+      for (var j = 0; j < rounds.length; j++) sum += rounds[j];
+      var avg = sum / rounds.length;
+      var claimed = score / 10; // ms10 → ms
+      if (Math.abs(avg - claimed) > 2) return false;
+
+      // Standard deviation check: too consistent + fast = bot
+      var variance = 0;
+      for (var k = 0; k < rounds.length; k++) {
+        variance += (rounds[k] - avg) * (rounds[k] - avg);
+      }
+      var stdDev = Math.sqrt(variance / rounds.length);
+      if (stdDev < 3 && avg < 200) return false;
+
+      return true;
+    }
+
+    if (game === 'target') {
+      // Must have valid duration and hit count
+      if (!p.duration || !p.hits || p.hits < 0) return false;
+      // Game duration should be ~30s (allow some tolerance)
+      if (p.duration < 25000 || p.duration > 40000) return false;
+      // Score proportional check: max ~4 hits/s * 100 pts = 400/s
+      var maxScore = Math.ceil(p.duration / 1000) * 400;
+      if (score > maxScore) return false;
+      return true;
+    }
+
+    return true; // other games pass through
+  }
+
   /* All possible start screen element IDs across games */
   const START_IDS = [
     'start-screen', 'startScreen', 'start-overlay', 'startOverlay',
@@ -414,8 +478,24 @@ window.Leaderboard = (() => {
      * @param {string}  [options.label='점수']    — column label
      */
     ready: function (game, score, options) {
+      var scoreVal = safeScore(score);
+
+      // Anti-cheat: check score limits
+      var limits = SCORE_LIMITS[game];
+      if (limits) {
+        if (limits.min !== undefined && scoreVal < limits.min) { _proof = null; return; }
+        if (limits.max !== undefined && scoreVal > limits.max) { _proof = null; return; }
+      }
+
+      // Anti-cheat: validate proof for sensitive games
+      var needsProof = (game === 'reaction' || game === 'aim' || game === 'target');
+      if (needsProof) {
+        if (!_proof || !_validateProof(game, scoreVal)) { _proof = null; return; }
+        _proof = null;
+      }
+
       currentGame  = game;
-      currentScore = score;
+      currentScore = scoreVal;
       opts = {
         ascending: false,
         format:    null,
@@ -440,6 +520,9 @@ window.Leaderboard = (() => {
     },
 
     show: openOverlay,
+
+    /** @internal Games call this to provide proof of actual gameplay */
+    _setProof: function (data) { _proof = data; },
   };
 })();
 

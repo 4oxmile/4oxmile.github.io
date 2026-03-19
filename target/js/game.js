@@ -32,6 +32,7 @@ let gameOver      = false;
 let spawnTimer    = null;
 let countdownTimer = null;
 let animFrameId   = null;
+let _gameStartTs  = 0;
 let lastTimestamp  = 0;
 let difficulty     = 0;   // 0-1, increases with score
 
@@ -398,6 +399,7 @@ function startCountdown() {
 // ── Game lifecycle ────────────────────────────────────────────────────────
 function startGame() {
   if(typeof Leaderboard!=='undefined')Leaderboard.hide();
+  _gameStartTs = Date.now();
   // Reset state
   score     = 0;
   hits      = 0;
@@ -458,7 +460,10 @@ function endGame() {
 
   highscoreBadge.classList.toggle('visible', isNew);
 
-  if(typeof Leaderboard!=='undefined')Leaderboard.ready('target',score,{});
+  if(typeof Leaderboard!=='undefined'){
+    Leaderboard._setProof({game:'target',hits:hits,duration:Date.now()-_gameStartTs,startTs:_gameStartTs});
+    Leaderboard.ready('target',score,{});
+  }
   resultOverlay.classList.remove('hidden');
 }
 
