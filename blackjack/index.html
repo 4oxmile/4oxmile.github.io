@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#0D1117" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+  <title>BLACKJACK</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🃏</text></svg>">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="/css/leaderboard.css">
+  <link rel="stylesheet" href="/css/game-icons.css">
+</head>
+<body>
+  <div id="app">
+    <!-- START SCREEN -->
+    <div id="start-screen" class="screen active">
+      <div class="title-wrap">
+        <div class="game-logo-css">🃏</div>
+        <h1 class="screen-title">BLACKJACK</h1>
+        <p class="screen-subtitle">딜러를 이겨 칩을 모으세요</p>
+      </div>
+      <div class="start-cards-preview">
+        <div class="preview-card">A<span class="suit-center">♠</span></div>
+        <div class="preview-card red">K<span class="suit-center">♥</span></div>
+        <div class="preview-card">J<span class="suit-center">♣</span></div>
+        <div class="preview-card red">Q<span class="suit-center">♦</span></div>
+      </div>
+      <button class="start-btn">게임 시작</button>
+    </div>
+
+    <!-- WIN / GAME OVER SCREEN -->
+    <div id="win-screen" class="screen">
+      <div class="win-icon" id="win-icon">🏆</div>
+      <h2 class="win-title" id="win-title">게임 종료</h2>
+      <div class="win-stats">
+        <div class="stat-row">
+          <span class="stat-label">최종 칩</span>
+          <span class="stat-value" id="win-chips">1000</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">플레이한 라운드</span>
+          <span class="stat-value" id="win-rounds">0</span>
+        </div>
+      </div>
+      <div class="win-actions">
+        <button class="btn-primary" id="win-again-btn">다시 하기</button>
+      </div>
+    </div>
+
+    <!-- GAME SCREEN -->
+    <div id="game-screen">
+      <header id="game-header">
+        <div class="header-left">
+          <button class="icon-btn" onclick="location.href='/'" aria-label="홈으로">⌂</button>
+          <span class="header-title">BLACKJACK</span>
+        </div>
+        <div class="header-controls">
+          <button class="icon-btn" id="restart-icon-btn" aria-label="새 게임">↺</button>
+        </div>
+      </header>
+
+      <div class="stats-bar">
+        <div class="stat-chip">
+          <div class="stat-chip-label">보유 칩</div>
+          <div class="stat-chip-value" id="chips-val">1000</div>
+        </div>
+        <div class="stat-chip">
+          <div class="stat-chip-label">베팅</div>
+          <div class="stat-chip-value" id="bet-val">0</div>
+        </div>
+        <div class="stat-chip">
+          <div class="stat-chip-label">라운드</div>
+          <div class="stat-chip-value" id="round-val">0</div>
+        </div>
+      </div>
+
+      <div id="game-area">
+        <!-- Result message overlay (shown briefly) -->
+        <div id="result-msg" class="result-msg hidden"></div>
+
+        <!-- Dealer area -->
+        <div id="dealer-area" class="hand-area">
+          <div class="hand-label">딜러 <span id="dealer-score" class="hand-score"></span></div>
+          <div id="dealer-cards" class="card-row"></div>
+        </div>
+
+        <!-- Player hands area (may have 1-4 hands for split) -->
+        <div id="player-area" class="hand-area">
+          <div id="player-hands-wrap"></div>
+        </div>
+      </div>
+
+      <!-- Betting controls (shown in 'bet' phase) -->
+      <div id="bet-controls" class="bottom-controls-panel">
+        <div class="chip-row">
+          <button class="chip-btn" data-val="5">5</button>
+          <button class="chip-btn" data-val="10">10</button>
+          <button class="chip-btn" data-val="25">25</button>
+          <button class="chip-btn" data-val="50">50</button>
+          <button class="chip-btn" data-val="100">100</button>
+          <button class="chip-btn" data-val="500">500</button>
+        </div>
+        <div class="action-row">
+          <button class="ctrl-btn" id="clear-bet-btn">
+            <span class="ctrl-btn-icon">✕</span>
+            <span class="ctrl-btn-label">초기화</span>
+          </button>
+          <button class="ctrl-btn bet-max-btn" id="deal-btn" disabled>
+            <span class="ctrl-btn-icon">🃏</span>
+            <span class="ctrl-btn-label">배분</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Action controls (shown in 'player' phase) -->
+      <div id="action-controls" class="bottom-controls-panel hidden">
+        <div class="action-row">
+          <button class="ctrl-btn" id="hit-btn">
+            <span class="ctrl-btn-icon">+</span>
+            <span class="ctrl-btn-label">히트</span>
+          </button>
+          <button class="ctrl-btn" id="stand-btn">
+            <span class="ctrl-btn-icon">✋</span>
+            <span class="ctrl-btn-label">스탠드</span>
+          </button>
+          <button class="ctrl-btn" id="double-btn">
+            <span class="ctrl-btn-icon">×2</span>
+            <span class="ctrl-btn-label">더블</span>
+          </button>
+          <button class="ctrl-btn" id="split-btn">
+            <span class="ctrl-btn-icon">↔</span>
+            <span class="ctrl-btn-label">스플릿</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/js/supabase-config.js"></script>
+  <script src="/js/leaderboard.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>

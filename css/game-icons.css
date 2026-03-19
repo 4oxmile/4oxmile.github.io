@@ -1377,6 +1377,83 @@
   75% { box-shadow: 17px 17px 8px rgba(234,179,8,0.8); }
 }
 
+/* ─── Blackjack ───────────────────────────────────────────── */
+.icon-blackjack {
+  display: block;
+  position: relative;
+  width: 36px;
+  height: 36px;
+  animation: float 2.4s ease-in-out infinite;
+}
+/* Back card (rotated, navy) */
+.icon-blackjack::before {
+  content: '';
+  position: absolute;
+  width: 19px;
+  height: 26px;
+  background: linear-gradient(135deg, #1a2a6c, #0f1a4a);
+  border: 1.5px solid #3b5bd6;
+  border-radius: 3px;
+  top: 4px;
+  left: 11px;
+  transform: rotate(12deg);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+}
+/* Front card with ♠ */
+.icon-blackjack::after {
+  content: '♠';
+  position: absolute;
+  width: 20px;
+  height: 27px;
+  background: #f8f8f0;
+  border: 1.5px solid #d0d0c8;
+  border-radius: 3px;
+  top: 5px;
+  left: 4px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.35);
+  font-size: 13px;
+  font-weight: 800;
+  color: #1a1a2e;
+  line-height: 27px;
+  text-align: center;
+}
+
+/* ─── Mahjong ─────────────────────────────────────────────── */
+.icon-mahjong {
+  display: block;
+  position: relative;
+  width: 36px;
+  height: 36px;
+  animation: float 2.6s ease-in-out infinite;
+}
+/* Tile body */
+.icon-mahjong::before {
+  content: '';
+  position: absolute;
+  width: 24px;
+  height: 30px;
+  background: linear-gradient(170deg, #faf6ea 0%, #ede8d4 100%);
+  border: 1.5px solid #c8b878;
+  border-radius: 4px;
+  top: 3px;
+  left: 6px;
+  box-shadow: 2px 3px 0 #b8a060, 0 4px 8px rgba(0,0,0,0.35);
+}
+/* 中 character */
+.icon-mahjong::after {
+  content: '中';
+  position: absolute;
+  font-size: 15px;
+  font-weight: 900;
+  color: #dc2626;
+  top: 4px;
+  left: 8px;
+  width: 20px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+}
+
 .game-logo-css > [class^="icon-"] {
   transform: scale(1.78);
   transform-origin: center;
