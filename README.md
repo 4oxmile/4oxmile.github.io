@@ -23,7 +23,7 @@
 
 ## 게임 목록
 
-총 **31개** 게임이 포함되어 있습니다.
+총 **35개** 게임이 포함되어 있습니다.
 
 ### 퍼즐 / 전략
 
@@ -36,6 +36,10 @@
 | **[SOKOBAN](https://4ox.kr/sokoban/)** | 상자를 밀어서 목적지에 배치 |
 | **[MEMORY](https://4ox.kr/memory/)** | 같은 카드 짝 맞추기 |
 | **[MAZE](https://4ox.kr/maze/)** | 기울여서 구슬을 굴려 탈출하기 |
+| **[NONOGRAM](https://4ox.kr/nonogram/)** | 숫자 힌트로 그림을 완성하세요 |
+| **[MATCH3](https://4ox.kr/match3/)** | 같은 보석 3개를 맞춰 없애기 |
+| **[SOLITAIRE](https://4ox.kr/solitaire/)** | 클래식 카드 솔리테어 |
+| **[FREECELL](https://4ox.kr/freecell/)** | 프리셀 카드 게임 |
 
 ### 보드 / 대전 (vs AI)
 
@@ -58,11 +62,11 @@
 | **[FLAPPY](https://4ox.kr/flappy/)** | 탭하여 새를 날려보세요 |
 | **[BREAKOUT](https://4ox.kr/breakout/)** | 패들로 공을 쳐서 벽돌 깨기 |
 | **[DINO](https://4ox.kr/dino/)** | 장애물을 점프해서 피하기 |
-| **[MARIO](https://4ox.kr/mario/)** | 코인 모으며 적을 밟아 처치하기 |
 | **[JUMP](https://4ox.kr/doodle/)** | 발판을 밟고 계속 위로 올라가기 |
 | **[CROSSY](https://4ox.kr/crossy/)** | 타이밍 맞춰 도로를 건너세요 |
 | **[DODGE](https://4ox.kr/dodge/)** | 사방에서 날아오는 화살을 피하세요 |
 | **[STACK](https://4ox.kr/stack/)** | 블록을 정확히 쌓아 올리세요 |
+| **[BUBBLE](https://4ox.kr/bubble/)** | 같은 색 버블을 맞춰 터뜨리세요 |
 
 ### 반응 / 감각
 
@@ -95,12 +99,13 @@
 ├── css/
 │   └── game-icons.css      # 게임 아이콘 스타일
 ├── js/
-│   └── supabase-config.js  # Supabase 설정
+│   ├── supabase-config.js  # Supabase 설정
+│   └── leaderboard.js      # 리더보드 모듈
 ├── 2048/                   # 각 게임별 디렉토리
 ├── tetris/
 ├── snake/
 ├── chess/
-├── ...                     # (총 31개 게임)
+├── ...                     # (총 35개 게임)
 ├── supabase-setup.sql      # Supabase DB 스키마 마이그레이션
 ├── CNAME                   # 커스텀 도메인 설정 (4ox.kr)
 └── 404.html                # 404 에러 페이지
