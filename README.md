@@ -23,7 +23,7 @@
 
 ## 게임 목록
 
-총 **35개** 게임이 포함되어 있습니다.
+총 **37개** 게임이 포함되어 있습니다.
 
 ### 퍼즐 / 전략
 
@@ -40,6 +40,8 @@
 | **[MATCH3](https://4ox.kr/match3/)** | 같은 보석 3개를 맞춰 없애기 |
 | **[SOLITAIRE](https://4ox.kr/solitaire/)** | 클래식 카드 솔리테어 |
 | **[FREECELL](https://4ox.kr/freecell/)** | 프리셀 카드 게임 |
+| **[BLACKJACK](https://4ox.kr/blackjack/)** | 딜러를 이겨 칩을 모으세요 |
+| **[MAHJONG](https://4ox.kr/mahjong/)** | 같은 타일 쌍을 모두 제거하세요 |
 
 ### 보드 / 대전 (vs AI)
 
@@ -105,7 +107,7 @@
 ├── tetris/
 ├── snake/
 ├── chess/
-├── ...                     # (총 35개 게임)
+├── ...                     # (총 37개 게임)
 ├── supabase-setup.sql      # Supabase DB 스키마 마이그레이션
 ├── CNAME                   # 커스텀 도메인 설정 (4ox.kr)
 └── 404.html                # 404 에러 페이지

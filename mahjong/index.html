@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#0D1117" media="(prefers-color-scheme: dark)">
+  <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
+  <title>MAHJONG</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🀄</text></svg>">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="/css/leaderboard.css">
+  <link rel="stylesheet" href="/css/game-icons.css">
+</head>
+<body>
+  <div id="app">
+    <div id="start-screen" class="screen active">
+      <div class="title-wrap">
+        <div class="game-logo-css">🀄</div>
+        <h1 class="screen-title">MAHJONG</h1>
+        <p class="screen-subtitle">같은 타일 쌍을 모두 제거하세요</p>
+      </div>
+      <div class="start-tiles-preview">
+        <div class="preview-tile red">中</div>
+        <div class="preview-tile green">發</div>
+        <div class="preview-tile">白</div>
+        <div class="preview-tile gold">春</div>
+      </div>
+      <button class="start-btn">게임 시작</button>
+    </div>
+
+    <div id="win-screen" class="screen">
+      <div class="win-icon">🏆</div>
+      <h2 class="win-title">완성!</h2>
+      <div class="win-stats">
+        <div class="stat-row">
+          <span class="stat-label">걸린 시간</span>
+          <span class="stat-value" id="win-time">00:00</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">제거한 쌍</span>
+          <span class="stat-value" id="win-pairs">72</span>
+        </div>
+      </div>
+      <div class="win-actions">
+        <button class="btn-primary" id="win-again-btn">다시 하기</button>
+      </div>
+    </div>
+
+    <div id="game-screen">
+      <header id="game-header">
+        <div class="header-left">
+          <button class="icon-btn" onclick="location.href='/'" aria-label="홈으로">⌂</button>
+          <span class="header-title">MAHJONG</span>
+        </div>
+        <div class="header-controls">
+          <button class="icon-btn" id="restart-icon-btn" aria-label="새 게임">↺</button>
+        </div>
+      </header>
+
+      <div class="stats-bar">
+        <div class="stat-chip">
+          <div class="stat-chip-label">남은 쌍</div>
+          <div class="stat-chip-value" id="pairs-val">72</div>
+        </div>
+        <div class="stat-chip">
+          <div class="stat-chip-label">이동</div>
+          <div class="stat-chip-value" id="moves-val">0</div>
+        </div>
+        <div class="stat-chip">
+          <div class="stat-chip-label">시간</div>
+          <div class="stat-chip-value" id="timer-val">00:00</div>
+        </div>
+      </div>
+
+      <div id="game-area">
+        <div id="board"></div>
+      </div>
+
+      <div id="bottom-controls">
+        <button class="ctrl-btn" id="hint-btn">
+          <span class="ctrl-btn-icon">💡</span>
+          <span class="ctrl-btn-label">힌트</span>
+        </button>
+        <button class="ctrl-btn" id="undo-btn">
+          <span class="ctrl-btn-icon">↩</span>
+          <span class="ctrl-btn-label">되돌리기</span>
+        </button>
+        <button class="ctrl-btn" id="shuffle-btn">
+          <span class="ctrl-btn-icon">🔀</span>
+          <span class="ctrl-btn-label">섞기</span>
+        </button>
+        <button class="ctrl-btn" id="restart-btn">
+          <span class="ctrl-btn-icon">🔄</span>
+          <span class="ctrl-btn-label">새 게임</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/js/supabase-config.js"></script>
+  <script src="/js/leaderboard.js"></script>
+  <script src="js/game.js"></script>
+</body>
+</html>

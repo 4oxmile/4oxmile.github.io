@@ -325,7 +325,7 @@
 
     // Leaderboard integration
     if (typeof Leaderboard !== 'undefined') {
-      Leaderboard.ready('simon', score);
+      Leaderboard.ready('simon', score, { ascending: false, label: '라운드' });
     }
   }
 
