@@ -1094,51 +1094,6 @@
 }
 
 
-/* ─── 30. Mario ────────────────────────────────────────────── */
-@keyframes mario-run {
-  0%, 100% { transform: translateX(0) translateY(0); }
-  25% { transform: translateX(2px) translateY(-4px); }
-  50% { transform: translateX(4px) translateY(0); }
-  75% { transform: translateX(2px) translateY(-3px); }
-}
-.icon-mario {
-  display: block;
-  position: relative;
-  width: 36px;
-  height: 36px;
-  animation: mario-run 0.8s ease-in-out infinite;
-}
-/* body + hat */
-.icon-mario::before {
-  content: '';
-  position: absolute;
-  width: 16px;
-  height: 12px;
-  background: linear-gradient(180deg, #E52521 50%, #3B3BFF 50%);
-  border-radius: 4px 4px 2px 2px;
-  bottom: 6px;
-  left: 10px;
-  box-shadow:
-    /* hat */ 0px -10px 0 4px #E52521,
-    /* hat brim */ 2px -6px 0 6px #E52521,
-    0 0 10px rgba(229,37,33,0.4);
-}
-/* head + face */
-.icon-mario::after {
-  content: '';
-  position: absolute;
-  width: 12px;
-  height: 10px;
-  background: radial-gradient(circle at 50% 40%, #FFB899, #E8956E);
-  border-radius: 50% 50% 40% 40%;
-  top: 7px;
-  left: 12px;
-  box-shadow:
-    /* eye */ 3px 1px 0 2px #0F172A,
-    /* mustache */ 2px 5px 0 2px #6B3300,
-    /* shoe L */ -4px 21px 0 3px #6B3300,
-    /* shoe R */ 8px 21px 0 3px #6B3300;
-}
 
 /* ─── 31. Bubble ───────────────────────────────────────────── */
 @keyframes bubble-float {
