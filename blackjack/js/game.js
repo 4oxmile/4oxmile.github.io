@@ -25,6 +25,7 @@
   let activeHandIdx = 0;
   let dealerHand    = [];
   let chips         = 1000;
+  let maxChips      = 1000;
   let bet           = 0;
   let phase         = 'bet'; // 'bet' | 'player' | 'dealer' | 'result'
   let rounds        = 0;
@@ -172,9 +173,10 @@
   }
 
   function renderStats() {
-    document.getElementById('chips-val').textContent = chips.toLocaleString();
-    document.getElementById('bet-val').textContent   = bet > 0 ? bet.toLocaleString() : '0';
-    document.getElementById('round-val').textContent = rounds;
+    document.getElementById('chips-val').textContent     = chips.toLocaleString();
+    document.getElementById('bet-val').textContent       = bet > 0 ? bet.toLocaleString() : '0';
+    document.getElementById('round-val').textContent     = rounds;
+    document.getElementById('max-chips-val').textContent = maxChips.toLocaleString();
   }
 
   function renderControls() {
@@ -377,6 +379,8 @@
       }
     });
 
+    if (chips > maxChips) maxChips = chips;
+
     phase = 'result';
     renderAll();
     showResultMsg(totalDelta);
@@ -414,14 +418,15 @@
   }
 
   function endGame() {
-    document.getElementById('win-chips').textContent  = chips.toLocaleString();
-    document.getElementById('win-rounds').textContent = rounds;
-    document.getElementById('win-icon').textContent   = chips > 1000 ? '🏆' : chips === 1000 ? '😐' : '💸';
-    document.getElementById('win-title').textContent  = chips > 1000 ? '대박!' : chips > 0 ? '게임 종료' : '파산!';
+    document.getElementById('win-chips').textContent     = chips.toLocaleString();
+    document.getElementById('win-rounds').textContent    = rounds;
+    document.getElementById('win-max-chips').textContent = maxChips.toLocaleString();
+    document.getElementById('win-icon').textContent      = maxChips > 1000 ? '🏆' : maxChips === 1000 ? '😐' : '💸';
+    document.getElementById('win-title').textContent     = maxChips > 1000 ? '대박!' : chips > 0 ? '게임 종료' : '파산!';
 
     document.getElementById('win-screen').classList.add('active');
 
-    Leaderboard.ready('blackjack', chips, {
+    Leaderboard.ready('blackjack', maxChips, {
       ascending: false,
       label: '칩',
     });
@@ -430,9 +435,10 @@
   // ─── Init & Events ──────────────────────────────────────────────────────────
   function initGame() {
     buildShoe();
-    chips  = 1000;
-    bet    = 0;
-    rounds = 0;
+    chips    = 1000;
+    maxChips = 1000;
+    bet      = 0;
+    rounds   = 0;
     phase  = 'bet';
     dealerHand  = [];
     playerHands = [];
