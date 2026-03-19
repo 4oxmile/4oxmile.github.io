@@ -1012,10 +1012,11 @@
 
       if (cardEl) {
         onCardTap(cardEl);
+        e.preventDefault();
       } else if (pileEl) {
         onPileTap(pileEl);
+        e.preventDefault();
       }
-      e.preventDefault();
     }, { passive: false });
   }
 
