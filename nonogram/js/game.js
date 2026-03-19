@@ -705,6 +705,7 @@
     }
 
     overlayWin.classList.remove('hidden');
+    if(typeof Leaderboard!=='undefined')Leaderboard.ready('nonogram_'+difficulty,seconds,{ascending:true,format:'time',label:'시간'});
   }
 
   // ── Timer ────────────────────────────────────────────
@@ -747,6 +748,7 @@
   function startGame() {
     overlayStart.classList.add('hidden');
     overlayWin.classList.add('hidden');
+    if(typeof Leaderboard!=='undefined')Leaderboard.hide();
     mode = 'fill';
     modeIcon.textContent = '✏️';
     modeLabel.textContent = '채우기 모드';

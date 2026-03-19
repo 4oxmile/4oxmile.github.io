@@ -146,7 +146,6 @@ function setDifficulty(d) {
 // Game flow
 // ─────────────────────────────────────────────
 function startGame() {
-  if(typeof Leaderboard!=='undefined')Leaderboard.hide();
   state.playerScore = 0;
   state.aiScore     = 0;
   updateScoreUI();
@@ -181,8 +180,6 @@ function endGame(playerWon) {
   state.phase = 'gameover';
   cancelAnimationFrame(state.animId);
   saveBest();
-  if(typeof Leaderboard!=='undefined')Leaderboard.ready('pong',state.playerScore);
-
   resultTitleEl.textContent = playerWon ? '승리!' : '패배';
   resultTitleEl.className   = 'result-title ' + (playerWon ? 'win' : 'lose');
   finalScoreEl.textContent  = state.playerScore + ' : ' + state.aiScore;

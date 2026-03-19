@@ -573,6 +573,7 @@
     updateUI();
     state = 'playing';
     hideAllOverlays();
+    if(typeof Leaderboard!=='undefined')Leaderboard.hide();
     gameLoop();
   }
 
@@ -587,11 +588,7 @@
     document.getElementById('lose-best').textContent = best;
     bestEl.textContent = best;
     overlayLose.classList.remove('hidden');
-
-    // Submit score
-    if (typeof window.submitScore === 'function') {
-      window.submitScore('bubble', score);
-    }
+    if(typeof Leaderboard!=='undefined')Leaderboard.ready('bubble',score);
   }
 
   function updateUI() {
