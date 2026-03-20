@@ -626,10 +626,4 @@ body {
   -webkit-touch-callout: none;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .win-icon             { animation: none; }
-  .game-logo-css        { animation: none; }
-  .mj-tile.hint-a,
-  .mj-tile.hint-b       { animation: none; }
-  @keyframes winBounce  { from {} to {} }
-}
+/* prefers-reduced-motion handled globally by css/tokens.css */

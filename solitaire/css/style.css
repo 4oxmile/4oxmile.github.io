@@ -757,8 +757,4 @@ body {
    MISC HELPERS
    ═══════════════════════════════════════════════════════════════════ */
 
-/* Reduced motion: kill win animation */
-@media (prefers-reduced-motion: reduce) {
-  .win-icon            { animation: none; }
-  @keyframes winBounce { from {} to {} }
-}
+/* prefers-reduced-motion handled globally by css/tokens.css */

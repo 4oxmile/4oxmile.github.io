@@ -777,12 +777,4 @@ body:has(#game-screen.active) #lb-fab {
   transform: translateX(-50%) translateY(80px) !important;
 }
 
-/* ═══════════════════════════════════════════════════════════════════
-   REDUCED MOTION
-   ═══════════════════════════════════════════════════════════════════ */
-@media (prefers-reduced-motion: reduce) {
-  .win-icon    { animation: none; }
-  .game-logo-css { animation: none; }
-  @keyframes winBounce { from {} to {} }
-  @keyframes float     { from {} to {} }
-}
+/* prefers-reduced-motion handled globally by css/tokens.css */

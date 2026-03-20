@@ -758,10 +758,10 @@ body {
   -webkit-touch-callout: none;
 }
 
+/* prefers-reduced-motion: global rule in css/tokens.css covers most cases.
+   Keep explicit animation:none for card-flip hint to avoid triggering
+   JS animationend callbacks on a near-zero duration. */
 @media (prefers-reduced-motion: reduce) {
-  .card.autocomplete-fly { animation-duration: 0.01ms !important; }
-  .card.hint .card-inner, .card.hint-source .card-inner { animation: none; }
-  .win-icon               { animation: none; }
-  .icon-freecell          { animation: none; }
-  @keyframes winBounce    { from {} to {} }
+  .card.hint .card-inner,
+  .card.hint-source .card-inner { animation: none; }
 }

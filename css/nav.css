@@ -1,0 +1,31 @@
+/* ═══════════════════════════════════════════════════
+   Navigation — Shared nav styles for 4ox.kr games
+   ═══════════════════════════════════════════════════ */
+
+.home-btn {
+  position: fixed;
+  top: max(env(safe-area-inset-top, 0px), 12px);
+  left: 12px;
+  z-index: 15;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.home-btn:hover {
+  background: var(--btn-active);
+  color: var(--text-primary);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-btn { transition-duration: 0.01ms !important; }
+}
