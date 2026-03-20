@@ -16,7 +16,7 @@
   <div id="app">
 
     <!-- ════════════ START SCREEN ════════════ -->
-    <div id="start-screen" class="screen">
+    <div id="start-screen" class="overlay">
       <div class="start-logo">
         <div class="game-logo-css"><span class="icon-sokoban"></span></div>
         <h1 class="title-gradient">SOKOBAN</h1>
@@ -40,7 +40,7 @@
     </div>
 
     <!-- ════════════ LEVEL SELECT SCREEN ════════════ -->
-    <div id="level-select-screen" class="screen hidden">
+    <div id="level-select-screen" class="overlay hidden">
       <div style="display:flex;align-items:center;gap:12px;width:100%;margin-bottom:4px;">
         <button id="btn-back-start" class="icon-btn" title="뒤로">←</button>
         <h2 class="screen-title">레벨 선택</h2>
@@ -52,7 +52,7 @@
     </div>
 
     <!-- ════════════ GAME SCREEN ════════════ -->
-    <div id="game-screen" class="screen hidden">
+    <div id="game-screen" class="overlay hidden">
       <div class="game-header">
         <div class="header-left">
           <button id="btn-menu" class="icon-btn" title="메뉴">☰</button>
@@ -106,7 +106,7 @@
     </div>
 
     <!-- ════════════ VICTORY SCREEN ════════════ -->
-    <div id="victory-screen" class="screen overlay-screen hidden">
+    <div id="victory-screen" class="overlay overlay-screen hidden">
       <div class="victory-icon">🎉</div>
       <div class="victory-title">레벨 클리어!</div>
 
@@ -143,7 +143,7 @@
     </div>
 
     <!-- ════════════ ALL CLEAR SCREEN ════════════ -->
-    <div id="allclear-screen" class="screen overlay-screen hidden">
+    <div id="allclear-screen" class="overlay overlay-screen hidden">
       <div class="allclear-icon">🏆</div>
       <div class="allclear-title">ALL CLEAR!</div>
       <p class="allclear-sub">

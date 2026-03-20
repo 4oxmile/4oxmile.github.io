@@ -520,7 +520,7 @@ function toggleNotesMode() {
    SCREEN / OVERLAY MANAGEMENT
    ============================================================ */
 function showScreen(name) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.overlay').forEach(s => s.classList.remove('active'));
   const target = document.getElementById(`screen-${name}`);
   if (target) target.classList.add('active');
 }

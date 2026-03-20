@@ -119,7 +119,7 @@ function renderScore() {
 // SCREEN MANAGEMENT
 // ──────────────────────────────────────
 function showScreen(id) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
+  document.querySelectorAll('.overlay').forEach(s => s.classList.add('hidden'));
   if (id) {
     const el = document.getElementById(id);
     if (el) el.classList.remove('hidden');

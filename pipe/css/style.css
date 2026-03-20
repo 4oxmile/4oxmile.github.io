@@ -69,7 +69,7 @@ body {
 /* ============================================
    Screens
    ============================================ */
-.screen {
+.overlay {
   position: absolute;
   inset: 0;
   display: flex;
@@ -77,8 +77,9 @@ body {
   justify-content: center;
 }
 
-.screen.hidden {
-  display: none;
+.overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
 }
 
 /* ============================================
@@ -542,12 +543,13 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 100;
+  z-index: 20;
   animation: fade-in 0.25s ease;
 }
 
 .overlay.hidden {
-  display: none;
+  opacity: 0;
+  pointer-events: none;
 }
 
 @keyframes fade-in {

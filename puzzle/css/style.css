@@ -61,7 +61,7 @@ body {
 /* ===========================
    Screens
    =========================== */
-.screen {
+.overlay {
   position: fixed;
   inset: 0;
   display: flex;
@@ -70,10 +70,10 @@ body {
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease;
-  z-index: 10;
+  z-index: 20;
 }
 
-.screen.active {
+.overlay.active {
   opacity: 1;
   pointer-events: all;
 }
@@ -575,16 +575,16 @@ body {
   to   { opacity: 1; transform: translateY(0); }
 }
 
-.screen.active .screen-content > * {
+.overlay.active .screen-content > * {
   animation: fadeIn 0.35s ease both;
 }
 
-.screen.active .screen-content > *:nth-child(1) { animation-delay: 0.05s; }
-.screen.active .screen-content > *:nth-child(2) { animation-delay: 0.10s; }
-.screen.active .screen-content > *:nth-child(3) { animation-delay: 0.15s; }
-.screen.active .screen-content > *:nth-child(4) { animation-delay: 0.20s; }
-.screen.active .screen-content > *:nth-child(5) { animation-delay: 0.25s; }
-.screen.active .screen-content > *:nth-child(6) { animation-delay: 0.30s; }
+.overlay.active .screen-content > *:nth-child(1) { animation-delay: 0.05s; }
+.overlay.active .screen-content > *:nth-child(2) { animation-delay: 0.10s; }
+.overlay.active .screen-content > *:nth-child(3) { animation-delay: 0.15s; }
+.overlay.active .screen-content > *:nth-child(4) { animation-delay: 0.20s; }
+.overlay.active .screen-content > *:nth-child(5) { animation-delay: 0.25s; }
+.overlay.active .screen-content > *:nth-child(6) { animation-delay: 0.30s; }
 
 /* ===========================
    Responsive tweaks

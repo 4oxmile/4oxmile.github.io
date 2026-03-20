@@ -60,11 +60,11 @@ body {
 /* ──────────────────────────────────────
    OVERLAY SCREENS
 ────────────────────────────────────── */
-.screen {
+.overlay {
   display: none;
   position: fixed;
   inset: 0;
-  z-index: 100;
+  z-index: 20;
   justify-content: center;
   align-items: center;
   background: var(--overlay-bg);
@@ -73,7 +73,7 @@ body {
   padding: 24px;
 }
 
-.screen.active {
+.overlay.active {
   display: flex;
 }
 

@@ -136,8 +136,8 @@ body {
   align-items: center;
   justify-content: center;
   background: var(--overlay-bg);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   padding: 24px;
   gap: 20px;
   transition: opacity 0.25s ease, visibility 0.25s ease;

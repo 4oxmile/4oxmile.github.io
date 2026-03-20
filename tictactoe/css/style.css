@@ -66,20 +66,20 @@ body {
 /* ──────────────────────────────────────
    OVERLAY SCREENS
 ────────────────────────────────────── */
-.screen {
+.overlay {
   position: fixed;
   inset: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 100;
+  z-index: 20;
   background: var(--overlay-bg);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
-.screen.hidden {
+.overlay.hidden {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;

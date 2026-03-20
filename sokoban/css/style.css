@@ -68,7 +68,7 @@ body {
 }
 
 /* ===================== SCREENS ===================== */
-.screen {
+.overlay {
   position: absolute;
   inset: 0;
   display: flex;
@@ -80,7 +80,7 @@ body {
   pointer-events: auto;
 }
 
-.screen.hidden {
+.overlay.hidden {
   opacity: 0;
   pointer-events: none;
   transform: scale(0.97);
@@ -91,7 +91,7 @@ body {
   background: var(--overlay-bg);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  z-index: 100;
+  z-index: 20;
 }
 
 /* ===================== START SCREEN ===================== */

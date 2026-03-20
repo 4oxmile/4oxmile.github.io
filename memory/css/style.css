@@ -64,7 +64,7 @@ body {
   background: var(--overlay-bg);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  z-index: 100;
+  z-index: 20;
   padding: 24px;
   transition: opacity 0.3s ease;
 }

@@ -79,19 +79,20 @@ body {
 .overlay {
   position: fixed;
   inset: 0;
-  z-index: 100;
+  z-index: 20;
   display: flex;
   align-items: center;
   justify-content: center;
   background: var(--overlay-bg);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   padding: 24px;
   animation: fadeIn 0.25s ease;
 }
 
 .overlay.hidden {
-  display: none;
+  opacity: 0;
+  pointer-events: none;
 }
 
 @keyframes fadeIn {

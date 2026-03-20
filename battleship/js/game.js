@@ -132,7 +132,7 @@ const $ = id => document.getElementById(id);
 
 // ── Screens ───────────────────────────────────────────────────
 function showScreen(name) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.overlay').forEach(s => s.classList.remove('active'));
   $(name + '-screen').classList.add('active');
   state.phase = name;
 }

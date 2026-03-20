@@ -75,7 +75,7 @@ body {
   align-items: center;
   justify-content: center;
   gap: 20px;
-  z-index: 100;
+  z-index: 20;
   padding: 24px;
   transition: opacity 0.3s ease, visibility 0.3s ease;
 }

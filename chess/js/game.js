@@ -627,7 +627,7 @@ class ChessUI {
 
     // Start screen
     app.innerHTML = `
-      <div id="start-screen" class="screen">
+      <div id="start-screen" class="overlay">
         <div class="game-logo-css"><span class="icon-chess"></span></div>
         <div class="game-title">CHESS</div>
         <div class="game-subtitle">1인 플레이 · AI 대전</div>
@@ -660,7 +660,7 @@ class ChessUI {
         <button class="btn btn-secondary" id="reset-stats-btn">기록 초기화</button>
       </div>
 
-      <div id="result-screen" class="screen hidden">
+      <div id="result-screen" class="overlay hidden">
         <div class="result-emoji" id="result-emoji"></div>
         <div class="result-title" id="result-title"></div>
         <div class="result-subtitle" id="result-subtitle"></div>
@@ -930,7 +930,7 @@ class ChessUI {
   // ── Screens ───────────────────────────────────
 
   _showScreen(id) {
-    document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
+    document.querySelectorAll('.overlay').forEach(s => s.classList.add('hidden'));
     const target = document.getElementById(id);
     if (target) target.classList.remove('hidden');
   }
