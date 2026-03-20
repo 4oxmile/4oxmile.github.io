@@ -787,6 +787,15 @@ body {
 }
 
 /* ═══════════════════════════════════════════════════════════════════
+   LEADERBOARD FAB — hide during active gameplay
+   ═══════════════════════════════════════════════════════════════════ */
+body:has(#game-screen.active) #lb-fab {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transform: translateX(-50%) translateY(80px) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
    REDUCED MOTION
    ═══════════════════════════════════════════════════════════════════ */
 @media (prefers-reduced-motion: reduce) {
