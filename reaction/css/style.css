@@ -157,7 +157,7 @@ body {
   font-weight: 700;
   cursor: pointer;
   letter-spacing: 1px;
-  box-shadow: 0 8px 32px rgba(59, 130, 246, 0.35);
+  box-shadow: 0 0 20px var(--accent-glow), 0 8px 32px rgba(59, 130, 246, 0.35);
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
@@ -516,7 +516,7 @@ body {
   font-weight: 700;
   cursor: pointer;
   letter-spacing: 0.5px;
-  box-shadow: 0 8px 32px rgba(59, 130, 246, 0.35);
+  box-shadow: 0 0 20px var(--accent-glow), 0 8px 32px rgba(59, 130, 246, 0.35);
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 

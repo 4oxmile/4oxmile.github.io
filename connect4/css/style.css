@@ -206,7 +206,7 @@ body {
   transition: all 0.15s ease;
   font-family: inherit;
   letter-spacing: 0.3px;
-  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.35);
+  box-shadow: 0 0 20px var(--accent-glow), 0 4px 16px rgba(59, 130, 246, 0.35);
 }
 
 .btn-primary:hover {

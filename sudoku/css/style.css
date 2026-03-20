@@ -213,6 +213,7 @@ body {
   transition: opacity 0.15s, transform 0.1s;
   font-family: inherit;
   letter-spacing: 0.03em;
+  box-shadow: 0 0 20px var(--accent-glow);
 }
 
 .btn-primary:hover {

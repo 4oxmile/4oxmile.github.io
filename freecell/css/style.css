@@ -217,6 +217,7 @@ body {
   letter-spacing: 0.05em;
   cursor: pointer;
   transition: filter 0.15s ease, transform 0.15s ease;
+  box-shadow: 0 0 20px var(--accent-glow);
 }
 
 .start-btn:hover {
@@ -301,6 +302,7 @@ body {
   font-weight: 700;
   cursor: pointer;
   transition: filter 0.15s ease, transform 0.15s ease;
+  box-shadow: 0 0 20px var(--accent-glow);
 }
 
 .btn-primary:hover {

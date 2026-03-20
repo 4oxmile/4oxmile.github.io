@@ -180,6 +180,7 @@ body {
   cursor: pointer;
   transition: background 0.15s, transform 0.1s;
   letter-spacing: 0.05em;
+  box-shadow: 0 0 20px var(--accent-glow);
 }
 
 .btn-primary:hover  { background: #2563eb; }

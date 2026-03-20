@@ -165,7 +165,7 @@ body {
   padding: 0.875rem 2.5rem;
   width: 100%;
   max-width: 260px;
-  box-shadow: 0 4px 16px rgba(59,130,246,0.3);
+  box-shadow: 0 0 20px var(--accent-glow), 0 4px 16px rgba(59,130,246,0.3);
 }
 
 .btn-primary:hover {

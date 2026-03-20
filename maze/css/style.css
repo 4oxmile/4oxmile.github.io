@@ -168,6 +168,7 @@ body {
   transition: background 0.15s, transform 0.1s;
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
+  box-shadow: 0 0 20px var(--accent-glow);
 }
 
 .primary-btn:active {

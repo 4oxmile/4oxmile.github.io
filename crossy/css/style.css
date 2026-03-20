@@ -220,7 +220,7 @@ html, body {
   cursor: pointer;
   letter-spacing: -0.2px;
   transition: transform 0.1s, box-shadow 0.1s, background 0.15s;
-  box-shadow: 0 4px 16px rgba(59,130,246,0.35);
+  box-shadow: 0 0 20px var(--accent-glow), 0 4px 16px rgba(59,130,246,0.35);
   min-width: 180px;
   margin-bottom: 12px;
 }
