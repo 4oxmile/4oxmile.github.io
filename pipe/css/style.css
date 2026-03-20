@@ -2,18 +2,7 @@
    CSS Variables & Theme
    ============================================ */
 :root {
-  --bg-primary: #0a0e14;
-  --bg-secondary: #111827;
-  --bg-tertiary: #1f2937;
-  --text-primary: #f0f6fc;
-  --text-secondary: #8b949e;
-  --text-muted: #484f58;
-  --accent: #3b82f6;
-  --accent-glow: rgba(59, 130, 246, 0.35);
-  --border: #30363d;
-  --btn-bg: #1f2937;
   --btn-hover: #2d3748;
-  --overlay-bg: rgba(0, 0, 0, 0.88);
 
   /* Pipe game specifics */
   --tile-bg: #161d2b;
@@ -28,6 +17,21 @@
   --water-glow: rgba(59, 130, 246, 0.5);
 
   --transition-rotate: 0.18s ease;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --btn-hover: #D0D7DE;
+    --tile-bg: #E9ECF0;
+    --tile-border: #D0D7DE;
+    --pipe-color: #94A3B8;
+    --source-color: #16A34A;
+    --source-glow: rgba(22, 163, 74, 0.3);
+    --drain-color: #DC2626;
+    --drain-glow: rgba(220, 38, 38, 0.3);
+    --water-color: #3182F6;
+    --water-glow: rgba(49, 130, 246, 0.3);
+  }
 }
 
 /* ============================================
@@ -541,6 +545,8 @@ body {
   position: fixed;
   inset: 0;
   background: var(--overlay-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   display: flex;
   align-items: center;
   justify-content: center;

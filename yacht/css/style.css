@@ -1,32 +1,34 @@
 /* ═══════════════════════════════════════
-   YACHT DICE — Dark Theme
+   YACHT DICE — Design Token System
    ═══════════════════════════════════════ */
 
 :root {
-  --bg: #0a0e14;
-  --bg2: #111620;
-  --bg3: #161c27;
   --bg4: #1c2333;
-  --text: #e8edf5;
-  --text2: #8b97b0;
-  --text3: #4a5568;
-  --accent: #3b82f6;
-  --accent-glow: rgba(59,130,246,0.35);
   --accent2: #8b5cf6;
   --green: #22c55e;
   --yellow: #eab308;
   --red: #ef4444;
-  --border: #1e2a3a;
   --border2: #2a3a50;
   --die-bg: #f5f7fa;
   --die-dot: #1a1f2e;
   --die-shadow: rgba(0,0,0,0.6);
   --held-border: #3b82f6;
   --held-glow: rgba(59,130,246,0.5);
-  --overlay: rgba(5,8,14,0.92);
   --radius: 12px;
   --radius-lg: 18px;
   --radius-die: 14px;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg4: #D0D7DE;
+    --border2: #B8C0CC;
+    --die-bg: #FFFFFF;
+    --die-dot: #1B1E28;
+    --die-shadow: rgba(0,0,0,0.15);
+    --held-border: #3182F6;
+    --held-glow: rgba(49,130,246,0.3);
+  }
 }
 
 *, *::before, *::after {
@@ -42,8 +44,8 @@ html, body {
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Pretendard', 'Segoe UI', Roboto, sans-serif;
-  background: var(--bg);
-  color: var(--text);
+  background: var(--bg-primary);
+  color: var(--text-primary);
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -82,7 +84,7 @@ body {
    START SCREEN
    ═══════════════════════════════════════ */
 #start-screen {
-  background: var(--bg);
+  background: var(--bg-primary);
   align-items: center;
   justify-content: center;
 }
@@ -121,7 +123,7 @@ body {
 .start-sub {
   font-size: 13px;
   letter-spacing: 4px;
-  color: var(--text3);
+  color: var(--text-muted);
   text-transform: uppercase;
   margin-top: -10px;
 }
@@ -130,7 +132,7 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
-  background: var(--bg3);
+  background: var(--bg-tertiary);
   border: 1px solid var(--border2);
   border-radius: var(--radius);
   padding: 10px 20px;
@@ -138,7 +140,7 @@ body {
 
 .best-score-label {
   font-size: 13px;
-  color: var(--text2);
+  color: var(--text-secondary);
 }
 
 .best-score-val {
@@ -149,7 +151,7 @@ body {
 
 .start-rules {
   text-align: center;
-  color: var(--text2);
+  color: var(--text-secondary);
   font-size: 13px;
   line-height: 1.8;
   margin-top: 8px;
@@ -209,14 +211,14 @@ body {
 
 .btn-roll:disabled {
   background: var(--bg4);
-  color: var(--text3);
+  color: var(--text-muted);
   box-shadow: none;
   cursor: default;
 }
 
 .btn-ghost {
-  background: var(--bg3);
-  color: var(--text2);
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
   border: 1px solid var(--border2);
   width: 100%;
   max-width: 280px;
@@ -224,7 +226,7 @@ body {
 
 .btn-ghost:hover {
   background: var(--bg4);
-  color: var(--text);
+  color: var(--text-primary);
 }
 
 .btn-icon {
@@ -232,9 +234,9 @@ body {
 }
 
 .icon-btn {
-  background: var(--bg3);
+  background: var(--bg-tertiary);
   border: 1px solid var(--border);
-  color: var(--text2);
+  color: var(--text-secondary);
   border-radius: var(--radius);
   width: 40px;
   height: 40px;
@@ -249,14 +251,14 @@ body {
 
 .icon-btn:hover {
   background: var(--bg4);
-  color: var(--text);
+  color: var(--text-primary);
 }
 
 /* ═══════════════════════════════════════
    GAME SCREEN — LAYOUT
    ═══════════════════════════════════════ */
 #game-screen {
-  background: var(--bg);
+  background: var(--bg-primary);
   display: flex;
   flex-direction: column;
 }
@@ -268,7 +270,7 @@ body {
   justify-content: space-between;
   padding: 12px 16px;
   border-bottom: 1px solid var(--border);
-  background: var(--bg2);
+  background: var(--bg-secondary);
   flex-shrink: 0;
 }
 
@@ -277,17 +279,17 @@ body {
   align-items: baseline;
   gap: 4px;
   font-size: 14px;
-  color: var(--text2);
+  color: var(--text-secondary);
 }
 
 .turn-num {
   font-size: 22px;
   font-weight: 700;
-  color: var(--text);
+  color: var(--text-primary);
 }
 
 .turn-sep, .turn-total {
-  color: var(--text3);
+  color: var(--text-muted);
 }
 
 .header-score {
@@ -298,7 +300,7 @@ body {
 
 .score-label {
   font-size: 13px;
-  color: var(--text2);
+  color: var(--text-secondary);
 }
 
 .score-val {
@@ -494,7 +496,7 @@ body {
 
 .roll-hint {
   font-size: 12px;
-  color: var(--text3);
+  color: var(--text-muted);
   text-align: center;
 }
 
@@ -508,7 +510,7 @@ body {
   width: 280px;
   flex-shrink: 0;
   border-left: 1px solid var(--border);
-  background: var(--bg2);
+  background: var(--bg-secondary);
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -524,7 +526,7 @@ body {
 .score-panel-title {
   font-size: 13px;
   font-weight: 700;
-  color: var(--text2);
+  color: var(--text-secondary);
   letter-spacing: 1px;
   text-transform: uppercase;
 }
@@ -539,11 +541,11 @@ body {
 .section-header {
   font-size: 11px;
   font-weight: 600;
-  color: var(--text3);
+  color: var(--text-muted);
   letter-spacing: 1px;
   text-transform: uppercase;
   padding: 4px 6px;
-  background: var(--bg3);
+  background: var(--bg-tertiary);
   border-radius: 6px;
   margin-bottom: 4px;
 }
@@ -567,7 +569,7 @@ body {
 }
 
 .score-row.available {
-  background: var(--bg3);
+  background: var(--bg-tertiary);
   border-color: var(--border);
 }
 
@@ -600,18 +602,18 @@ body {
 
 .cat-name {
   font-size: 13px;
-  color: var(--text2);
+  color: var(--text-secondary);
 }
 
 .score-row.used .cat-name,
 .score-row.zero-used .cat-name {
-  color: var(--text3);
+  color: var(--text-muted);
 }
 
 .cat-score {
   font-size: 14px;
   font-weight: 700;
-  color: var(--text);
+  color: var(--text-primary);
   min-width: 36px;
   text-align: right;
 }
@@ -631,13 +633,13 @@ body {
 
 .bonus-label {
   font-size: 12px;
-  color: var(--text3);
+  color: var(--text-muted);
 }
 
 .bonus-val {
   font-size: 13px;
   font-weight: 600;
-  color: var(--text2);
+  color: var(--text-secondary);
 }
 
 .bonus-highlight .bonus-val {
@@ -654,7 +656,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 12px 10px;
-  background: var(--bg3);
+  background: var(--bg-tertiary);
   border-radius: var(--radius);
   border: 1px solid var(--border2);
   margin-top: 4px;
@@ -663,7 +665,7 @@ body {
 .total-label {
   font-size: 14px;
   font-weight: 700;
-  color: var(--text2);
+  color: var(--text-secondary);
 }
 
 .total-val {
@@ -676,7 +678,7 @@ body {
    RESULT OVERLAY
    ═══════════════════════════════════════ */
 .overlay-screen {
-  background: var(--overlay);
+  background: var(--overlay-bg);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -684,7 +686,7 @@ body {
 }
 
 .result-content {
-  background: var(--bg2);
+  background: var(--bg-secondary);
   border: 1px solid var(--border2);
   border-radius: var(--radius-lg);
   padding: 28px 24px;
@@ -732,14 +734,14 @@ body {
 
 .result-score-unit {
   font-size: 22px;
-  color: var(--text2);
+  color: var(--text-secondary);
 }
 
 .result-best-wrap {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: var(--bg3);
+  background: var(--bg-tertiary);
   border-radius: var(--radius);
   padding: 8px 16px;
   border: 1px solid var(--border);
@@ -747,7 +749,7 @@ body {
 
 .result-best-label {
   font-size: 13px;
-  color: var(--text3);
+  color: var(--text-muted);
 }
 
 .result-best-val {
@@ -779,7 +781,7 @@ body {
 }
 
 .breakdown-section {
-  background: var(--bg3);
+  background: var(--bg-tertiary);
   border-radius: var(--radius);
   overflow: hidden;
   border: 1px solid var(--border);
@@ -788,7 +790,7 @@ body {
 .breakdown-header {
   font-size: 11px;
   font-weight: 700;
-  color: var(--text3);
+  color: var(--text-muted);
   letter-spacing: 1px;
   text-transform: uppercase;
   padding: 8px 12px;
@@ -814,16 +816,16 @@ body {
 }
 
 .breakdown-cat {
-  color: var(--text2);
+  color: var(--text-secondary);
 }
 
 .breakdown-score {
   font-weight: 700;
-  color: var(--text);
+  color: var(--text-primary);
 }
 
 .breakdown-score.zero {
-  color: var(--text3);
+  color: var(--text-muted);
 }
 
 .breakdown-bonus {

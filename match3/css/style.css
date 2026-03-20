@@ -2,19 +2,6 @@
    CSS Variables & Theme
    ============================================ */
 :root {
-  --bg-primary: #0D1117;
-  --bg-secondary: #161B22;
-  --bg-tertiary: #21262D;
-  --text-primary: #F0F6FC;
-  --text-secondary: #8B949E;
-  --text-muted: #484F58;
-  --accent: #3B82F6;
-  --accent-glow: rgba(59, 130, 246, 0.3);
-  --border: #30363D;
-  --btn-bg: #21262D;
-  --btn-active: #30363D;
-  --overlay-bg: rgba(0, 0, 0, 0.88);
-  --board-bg: #0A0E14;
   --board-grid: rgba(48, 54, 61, 0.35);
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
@@ -24,19 +11,6 @@
 
 @media (prefers-color-scheme: light) {
   :root {
-    --bg-primary: #FFFFFF;
-    --bg-secondary: #F6F8FA;
-    --bg-tertiary: #E9ECF0;
-    --text-primary: #1B1E28;
-    --text-secondary: #57606A;
-    --text-muted: #8C959F;
-    --accent: #3182F6;
-    --accent-glow: rgba(49, 130, 246, 0.2);
-    --border: #D0D7DE;
-    --btn-bg: #E9ECF0;
-    --btn-active: #D0D7DE;
-    --overlay-bg: rgba(255, 255, 255, 0.92);
-    --board-bg: #F0F2F5;
     --board-grid: rgba(208, 215, 222, 0.45);
   }
 }

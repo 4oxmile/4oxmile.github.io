@@ -10,10 +10,6 @@
 }
 
 :root {
-  --bg: #0a0e14;
-  --surface: #131920;
-  --border: #1e2a38;
-
   /* Color palette - dim (default) */
   --red-dim:    #5a1a1a;
   --blue-dim:   #1a2e5a;
@@ -32,10 +28,6 @@
   --green-glow:  rgba(16, 185, 129, 0.7);
   --yellow-glow: rgba(234, 179, 8, 0.7);
 
-  --text-primary:   #e8edf3;
-  --text-secondary: #7a8fa8;
-  --accent:         #3B82F6;
-
   --radius-btn: 20px;
   --gap: 12px;
   --btn-size: min(42vw, 200px);
@@ -47,9 +39,9 @@ html, body {
 }
 
 body {
-  background-color: var(--bg);
+  background-color: var(--bg-primary);
   color: var(--text-primary);
-  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Pretendard', 'Segoe UI', Roboto, sans-serif;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -110,7 +102,7 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 4px;
-  background: var(--surface);
+  background: var(--bg-secondary);
   border: 1px solid var(--border);
   border-radius: 16px;
   padding: 16px 40px;
@@ -141,7 +133,7 @@ body {
   flex-direction: column;
   gap: 12px;
   width: 100%;
-  background: var(--surface);
+  background: var(--bg-secondary);
   border: 1px solid var(--border);
   border-radius: 16px;
   padding: 20px 32px;
@@ -336,7 +328,7 @@ body {
   justify-content: center;
   width: 72px;
   height: 72px;
-  background: var(--bg);
+  background: var(--bg-primary);
   border: 2px solid var(--border);
   border-radius: 50%;
   pointer-events: none;
@@ -401,17 +393,3 @@ body {
   :root { --btn-size: min(44vw, 160px); --gap: 8px; }
 }
 
-/* ============================================================
-   Leaderboard TOP5 — Simon은 항상 다크 배경이므로
-   OS 라이트 모드에서도 밝은 텍스트 색 강제 적용
-   ============================================================ */
-.lb-start-ranking {
-  background: rgba(255, 255, 255, 0.07) !important;
-  border-color: rgba(255, 255, 255, 0.14) !important;
-}
-.lb-start-title  { color: rgba(255, 255, 255, 0.6)  !important; }
-.lb-start-rank   { color: rgba(255, 255, 255, 0.55) !important; }
-.lb-start-name   { color: rgba(255, 255, 255, 0.9)  !important; }
-.lb-start-score  { color: rgba(255, 255, 255, 0.75) !important; }
-.lb-start-status { color: rgba(255, 255, 255, 0.45) !important; }
-.lb-start-row:nth-child(odd) { background: rgba(255, 255, 255, 0.04) !important; }
