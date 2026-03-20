@@ -179,15 +179,18 @@ body {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #3b82f6, #6366f1);
+  background: var(--accent);
   color: #fff;
-  box-shadow: 0 4px 20px rgba(59,130,246,0.35);
   width: 100%;
   max-width: 280px;
 }
 
 .btn-primary:hover {
-  box-shadow: 0 4px 28px rgba(59,130,246,0.5);
+  filter: brightness(1.1);
+}
+
+.btn-primary:active {
+  transform: scale(0.97);
 }
 
 .btn-roll {

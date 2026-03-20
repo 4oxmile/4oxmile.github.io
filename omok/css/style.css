@@ -197,23 +197,17 @@ body {
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #3B82F6, #8B5CF6);
+  background: var(--accent);
   border-color: transparent;
   color: #fff;
-  position: relative;
-  overflow: hidden;
 }
 
-.btn-primary::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(255, 255, 255, 0);
-  transition: background 0.2s ease;
+.btn-primary:hover {
+  filter: brightness(1.1);
 }
 
-.btn-primary:hover::after {
-  background: rgba(255, 255, 255, 0.08);
+.btn-primary:active {
+  transform: scale(0.97);
 }
 
 .btn-small {

@@ -178,32 +178,22 @@ body {
   padding: 14px 24px;
   border: none;
   border-radius: 12px;
-  background: linear-gradient(135deg, #3B82F6, #8B5CF6);
+  background: var(--accent);
   color: #fff;
   font-family: inherit;
   font-size: 16px;
   font-weight: 700;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: filter 0.15s ease, transform 0.15s ease;
   letter-spacing: 0.5px;
-  position: relative;
-  overflow: hidden;
 }
 
-.btn-primary::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(255, 255, 255, 0);
-  transition: background 0.2s ease;
-}
-
-.btn-primary:hover::after {
-  background: rgba(255, 255, 255, 0.08);
+.btn-primary:hover {
+  filter: brightness(1.1);
 }
 
 .btn-primary:active {
-  transform: scale(0.98);
+  transform: scale(0.97);
 }
 
 .btn-secondary {

@@ -227,7 +227,7 @@ body {
 /* Buttons */
 .btn-primary {
   padding: 14px 40px;
-  background: linear-gradient(135deg, #3B82F6, #8B5CF6);
+  background: var(--accent);
   border: none;
   border-radius: 12px;
   color: #ffffff;
@@ -236,18 +236,17 @@ body {
   cursor: pointer;
   font-family: inherit;
   letter-spacing: 1px;
-  transition: all 0.15s ease;
+  transition: filter 0.15s ease, transform 0.15s ease;
   min-width: 200px;
   text-align: center;
 }
 
 .btn-primary:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+  filter: brightness(1.1);
 }
 
 .btn-primary:active {
-  transform: translateY(0);
+  transform: scale(0.97);
 }
 
 .btn-secondary {

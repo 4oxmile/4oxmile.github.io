@@ -190,20 +190,22 @@ body {
   padding: 16px;
   border: none;
   border-radius: 12px;
-  background: linear-gradient(135deg, var(--accent), #8B5CF6);
+  background: var(--accent);
   color: #ffffff;
   font-family: inherit;
   font-size: 1.05rem;
   font-weight: 700;
   letter-spacing: 0.05em;
   cursor: pointer;
-  box-shadow: 0 4px 20px rgba(59, 130, 246, 0.35);
-  transition: transform 0.15s ease, opacity 0.15s ease;
+  transition: filter 0.15s ease, transform 0.15s ease;
+}
+
+.start-btn:hover {
+  filter: brightness(1.1);
 }
 
 .start-btn:active {
   transform: scale(0.97);
-  opacity: 0.9;
 }
 
 /* ── Win screen ── */
@@ -273,17 +275,20 @@ body {
   padding: 13px;
   border: none;
   border-radius: 10px;
-  background: linear-gradient(135deg, var(--accent), #8B5CF6);
+  background: var(--accent);
   color: #ffffff;
   font-family: inherit;
   font-size: 0.9rem;
   font-weight: 700;
   cursor: pointer;
-  transition: opacity 0.15s ease, transform 0.15s ease;
+  transition: filter 0.15s ease, transform 0.15s ease;
+}
+
+.btn-primary:hover {
+  filter: brightness(1.1);
 }
 
 .btn-primary:active {
-  opacity: 0.85;
   transform: scale(0.97);
 }
 
