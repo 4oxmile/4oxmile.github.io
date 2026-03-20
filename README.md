@@ -23,7 +23,7 @@
 
 ## 게임 목록
 
-총 **37개** 게임이 포함되어 있습니다.
+총 **40개** 게임이 포함되어 있습니다.
 
 ### 퍼즐 / 전략
 
@@ -42,6 +42,9 @@
 | **[FREECELL](https://4ox.kr/freecell/)** | 프리셀 카드 게임 |
 | **[BLACKJACK](https://4ox.kr/blackjack/)** | 딜러를 이겨 칩을 모으세요 |
 | **[MAHJONG](https://4ox.kr/mahjong/)** | 같은 타일 쌍을 모두 제거하세요 |
+| **[PIPE](https://4ox.kr/pipe/)** | 타일을 회전해 물길을 연결하세요 |
+| **[YACHT DICE](https://4ox.kr/yacht/)** | 5개 주사위로 12가지 점수 도전 |
+| **[SIMON](https://4ox.kr/simon/)** | 색깔 패턴을 기억하고 따라하세요 |
 
 ### 보드 / 대전 (vs AI)
 
@@ -90,6 +93,7 @@
 - **Backend** : [Supabase](https://supabase.com) (리더보드 및 클릭 집계)
 - **Hosting** : GitHub Pages
 - **Font** : Pretendard, System UI
+- **Design System** : 공유 CSS 토큰 (`css/tokens.css`) 기반 다크/라이트 모드, 접근성(reduced-motion) 지원
 
 ---
 
@@ -99,7 +103,11 @@
 4ox.kr/
 ├── index.html              # 메인 게임 목록 페이지
 ├── css/
-│   └── game-icons.css      # 게임 아이콘 스타일
+│   ├── tokens.css          # 공유 디자인 토큰 (다크/라이트 모드)
+│   ├── nav.css             # 공유 홈 네비게이션 스타일
+│   ├── game-icons.css      # 게임 아이콘 스타일
+│   ├── leaderboard.css     # 리더보드 공용 스타일
+│   └── cards.css           # 카드게임 공용 스타일
 ├── js/
 │   ├── supabase-config.js  # Supabase 설정
 │   └── leaderboard.js      # 리더보드 모듈
@@ -107,7 +115,7 @@
 ├── tetris/
 ├── snake/
 ├── chess/
-├── ...                     # (총 37개 게임)
+├── ...                     # (총 40개 게임)
 ├── supabase-setup.sql      # Supabase DB 스키마 마이그레이션
 ├── CNAME                   # 커스텀 도메인 설정 (4ox.kr)
 └── 404.html                # 404 에러 페이지
