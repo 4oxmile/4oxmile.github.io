@@ -545,7 +545,7 @@ body {
   font-size: 13px;
 }
 
-.btn-icon {
+.icon-btn {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -561,16 +561,16 @@ body {
   font-family: inherit;
 }
 
-.btn-icon .btn-text {
+.icon-btn .btn-text {
   font-size: 13px;
   color: var(--text-secondary);
 }
 
-.btn-icon:hover {
+.icon-btn:hover {
   background: var(--btn-active);
 }
 
-.btn-icon:active {
+.icon-btn:active {
   transform: scale(0.95);
 }
 

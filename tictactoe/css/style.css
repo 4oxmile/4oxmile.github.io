@@ -555,7 +555,7 @@ body {
   justify-content: center;
 }
 
-.btn-icon {
+.icon-btn {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -571,17 +571,17 @@ body {
   transition: all 0.18s ease;
 }
 
-.btn-icon:hover {
+.icon-btn:hover {
   border-color: var(--accent);
   color: var(--text-primary);
   background: var(--btn-active);
 }
 
-.btn-icon:active {
+.icon-btn:active {
   transform: scale(0.97);
 }
 
-.btn-icon svg {
+.icon-btn svg {
   width: 16px;
   height: 16px;
   flex-shrink: 0;

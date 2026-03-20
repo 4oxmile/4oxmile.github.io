@@ -431,12 +431,12 @@ body {
 }
 
 /* ── Pause button ── */
-.btn-icon {
+.icon-btn {
   background: var(--btn-bg);
   border: 1px solid var(--border);
   border-radius: 10px;
-  width: 38px;
-  height: 38px;
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -447,7 +447,7 @@ body {
   flex-shrink: 0;
 }
 
-.btn-icon:hover {
+.icon-btn:hover {
   background: var(--btn-active);
   color: var(--text-primary);
 }

@@ -155,7 +155,7 @@ body {
   color: var(--text-primary);
 }
 
-.btn-icon {
+.icon-btn {
   background: var(--btn-bg);
   color: var(--text-secondary);
   border: 1px solid var(--border);
@@ -166,7 +166,7 @@ body {
   height: 36px;
 }
 
-.btn-icon:hover {
+.icon-btn:hover {
   background: var(--btn-active);
   color: var(--text-primary);
 }

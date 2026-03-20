@@ -673,8 +673,8 @@ class ChessUI {
           <span class="header-title">CHESS</span>
         </div>
         <div class="header-controls">
-          <button class="btn btn-icon" id="undo-btn" title="무르기">↩</button>
-          <button class="btn btn-icon" id="menu-btn" title="메뉴">☰</button>
+          <button class="btn icon-btn" id="undo-btn" title="무르기">↩</button>
+          <button class="btn icon-btn" id="menu-btn" title="메뉴">☰</button>
         </div>
       </div>
 
