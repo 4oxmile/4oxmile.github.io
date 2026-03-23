@@ -19,40 +19,43 @@
   <div id="app">
     <!-- START SCREEN -->
     <div id="start-screen" class="overlay active">
-      <div class="title-wrap">
+      <div class="overlay-content">
         <div class="game-logo-css">🃏</div>
-        <h1 class="screen-title">BLACKJACK</h1>
-        <p class="screen-subtitle">딜러를 이겨 칩을 모으세요</p>
+        <h1 class="game-title">BLACKJACK</h1>
+        <p class="game-desc">딜러를 이겨 칩을 모으세요</p>
+        <div class="start-cards-preview">
+          <div class="preview-card">A<span class="suit-center">♠</span></div>
+          <div class="preview-card red">K<span class="suit-center">♥</span></div>
+          <div class="preview-card">J<span class="suit-center">♣</span></div>
+          <div class="preview-card red">Q<span class="suit-center">♦</span></div>
+        </div>
+        <p class="game-hint">칩이 0이 되면 게임 종료</p>
+        <button class="cta-btn start-btn">게임 시작</button>
       </div>
-      <div class="start-cards-preview">
-        <div class="preview-card">A<span class="suit-center">♠</span></div>
-        <div class="preview-card red">K<span class="suit-center">♥</span></div>
-        <div class="preview-card">J<span class="suit-center">♣</span></div>
-        <div class="preview-card red">Q<span class="suit-center">♦</span></div>
-      </div>
-      <button class="start-btn">게임 시작</button>
     </div>
 
     <!-- WIN / GAME OVER SCREEN -->
     <div id="win-screen" class="overlay">
-      <div class="win-icon" id="win-icon">🏆</div>
-      <h2 class="win-title" id="win-title">게임 종료</h2>
-      <div class="win-stats">
-        <div class="stat-row">
-          <span class="stat-label">최고 보유 칩</span>
-          <span class="stat-value" id="win-max-chips">1000</span>
+      <div class="overlay-content">
+        <div class="win-icon" id="win-icon">🏆</div>
+        <h2 class="over-title" id="win-title">게임 종료</h2>
+        <div class="win-stats">
+          <div class="stat-row">
+            <span class="stat-label">최고 보유 칩</span>
+            <span class="stat-value" id="win-max-chips">1000</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">최종 칩</span>
+            <span class="stat-value" id="win-chips">1000</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">플레이한 라운드</span>
+            <span class="stat-value" id="win-rounds">0</span>
+          </div>
         </div>
-        <div class="stat-row">
-          <span class="stat-label">최종 칩</span>
-          <span class="stat-value" id="win-chips">1000</span>
+        <div class="win-actions">
+          <button class="cta-btn btn-primary" id="win-again-btn">다시 하기</button>
         </div>
-        <div class="stat-row">
-          <span class="stat-label">플레이한 라운드</span>
-          <span class="stat-value" id="win-rounds">0</span>
-        </div>
-      </div>
-      <div class="win-actions">
-        <button class="btn-primary" id="win-again-btn">다시 하기</button>
       </div>
     </div>
 
@@ -149,7 +152,8 @@
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/js/theme-init.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="/js/supabase-config.js"></script>
   <script src="/js/leaderboard.js"></script>
   <script src="js/game.js"></script>
