@@ -1,11 +1,16 @@
-(function () {
-  'use strict';
+/* ============================================================
+   SKIPPITY — game.js
+   Core game logic, AI, rendering. Exposes window.Game for online.js
+   ============================================================ */
+
+'use strict';
+
+window.Game = (function () {
 
   /* ── Constants ──────────────────────────────────────── */
   const SIZE = 10;
   const NUM_COLORS = 5;
   const COLOR_CSS = ['c0', 'c1', 'c2', 'c3', 'c4'];
-  const COLOR_NAMES = ['빨강', '파랑', '초록', '노랑', '보라'];
   const DIR = [[-1, 0], [1, 0], [0, -1], [0, 1]];
   const STATS_KEY = 'skippity_stats';
   const DIFF_KEY = 'skippity_diff';
@@ -15,12 +20,17 @@
   let playerCap = [0, 0, 0, 0, 0];
   let aiCap = [0, 0, 0, 0, 0];
   let turn = 'player';
-  let selected = null;   // {r, c} — piece player clicked to start
-  let jumping = null;    // {r, c} — piece currently in multi-jump
+  let selected = null;
+  let jumping = null;
   let gameActive = false;
   let difficulty = 'normal';
   let stats = { wins: 0, losses: 0, draws: 0 };
   let aiThinking = false;
+
+  /* ── Online mode hooks ─────────────────────────────── */
+  let onlineMode = false;
+  let turnMoves = [];          // records jumps during player's turn
+  let onTurnEndCb = null;      // callback when player finishes turn
 
   /* ── DOM Helpers ────────────────────────────────────── */
   const $ = (id) => document.getElementById(id);
@@ -36,9 +46,15 @@
 
   function setupListeners() {
     $('start-btn').addEventListener('click', startGame);
-    $('play-again-btn').addEventListener('click', startGame);
+    $('play-again-btn').addEventListener('click', () => {
+      if (onlineMode) { showMenu(); return; }
+      startGame();
+    });
     $('back-btn').addEventListener('click', () => { window.location.href = '/'; });
-    $('restart-btn').addEventListener('click', startGame);
+    $('restart-btn').addEventListener('click', () => {
+      if (onlineMode) return; // no restart in online
+      startGame();
+    });
     $('menu-btn').addEventListener('click', showMenu);
     $('end-turn-btn').addEventListener('click', endPlayerTurn);
 
@@ -68,6 +84,8 @@
 
   /* ── Game Start ─────────────────────────────────────── */
   function startGame() {
+    onlineMode = false;
+    turnMoves = [];
     board = createBoard();
     playerCap = [0, 0, 0, 0, 0];
     aiCap = [0, 0, 0, 0, 0];
@@ -77,10 +95,37 @@
     gameActive = true;
     aiThinking = false;
 
-    $('start-overlay').classList.add('hidden');
-    $('result-overlay').classList.add('hidden');
-    hideEndTurn();
+    // Restore labels for AI mode
+    const aiLabel = $('ai-label');
+    if (aiLabel) aiLabel.textContent = 'AI';
 
+    hideAllOverlays();
+    hideEndTurn();
+    renderBoard();
+    renderScores();
+    updateTurnUI();
+  }
+
+  function startOnline(flatBoard, iAmFirst) {
+    onlineMode = true;
+    turnMoves = [];
+    board = unflattenBoard(flatBoard);
+    playerCap = [0, 0, 0, 0, 0];
+    aiCap = [0, 0, 0, 0, 0];
+    turn = iAmFirst ? 'player' : 'ai';
+    selected = null;
+    jumping = null;
+    gameActive = true;
+    aiThinking = false;
+
+    // Update labels for online
+    const aiLabel = $('ai-label');
+    if (aiLabel) aiLabel.textContent = '상대';
+    const headerTitle = document.querySelector('.header-title');
+    if (headerTitle) headerTitle.textContent = 'ONLINE';
+
+    hideAllOverlays();
+    hideEndTurn();
     renderBoard();
     renderScores();
     updateTurnUI();
@@ -98,8 +143,25 @@
       b[r] = [];
       for (let c = 0; c < SIZE; c++) b[r][c] = pieces[idx++];
     }
-    // Remove center 4
     b[4][4] = b[4][5] = b[5][4] = b[5][5] = null;
+    return b;
+  }
+
+  function flattenBoard() {
+    const flat = [];
+    for (let r = 0; r < SIZE; r++)
+      for (let c = 0; c < SIZE; c++)
+        flat.push(board[r][c]);
+    return flat;
+  }
+
+  function unflattenBoard(flat) {
+    const b = [];
+    for (let r = 0; r < SIZE; r++) {
+      b[r] = [];
+      for (let c = 0; c < SIZE; c++)
+        b[r][c] = flat[r * SIZE + c];
+    }
     return b;
   }
 
@@ -198,6 +260,9 @@
     if (who === 'player') playerCap[capturedColor]++;
     else aiCap[capturedColor]++;
 
+    // Record move for online sync
+    turnMoves.push({ fr, fc, tr: jump.tr, tc: jump.tc, cr: jump.cr, cc: jump.cc, color: capturedColor });
+
     renderScores();
   }
 
@@ -208,17 +273,56 @@
   }
 
   function endPlayerTurn() {
+    const moves = [...turnMoves];
+    turnMoves = [];
     jumping = null;
     selected = null;
     hideEndTurn();
 
-    if (!hasAnyJumps()) { endGame(); return; }
+    if (onlineMode) {
+      // Send moves to opponent, disable board
+      turn = 'ai';
+      updateTurnUI();
+      renderBoard();
+      if (onTurnEndCb) onTurnEndCb(moves);
+      return;
+    }
 
+    // AI mode
+    if (!hasAnyJumps()) { endGame(); return; }
     turn = 'ai';
     updateTurnUI();
     renderBoard();
     aiThinking = true;
     setTimeout(aiTurn, 500);
+  }
+
+  /* ── Receive opponent moves (online) ────────────────── */
+  function applyOpponentMoves(moves, idx) {
+    if (!gameActive) return;
+    if (idx >= moves.length) {
+      if (!hasAnyJumps()) { endGame(); return; }
+      turn = 'player';
+      updateTurnUI();
+      renderBoard();
+      return;
+    }
+
+    const m = moves[idx];
+    const capturedColor = board[m.cr][m.cc];
+    board[m.tr][m.tc] = board[m.fr][m.fc];
+    board[m.fr][m.fc] = null;
+    board[m.cr][m.cc] = null;
+    aiCap[capturedColor]++;
+    renderScores();
+    renderBoard();
+
+    // Highlight opponent's piece
+    const cell = getCellEl(m.tr, m.tc);
+    const piece = cell && cell.querySelector('.piece');
+    if (piece) piece.classList.add('ai-active');
+
+    setTimeout(() => applyOpponentMoves(moves, idx + 1), 400);
   }
 
   /* ── AI ─────────────────────────────────────────────── */
@@ -228,7 +332,6 @@
     const jumpable = getJumpablePieces();
     if (jumpable.length === 0) { endGame(); return; }
 
-    // Find all possible move sequences
     const sequences = [];
     for (const piece of jumpable) {
       findSequences(piece.r, piece.c, piece.r, piece.c, [], sequences, 0);
@@ -238,7 +341,6 @@
 
     let chosen;
     if (difficulty === 'easy') {
-      // Pick a random single jump (no multi-jump for easy)
       const singles = sequences.filter((s) => s.moves.length === 1);
       const pool = singles.length > 0 ? singles : sequences;
       chosen = pool[Math.floor(Math.random() * pool.length)];
@@ -288,19 +390,14 @@
     for (const move of seq.moves) {
       tempCap[move.color]++;
       score += 1;
-      // Bonus for colors AI needs most
       if (aiCap[move.color] <= minBefore) score += 3;
     }
 
-    // Bonus for completing sets
     const setsAfter = Math.min(...tempCap);
     score += (setsAfter - minBefore) * 15;
-
-    // Longer chains slightly preferred
     score += seq.moves.length * 0.3;
 
     if (difficulty === 'hard') {
-      // Block player's needed colors
       const playerMin = Math.min(...playerCap);
       for (const move of seq.moves) {
         if (playerCap[move.color] <= playerMin) score += 2;
@@ -325,7 +422,6 @@
     executeJump(move.fr, move.fc, { tr: move.tr, tc: move.tc, cr: move.cr, cc: move.cc }, 'ai');
     renderBoard();
 
-    // Highlight AI piece
     const cell = getCellEl(move.tr, move.tc);
     const piece = cell && cell.querySelector('.piece');
     if (piece) piece.classList.add('ai-active');
@@ -343,14 +439,15 @@
     const playerTotal = playerCap.reduce((a, b) => a + b, 0);
     const aiTotal = aiCap.reduce((a, b) => a + b, 0);
 
+    const oppLabel = onlineMode ? '상대' : 'AI';
     let result, title, subtitle, icon;
     if (playerSets > aiSets || (playerSets === aiSets && playerTotal > aiTotal)) {
       result = 'win'; title = '승리!'; icon = '🏆';
-      subtitle = `${playerSets}세트 (${playerTotal}개) vs AI ${aiSets}세트 (${aiTotal}개)`;
+      subtitle = `${playerSets}세트 (${playerTotal}개) vs ${oppLabel} ${aiSets}세트 (${aiTotal}개)`;
       stats.wins++;
     } else if (playerSets < aiSets || (playerSets === aiSets && playerTotal < aiTotal)) {
       result = 'lose'; title = '패배'; icon = '😢';
-      subtitle = `${playerSets}세트 (${playerTotal}개) vs AI ${aiSets}세트 (${aiTotal}개)`;
+      subtitle = `${playerSets}세트 (${playerTotal}개) vs ${oppLabel} ${aiSets}세트 (${aiTotal}개)`;
       stats.losses++;
     } else {
       result = 'draw'; title = '무승부'; icon = '🤝';
@@ -367,7 +464,8 @@
   function renderBoard() {
     const boardEl = $('board');
     boardEl.innerHTML = '';
-    const jumpablePieces = (turn === 'player' && !jumping && !aiThinking) ? getJumpablePieces() : [];
+    const isMyTurn = turn === 'player' && !jumping && !aiThinking;
+    const jumpablePieces = isMyTurn ? getJumpablePieces() : [];
 
     for (let r = 0; r < SIZE; r++) {
       for (let c = 0; c < SIZE; c++) {
@@ -380,17 +478,12 @@
           const piece = document.createElement('div');
           piece.className = 'piece ' + COLOR_CSS[board[r][c]];
 
-          // Jumpable indicator
           if (jumpablePieces.some((p) => p.r === r && p.c === c)) {
             piece.classList.add('jumpable');
           }
-
-          // Selected
           if (selected && selected.r === r && selected.c === c) {
             piece.classList.add('selected');
           }
-
-          // Jumping (multi-jump)
           if (jumping && jumping.r === r && jumping.c === c) {
             piece.classList.add('jumping');
           }
@@ -403,7 +496,6 @@
       }
     }
 
-    // Show valid jump destinations
     if (selected) showValidJumps(selected.r, selected.c);
     if (jumping) showValidJumps(jumping.r, jumping.c);
   }
@@ -447,9 +539,13 @@
   function updateTurnUI() {
     const disc = $('turn-disc');
     const text = $('turn-text');
-    disc.className = 'turn-disc ' + (turn === 'player' ? 'player' : 'ai');
-    text.textContent = turn === 'player' ? '당신의 차례 — 말을 선택하세요' : 'AI 생각 중...';
-
+    if (turn === 'player') {
+      disc.className = 'turn-disc player';
+      text.textContent = onlineMode ? '내 차례 — 말을 선택하세요' : '당신의 차례 — 말을 선택하세요';
+    } else {
+      disc.className = 'turn-disc ai';
+      text.textContent = onlineMode ? '상대방의 차례...' : 'AI 생각 중...';
+    }
     $('player-row').classList.toggle('active', turn === 'player');
     $('ai-row').classList.toggle('active', turn === 'ai');
   }
@@ -464,6 +560,13 @@
   }
 
   /* ── Overlays ───────────────────────────────────────── */
+  function hideAllOverlays() {
+    $('start-overlay').classList.add('hidden');
+    $('result-overlay').classList.add('hidden');
+    const lobby = $('lobby-screen');
+    if (lobby) lobby.classList.add('hidden');
+  }
+
   function showResult(result, title, subtitle, icon) {
     $('result-icon').textContent = icon;
     const titleEl = $('result-title');
@@ -471,10 +574,10 @@
     titleEl.className = 'over-title result-title ' + result;
     $('result-subtitle').textContent = subtitle;
 
-    // Build result scores detail
+    const oppLabel = onlineMode ? '상대' : 'AI';
     const scoresEl = $('result-scores');
     scoresEl.innerHTML = '';
-    [{ label: '당신', cap: playerCap }, { label: 'AI', cap: aiCap }].forEach(({ label, cap }) => {
+    [{ label: '나', cap: playerCap }, { label: oppLabel, cap: aiCap }].forEach(({ label, cap }) => {
       const row = document.createElement('div');
       row.className = 'result-score-row';
       row.innerHTML = `<span class="rs-label">${label}</span><div class="rs-dots">${
@@ -489,6 +592,11 @@
   function showMenu() {
     gameActive = false;
     aiThinking = false;
+    onlineMode = false;
+    const headerTitle = document.querySelector('.header-title');
+    if (headerTitle) headerTitle.textContent = 'SKIPPITY';
+    const aiLabel = $('ai-label');
+    if (aiLabel) aiLabel.textContent = 'AI';
     renderStats();
     $('start-overlay').classList.remove('hidden');
   }
@@ -531,4 +639,28 @@
   } else {
     init();
   }
+
+  /* ── Public API ─────────────────────────────────────── */
+  return {
+    // Online mode
+    startOnline,
+    createBoard,
+    flattenBoard,
+    applyOpponentMoves,
+    hasAnyJumps,
+    renderBoard,
+    renderScores,
+    updateTurnUI,
+    showResult,
+    showMenu,
+    hideAllOverlays,
+    endGame,
+    isOnline: () => onlineMode,
+    isActive: () => gameActive,
+    setActive: (v) => { gameActive = v; },
+    setOnline: (v) => { onlineMode = v; },
+    setOnTurnEnd: (cb) => { onTurnEndCb = cb; },
+    getBoard: () => board,
+    setBoard: (b) => { board = b; },
+  };
 })();
