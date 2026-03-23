@@ -19,17 +19,17 @@
 
     <!-- ===== START OVERLAY ===== -->
     <div class="overlay" id="start-screen">
-      <div class="screen-content">
+      <div class="overlay-content">
         <div class="game-logo-css"><span class="icon-target"></span></div>
         <h1 class="game-title">AIM</h1>
-        <p class="game-subtitle">랜덤 위치의 원을 빠르게 클릭하세요!<br>총 5라운드 평균을 측정합니다</p>
+        <p class="game-desc">랜덤 위치의 원을 빠르게 클릭하세요!<br>총 5라운드 평균을 측정합니다</p>
 
         <div class="best-record" id="start-best" style="display:none;">
           <span>🏆 최고 기록</span>
           <span class="record-value" id="start-best-value">—</span>
         </div>
 
-        <button class="btn-primary" id="btn-start">시작하기</button>
+        <button class="cta-btn" id="btn-start">시작하기</button>
       </div>
     </div>
 
@@ -58,8 +58,8 @@
 
     <!-- ===== RESULTS OVERLAY ===== -->
     <div class="overlay hidden" id="results-screen">
-      <div class="screen-content">
-        <h2 class="results-title">결과</h2>
+      <div class="overlay-content">
+        <h2 class="over-title">결과</h2>
 
         <div class="results-avg-label">평균 반응속도</div>
         <div class="results-avg-time" id="results-avg-time">—</div>
@@ -81,13 +81,14 @@
         <div class="rounds-list-title">라운드별 기록</div>
         <div class="rounds-list" id="rounds-list"></div>
 
-        <button class="btn-retry" id="btn-retry">다시 하기</button>
+        <button class="cta-btn" id="btn-retry">다시 하기</button>
       </div>
     </div>
 
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/js/theme-init.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="/js/supabase-config.js"></script>
   <script src="/js/leaderboard.js"></script>
   <script src="js/game.js"></script>

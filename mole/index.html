@@ -18,35 +18,39 @@
 
   <!-- ── Start Overlay ─────────────────────────────── -->
   <div id="start-overlay" class="overlay">
-    <div class="game-logo-css"><span class="icon-mole"></span></div>
-    <h1 class="game-title">MOLE</h1>
-    <p class="game-subtitle">두더지를 빠르게 잡으세요!<br>콤보를 이어갈수록 더 많은 점수!</p>
-    <div class="divider"></div>
-    <div class="diff-group">
-      <button class="diff-btn" data-diff="easy">쉬움</button>
-      <button class="diff-btn active" data-diff="normal">보통</button>
-      <button class="diff-btn" data-diff="hard">어려움</button>
+    <div class="overlay-content">
+      <div class="game-logo-css"><span class="icon-mole"></span></div>
+      <h1 class="game-title">MOLE</h1>
+      <p class="game-desc">두더지를 빠르게 잡으세요!<br>콤보를 이어갈수록 더 많은 점수!</p>
+      <div class="divider"></div>
+      <div class="diff-group">
+        <button class="diff-btn" data-diff="easy">쉬움</button>
+        <button class="diff-btn active" data-diff="normal">보통</button>
+        <button class="diff-btn" data-diff="hard">어려움</button>
+      </div>
+      <button id="btn-start" class="cta-btn">게임 시작</button>
+      <p class="game-hint">최고 기록: <strong id="best-score-start">0</strong></p>
     </div>
-    <button id="btn-start" class="btn primary">게임 시작</button>
-    <p class="game-subtitle" style="font-size:0.78rem; margin-top:-8px;">최고 기록: <strong id="best-score-start">0</strong></p>
   </div>
 
   <!-- ── Game Over Overlay ──────────────────────────── -->
   <div id="gameover-overlay" class="overlay hidden">
-    <h2 class="game-title" style="font-size: clamp(2rem, 12vw, 3.5rem);">결과</h2>
+    <div class="overlay-content">
+      <div class="over-title">결과</div>
 
-    <div class="score-card">
-      <div class="label">이번 점수</div>
-      <div id="final-score" class="value accent">0</div>
-      <div id="new-record-badge" class="new-record-badge" hidden>신기록!</div>
+      <div class="score-card">
+        <div class="label">이번 점수</div>
+        <div id="final-score" class="value accent">0</div>
+        <div id="new-record-badge" class="new-record-badge" hidden>신기록!</div>
+      </div>
+
+      <div class="score-card">
+        <div class="label">최고 기록</div>
+        <div id="final-best" class="value">0</div>
+      </div>
+
+      <button id="btn-restart" class="cta-btn">다시 하기</button>
     </div>
-
-    <div class="score-card">
-      <div class="label">최고 기록</div>
-      <div id="final-best" class="value">0</div>
-    </div>
-
-    <button id="btn-restart" class="btn primary">다시 하기</button>
   </div>
 
   <!-- ── HUD ───────────────────────────────────────── -->
@@ -75,6 +79,7 @@
   </div>
 
 </div>
+<script src="/js/theme-init.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="/js/supabase-config.js"></script>
 <script src="/js/leaderboard.js"></script>

@@ -36,28 +36,33 @@
 
     <!-- Start overlay -->
     <div class="overlay" id="overlay-start">
-      <div class="game-logo-css"><span class="icon-stack"></span></div>
-      <div class="overlay-title">STACK</div>
-      <div class="overlay-subtitle">블록을 쌓아 최고 기록에 도전하세요</div>
-      <button class="btn primary" id="btn-start">시작하기</button>
-      <p class="hint-text">탭 · 클릭 · 스페이스바로 블록을 놓으세요</p>
+      <div class="overlay-content">
+        <div class="game-logo-css"><span class="icon-stack"></span></div>
+        <h1 class="game-title">STACK</h1>
+        <p class="game-desc">블록을 쌓아 최고 기록에 도전하세요</p>
+        <button class="cta-btn" id="btn-start">시작하기</button>
+        <p class="game-hint">탭 · 클릭 · 스페이스바로 블록을 놓으세요</p>
+      </div>
     </div>
 
     <!-- Game Over overlay -->
     <div class="overlay hidden" id="overlay-over">
-      <div class="overlay-title">STACK</div>
-      <div class="overlay-score-section">
-        <span class="overlay-score-label">최종 점수</span>
-        <span class="overlay-score-value" id="over-score-val">0</span>
-        <span class="overlay-best" id="over-best-val">최고 기록: 0</span>
+      <div class="overlay-content">
+        <h2 class="over-title">STACK</h2>
+        <div class="overlay-score-section">
+          <span class="overlay-score-label">최종 점수</span>
+          <span class="overlay-score-value" id="over-score-val">0</span>
+          <span class="overlay-best" id="over-best-val">최고 기록: 0</span>
+        </div>
+        <button class="cta-btn" id="btn-restart">다시 하기</button>
+        <p class="game-hint">탭 · 클릭 · 스페이스바로 재시작</p>
       </div>
-      <button class="btn primary" id="btn-restart">다시 하기</button>
-      <p class="hint-text">탭 · 클릭 · 스페이스바로 재시작</p>
     </div>
 
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/js/theme-init.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="/js/supabase-config.js"></script>
 <script src="/js/leaderboard.js"></script>
 <script src="js/game.js"></script>

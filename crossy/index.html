@@ -40,22 +40,24 @@
 
     <!-- ── START SCREEN ── -->
     <div id="start-screen" class="overlay">
-      <div class="game-logo-css"><span class="icon-crossy"></span></div>
-      <div class="game-title">CROSSY</div>
-      <div class="game-subtitle">도로를 건너라</div>
+      <div class="overlay-content">
+        <div class="game-logo-css"><span class="icon-crossy"></span></div>
+        <div class="game-title">CROSSY</div>
+        <div class="game-desc">도로를 건너라</div>
 
-      <div class="character-preview">🐣</div>
+        <div class="character-preview">🐣</div>
 
-      <div class="best-score-display">
-        🏆 최고 기록 <span class="score-value" id="start-best-score">0</span>
+        <div class="best-score-display">
+          🏆 최고 기록 <span class="score-value" id="start-best-score">0</span>
+        </div>
+
+        <button class="cta-btn" id="btn-start" onclick="startGame()">
+          🎮 게임 시작
+        </button>
+        <button class="btn-secondary" onclick="showHowToPlay()">
+          ❓ 도움말
+        </button>
       </div>
-
-      <button class="btn-primary" id="btn-start" onclick="startGame()">
-        🎮 게임 시작
-      </button>
-      <button class="btn-secondary" onclick="showHowToPlay()">
-        ❓ 도움말
-      </button>
     </div>
 
     <!-- ── HOW TO PLAY ── -->
@@ -109,34 +111,36 @@
 
     <!-- ── GAME OVER SCREEN ── -->
     <div id="gameover-screen" class="overlay">
-      <div class="gameover-icon" id="gameover-icon">💥</div>
-      <div class="gameover-title">게임 오버</div>
+      <div class="overlay-content">
+        <div class="gameover-icon" id="gameover-icon">💥</div>
+        <div class="over-title">게임 오버</div>
 
-      <div class="new-record-badge hidden" id="new-record-badge">
-        🏆 신기록!
+        <div class="new-record-badge hidden" id="new-record-badge">
+          🏆 신기록!
+        </div>
+
+        <div class="score-cards">
+          <div class="score-card">
+            <div class="score-card-label">점수</div>
+            <div class="score-card-value" id="go-score">0</div>
+          </div>
+          <div class="score-card">
+            <div class="score-card-label">최고</div>
+            <div class="score-card-value gold" id="go-best">0</div>
+          </div>
+          <div class="score-card">
+            <div class="score-card-label">코인</div>
+            <div class="score-card-value" id="go-coins">0</div>
+          </div>
+        </div>
+
+        <button class="cta-btn" onclick="startGame()">
+          🔄 다시 하기
+        </button>
+        <button class="btn-secondary" onclick="quitToMenu()">
+          🏠 메인으로
+        </button>
       </div>
-
-      <div class="score-cards">
-        <div class="score-card">
-          <div class="score-card-label">점수</div>
-          <div class="score-card-value" id="go-score">0</div>
-        </div>
-        <div class="score-card">
-          <div class="score-card-label">최고</div>
-          <div class="score-card-value gold" id="go-best">0</div>
-        </div>
-        <div class="score-card">
-          <div class="score-card-label">코인</div>
-          <div class="score-card-value" id="go-coins">0</div>
-        </div>
-      </div>
-
-      <button class="btn-primary" onclick="startGame()">
-        🔄 다시 하기
-      </button>
-      <button class="btn-secondary" onclick="quitToMenu()">
-        🏠 메인으로
-      </button>
     </div>
 
     <!-- ── MOBILE CONTROLS ── -->
@@ -154,6 +158,7 @@
   </div>
 </div>
 
+<script src="/js/theme-init.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="/js/supabase-config.js"></script>
 <script src="/js/leaderboard.js"></script>

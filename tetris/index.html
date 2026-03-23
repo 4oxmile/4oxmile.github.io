@@ -20,17 +20,15 @@
       <div class="overlay-content">
         <div class="game-logo-css"><span class="icon-tetris"></span></div>
         <h1 class="game-title">TETRIS</h1>
-        <p class="subtitle">탭하여 시작</p>
-        <div class="start-info">
-          <span>최고 점수: <span id="start-highscore">0</span></span>
-        </div>
+        <p class="game-hint">최고 점수: <span id="start-highscore">0</span></p>
+        <button class="cta-btn">시작하기</button>
       </div>
     </div>
 
     <!-- Game Over Screen -->
     <div id="gameover-screen" class="overlay hidden">
       <div class="overlay-content">
-        <h2 class="gameover-title">GAME OVER</h2>
+        <h2 class="over-title">GAME OVER</h2>
         <div class="final-score">
           <div class="score-label">점수</div>
           <div id="final-score-value" class="score-value">0</div>
@@ -46,7 +44,7 @@
           </div>
         </div>
         <div id="new-record" class="new-record hidden">NEW RECORD!</div>
-        <p class="subtitle">탭하여 다시 시작</p>
+        <button class="cta-btn">다시하기</button>
       </div>
     </div>
 
@@ -114,7 +112,8 @@
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/js/theme-init.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="/js/supabase-config.js"></script>
   <script src="/js/leaderboard.js"></script>
   <script src="js/tetris.js"></script>

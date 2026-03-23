@@ -522,7 +522,10 @@ function toggleNotesMode() {
 function showScreen(name) {
   document.querySelectorAll('.overlay').forEach(s => s.classList.remove('active'));
   const target = document.getElementById(`screen-${name}`);
-  if (target) target.classList.add('active');
+  if (target) {
+    target.classList.remove('hidden');
+    target.classList.add('active');
+  }
 }
 
 function showOverlay(name) {

@@ -383,6 +383,32 @@
   .lb-start-status { color: rgba(0, 0, 0, 0.3); }
 }
 
+/* ── data-theme forced dark ──────────────────────── */
+html[data-theme="dark"] .lb-overlay { background: rgba(0, 0, 0, 0.7); }
+html[data-theme="dark"] .lb-row:nth-child(odd) { background: rgba(255, 255, 255, 0.02); }
+html[data-theme="dark"] .lb-row-mine { background: rgba(59, 130, 246, 0.1) !important; border-color: rgba(59, 130, 246, 0.3); }
+html[data-theme="dark"] #lb-fab { box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4); }
+html[data-theme="dark"] .lb-start-ranking { background: rgba(255, 255, 255, 0.06); border-color: rgba(255, 255, 255, 0.1); }
+html[data-theme="dark"] .lb-start-title { color: rgba(255, 255, 255, 0.5); }
+html[data-theme="dark"] .lb-start-row:nth-child(odd) { background: rgba(255, 255, 255, 0.03); }
+html[data-theme="dark"] .lb-start-rank { color: rgba(255, 255, 255, 0.5); }
+html[data-theme="dark"] .lb-start-name { color: rgba(255, 255, 255, 0.85); }
+html[data-theme="dark"] .lb-start-score { color: rgba(255, 255, 255, 0.7); }
+html[data-theme="dark"] .lb-start-status { color: rgba(255, 255, 255, 0.35); }
+
+/* ── data-theme forced light ─────────────────────── */
+html[data-theme="light"] .lb-overlay { background: rgba(255, 255, 255, 0.7); }
+html[data-theme="light"] .lb-row:nth-child(odd) { background: rgba(0, 0, 0, 0.02); }
+html[data-theme="light"] .lb-row-mine { background: rgba(49, 130, 246, 0.08) !important; border-color: rgba(49, 130, 246, 0.2); }
+html[data-theme="light"] #lb-fab { box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15); }
+html[data-theme="light"] .lb-start-ranking { background: rgba(0, 0, 0, 0.05); border-color: rgba(0, 0, 0, 0.1); }
+html[data-theme="light"] .lb-start-title { color: rgba(0, 0, 0, 0.4); }
+html[data-theme="light"] .lb-start-row:nth-child(odd) { background: rgba(0, 0, 0, 0.03); }
+html[data-theme="light"] .lb-start-rank { color: rgba(0, 0, 0, 0.4); }
+html[data-theme="light"] .lb-start-name { color: rgba(0, 0, 0, 0.75); }
+html[data-theme="light"] .lb-start-score { color: rgba(0, 0, 0, 0.6); }
+html[data-theme="light"] .lb-start-status { color: rgba(0, 0, 0, 0.3); }
+
 /* ── Reduced motion ───────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   #lb-fab,

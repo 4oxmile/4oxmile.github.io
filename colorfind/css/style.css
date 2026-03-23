@@ -499,6 +499,62 @@ body {
   100% { transform: translate(-50%, -80%) scale(0.8); opacity: 0; }
 }
 
+/* ── Styleguide Standard Classes ── */
+.overlay-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 40px 32px;
+  max-width: 360px;
+  width: 90%;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+}
+
+.game-desc {
+  font-size: 16px;
+  color: var(--text-secondary);
+  text-align: center;
+  line-height: 1.6;
+}
+
+.game-hint {
+  font-size: 13px;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+  text-align: center;
+  line-height: 1.7;
+}
+
+.over-title {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.cta-btn {
+  padding: 14px 48px;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: inherit;
+  color: #fff;
+  background: var(--accent);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: filter .15s, transform .15s, box-shadow .15s;
+  box-shadow: 0 4px 20px var(--accent-glow);
+  letter-spacing: .5px;
+  width: 100%;
+  max-width: 280px;
+}
+
+.cta-btn:hover { filter: brightness(1.1); }
+.cta-btn:active { transform: scale(0.97); }
+
 /* ── Responsive tweaks ── */
 @media (max-height: 700px) {
   .hud {

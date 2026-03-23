@@ -1,0 +1,482 @@
+/* ═══════════════════════════════════════════════════
+   Sample Styleguide — 2048 디자인 기반 공통 컴포넌트
+   ═══════════════════════════════════════════════════ */
+
+/* ===========================
+   Theme Overrides
+   data-theme 속성으로 강제 다크/라이트 전환
+   (시스템 모드일 때는 tokens.css의 media query 사용)
+   =========================== */
+html[data-theme="dark"] {
+  --bg-primary: #0D1117;
+  --bg-secondary: #161B22;
+  --bg-tertiary: #21262D;
+  --text-primary: #F0F6FC;
+  --text-secondary: #8B949E;
+  --text-muted: #484F58;
+  --accent: #3B82F6;
+  --accent-glow: rgba(59, 130, 246, 0.3);
+  --border: #30363D;
+  --btn-bg: #21262D;
+  --btn-active: #30363D;
+  --overlay-bg: rgba(0, 0, 0, 0.85);
+  --board-bg: #0A0E14;
+}
+
+html[data-theme="light"] {
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #F6F8FA;
+  --bg-tertiary: #E9ECF0;
+  --text-primary: #1B1E28;
+  --text-secondary: #57606A;
+  --text-muted: #8C959F;
+  --accent: #3182F6;
+  --accent-glow: rgba(49, 130, 246, 0.2);
+  --border: #D0D7DE;
+  --btn-bg: #E9ECF0;
+  --btn-active: #D0D7DE;
+  --overlay-bg: rgba(255, 255, 255, 0.9);
+  --board-bg: #F0F2F5;
+}
+
+/* ===========================
+   Reset & Base
+   =========================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Pretendard', 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* ===========================
+   Theme Toggle Button
+   =========================== */
+.theme-toggle-btn {
+  position: fixed;
+  top: max(env(safe-area-inset-top, 0px), 12px);
+  right: 12px;
+  z-index: 15;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.15s, color 0.15s;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.theme-toggle-btn:hover {
+  background: var(--btn-active);
+  color: var(--text-primary);
+}
+
+/* ===========================
+   Overlay Screens
+   =========================== */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--overlay-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.overlay-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 40px 32px;
+  max-width: 360px;
+  width: 90%;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+/* ===========================
+   Game Title (gradient)
+   =========================== */
+.game-title {
+  font-size: 72px;
+  font-weight: 900;
+  letter-spacing: -2px;
+  background: linear-gradient(135deg, #3B82F6, #8B5CF6, #EC4899);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+}
+
+.game-desc {
+  font-size: 16px;
+  color: var(--text-secondary);
+  text-align: center;
+  line-height: 1.6;
+}
+
+.game-hint {
+  font-size: 13px;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+}
+
+/* ===========================
+   CTA Button
+   =========================== */
+.cta-btn {
+  padding: 14px 48px;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: inherit;
+  color: #fff;
+  background: var(--accent);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: filter 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: 0 4px 20px var(--accent-glow);
+  letter-spacing: 0.5px;
+}
+
+.cta-btn:hover {
+  filter: brightness(1.1);
+}
+
+.cta-btn:active {
+  transform: scale(0.97);
+}
+
+/* ===========================
+   Game Over Overlay specifics
+   =========================== */
+.over-title {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.new-record {
+  font-size: 15px;
+  font-weight: 700;
+  color: #F59E0B;
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  padding: 6px 18px;
+  border-radius: 50px;
+}
+
+.score-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.score-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: var(--bg-tertiary);
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+
+.score-row .score-label {
+  font-size: 14px;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.score-row .score-val {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.score-row .score-val.accent {
+  color: var(--accent);
+}
+
+/* ===========================
+   Game Wrapper
+   =========================== */
+#game-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 480px;
+  padding: 0 16px;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  gap: 0;
+}
+
+/* ===========================
+   Header
+   =========================== */
+.game-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 20px 0 12px;
+}
+
+.header-title {
+  font-size: 36px;
+  font-weight: 900;
+  letter-spacing: -1px;
+  background: linear-gradient(135deg, #3B82F6, #8B5CF6, #EC4899);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.score-area {
+  display: flex;
+  gap: 8px;
+}
+
+.score-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 16px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  min-width: 70px;
+}
+
+.score-box .score-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.score-number {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+/* ===========================
+   Controls
+   =========================== */
+.controls {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  padding: 0 0 12px;
+}
+
+.control-btn {
+  padding: 8px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: inherit;
+  color: var(--text-secondary);
+  background: var(--btn-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  letter-spacing: 0.3px;
+}
+
+.control-btn:hover {
+  background: var(--btn-active);
+  color: var(--text-primary);
+  border-color: var(--accent);
+}
+
+.control-btn:active {
+  transform: scale(0.97);
+}
+
+/* ===========================
+   Footer
+   =========================== */
+.game-footer {
+  padding: 12px 0 16px;
+  text-align: center;
+}
+
+.game-footer p {
+  font-size: 12px;
+  color: var(--text-muted);
+  letter-spacing: 0.3px;
+}
+
+/* ===========================
+   Animations
+   =========================== */
+@keyframes scorePop {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.3); color: var(--accent); }
+  100% { transform: scale(1); }
+}
+
+.score-pop {
+  animation: scorePop 0.25s ease;
+}
+
+/* ═══════════════════════════════════════════════════
+   Styleguide-only Styles (아래는 복사 불필요)
+   ═══════════════════════════════════════════════════ */
+
+.sg-page {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 60px 16px 40px;
+}
+
+.sg-page-title {
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: -1px;
+  background: linear-gradient(135deg, #3B82F6, #8B5CF6, #EC4899);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 4px;
+}
+
+.sg-page-desc {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 32px;
+}
+
+.sg-section {
+  margin-bottom: 32px;
+}
+
+.sg-section-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.sg-demo {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sg-demo-row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.sg-demo-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 24px;
+  width: 100%;
+}
+
+.sg-overlay-preview {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  min-height: 320px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border);
+}
+
+.sg-overlay-preview .overlay {
+  position: absolute;
+  opacity: 1;
+  pointer-events: none;
+}
+
+.sg-label {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+}
+
+.sg-color-swatch {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.sg-swatch {
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 4px;
+  font-size: 8px;
+  color: var(--text-muted);
+}
+
+.sg-typo-sample {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sg-theme-indicator {
+  position: fixed;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 50px;
+  padding: 6px 16px;
+  z-index: 15;
+}

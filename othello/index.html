@@ -16,73 +16,75 @@
 
     <!-- ── Start Screen ──────────────────────────────────────── -->
     <div id="start-screen" class="overlay">
+      <div class="overlay-content">
 
-      <div>
         <div class="game-logo-css"><span class="icon-othello"></span></div>
         <h1 class="game-title">OTHELLO</h1>
-        <p class="game-subtitle">오델로 · 리버시</p>
+        <p class="game-desc">오델로 · 리버시</p>
+
+        <!-- Win/loss stats -->
+        <div class="stats-row">
+          <div class="stat-box">
+            <span class="stat-value" id="start-stat-wins">0</span>
+            <span class="stat-label">승리</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-value" id="start-stat-draws">0</span>
+            <span class="stat-label">무승부</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-value" id="start-stat-losses">0</span>
+            <span class="stat-label">패배</span>
+          </div>
+        </div>
+
+        <!-- Difficulty selector -->
+        <div class="difficulty-group">
+          <span class="difficulty-label">난이도</span>
+          <div class="difficulty-pills">
+            <button class="diff-btn" data-diff="easy">쉬움</button>
+            <button class="diff-btn active" data-diff="normal">보통</button>
+            <button class="diff-btn" data-diff="hard">어려움</button>
+          </div>
+        </div>
+
+        <button id="start-btn" class="cta-btn">게임 시작</button>
+
       </div>
-
-      <!-- Win/loss stats -->
-      <div class="stats-row">
-        <div class="stat-box">
-          <span class="stat-value" id="start-stat-wins">0</span>
-          <span class="stat-label">승리</span>
-        </div>
-        <div class="stat-box">
-          <span class="stat-value" id="start-stat-draws">0</span>
-          <span class="stat-label">무승부</span>
-        </div>
-        <div class="stat-box">
-          <span class="stat-value" id="start-stat-losses">0</span>
-          <span class="stat-label">패배</span>
-        </div>
-      </div>
-
-      <!-- Difficulty selector -->
-      <div class="difficulty-group">
-        <span class="difficulty-label">난이도</span>
-        <div class="difficulty-pills">
-          <button class="diff-btn" data-diff="easy">쉬움</button>
-          <button class="diff-btn active" data-diff="normal">보통</button>
-          <button class="diff-btn" data-diff="hard">어려움</button>
-        </div>
-      </div>
-
-      <button id="start-btn" class="btn btn-primary">게임 시작</button>
-
     </div>
 
     <!-- ── Result Screen ─────────────────────────────────────── -->
     <div id="result-screen" class="overlay hidden">
+      <div class="overlay-content">
 
-      <div class="result-icon" id="result-icon">🏆</div>
-      <div class="result-title" id="result-title">승리!</div>
-      <p class="result-score">
-        나 (흑)&nbsp;<strong id="result-black">0</strong>
-        &nbsp;:&nbsp;
-        <strong id="result-white">0</strong>&nbsp;AI (백)
-      </p>
+        <div class="result-icon" id="result-icon">🏆</div>
+        <div class="over-title" id="result-title">승리!</div>
+        <p class="result-score">
+          나 (흑)&nbsp;<strong id="result-black">0</strong>
+          &nbsp;:&nbsp;
+          <strong id="result-white">0</strong>&nbsp;AI (백)
+        </p>
 
-      <!-- Updated stats after game -->
-      <div class="stats-row">
-        <div class="stat-box">
-          <span class="stat-value" id="result-stat-wins">0</span>
-          <span class="stat-label">승리</span>
+        <!-- Updated stats after game -->
+        <div class="stats-row">
+          <div class="stat-box">
+            <span class="stat-value" id="result-stat-wins">0</span>
+            <span class="stat-label">승리</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-value" id="result-stat-draws">0</span>
+            <span class="stat-label">무승부</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-value" id="result-stat-losses">0</span>
+            <span class="stat-label">패배</span>
+          </div>
         </div>
-        <div class="stat-box">
-          <span class="stat-value" id="result-stat-draws">0</span>
-          <span class="stat-label">무승부</span>
-        </div>
-        <div class="stat-box">
-          <span class="stat-value" id="result-stat-losses">0</span>
-          <span class="stat-label">패배</span>
-        </div>
+
+        <button id="play-again-btn" class="cta-btn">다시 하기</button>
+        <button id="home-btn" class="btn">처음으로</button>
+
       </div>
-
-      <button id="play-again-btn" class="btn btn-primary">다시 하기</button>
-      <button id="home-btn" class="btn">처음으로</button>
-
     </div>
 
     <!-- ── Game Screen ───────────────────────────────────────── -->
@@ -163,7 +165,8 @@
 
   </div><!-- /app -->
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/js/theme-init.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="/js/supabase-config.js"></script>
 <script src="/js/leaderboard.js"></script>
 <script src="js/game.js"></script>

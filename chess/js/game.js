@@ -628,44 +628,48 @@ class ChessUI {
     // Start screen
     app.innerHTML = `
       <div id="start-screen" class="overlay">
-        <div class="game-logo-css"><span class="icon-chess"></span></div>
-        <div class="game-title">CHESS</div>
-        <div class="game-subtitle">1인 플레이 · AI 대전</div>
+        <div class="overlay-content">
+          <div class="game-logo-css"><span class="icon-chess"></span></div>
+          <div class="game-title">CHESS</div>
+          <div class="game-desc">1인 플레이 · AI 대전</div>
 
-        <div class="stats-card">
-          <div class="stat-item">
-            <div class="stat-value wins" id="stat-wins">0</div>
-            <div class="stat-label">승리</div>
+          <div class="stats-card">
+            <div class="stat-item">
+              <div class="stat-value wins" id="stat-wins">0</div>
+              <div class="stat-label">승리</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value losses" id="stat-losses">0</div>
+              <div class="stat-label">패배</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value draws" id="stat-draws">0</div>
+              <div class="stat-label">무승부</div>
+            </div>
           </div>
-          <div class="stat-item">
-            <div class="stat-value losses" id="stat-losses">0</div>
-            <div class="stat-label">패배</div>
+
+          <div style="display:flex;flex-direction:column;align-items:center;gap:0.4rem;">
+            <div class="game-hint">난이도</div>
+            <div class="difficulty-row">
+              <button class="diff-btn ${this.difficulty===1?'selected':''}" data-diff="1">쉬움</button>
+              <button class="diff-btn ${this.difficulty===2?'selected':''}" data-diff="2">보통</button>
+              <button class="diff-btn ${this.difficulty===3?'selected':''}" data-diff="3">어려움</button>
+            </div>
           </div>
-          <div class="stat-item">
-            <div class="stat-value draws" id="stat-draws">0</div>
-            <div class="stat-label">무승부</div>
-          </div>
+
+          <button class="cta-btn" id="start-btn">게임 시작</button>
+          <button class="btn btn-secondary" id="reset-stats-btn">기록 초기화</button>
         </div>
-
-        <div style="display:flex;flex-direction:column;align-items:center;gap:0.4rem;">
-          <div style="font-size:0.75rem;color:var(--text-muted);margin-bottom:0.2rem;">난이도</div>
-          <div class="difficulty-row">
-            <button class="diff-btn ${this.difficulty===1?'selected':''}" data-diff="1">쉬움</button>
-            <button class="diff-btn ${this.difficulty===2?'selected':''}" data-diff="2">보통</button>
-            <button class="diff-btn ${this.difficulty===3?'selected':''}" data-diff="3">어려움</button>
-          </div>
-        </div>
-
-        <button class="btn btn-primary" id="start-btn">게임 시작</button>
-        <button class="btn btn-secondary" id="reset-stats-btn">기록 초기화</button>
       </div>
 
       <div id="result-screen" class="overlay hidden">
-        <div class="result-emoji" id="result-emoji"></div>
-        <div class="result-title" id="result-title"></div>
-        <div class="result-subtitle" id="result-subtitle"></div>
-        <button class="btn btn-primary" id="play-again-btn">다시 시작</button>
-        <button class="btn btn-secondary" id="to-menu-btn">메뉴로</button>
+        <div class="overlay-content">
+          <div class="result-emoji" id="result-emoji"></div>
+          <div class="over-title" id="result-title"></div>
+          <div class="game-desc" id="result-subtitle"></div>
+          <button class="cta-btn" id="play-again-btn">다시 시작</button>
+          <button class="btn btn-secondary" id="to-menu-btn">메뉴로</button>
+        </div>
       </div>
 
       <div id="game-header" style="display:none;">

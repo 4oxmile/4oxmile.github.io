@@ -20,25 +20,15 @@
 
     <!-- ════════════ START SCREEN ════════════ -->
     <div id="start-screen" class="overlay">
-      <div class="start-logo">
+      <div class="overlay-content">
         <div class="game-logo-css"><span class="icon-sokoban"></span></div>
-        <h1 class="title-gradient">SOKOBAN</h1>
-        <p class="subtitle">창고지기 퍼즐</p>
-      </div>
+        <h1 class="game-title">SOKOBAN</h1>
+        <p class="game-desc">창고지기 퍼즐</p>
 
-      <div class="start-buttons">
-        <button id="btn-start" class="btn btn-primary">
-          <span class="icon-btn">▶</span>
-          레벨 선택
-        </button>
-        <button id="btn-continue" class="btn" style="display:none;">
-          <span class="icon-btn">↩</span>
-          계속하기
-        </button>
-      </div>
+        <button id="btn-start" class="cta-btn">레벨 선택</button>
+        <button id="btn-continue" class="cta-btn" style="display:none;">계속하기</button>
 
-      <div style="position:absolute;bottom:24px;color:var(--text-muted);font-size:11px;letter-spacing:0.5px;">
-        방향키 또는 스와이프로 이동
+        <p class="game-hint">방향키 또는 스와이프로 이동</p>
       </div>
     </div>
 
@@ -110,63 +100,52 @@
 
     <!-- ════════════ VICTORY SCREEN ════════════ -->
     <div id="victory-screen" class="overlay overlay-screen hidden">
-      <div class="victory-icon">🎉</div>
-      <div class="victory-title">레벨 클리어!</div>
+      <div class="overlay-content">
+        <div class="victory-icon">🎉</div>
+        <div class="over-title">레벨 클리어!</div>
 
-      <div class="victory-stats">
-        <div class="stat-row">
-          <span class="stat-label">레벨</span>
-          <span class="stat-value" id="victory-level-num">1</span>
+        <div class="victory-stats">
+          <div class="stat-row">
+            <span class="stat-label">레벨</span>
+            <span class="stat-value" id="victory-level-num">1</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">이동수</span>
+            <span class="stat-value" id="victory-moves">0</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">최고 기록</span>
+            <span class="stat-value" id="victory-best">0</span>
+            <span id="new-best-badge" class="new-best-badge" style="display:none;">NEW BEST</span>
+          </div>
         </div>
-        <div class="stat-row">
-          <span class="stat-label">이동수</span>
-          <span class="stat-value" id="victory-moves">0</span>
-        </div>
-        <div class="stat-row">
-          <span class="stat-label">최고 기록</span>
-          <span class="stat-value" id="victory-best">0</span>
-          <span id="new-best-badge" class="new-best-badge" style="display:none;">NEW BEST</span>
-        </div>
-      </div>
 
-      <div class="victory-buttons">
-        <button id="btn-next-level" class="btn btn-primary">
-          <span class="icon-btn">▶</span>
-          다음 레벨
-        </button>
-        <button id="btn-victory-restart" class="btn">
-          <span class="icon-btn">↺</span>
-          다시 하기
-        </button>
-        <button id="btn-victory-levels" class="btn btn-ghost">
-          <span class="icon-btn">☰</span>
-          레벨 선택
-        </button>
+        <div class="victory-buttons">
+          <button id="btn-next-level" class="cta-btn">다음 레벨</button>
+          <button id="btn-victory-restart" class="btn">↺ 다시 하기</button>
+          <button id="btn-victory-levels" class="btn btn-ghost">☰ 레벨 선택</button>
+        </div>
       </div>
     </div>
 
     <!-- ════════════ ALL CLEAR SCREEN ════════════ -->
     <div id="allclear-screen" class="overlay overlay-screen hidden">
-      <div class="allclear-icon">🏆</div>
-      <div class="allclear-title">ALL CLEAR!</div>
-      <p class="allclear-sub">
-        모든 레벨을 클리어했습니다!<br />
-        정말 대단해요! 🎊
-      </p>
-      <div style="display:flex;flex-direction:column;gap:10px;width:100%;max-width:280px;margin-top:8px;">
-        <button id="btn-allclear-levels" class="btn btn-primary">
-          <span class="icon-btn">↺</span>
-          레벨 다시 보기
-        </button>
-        <button id="btn-allclear-menu" class="btn btn-ghost">
-          처음으로
-        </button>
+      <div class="overlay-content">
+        <div class="allclear-icon">🏆</div>
+        <div class="over-title allclear-title">ALL CLEAR!</div>
+        <p class="game-desc">
+          모든 레벨을 클리어했습니다!<br />
+          정말 대단해요! 🎊
+        </p>
+        <button id="btn-allclear-levels" class="cta-btn">↺ 레벨 다시 보기</button>
+        <button id="btn-allclear-menu" class="btn btn-ghost">처음으로</button>
       </div>
     </div>
 
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/js/theme-init.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="/js/supabase-config.js"></script>
 <script src="/js/leaderboard.js"></script>
 <script src="js/game.js"></script>

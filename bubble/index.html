@@ -40,15 +40,17 @@
 
       <!-- Start Overlay -->
       <div class="overlay" id="overlay-start">
-        <div class="game-logo-css"><span class="icon-bubble"></span></div>
-        <div class="overlay-title">BUBBLE</div>
-        <div class="overlay-subtitle">
-          같은 색 버블 3개 이상을 맞춰 터뜨리세요!<br>
-          버블이 바닥에 닿으면 게임 오버.
-        </div>
-        <button class="btn btn-primary" id="btn-start">게임 시작</button>
-        <div class="controls-hint">
-          터치 · ← → 방향키로 조준, 스페이스로 발사
+        <div class="overlay-content">
+          <div class="game-logo-css"><span class="icon-bubble"></span></div>
+          <div class="game-title">BUBBLE</div>
+          <div class="game-desc">
+            같은 색 버블 3개 이상을 맞춰 터뜨리세요!<br>
+            버블이 바닥에 닿으면 게임 오버.
+          </div>
+          <button class="cta-btn" id="btn-start">게임 시작</button>
+          <div class="game-hint">
+            터치 · ← → 방향키로 조준, 스페이스로 발사
+          </div>
         </div>
       </div>
 
@@ -64,19 +66,21 @@
 
       <!-- Game Over Overlay -->
       <div class="overlay hidden" id="overlay-lose">
-        <div class="overlay-title" style="background:linear-gradient(135deg,#F43F5E,#FB923C,#FACC15);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">
-          게임 오버
+        <div class="overlay-content">
+          <div class="over-title" style="background:linear-gradient(135deg,#F43F5E,#FB923C,#FACC15);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">
+            게임 오버
+          </div>
+          <div class="game-desc">
+            레벨 <span id="lose-level">1</span>에서 탈락했습니다.<br>
+            다시 도전해보세요!
+          </div>
+          <div class="overlay-score-box">
+            <div class="overlay-score-label">최종 점수</div>
+            <div class="overlay-score-value" id="lose-score">0</div>
+            <div class="overlay-best">최고 기록: <span id="lose-best">0</span></div>
+          </div>
+          <button class="cta-btn" id="btn-restart">다시 시작</button>
         </div>
-        <div class="overlay-subtitle">
-          레벨 <span id="lose-level">1</span>에서 탈락했습니다.<br>
-          다시 도전해보세요!
-        </div>
-        <div class="overlay-score-box">
-          <div class="overlay-score-label">최종 점수</div>
-          <div class="overlay-score-value" id="lose-score">0</div>
-          <div class="overlay-best">최고 기록: <span id="lose-best">0</span></div>
-        </div>
-        <button class="btn btn-primary" id="btn-restart">다시 시작</button>
       </div>
 
     </div>
@@ -102,7 +106,8 @@
 
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/js/theme-init.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="/js/supabase-config.js"></script>
   <script src="/js/leaderboard.js"></script>
   <script src="js/game.js"></script>

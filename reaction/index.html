@@ -20,16 +20,19 @@
 
     <!-- ===== START OVERLAY ===== -->
     <div class="overlay" id="start-screen">
-      <div class="game-logo-css"><span class="icon-reaction"></span></div>
-      <h1 class="game-title">REACTION</h1>
-      <p class="game-subtitle">초록색이 되면 탭하세요!<br>총 5라운드의 평균을 측정합니다</p>
+      <div class="overlay-content">
+        <div class="game-logo-css"><span class="icon-reaction"></span></div>
+        <h1 class="game-title">REACTION</h1>
+        <p class="game-desc">초록색이 되면 탭하세요!</p>
+        <p class="game-hint">총 5라운드의 평균을 측정합니다</p>
 
-      <div class="best-record-badge" id="start-best-badge" style="display:none;">
-        <span>🏆 최고 기록</span>
-        <span class="record-value" id="start-best-value">—</span>
+        <div class="best-record-badge" id="start-best-badge" style="display:none;">
+          <span>🏆 최고 기록</span>
+          <span class="record-value" id="start-best-value">—</span>
+        </div>
+
+        <button class="cta-btn" id="btn-start">시작하기</button>
       </div>
-
-      <button class="btn-start" id="btn-start">시작하기</button>
     </div>
 
     <!-- ===== GAME AREA ===== -->
@@ -71,29 +74,31 @@
 
     <!-- ===== RESULTS OVERLAY ===== -->
     <div class="overlay hidden" id="results-screen">
-      <h2 class="results-title">결과</h2>
+      <div class="overlay-content results-content">
+        <h2 class="over-title">결과</h2>
 
-      <div class="results-avg-label">평균 반응속도</div>
-      <div class="results-avg-time" id="results-avg-time">—</div>
-      <div class="results-rating" id="results-rating">—</div>
+        <div class="results-avg-label">평균 반응속도</div>
+        <div class="results-avg-time" id="results-avg-time">—</div>
+        <div class="results-rating" id="results-rating">—</div>
 
-      <div class="new-record-banner" id="new-record-banner">🎉 새로운 최고 기록!</div>
+        <div class="new-record-banner" id="new-record-banner">🎉 새로운 최고 기록!</div>
 
-      <div class="results-cards">
-        <div class="result-card best">
-          <div class="result-card-label">최고 기록</div>
-          <div class="result-card-value" id="results-best-time">—</div>
+        <div class="results-cards">
+          <div class="result-card best">
+            <div class="result-card-label">최고 기록</div>
+            <div class="result-card-value" id="results-best-time">—</div>
+          </div>
+          <div class="result-card">
+            <div class="result-card-label">가장 빠른 라운드</div>
+            <div class="result-card-value" id="results-fastest-round">—</div>
+          </div>
         </div>
-        <div class="result-card">
-          <div class="result-card-label">가장 빠른 라운드</div>
-          <div class="result-card-value" id="results-fastest-round">—</div>
-        </div>
+
+        <div class="rounds-list-title">라운드별 기록</div>
+        <div class="rounds-list" id="rounds-list"></div>
+
+        <button class="cta-btn" id="btn-retry">다시 하기</button>
       </div>
-
-      <div class="rounds-list-title">라운드별 기록</div>
-      <div class="rounds-list" id="rounds-list"></div>
-
-      <button class="btn-retry" id="btn-retry">다시 하기</button>
     </div>
 
   </div>
@@ -101,6 +106,7 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="/js/supabase-config.js"></script>
 <script src="/js/leaderboard.js"></script>
+<script src="/js/theme-init.js"></script>
 <script src="js/game.js"></script>
 </body>
 </html>

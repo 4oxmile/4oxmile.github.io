@@ -123,19 +123,34 @@ html, body {
   gap: 0;
 }
 
+.overlay-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 40px 32px;
+  max-width: 360px;
+  width: 90%;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
 .game-title {
-  font-size: clamp(52px, 18vw, 80px);
+  font-size: 52px;
   font-weight: 900;
-  letter-spacing: -2px;
-  background: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 40%, #EC4899 80%, #F59E0B 100%);
+  letter-spacing: -0.03em;
+  background: linear-gradient(135deg, #3B82F6, #8B5CF6, #EC4899);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-align: center;
   line-height: 1;
-  margin-bottom: 6px;
-  filter: drop-shadow(0 2px 8px rgba(59,130,246,0.4));
 }
+
+.game-desc { font-size: 16px; color: var(--text-secondary); text-align: center; line-height: 1.6; }
+.game-hint { font-size: 13px; color: var(--text-muted); letter-spacing: 0.5px; }
+.over-title { font-size: 32px; font-weight: 800; color: var(--text-primary); }
 
 .game-subtitle {
   font-size: 14px;
@@ -148,7 +163,6 @@ html, body {
 
 .character-preview {
   font-size: 64px;
-  margin-bottom: 40px;
   animation: bounce-preview 1.2s ease-in-out infinite;
 }
 
@@ -163,7 +177,6 @@ html, body {
   gap: 8px;
   font-size: 14px;
   color: var(--text-secondary);
-  margin-bottom: 40px;
 }
 
 .best-score-display .score-value {
@@ -171,6 +184,26 @@ html, body {
   color: #F59E0B;
   font-size: 16px;
 }
+
+/* CTA Button (styleguide) */
+.cta-btn {
+  padding: 14px 48px;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: inherit;
+  color: #fff;
+  background: var(--accent);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: filter 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: 0 4px 20px var(--accent-glow);
+  letter-spacing: 0.5px;
+  width: 100%;
+  max-width: 280px;
+}
+.cta-btn:hover { filter: brightness(1.1); }
+.cta-btn:active { transform: scale(0.97); }
 
 /* Buttons */
 .btn-primary {
@@ -191,7 +224,6 @@ html, body {
   transition: transform 0.1s, box-shadow 0.1s, background 0.15s;
   box-shadow: 0 0 20px var(--accent-glow), 0 4px 16px rgba(59,130,246,0.35);
   min-width: 180px;
-  margin-bottom: 12px;
 }
 
 .btn-primary:active {
@@ -238,7 +270,6 @@ html, body {
 
 .gameover-icon {
   font-size: 56px;
-  margin-bottom: 28px;
   animation: shake-once 0.5s ease;
 }
 
@@ -253,7 +284,6 @@ html, body {
 .score-cards {
   display: flex;
   gap: 12px;
-  margin-bottom: 36px;
 }
 
 .score-card {
@@ -305,7 +335,6 @@ html, body {
   letter-spacing: 0.5px;
   padding: 4px 10px;
   border-radius: 20px;
-  margin-bottom: 24px;
   animation: scale-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 

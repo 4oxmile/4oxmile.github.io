@@ -12,13 +12,14 @@
   <link rel="stylesheet" href="/css/game-icons.css" />
 </head>
 <body>
+<a href="/" class="home-btn" aria-label="홈으로"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></a>
 
   <!-- Start Screen -->
   <div id="screen-start" class="overlay active">
-    <div class="screen-content">
+    <div class="overlay-content">
       <div class="game-logo-css"><span class="icon-sudoku"></span></div>
-      <h1 class="title-gradient">SUDOKU</h1>
-      <p class="subtitle">숫자 퍼즐 게임</p>
+      <h1 class="game-title">SUDOKU</h1>
+      <p class="game-desc">숫자 퍼즐 게임</p>
       <div class="difficulty-select">
         <p class="section-label">난이도 선택</p>
         <div class="diff-buttons">
@@ -30,7 +31,7 @@
       <div class="best-times" id="best-times-display">
         <!-- filled by JS -->
       </div>
-      <button class="btn-primary" id="btn-start">게임 시작</button>
+      <button class="cta-btn" id="btn-start">게임 시작</button>
     </div>
   </div>
 
@@ -39,11 +40,8 @@
     <div class="game-wrapper">
       <!-- Header -->
       <div class="game-header">
-        <button class="icon-btn home-btn" id="btn-home" title="홈으로">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
-            <polyline points="9 22 9 12 15 12 15 22"/>
-          </svg>
+        <button class="icon-btn" id="btn-home" title="메뉴로">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
         </button>
         <div class="header-center">
           <span class="diff-badge" id="diff-label">보통</span>
@@ -110,11 +108,11 @@
   </div>
 
   <!-- Victory Overlay -->
-  <div id="overlay-victory" class="overlay hidden">
-    <div class="overlay-card">
+  <div id="overlay-victory" class="overlay overlay-popup hidden">
+    <div class="overlay-content">
       <div class="victory-icon">🎉</div>
-      <h2 class="overlay-title">완료!</h2>
-      <p class="overlay-sub">퍼즐을 해결했습니다</p>
+      <h2 class="over-title">완료!</h2>
+      <p class="game-desc">퍼즐을 해결했습니다</p>
       <div class="result-stats">
         <div class="stat-item">
           <span class="stat-label">시간</span>
@@ -131,24 +129,25 @@
       </div>
       <div class="overlay-buttons">
         <button class="btn-secondary" id="btn-victory-home">홈으로</button>
-        <button class="btn-primary" id="btn-victory-new">새 게임</button>
+        <button class="cta-btn" id="btn-victory-new">새 게임</button>
       </div>
     </div>
   </div>
 
   <!-- Confirm New Game Overlay -->
-  <div id="overlay-confirm" class="overlay hidden">
-    <div class="overlay-card small">
-      <h2 class="overlay-title">새 게임</h2>
-      <p class="overlay-sub">현재 게임을 포기하고 새 게임을 시작할까요?</p>
+  <div id="overlay-confirm" class="overlay overlay-popup hidden">
+    <div class="overlay-content overlay-content--small">
+      <h2 class="over-title">새 게임</h2>
+      <p class="game-desc">현재 게임을 포기하고 새 게임을 시작할까요?</p>
       <div class="overlay-buttons">
         <button class="btn-secondary" id="btn-confirm-cancel">취소</button>
-        <button class="btn-primary" id="btn-confirm-ok">확인</button>
+        <button class="cta-btn" id="btn-confirm-ok">확인</button>
       </div>
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/js/theme-init.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="/js/supabase-config.js"></script>
 <script src="/js/leaderboard.js"></script>
 <script src="js/game.js"></script>

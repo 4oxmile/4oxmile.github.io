@@ -22,38 +22,38 @@
          START SCREEN
     ════════════════════════════════════════ -->
     <div id="start-screen" class="overlay">
-      <div class="title-wrap">
+      <div class="overlay-content">
         <div class="game-logo-css"><span class="icon-freecell"></span></div>
-        <h1 class="screen-title">FREECELL</h1>
-        <p class="screen-subtitle">전략 카드 게임</p>
+        <h1 class="game-title">FREECELL</h1>
+        <p class="game-desc">전략 카드 게임</p>
+        <div class="start-cards-preview">
+          <div class="preview-card">A<span class="suit-center">♥</span></div>
+          <div class="preview-card">K<span class="suit-center">♠</span></div>
+          <div class="preview-card">Q<span class="suit-center">♦</span></div>
+          <div class="preview-card">J<span class="suit-center">♣</span></div>
+        </div>
+        <button class="cta-btn">게임 시작</button>
       </div>
-      <div class="start-cards-preview">
-        <div class="preview-card">A<span class="suit-center">♥</span></div>
-        <div class="preview-card">K<span class="suit-center">♠</span></div>
-        <div class="preview-card">Q<span class="suit-center">♦</span></div>
-        <div class="preview-card">J<span class="suit-center">♣</span></div>
-      </div>
-      <button class="start-btn">게임 시작</button>
     </div>
 
     <!-- ════════════════════════════════════════
          WIN SCREEN
     ════════════════════════════════════════ -->
     <div id="win-screen" class="overlay">
-      <div class="win-icon">🏆</div>
-      <h2 class="win-title">축하합니다!</h2>
-      <div class="win-stats">
-        <div class="stat-row">
-          <span class="stat-label">이동 횟수</span>
-          <span class="stat-value" id="win-moves">0</span>
+      <div class="overlay-content">
+        <div class="win-icon">🏆</div>
+        <h2 class="over-title">축하합니다!</h2>
+        <div class="win-stats">
+          <div class="stat-row">
+            <span class="stat-label">이동 횟수</span>
+            <span class="stat-value" id="win-moves">0</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">걸린 시간</span>
+            <span class="stat-value" id="win-time">00:00</span>
+          </div>
         </div>
-        <div class="stat-row">
-          <span class="stat-label">걸린 시간</span>
-          <span class="stat-value" id="win-time">00:00</span>
-        </div>
-      </div>
-      <div class="win-actions">
-        <button class="btn-primary" id="win-again-btn">다시 하기</button>
+        <button class="cta-btn" id="win-again-btn">다시 하기</button>
       </div>
     </div>
 
@@ -151,7 +151,8 @@
 
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/js/theme-init.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="/js/supabase-config.js"></script>
   <script src="/js/leaderboard.js"></script>
   <script src="js/game.js"></script>

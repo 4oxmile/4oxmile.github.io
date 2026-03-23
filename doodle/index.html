@@ -44,68 +44,58 @@
 
       <!-- Start overlay -->
       <div class="overlay" id="start-overlay">
-        <div class="game-logo-css"><span class="icon-doodle"></span></div>
-        <h1 class="game-title">JUMP</h1>
-        <p class="game-subtitle">끝없이 올라가세요!</p>
+        <div class="overlay-content">
+          <div class="game-logo-css"><span class="icon-doodle"></span></div>
+          <h1 class="game-title">JUMP</h1>
+          <p class="game-desc">끝없이 올라가세요!</p>
 
-        <button class="btn btn-primary" id="start-btn">시작하기</button>
+          <button class="cta-btn" id="start-btn">시작하기</button>
 
-        <div class="controls-hint">
-          <div class="hint-item">
-            <span class="hint-icon">⬅➡</span>
-            <span>키보드 방향키</span>
-          </div>
-          <div class="hint-item">
-            <span class="hint-icon">↕️</span>
-            <span>기기 기울이기</span>
-          </div>
-          <div class="hint-item">
-            <span class="hint-icon">👆</span>
-            <span>화면 드래그</span>
-          </div>
-        </div>
+          <p class="game-hint">⬅➡ 방향키 &nbsp;·&nbsp; ↕️ 기울이기 &nbsp;·&nbsp; 👆 드래그</p>
 
-        <div class="platform-legend">
-          <div class="legend-item">
-            <div class="legend-dot normal"></div>
-            <span>일반 플랫폼</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-dot moving"></div>
-            <span>이동 플랫폼</span>
-          </div>
-          <div class="legend-item">
-            <div class="legend-dot breakable"></div>
-            <span>부서지는 플랫폼</span>
+          <div class="platform-legend">
+            <div class="legend-item">
+              <div class="legend-dot normal"></div>
+              <span>일반 플랫폼</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot moving"></div>
+              <span>이동 플랫폼</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot breakable"></div>
+              <span>부서지는 플랫폼</span>
+            </div>
           </div>
         </div>
       </div>
 
       <!-- Result overlay -->
       <div class="overlay hidden" id="result-overlay">
-        <h1 class="game-title" style="margin-bottom:6px;">게임 오버</h1>
-        <p id="result-msg" style="color:var(--text-secondary);font-size:14px;margin-bottom:24px;">다시 도전해보세요!</p>
+        <div class="overlay-content">
+          <h2 class="over-title">게임 오버</h2>
+          <p id="result-msg" class="game-desc">다시 도전해보세요!</p>
 
-        <div class="result-row">
-          <div class="score-card">
-            <div class="score-card-label">이번 점수</div>
-            <div class="score-card-value" id="result-score">0</div>
+          <div class="result-row">
+            <div class="score-card">
+              <div class="score-card-label">이번 점수</div>
+              <div class="score-card-value" id="result-score">0</div>
+            </div>
+            <div class="score-card">
+              <div class="score-card-label">최고 기록</div>
+              <div class="score-card-value accent" id="result-best">0</div>
+            </div>
           </div>
-          <div class="score-card">
-            <div class="score-card-label">최고 기록</div>
-            <div class="score-card-value accent" id="result-best">0</div>
-          </div>
-        </div>
 
-        <div class="btn-row">
-          <button class="btn btn-primary" id="restart-btn">다시 하기</button>
+          <button class="cta-btn" id="restart-btn">다시 하기</button>
           <button class="btn" id="menu-btn">메인 화면</button>
         </div>
       </div>
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/js/theme-init.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="/js/supabase-config.js"></script>
 <script src="/js/leaderboard.js"></script>
 <script src="js/game.js"></script>

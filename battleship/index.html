@@ -21,10 +21,10 @@
 
   <!-- ================= START SCREEN ================= -->
   <div class="overlay active" id="start-screen">
-    <div class="screen-content">
+    <div class="overlay-content">
       <div class="game-logo-css"><span class="icon-battleship"></span></div>
       <h1 class="game-title">BATTLESHIP</h1>
-      <p class="game-subtitle">전략 해전 게임 · 1P vs AI</p>
+      <p class="game-desc">전략 해전 게임 · 1P vs AI</p>
 
       <div class="stats-panel">
         <div class="stat-item">
@@ -41,14 +41,10 @@
         </div>
       </div>
 
-      <button class="btn btn-primary btn-full" id="btn-new-game">
-        ⚓ AI 대전
-      </button>
-      <button class="btn-online-start" id="btn-online">
-        🌐 온라인 대전
-      </button>
+      <button class="cta-btn" id="btn-new-game">⚓ AI 대전</button>
+      <button class="btn-online-start" id="btn-online">🌐 온라인 대전</button>
 
-      <p class="start-hint">
+      <p class="game-hint">
         AI 대전: 컴퓨터와 1:1 대결<br/>
         온라인 대전: 친구와 실시간 대결
       </p>
@@ -124,9 +120,7 @@
         <button class="btn btn-sm btn-danger" id="btn-reset-place">초기화</button>
       </div>
 
-      <button class="btn btn-primary btn-full" id="btn-start-game" disabled>
-        전투 시작
-      </button>
+      <button class="cta-btn" id="btn-start-game" disabled>전투 시작</button>
     </div>
   </div>
 
@@ -176,10 +170,10 @@
 
   <!-- ================= RESULT SCREEN ================= -->
   <div class="overlay" id="result-screen">
-    <div class="screen-content">
+    <div class="overlay-content">
       <div class="result-emoji" id="result-emoji">🏆</div>
       <h2 class="result-title win" id="result-title">승리!</h2>
-      <p class="result-desc" id="result-desc">모든 적 함선을 격침했습니다!</p>
+      <p class="game-desc" id="result-desc">모든 적 함선을 격침했습니다!</p>
 
       <div class="result-stats">
         <div class="result-stat">
@@ -201,13 +195,14 @@
       </div>
 
       <div class="btn-group">
-        <button class="btn btn-primary" id="btn-play-again">다시 하기</button>
+        <button class="cta-btn" id="btn-play-again">다시 하기</button>
         <button class="btn" id="btn-home">처음으로</button>
       </div>
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/js/theme-init.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="/js/supabase-config.js"></script>
 <script src="/js/leaderboard.js"></script>
 <script src="js/game.js"></script>

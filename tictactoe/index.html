@@ -21,7 +21,7 @@
 
   <!-- ── START SCREEN ─────────────────────────── -->
   <div class="overlay" id="start-screen">
-    <div class="screen-content">
+    <div class="overlay-content">
       <div class="game-logo-css"><span class="icon-tictactoe"></span></div>
       <h1 class="game-title">TICTACTOE</h1>
 
@@ -34,7 +34,7 @@
         </div>
       </div>
 
-      <button class="btn-primary" id="btn-start">게임 시작</button>
+      <button class="cta-btn" id="btn-start">게임 시작</button>
       <button class="btn-online" id="btn-online">🌐 온라인 대전</button>
     </div>
   </div>
@@ -87,12 +87,12 @@
 
   <!-- ── RESULT SCREEN ────────────────────────── -->
   <div class="overlay hidden" id="result-screen">
-    <div class="screen-content">
+    <div class="overlay-content">
       <div class="result-emoji" id="result-emoji">🏆</div>
-      <h2 class="result-title win" id="result-title">승리!</h2>
-      <p class="result-subtitle" id="result-subtitle">AI를 이겼습니다!</p>
+      <h2 class="result-title over-title win" id="result-title">승리!</h2>
+      <p class="result-subtitle game-desc" id="result-subtitle">AI를 이겼습니다!</p>
       <div class="result-buttons">
-        <button class="btn-primary" id="btn-result-new">다시 하기</button>
+        <button class="cta-btn" id="btn-result-new">다시 하기</button>
         <button class="btn-secondary" id="btn-result-menu">메인 메뉴</button>
       </div>
     </div>
@@ -169,7 +169,8 @@
     </div>
   </main>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/js/theme-init.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="/js/supabase-config.js"></script>
 <script src="/js/leaderboard.js"></script>
 <script src="js/game.js"></script>

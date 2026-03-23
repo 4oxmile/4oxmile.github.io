@@ -16,45 +16,49 @@
 
   <!-- ══ START OVERLAY ══ -->
   <div class="overlay" id="start-overlay">
-    <div class="game-logo-css"><span class="icon-connect4"></span></div>
-    <h1 class="game-title">CONNECT4</h1>
-    <p class="game-subtitle">4개를 연결하라</p>
+    <div class="overlay-content">
+      <div class="game-logo-css"><span class="icon-connect4"></span></div>
+      <h1 class="game-title">CONNECT4</h1>
+      <p class="game-desc">4개를 연결하라</p>
 
-    <!-- Stats -->
-    <div class="stats-bar">
-      <div class="stat-item wins">
-        <span class="stat-label">승리</span>
-        <span class="stat-value" id="stat-wins">0</span>
+      <!-- Stats -->
+      <div class="stats-bar">
+        <div class="stat-item wins">
+          <span class="stat-label">승리</span>
+          <span class="stat-value" id="stat-wins">0</span>
+        </div>
+        <div class="stat-item draws">
+          <span class="stat-label">무승부</span>
+          <span class="stat-value" id="stat-draws">0</span>
+        </div>
+        <div class="stat-item losses">
+          <span class="stat-label">패배</span>
+          <span class="stat-value" id="stat-losses">0</span>
+        </div>
       </div>
-      <div class="stat-item draws">
-        <span class="stat-label">무승부</span>
-        <span class="stat-value" id="stat-draws">0</span>
+
+      <!-- Difficulty -->
+      <span class="section-label">난이도 선택</span>
+      <div class="difficulty-row">
+        <button class="diff-btn" data-diff="easy">쉬움</button>
+        <button class="diff-btn active" data-diff="normal">보통</button>
+        <button class="diff-btn" data-diff="hard">어려움</button>
       </div>
-      <div class="stat-item losses">
-        <span class="stat-label">패배</span>
-        <span class="stat-value" id="stat-losses">0</span>
-      </div>
+
+      <button class="cta-btn" id="start-btn">게임 시작</button>
     </div>
-
-    <!-- Difficulty -->
-    <span class="section-label">난이도 선택</span>
-    <div class="difficulty-row">
-      <button class="diff-btn" data-diff="easy">쉬움</button>
-      <button class="diff-btn active" data-diff="normal">보통</button>
-      <button class="diff-btn" data-diff="hard">어려움</button>
-    </div>
-
-    <button class="btn-primary" id="start-btn">게임 시작</button>
   </div>
 
   <!-- ══ RESULT OVERLAY ══ -->
   <div class="overlay hidden" id="result-overlay">
-    <div class="result-icon" id="result-icon">🏆</div>
-    <h2 class="result-title win" id="result-title">승리!</h2>
-    <p class="result-subtitle" id="result-subtitle">4개를 연결했습니다!</p>
+    <div class="overlay-content">
+      <div class="result-icon" id="result-icon">🏆</div>
+      <h2 class="over-title result-title win" id="result-title">승리!</h2>
+      <p class="game-desc" id="result-subtitle">4개를 연결했습니다!</p>
 
-    <button class="btn-primary" id="play-again-btn">다시 하기</button>
-    <button class="btn-secondary" id="back-btn">메인으로</button>
+      <button class="cta-btn" id="play-again-btn">다시 하기</button>
+      <button class="btn-secondary" id="back-btn">메인으로</button>
+    </div>
   </div>
 
   <!-- ══ GAME ══ -->
@@ -97,7 +101,8 @@
 
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/js/theme-init.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="/js/supabase-config.js"></script>
 <script src="/js/leaderboard.js"></script>
 <script src="js/game.js"></script>

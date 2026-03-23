@@ -53,18 +53,20 @@
          SCREEN: START
     ═════════════════════════════════════════════════════════════ -->
     <div id="screen-start" class="overlay">
-      <div class="game-logo-css"><span class="icon-rhythm"></span></div>
-      <h1 class="game-title">RHYTHM</h1>
-      <p class="game-subtitle">4키 리듬 게임 · 타이밍이 전부다</p>
+      <div class="overlay-content">
+        <div class="game-logo-css"><span class="icon-rhythm"></span></div>
+        <h1 class="game-title">RHYTHM</h1>
+        <p class="game-desc">4키 리듬 게임 · 타이밍이 전부다</p>
 
-      <button id="btn-play" class="btn btn-primary">
-        ▶ 게임 시작
-      </button>
+        <button id="btn-play" class="cta-btn">
+          ▶ 게임 시작
+        </button>
 
-      <p style="font-size:12px;color:var(--text-muted);text-align:center;line-height:1.6;max-width:280px;">
-        키보드: <strong style="color:var(--text-secondary)">A S D F</strong> 또는 화살표키<br />
-        모바일: 각 레인을 탭하세요
-      </p>
+        <p class="game-hint">
+          키보드: <strong style="color:var(--text-secondary)">A S D F</strong> 또는 화살표키<br />
+          모바일: 각 레인을 탭하세요
+        </p>
+      </div>
     </div>
 
     <!-- ════════════════════════════════════════════════════════════
@@ -106,48 +108,51 @@
          SCREEN: RESULT
     ═════════════════════════════════════════════════════════════ -->
     <div id="screen-result" class="overlay hidden">
-      <h2 id="result-title" class="result-title">결과</h2>
+      <div class="overlay-content">
+        <h2 id="result-title" class="result-title over-title">결과</h2>
 
-      <div class="result-score-block">
-        <div class="result-score-label">최종 점수</div>
-        <div id="result-score-value" class="result-score-value">0</div>
-        <div id="result-new-best" class="result-new-best" style="display:none;">★ 신기록!</div>
+        <div class="result-score-block">
+          <div class="result-score-label">최종 점수</div>
+          <div id="result-score-value" class="result-score-value">0</div>
+          <div id="result-new-best" class="result-new-best" style="display:none;">★ 신기록!</div>
+        </div>
+
+        <div class="result-stats">
+          <div class="result-stat">
+            <div id="result-perfect" class="result-stat-count grade-perfect">0</div>
+            <div class="result-stat-label">PERFECT</div>
+          </div>
+          <div class="result-stat">
+            <div id="result-great" class="result-stat-count grade-great">0</div>
+            <div class="result-stat-label">GREAT</div>
+          </div>
+          <div class="result-stat">
+            <div id="result-good" class="result-stat-count grade-good">0</div>
+            <div class="result-stat-label">GOOD</div>
+          </div>
+          <div class="result-stat">
+            <div id="result-miss" class="result-stat-count grade-miss">0</div>
+            <div class="result-stat-label">MISS</div>
+          </div>
+        </div>
+
+        <div style="font-size:13px;color:var(--text-secondary);">
+          최대 콤보: <strong id="result-max-combo" style="color:var(--accent);">0</strong>
+        </div>
+
+        <button id="btn-retry" class="cta-btn">
+          ↺ 다시 도전
+        </button>
+        <button id="btn-back-to-select" class="btn">
+          ← 곡 선택
+        </button>
       </div>
-
-      <div class="result-stats">
-        <div class="result-stat">
-          <div id="result-perfect" class="result-stat-count grade-perfect">0</div>
-          <div class="result-stat-label">PERFECT</div>
-        </div>
-        <div class="result-stat">
-          <div id="result-great" class="result-stat-count grade-great">0</div>
-          <div class="result-stat-label">GREAT</div>
-        </div>
-        <div class="result-stat">
-          <div id="result-good" class="result-stat-count grade-good">0</div>
-          <div class="result-stat-label">GOOD</div>
-        </div>
-        <div class="result-stat">
-          <div id="result-miss" class="result-stat-count grade-miss">0</div>
-          <div class="result-stat-label">MISS</div>
-        </div>
-      </div>
-
-      <div style="font-size:13px;color:var(--text-secondary);">
-        최대 콤보: <strong id="result-max-combo" style="color:var(--accent);">0</strong>
-      </div>
-
-      <button id="btn-retry" class="btn btn-primary">
-        ↺ 다시 도전
-      </button>
-      <button id="btn-back-to-select" class="btn">
-        ← 곡 선택
-      </button>
     </div>
 
   </div><!-- /#app -->
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/js/theme-init.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="/js/supabase-config.js"></script>
 <script src="/js/leaderboard.js"></script>
 <script src="js/game.js"></script>

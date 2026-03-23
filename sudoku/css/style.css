@@ -1,5 +1,5 @@
 /* =============================================
-   DESIGN TOKENS
+   SUDOKU — 2048 디자인 기반 공통 + 게임 전용
    ============================================= */
 
 /* =============================================
@@ -12,10 +12,7 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-html {
-  height: 100%;
-  font-size: 16px;
-}
+html { height: 100%; font-size: 16px; }
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Pretendard', 'Segoe UI', Roboto, sans-serif;
@@ -30,7 +27,7 @@ body {
 }
 
 /* =============================================
-   SCREENS
+   OVERLAY SYSTEM (통합)
    ============================================= */
 .overlay {
   display: none;
@@ -40,46 +37,133 @@ body {
   height: 100dvh;
   align-items: center;
   justify-content: center;
-  background: var(--bg-primary);
   overflow-y: auto;
+  z-index: 20;
 }
 
+/* Screen overlays: shown via active class */
 .overlay.active {
   display: flex;
 }
 
+/* Screen backgrounds */
+#screen-start,
+#screen-game {
+  background: var(--bg-primary);
+}
+
+/* Popup overlays: shown by default, hidden via .hidden */
+.overlay-popup {
+  display: flex !important;
+  background: var(--overlay-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 30;
+  padding: 24px;
+  animation: overlayIn 0.25s ease;
+}
+
+/* Hidden class hides any overlay */
+.overlay.hidden {
+  display: none !important;
+}
+
+@keyframes overlayIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
 /* =============================================
-   START SCREEN
+   OVERLAY CONTENT CARD (공통)
    ============================================= */
-.screen-content {
-  width: 100%;
-  max-width: 480px;
-  padding: 48px 24px 40px;
+.overlay-content {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 28px;
-  min-height: 100dvh;
-  justify-content: center;
+  gap: 20px;
+  padding: 40px 32px;
+  max-width: 360px;
+  width: 90%;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
 }
 
-.title-gradient {
-  font-size: clamp(2.8rem, 10vw, 3.8rem);
-  font-weight: 800;
-  letter-spacing: 0.15em;
+.overlay-content--small {
+  max-width: 300px;
+  padding: 28px 24px;
+}
+
+.overlay-popup .overlay-content {
+  animation: cardIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes cardIn {
+  from { transform: scale(0.85) translateY(20px); opacity: 0; }
+  to   { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+/* =============================================
+   STANDARD CLASSES (가이드라인)
+   ============================================= */
+.game-title {
+  font-size: 52px;
+  font-weight: 900;
+  letter-spacing: -0.03em;
   background: linear-gradient(135deg, #3B82F6, #8B5CF6, #EC4899);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-align: center;
-  line-height: 1.1;
+  line-height: 1;
 }
 
-.subtitle {
-  font-size: 0.9rem;
+.game-desc {
+  font-size: 16px;
   color: var(--text-secondary);
-  letter-spacing: 0.05em;
-  margin-top: -16px;
+  text-align: center;
+  line-height: 1.6;
+}
+
+.game-hint {
+  font-size: 13px;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+}
+
+.over-title {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.cta-btn {
+  padding: 14px 48px;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: inherit;
+  color: #fff;
+  background: var(--accent);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: filter 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: 0 4px 20px var(--accent-glow);
+  letter-spacing: 0.5px;
+  width: 100%;
+  max-width: 280px;
+}
+
+.cta-btn:hover { filter: brightness(1.1); }
+.cta-btn:active { transform: scale(0.97); }
+
+/* =============================================
+   START SCREEN — 게임 전용
+   ============================================= */
+#screen-start .overlay-content {
+  padding: 48px 24px 40px;
+  max-width: 400px;
+  width: 95%;
 }
 
 .section-label {
@@ -130,7 +214,7 @@ body {
 /* Best Times */
 .best-times {
   width: 100%;
-  background: var(--bg-secondary);
+  background: var(--bg-tertiary);
   border: 1px solid var(--border);
   border-radius: 12px;
   padding: 16px;
@@ -154,45 +238,11 @@ body {
   font-size: 0.88rem;
 }
 
-.best-time-row .label {
-  color: var(--text-secondary);
-}
+.best-time-row .label { color: var(--text-secondary); }
+.best-time-row .value { color: var(--text-primary); font-weight: 600; font-variant-numeric: tabular-nums; }
+.best-time-row .value.new-record { color: var(--accent); }
 
-.best-time-row .value {
-  color: var(--text-primary);
-  font-weight: 600;
-  font-variant-numeric: tabular-nums;
-}
-
-.best-time-row .value.new-record {
-  color: var(--accent);
-}
-
-/* Primary / Secondary buttons */
-.btn-primary {
-  width: 100%;
-  padding: 15px;
-  background: var(--accent);
-  border: none;
-  border-radius: 12px;
-  color: #fff;
-  font-size: 1rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: opacity 0.15s, transform 0.1s;
-  font-family: inherit;
-  letter-spacing: 0.03em;
-  box-shadow: 0 0 20px var(--accent-glow);
-}
-
-.btn-primary:hover {
-  opacity: 0.9;
-}
-
-.btn-primary:active {
-  transform: scale(0.98);
-}
-
+/* Secondary button */
 .btn-secondary {
   flex: 1;
   padding: 13px;
@@ -214,9 +264,7 @@ body {
 /* =============================================
    GAME SCREEN
    ============================================= */
-#screen-game {
-  padding: 0;
-}
+#screen-game { padding: 0; }
 
 .game-wrapper {
   width: 100%;
@@ -323,21 +371,14 @@ body {
   -webkit-user-select: none;
 }
 
-.cell:nth-child(9n) {
-  border-right: none;
-}
+.cell:nth-child(9n) { border-right: none; }
+.cell:nth-child(n+73) { border-bottom: none; }
 
-/* Remove bottom border for last row */
-.cell:nth-child(n+73) {
-  border-bottom: none;
-}
-
-/* Thick borders for 3x3 boxes — right side */
+/* 3x3 box borders */
 .cell:nth-child(3n):not(:nth-child(9n)) {
   border-right: 2px solid var(--text-secondary);
 }
 
-/* Thick borders for 3x3 boxes — bottom side (rows 3 and 6) */
 .cell:nth-child(n+19):nth-child(-n+27),
 .cell:nth-child(n+46):nth-child(-n+54) {
   border-bottom: 2px solid var(--text-secondary);
@@ -353,16 +394,10 @@ body {
   z-index: 1;
 }
 
-.cell.given .cell-value {
-  color: var(--text-primary);
-  font-weight: 700;
-}
+.cell.given .cell-value { color: var(--text-primary); font-weight: 700; }
+.cell.user-filled .cell-value { color: var(--accent); }
 
-.cell.user-filled .cell-value {
-  color: var(--accent);
-}
-
-/* Notes grid inside cell */
+/* Notes */
 .cell-notes {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -384,42 +419,22 @@ body {
   line-height: 1;
 }
 
-.note-digit.visible {
-  color: var(--accent);
-  opacity: 0.85;
-}
+.note-digit.visible { color: var(--accent); opacity: 0.85; }
 
 /* Highlight states */
-.cell.highlight-region {
-  background: var(--bg-secondary);
-}
+.cell.highlight-region { background: var(--bg-secondary); }
+.cell.highlight-same { background: rgba(59, 130, 246, 0.15); }
+.cell.selected { background: rgba(59, 130, 246, 0.28) !important; }
+.cell.error .cell-value { color: #F87171 !important; }
+.cell.error { background: rgba(248, 113, 113, 0.1); }
 
-.cell.highlight-same {
-  background: rgba(59, 130, 246, 0.15);
-}
-
-.cell.selected {
-  background: rgba(59, 130, 246, 0.28) !important;
-}
-
-.cell.error .cell-value {
-  color: #F87171 !important;
-}
-
-.cell.error {
-  background: rgba(248, 113, 113, 0.1);
-}
-
-/* Complete animation */
 @keyframes cellComplete {
   0%   { transform: scale(1); }
   40%  { transform: scale(1.15); }
   100% { transform: scale(1); }
 }
 
-.cell.complete-anim {
-  animation: cellComplete 0.35s ease forwards;
-}
+.cell.complete-anim { animation: cellComplete 0.35s ease forwards; }
 
 /* =============================================
    CONTROLS
@@ -431,10 +446,7 @@ body {
   flex-shrink: 0;
 }
 
-.action-row {
-  display: flex;
-  gap: 8px;
-}
+.action-row { display: flex; gap: 8px; }
 
 .action-btn {
   flex: 1;
@@ -456,16 +468,8 @@ body {
   letter-spacing: 0.04em;
 }
 
-.action-btn:hover {
-  color: var(--text-primary);
-  border-color: var(--text-secondary);
-}
-
-.action-btn.active {
-  background: var(--btn-active);
-  border-color: var(--accent);
-  color: var(--accent);
-}
+.action-btn:hover { color: var(--text-primary); border-color: var(--text-secondary); }
+.action-btn.active { background: var(--btn-active); border-color: var(--accent); color: var(--accent); }
 
 /* Number Pad */
 .numpad {
@@ -490,89 +494,16 @@ body {
   justify-content: center;
 }
 
-.num-btn:hover {
-  background: var(--btn-active);
-  border-color: var(--accent);
-  color: var(--accent);
-}
-
-.num-btn:active {
-  transform: scale(0.93);
-}
-
-.num-btn.complete {
-  opacity: 0.35;
-  cursor: default;
-  pointer-events: none;
-}
+.num-btn:hover { background: var(--btn-active); border-color: var(--accent); color: var(--accent); }
+.num-btn:active { transform: scale(0.93); }
+.num-btn.complete { opacity: 0.35; cursor: default; pointer-events: none; }
 
 /* =============================================
-   OVERLAYS
+   VICTORY / CONFIRM — 게임 전용
    ============================================= */
-.overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 20;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  background: var(--overlay-bg);
-  animation: overlayIn 0.25s ease;
-}
-
-.overlay.hidden {
-  opacity: 0;
-  pointer-events: none;
-}
-
-@keyframes overlayIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-
-.overlay-card {
-  width: 100%;
-  max-width: 360px;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  padding: 32px 28px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-  animation: cardIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.overlay-card.small {
-  max-width: 300px;
-  padding: 28px 24px;
-}
-
-@keyframes cardIn {
-  from { transform: scale(0.85) translateY(20px); opacity: 0; }
-  to   { transform: scale(1) translateY(0); opacity: 1; }
-}
-
 .victory-icon {
   font-size: 3.5rem;
   line-height: 1;
-}
-
-.overlay-title {
-  font-size: 1.7rem;
-  font-weight: 800;
-  color: var(--text-primary);
-}
-
-.overlay-sub {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-  text-align: center;
 }
 
 .result-stats {
@@ -585,27 +516,10 @@ body {
   padding: 16px;
 }
 
-.stat-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.stat-label {
-  font-size: 0.82rem;
-  color: var(--text-secondary);
-}
-
-.stat-value {
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  font-variant-numeric: tabular-nums;
-}
-
-.stat-value.new-record {
-  color: var(--accent);
-}
+.stat-item { display: flex; justify-content: space-between; align-items: center; }
+.stat-label { font-size: 0.82rem; color: var(--text-secondary); }
+.stat-value { font-size: 0.95rem; font-weight: 700; color: var(--text-primary); font-variant-numeric: tabular-nums; }
+.stat-value.new-record { color: var(--accent); }
 
 .overlay-buttons {
   display: flex;
@@ -614,31 +528,20 @@ body {
   margin-top: 4px;
 }
 
+.overlay-buttons .cta-btn { flex: 1.4; padding: 13px; }
+
 /* =============================================
-   RESPONSIVE — very small screens
+   RESPONSIVE
    ============================================= */
 @media (max-height: 650px) {
-  .game-wrapper {
-    gap: 8px;
-    padding: 8px 10px 12px;
-  }
-
-  .timer-display {
-    font-size: 1.25rem;
-  }
-
-  .action-btn {
-    padding: 8px 4px;
-    font-size: 0.65rem;
-  }
-
-  .numpad {
-    gap: 3px;
-  }
+  .game-wrapper { gap: 8px; padding: 8px 10px 12px; }
+  .timer-display { font-size: 1.25rem; }
+  .action-btn { padding: 8px 4px; font-size: 0.65rem; }
+  .numpad { gap: 3px; }
+  .overlay-content { padding: 28px 20px; gap: 16px; }
 }
 
 @media (max-width: 360px) {
-  .game-wrapper {
-    padding: 8px 8px 12px;
-  }
+  .game-wrapper { padding: 8px 8px 12px; }
+  .game-title { font-size: 40px; }
 }

@@ -46,75 +46,74 @@
 
       <!-- ── Start Screen ── -->
       <div class="overlay" id="overlay-start">
-        <div class="game-logo-css"><span class="icon-dodge"></span></div>
-        <div class="game-title">DODGE</div>
-        <div class="game-subtitle">화살을 피하라</div>
+        <div class="overlay-content">
+          <div class="game-logo-css"><span class="icon-dodge"></span></div>
+          <div class="game-title">DODGE</div>
+          <div class="game-desc">화살을 피하라</div>
 
-        <div class="highscore-row">
-          <span class="highscore-icon">🏆</span>
-          <span class="highscore-label">최고 기록</span>
-          <span class="highscore-value" id="start-best">0</span>
-          <span class="highscore-label">초</span>
-        </div>
-
-        <button class="btn btn-primary" id="btn-start">
-          <span>▶</span>
-          <span>게임 시작</span>
-        </button>
-
-        <div class="divider"></div>
-
-        <div class="tips-row">
-          <div class="tip-pill">
-            <span>⌨</span>
-            <span>WASD / 방향키</span>
+          <div class="highscore-row">
+            <span class="highscore-icon">🏆</span>
+            <span class="highscore-label">최고 기록</span>
+            <span class="highscore-value" id="start-best">0</span>
+            <span class="highscore-label">초</span>
           </div>
-          <div class="tip-pill">
-            <span>👆</span>
-            <span>터치 드래그</span>
+
+          <button class="cta-btn" id="btn-start">게임 시작</button>
+
+          <div class="divider"></div>
+
+          <div class="tips-row">
+            <div class="tip-pill">
+              <span>⌨</span>
+              <span>WASD / 방향키</span>
+            </div>
+            <div class="tip-pill">
+              <span>👆</span>
+              <span>터치 드래그</span>
+            </div>
           </div>
-        </div>
-        <div class="tips-row">
-          <div class="tip-pill">
-            <span>🛡</span>
-            <span>방어막 수집</span>
-          </div>
-          <div class="tip-pill">
-            <span>⏱</span>
-            <span>슬로우 수집</span>
+          <div class="tips-row">
+            <div class="tip-pill">
+              <span>🛡</span>
+              <span>방어막 수집</span>
+            </div>
+            <div class="tip-pill">
+              <span>⏱</span>
+              <span>슬로우 수집</span>
+            </div>
           </div>
         </div>
       </div>
 
       <!-- ── Game Over Screen ── -->
       <div class="overlay hidden" id="overlay-dead">
-        <div class="game-title" style="font-size: clamp(32px,9vw,52px);">GAME OVER</div>
+        <div class="overlay-content">
+          <div class="over-title">GAME OVER</div>
 
-        <div class="score-block">
-          <span class="score-label">생존 시간</span>
-          <span class="score-value" id="result-score">0</span>
-          <span class="score-unit">초</span>
+          <div class="score-block">
+            <span class="score-label">생존 시간</span>
+            <span class="score-value" id="result-score">0</span>
+            <span class="score-unit">초</span>
+          </div>
+
+          <span class="new-record hidden" id="new-record">★ 신기록 달성! ★</span>
+
+          <div class="highscore-row">
+            <span class="highscore-icon">🏆</span>
+            <span class="highscore-label">최고 기록</span>
+            <span class="highscore-value" id="result-best">0</span>
+            <span class="highscore-label">초</span>
+          </div>
+
+          <button class="cta-btn" id="btn-restart">다시 시작</button>
         </div>
-
-        <span class="new-record hidden" id="new-record">★ 신기록 달성! ★</span>
-
-        <div class="highscore-row">
-          <span class="highscore-icon">🏆</span>
-          <span class="highscore-label">최고 기록</span>
-          <span class="highscore-value" id="result-best">0</span>
-          <span class="highscore-label">초</span>
-        </div>
-
-        <button class="btn btn-primary" id="btn-restart">
-          <span>↺</span>
-          <span>다시 시작</span>
-        </button>
       </div>
 
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/js/theme-init.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="/js/supabase-config.js"></script>
 <script src="/js/leaderboard.js"></script>
 <script src="js/game.js"></script>

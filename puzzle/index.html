@@ -16,11 +16,11 @@
 
   <!-- Start Screen -->
   <div id="screen-start" class="overlay active">
-    <div class="screen-content">
+    <div class="overlay-content">
       <div class="title-block">
         <div class="game-logo-css"><span class="icon-puzzle"></span></div>
         <h1 class="game-title">PUZZLE</h1>
-        <p class="game-subtitle">슬라이딩 퍼즐</p>
+        <p class="game-desc">슬라이딩 퍼즐</p>
       </div>
 
       <div class="size-selector">
@@ -36,12 +36,9 @@
         <!-- filled by JS -->
       </div>
 
-      <button id="btn-start" class="btn-primary">게임 시작</button>
+      <button id="btn-start" class="cta-btn">게임 시작</button>
 
-      <div class="how-to">
-        <p>빈 칸 옆의 타일을 탭하여 이동시키세요.</p>
-        <p>1부터 순서대로 정렬하면 클리어!</p>
-      </div>
+      <p class="game-hint">빈 칸 옆의 타일을 탭하여 이동 · 1부터 순서대로 정렬하면 클리어!</p>
     </div>
   </div>
 
@@ -87,10 +84,10 @@
 
   <!-- Victory Screen -->
   <div id="screen-victory" class="overlay">
-    <div class="screen-content">
+    <div class="overlay-content">
       <div class="victory-icon">🎉</div>
-      <h2 class="victory-title">클리어!</h2>
-      <p class="victory-subtitle">퍼즐을 완성했습니다</p>
+      <h2 class="over-title">클리어!</h2>
+      <p class="game-desc">퍼즐을 완성했습니다</p>
 
       <div class="result-card">
         <div class="result-row">
@@ -105,13 +102,14 @@
       </div>
 
       <div class="victory-actions">
-        <button id="btn-play-again" class="btn-primary">다시 도전</button>
+        <button id="btn-play-again" class="cta-btn">다시 도전</button>
         <button id="btn-to-menu" class="btn-secondary">메뉴로</button>
       </div>
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/js/theme-init.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="/js/supabase-config.js"></script>
 <script src="/js/leaderboard.js"></script>
 <script src="js/game.js"></script>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>Sample Styleguide</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎨</text></svg>" />
+  <link rel="stylesheet" href="/css/tokens.css">
+  <link rel="stylesheet" href="/css/nav.css">
+  <link rel="stylesheet" href="/css/game-icons.css">
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+<a href="/" class="home-btn" aria-label="홈으로"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></a>
+
+<!-- Theme Toggle (미리보기용 — 실제 게임에서는 메인 index.html에만 배치) -->
+<button id="theme-toggle" class="theme-toggle-btn" aria-label="테마 전환" onclick="toggleTheme()">🖥️</button>
+
+<div class="sg-page">
+  <h1 class="sg-page-title">Styleguide</h1>
+  <p class="sg-page-desc">2048 디자인 기반 공통 컴포넌트 레퍼런스</p>
+
+  <!-- ===========================
+       Game Icons
+       =========================== -->
+  <section class="sg-section">
+    <h2 class="sg-section-title">Game Icons</h2>
+    <div class="sg-demo">
+      <div class="sg-label">game-logo-css 컨테이너 (64x64, 시작화면용)</div>
+      <div class="sg-demo-row">
+        <div class="game-logo-css"><span class="icon-2048"></span></div>
+        <div class="game-logo-css"><span class="icon-tetris"></span></div>
+        <div class="game-logo-css"><span class="icon-snake"></span></div>
+        <div class="game-logo-css"><span class="icon-chess"></span></div>
+      </div>
+      <div class="sg-label">원본 크기 (36x36)</div>
+      <div class="sg-demo-row">
+        <span class="icon-2048"></span>
+        <span class="icon-tetris"></span>
+        <span class="icon-snake"></span>
+        <span class="icon-chess"></span>
+        <span class="icon-puzzle"></span>
+        <span class="icon-minesweeper"></span>
+        <span class="icon-match3"></span>
+        <span class="icon-memory"></span>
+      </div>
+      <div class="sg-label">사용법: &lt;div class="game-logo-css"&gt;&lt;span class="icon-{game}"&gt;&lt;/span&gt;&lt;/div&gt;</div>
+    </div>
+  </section>
+
+  <!-- ===========================
+       Start Screen with Icon (통합 예시)
+       =========================== -->
+  <section class="sg-section">
+    <h2 class="sg-section-title">Start Screen + Icon (통합)</h2>
+    <div class="sg-overlay-preview">
+      <div class="overlay active">
+        <div class="overlay-content">
+          <div class="game-logo-css"><span class="icon-2048"></span></div>
+          <h1 class="game-title" style="font-size:48px;">2048</h1>
+          <p class="game-desc">숫자 타일을 합쳐<br />2048을 만드세요!</p>
+          <p class="game-hint">← → ↑ ↓ 또는 스와이프</p>
+          <button class="cta-btn" onclick="return false;">탭하여 시작</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================
+       Typography
+       =========================== -->
+  <section class="sg-section">
+    <h2 class="sg-section-title">Typography</h2>
+    <div class="sg-demo sg-typo-sample">
+      <div>
+        <div class="sg-label">Game Title (72px, gradient)</div>
+        <div class="game-title" style="font-size:48px;">게임 제목</div>
+      </div>
+      <div>
+        <div class="sg-label">Header Title (36px, gradient)</div>
+        <span class="header-title">헤더 제목</span>
+      </div>
+      <div>
+        <div class="sg-label">Over Title (32px)</div>
+        <div class="over-title">게임 종료</div>
+      </div>
+      <div>
+        <div class="sg-label">Description (16px, --text-secondary)</div>
+        <p class="game-desc">숫자 타일을 합쳐<br />2048을 만드세요!</p>
+      </div>
+      <div>
+        <div class="sg-label">Hint (13px, --text-muted)</div>
+        <p class="game-hint">← → ↑ ↓ 또는 스와이프</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================
+       Colors
+       =========================== -->
+  <section class="sg-section">
+    <h2 class="sg-section-title">Colors</h2>
+    <div class="sg-demo">
+      <div class="sg-label">Backgrounds</div>
+      <div class="sg-color-swatch">
+        <div class="sg-swatch" style="background:var(--bg-primary);">primary</div>
+        <div class="sg-swatch" style="background:var(--bg-secondary);">second</div>
+        <div class="sg-swatch" style="background:var(--bg-tertiary);">tertiary</div>
+        <div class="sg-swatch" style="background:var(--board-bg);">board</div>
+      </div>
+      <div class="sg-label" style="margin-top:8px;">Text</div>
+      <div class="sg-color-swatch">
+        <div class="sg-swatch" style="background:var(--bg-tertiary);color:var(--text-primary);">primary</div>
+        <div class="sg-swatch" style="background:var(--bg-tertiary);color:var(--text-secondary);">second</div>
+        <div class="sg-swatch" style="background:var(--bg-tertiary);color:var(--text-muted);">muted</div>
+        <div class="sg-swatch" style="background:var(--accent);color:#fff;">accent</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================
+       Buttons
+       =========================== -->
+  <section class="sg-section">
+    <h2 class="sg-section-title">Buttons</h2>
+    <div class="sg-demo">
+      <div class="sg-label">CTA Button</div>
+      <div class="sg-demo-row">
+        <button class="cta-btn">탭하여 시작</button>
+      </div>
+      <div class="sg-label">Control Button</div>
+      <div class="sg-demo-row">
+        <button class="control-btn">새 게임</button>
+        <button class="control-btn">되돌리기</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================
+       Score Display
+       =========================== -->
+  <section class="sg-section">
+    <h2 class="sg-section-title">Score Display</h2>
+    <div class="sg-demo">
+      <div class="sg-label">Header Score Boxes</div>
+      <div class="sg-demo-row">
+        <div class="score-box">
+          <div class="score-label">점수</div>
+          <div class="score-number">12,480</div>
+        </div>
+        <div class="score-box">
+          <div class="score-label">최고</div>
+          <div class="score-number">38,920</div>
+        </div>
+      </div>
+      <div class="sg-label">Score Rows (Game Over)</div>
+      <div class="score-summary">
+        <div class="score-row">
+          <span class="score-label">점수</span>
+          <span class="score-val">12,480</span>
+        </div>
+        <div class="score-row">
+          <span class="score-label">최고 점수</span>
+          <span class="score-val accent">38,920</span>
+        </div>
+      </div>
+      <div class="sg-label">New Record Badge</div>
+      <div class="sg-demo-row">
+        <div class="new-record">🏆 신기록!</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================
+       Header Component
+       =========================== -->
+  <section class="sg-section">
+    <h2 class="sg-section-title">Game Header</h2>
+    <div class="sg-demo-card">
+      <header class="game-header">
+        <div class="title-area">
+          <span class="header-title">Game</span>
+        </div>
+        <div class="score-area">
+          <div class="score-box">
+            <div class="score-label">점수</div>
+            <div class="score-number">0</div>
+          </div>
+          <div class="score-box">
+            <div class="score-label">최고</div>
+            <div class="score-number">0</div>
+          </div>
+        </div>
+      </header>
+      <div class="controls">
+        <button class="control-btn">새 게임</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================
+       Start Screen (embedded preview)
+       =========================== -->
+  <section class="sg-section">
+    <h2 class="sg-section-title">Start Screen Overlay</h2>
+    <div class="sg-overlay-preview">
+      <div class="overlay active">
+        <div class="overlay-content">
+          <h1 class="game-title" style="font-size:48px;">Game</h1>
+          <p class="game-desc">게임 설명이 여기에<br />표시됩니다</p>
+          <p class="game-hint">← → ↑ ↓ 또는 스와이프</p>
+          <button class="cta-btn" onclick="return false;">탭하여 시작</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================
+       Game Over Screen (embedded preview)
+       =========================== -->
+  <section class="sg-section">
+    <h2 class="sg-section-title">Game Over Overlay</h2>
+    <div class="sg-overlay-preview">
+      <div class="overlay active">
+        <div class="overlay-content">
+          <h2 class="over-title">게임 종료</h2>
+          <div class="new-record">🏆 신기록!</div>
+          <div class="score-summary">
+            <div class="score-row">
+              <span class="score-label">점수</span>
+              <span class="score-val">12,480</span>
+            </div>
+            <div class="score-row">
+              <span class="score-label">최고 점수</span>
+              <span class="score-val accent">38,920</span>
+            </div>
+          </div>
+          <button class="cta-btn" onclick="return false;">다시 시작</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================
+       Footer
+       =========================== -->
+  <section class="sg-section">
+    <h2 class="sg-section-title">Footer</h2>
+    <div class="sg-demo-card">
+      <footer class="game-footer">
+        <p>방향키 또는 스와이프로 타일을 이동하세요</p>
+      </footer>
+    </div>
+  </section>
+</div>
+
+<!-- Theme Indicator -->
+<div id="theme-indicator" class="sg-theme-indicator">테마: 시스템</div>
+
+<script src="js/theme.js"></script>
+</body>
+</html>

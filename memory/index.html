@@ -19,73 +19,75 @@
        START SCREEN
   ════════════════════════════════════════ -->
   <div id="start-screen" class="overlay" role="dialog" aria-labelledby="main-title">
+    <div class="overlay-content">
 
-    <div class="title-wrap">
       <div class="game-logo-css"><span class="icon-memory"></span></div>
-      <h1 id="main-title" class="title">MEMORY</h1>
-      <p class="subtitle">카드 짝 맞추기 게임</p>
-    </div>
+      <h1 id="main-title" class="game-title">MEMORY</h1>
+      <p class="game-desc">카드 짝 맞추기 게임</p>
 
-    <!-- Size selector -->
-    <div class="size-section">
-      <span class="size-label">난이도 선택</span>
-      <div class="size-buttons">
-        <button class="size-btn" data-size="3x4" aria-label="쉬움: 3×4 격자">
-          <span class="size-name">3×4</span>
-          <span class="size-desc">쉬움 · 12장</span>
-        </button>
-        <button class="size-btn active" data-size="4x4" aria-label="보통: 4×4 격자">
-          <span class="size-name">4×4</span>
-          <span class="size-desc">보통 · 16장</span>
-        </button>
-        <button class="size-btn" data-size="4x5" aria-label="어려움: 4×5 격자">
-          <span class="size-name">4×5</span>
-          <span class="size-desc">어려움 · 20장</span>
-        </button>
+      <!-- Size selector -->
+      <div class="size-section">
+        <span class="size-label">난이도 선택</span>
+        <div class="size-buttons">
+          <button class="size-btn" data-size="3x4" aria-label="쉬움: 3×4 격자">
+            <span class="size-name">3×4</span>
+            <span class="size-desc">쉬움 · 12장</span>
+          </button>
+          <button class="size-btn active" data-size="4x4" aria-label="보통: 4×4 격자">
+            <span class="size-name">4×4</span>
+            <span class="size-desc">보통 · 16장</span>
+          </button>
+          <button class="size-btn" data-size="4x5" aria-label="어려움: 4×5 격자">
+            <span class="size-name">4×5</span>
+            <span class="size-desc">어려움 · 20장</span>
+          </button>
+        </div>
       </div>
+
+      <!-- Best records -->
+      <div id="best-records" class="best-records" aria-label="최고 기록"></div>
+
+      <!-- Start -->
+      <button id="start-btn" class="cta-btn">게임 시작</button>
+
     </div>
-
-    <!-- Best records -->
-    <div id="best-records" class="best-records" aria-label="최고 기록"></div>
-
-    <!-- Start -->
-    <button id="start-btn" class="start-btn">게임 시작</button>
-
   </div>
 
   <!-- ════════════════════════════════════════
        VICTORY SCREEN
   ════════════════════════════════════════ -->
   <div id="victory-screen" class="overlay hidden" role="dialog" aria-labelledby="victory-heading">
+    <div class="overlay-content">
 
-    <div class="victory-emoji" aria-hidden="true">🎉</div>
-    <h2 id="victory-heading" class="victory-title">완성!</h2>
+      <div class="victory-emoji" aria-hidden="true">🎉</div>
+      <h2 id="victory-heading" class="over-title">완성!</h2>
 
-    <div class="victory-stats">
-      <div class="stat-row">
-        <span class="stat-label">격자 크기</span>
-        <span class="stat-value" id="v-size">4×4</span>
+      <div class="victory-stats">
+        <div class="stat-row">
+          <span class="stat-label">격자 크기</span>
+          <span class="stat-value" id="v-size">4×4</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">이동 횟수</span>
+          <span class="stat-value" id="v-moves">0번</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">걸린 시간</span>
+          <span class="stat-value" id="v-time">00:00</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">최고 기록</span>
+          <span class="stat-value" id="v-best">0번</span>
+          <span class="new-best-badge" id="v-best-badge" style="display:none" aria-label="신기록">NEW</span>
+        </div>
       </div>
-      <div class="stat-row">
-        <span class="stat-label">이동 횟수</span>
-        <span class="stat-value" id="v-moves">0번</span>
+
+      <div class="victory-actions">
+        <button class="btn-secondary" id="v-menu-btn">사이즈 변경</button>
+        <button class="btn-primary" id="v-again-btn">다시 하기</button>
       </div>
-      <div class="stat-row">
-        <span class="stat-label">걸린 시간</span>
-        <span class="stat-value" id="v-time">00:00</span>
-      </div>
-      <div class="stat-row">
-        <span class="stat-label">최고 기록</span>
-        <span class="stat-value" id="v-best">0번</span>
-        <span class="new-best-badge" id="v-best-badge" style="display:none" aria-label="신기록">NEW</span>
-      </div>
+
     </div>
-
-    <div class="victory-actions">
-      <button class="btn-secondary" id="v-menu-btn">사이즈 변경</button>
-      <button class="btn-primary" id="v-again-btn">다시 하기</button>
-    </div>
-
   </div>
 
   <!-- ════════════════════════════════════════
@@ -134,7 +136,8 @@
 
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/js/theme-init.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="/js/supabase-config.js"></script>
 <script src="/js/leaderboard.js"></script>
 <script src="js/game.js"></script>

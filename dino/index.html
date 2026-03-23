@@ -54,56 +54,50 @@
 
     <!-- Overlay: Start -->
     <div class="overlay" id="overlayStart">
-      <div class="game-logo-css"><span class="icon-dino"></span></div>
-      <div class="overlay-title">DINO RUN</div>
-      <div class="overlay-subtitle">
-        장애물을 피해 달리세요!<br>
-        스페이스바 · 위 방향키 · 탭으로 점프<br>
-        아래 방향키로 웅크리기
-      </div>
-      <div class="overlay-stats">
-        <div class="stat-block">
-          <span class="stat-label">최고 점수</span>
-          <span class="stat-value accent" id="startHiscore">0</span>
+      <div class="overlay-content">
+        <div class="game-logo-css"><span class="icon-dino"></span></div>
+        <div class="game-title">DINO RUN</div>
+        <div class="game-desc">
+          장애물을 피해 달리세요!<br>
+          스페이스바 · 위 방향키 · 탭으로 점프<br>
+          아래 방향키로 웅크리기
         </div>
+        <div class="overlay-stats">
+          <div class="stat-block">
+            <span class="stat-label">최고 점수</span>
+            <span class="stat-value accent" id="startHiscore">0</span>
+          </div>
+        </div>
+        <button class="cta-btn" id="btnStart">게임 시작</button>
+        <p class="game-hint">스페이스바로도 시작할 수 있어요</p>
       </div>
-      <button class="overlay-btn" id="btnStart">
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <polygon points="5 3 19 12 5 21 5 3"/>
-        </svg>
-        게임 시작
-      </button>
-      <p class="overlay-hint">스페이스바로도 시작할 수 있어요</p>
     </div>
 
     <!-- Overlay: Dead -->
     <div class="overlay hidden" id="overlayDead">
-      <div class="overlay-icon">💀</div>
-      <div class="overlay-title">GAME OVER</div>
-      <div class="overlay-subtitle">아쉬워요! 다시 도전해 보세요.</div>
-      <div class="overlay-stats">
-        <div class="stat-block">
-          <span class="stat-label">점수</span>
-          <span class="stat-value" id="deadScore">00000</span>
+      <div class="overlay-content">
+        <div class="overlay-icon">💀</div>
+        <div class="over-title">GAME OVER</div>
+        <div class="game-desc">아쉬워요! 다시 도전해 보세요.</div>
+        <div class="overlay-stats">
+          <div class="stat-block">
+            <span class="stat-label">점수</span>
+            <span class="stat-value" id="deadScore">00000</span>
+          </div>
+          <div class="stat-block">
+            <span class="stat-label">최고 점수</span>
+            <span class="stat-value" id="deadHiscore">00000</span>
+          </div>
         </div>
-        <div class="stat-block">
-          <span class="stat-label">최고 점수</span>
-          <span class="stat-value" id="deadHiscore">00000</span>
-        </div>
+        <button class="cta-btn" id="btnRestart">다시 시작</button>
+        <p class="game-hint">스페이스바를 눌러도 재시작할 수 있어요</p>
       </div>
-      <button class="overlay-btn" id="btnRestart">
-        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="1 4 1 10 7 10"/>
-          <path d="M3.51 15a9 9 0 1 0 .49-4.95"/>
-        </svg>
-        다시 시작
-      </button>
-      <p class="overlay-hint">스페이스바를 눌러도 재시작할 수 있어요</p>
     </div>
 
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/js/theme-init.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="/js/supabase-config.js"></script>
   <script src="/js/leaderboard.js"></script>
   <script src="js/game.js"></script>

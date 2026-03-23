@@ -1,8 +1,13 @@
 /* ══════════════════════════════════════════
    BATTLESHIP — style.css
-   Designed to match TicTacToe's visual system
+   2048 디자인 기반 공통 스타일 + 게임 전용 스타일
    ══════════════════════════════════════════ */
 
+/* Theme overrides: now in shared /css/tokens.css */
+
+/* ===========================
+   Reset & Base
+   =========================== */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -25,9 +30,9 @@ body {
   overflow-x: hidden;
 }
 
-/* ──────────────────────────────────────
-   OVERLAY SCREENS
-────────────────────────────────────── */
+/* ===========================
+   Overlay Screens (공통)
+   =========================== */
 .overlay {
   display: none;
   position: fixed;
@@ -45,6 +50,22 @@ body {
   display: flex;
 }
 
+/* Card-style wrapper (시작/결과 화면) */
+.overlay-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 40px 32px;
+  max-width: 360px;
+  width: 90%;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+/* Plain wrapper (로비/배치 화면) */
 .screen-content {
   width: 100%;
   max-width: 360px;
@@ -55,21 +76,9 @@ body {
   padding: 0 24px;
 }
 
-/* ──────────────────────────────────────
-   START SCREEN
-────────────────────────────────────── */
-.game-logo {
-  font-size: 64px;
-  line-height: 1;
-  filter: drop-shadow(0 4px 16px rgba(59, 130, 246, 0.4));
-  animation: float 3s ease-in-out infinite;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-8px); }
-}
-
+/* ===========================
+   Game Title (gradient, 공통)
+   =========================== */
 .game-title {
   font-size: 36px;
   font-weight: 800;
@@ -81,17 +90,60 @@ body {
   text-align: center;
 }
 
-.game-subtitle {
-  font-size: 14px;
+.game-desc {
+  font-size: 16px;
   color: var(--text-secondary);
   text-align: center;
-  letter-spacing: 0.5px;
-  margin-top: 0;
+  line-height: 1.6;
 }
 
+.game-hint {
+  font-size: 13px;
+  color: var(--text-muted);
+  text-align: center;
+  line-height: 1.6;
+  letter-spacing: 0.5px;
+}
+
+/* ===========================
+   CTA Button (공통)
+   =========================== */
+.cta-btn {
+  padding: 14px 48px;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: inherit;
+  color: #fff;
+  background: var(--accent);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: filter 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: 0 4px 20px var(--accent-glow);
+  letter-spacing: 0.5px;
+  width: 100%;
+}
+
+.cta-btn:hover {
+  filter: brightness(1.1);
+}
+
+.cta-btn:active {
+  transform: scale(0.97);
+}
+
+.cta-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  filter: none;
+}
+
+/* ===========================
+   Start Screen — 게임 전용
+   =========================== */
 .stats-panel {
   width: 100%;
-  background: var(--bg-secondary);
+  background: var(--bg-tertiary);
   border: 1px solid var(--border);
   border-radius: 16px;
   padding: 20px 28px;
@@ -123,17 +175,9 @@ body {
   color: var(--text-muted);
 }
 
-.start-hint {
-  font-size: 12px;
-  color: var(--text-muted);
-  text-align: center;
-  line-height: 1.6;
-  margin-top: -12px;
-}
-
-/* ──────────────────────────────────────
-   BUTTONS
-────────────────────────────────────── */
+/* ===========================
+   Buttons (게임 전용)
+   =========================== */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -203,15 +247,16 @@ body {
   width: 100%;
 }
 
-.btn-group .btn {
+.btn-group .btn,
+.btn-group .cta-btn {
   flex: 1;
 }
 
-/* ──────────────────────────────────────
-   RESULT SCREEN
-────────────────────────────────────── */
-#result-screen .screen-content {
-  gap: 20px;
+/* ===========================
+   Result Screen — 게임 전용
+   =========================== */
+#result-screen .overlay-content {
+  gap: 16px;
 }
 
 .result-emoji {
@@ -246,13 +291,6 @@ body {
   background-clip: text;
 }
 
-.result-desc {
-  font-size: 14px;
-  color: var(--text-secondary);
-  text-align: center;
-  line-height: 1.5;
-}
-
 .result-stats {
   width: 100%;
   display: grid;
@@ -261,7 +299,7 @@ body {
 }
 
 .result-stat {
-  background: var(--bg-secondary);
+  background: var(--bg-tertiary);
   border: 1px solid var(--border);
   border-radius: 10px;
   padding: 12px;
@@ -283,9 +321,9 @@ body {
   text-align: center;
 }
 
-/* ──────────────────────────────────────
-   PLACE SCREEN
-────────────────────────────────────── */
+/* ===========================
+   Place Screen — 게임 전용
+   =========================== */
 #place-screen {
   overflow-y: auto;
 }
@@ -364,9 +402,9 @@ body {
   color: var(--accent);
 }
 
-/* ──────────────────────────────────────
-   GAME SCREEN
-────────────────────────────────────── */
+/* ===========================
+   Game Screen — 게임 전용
+   =========================== */
 #game-screen {
   background: var(--bg-primary);
   z-index: 100;
@@ -485,9 +523,9 @@ body {
 .status-bar.sunk { border-color: #F97316; color: #F97316; font-weight: 600; }
 .status-bar.ai { border-color: var(--border); color: var(--text-secondary); }
 
-/* ──────────────────────────────────────
-   BOARDS
-────────────────────────────────────── */
+/* ===========================
+   Boards
+   =========================== */
 .board-wrapper {
   display: flex;
   flex-direction: column;
@@ -598,9 +636,9 @@ body {
 .place-board .cell { cursor: crosshair; }
 .place-board .cell:hover:not(.ship) { background: rgba(59, 130, 246, 0.08); }
 
-/* ──────────────────────────────────────
-   SHIP HUD
-────────────────────────────────────── */
+/* ===========================
+   Ship HUD
+   =========================== */
 .ships-hud-row {
   display: flex;
   flex-direction: column;
@@ -621,9 +659,9 @@ body {
 .ship-badge .block { width: 8px; height: 8px; border-radius: 1px; background: var(--accent); }
 .ship-badge.sunk .block { background: var(--text-muted); }
 
-/* ──────────────────────────────────────
-   AI THINKING
-────────────────────────────────────── */
+/* ===========================
+   AI Thinking
+   =========================== */
 .thinking-dots { display: inline-flex; gap: 4px; align-items: center; }
 .thinking-dots span { width: 5px; height: 5px; border-radius: 50%; background: var(--text-muted); animation: thinkDot 1.2s ease-in-out infinite; }
 .thinking-dots span:nth-child(2) { animation-delay: 0.2s; }
@@ -634,9 +672,9 @@ body {
   40% { transform: scale(1); opacity: 1; }
 }
 
-/* ──────────────────────────────────────
-   ATTACK FX
-────────────────────────────────────── */
+/* ===========================
+   Attack FX
+   =========================== */
 .attack-fx { position: absolute; inset: -40%; z-index: 10; pointer-events: none; border-radius: 50%; }
 
 .hit-fx { animation: hitBlast 0.65s ease-out forwards; }
@@ -661,9 +699,17 @@ body {
 
 .cell.sunk-flash { animation: sunkFlash 0.4s ease 3; }
 
-/* ──────────────────────────────────────
-   SCROLLBAR & RESPONSIVE
-────────────────────────────────────── */
+/* ===========================
+   Animations
+   =========================== */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+/* ===========================
+   Scrollbar & Responsive
+   =========================== */
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
@@ -677,5 +723,6 @@ body {
 @media (max-height: 700px) {
   .game-container { gap: 8px; padding: 10px; }
   .screen-content { gap: 20px; }
+  .overlay-content { padding: 28px 24px; gap: 16px; }
   .stats-panel { padding: 14px 20px; gap: 24px; }
 }

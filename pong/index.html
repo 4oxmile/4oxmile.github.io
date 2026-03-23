@@ -38,47 +38,53 @@
 
       <!-- ── START SCREEN ── -->
       <div id="start-screen" class="overlay">
-        <div class="game-logo-css"><span class="icon-pong"></span></div>
-        <h1 class="game-title">PONG</h1>
-        <p class="game-subtitle">1인 플레이 vs AI</p>
+        <div class="overlay-content">
+          <div class="game-logo-css"><span class="icon-pong"></span></div>
+          <h1 class="game-title">PONG</h1>
+          <p class="game-desc">1인 플레이 vs AI</p>
 
-        <div class="difficulty-section">
-          <p class="difficulty-label">난이도 선택</p>
-          <div class="difficulty-buttons">
-            <button class="diff-btn" data-diff="easy">쉬움</button>
-            <button class="diff-btn active" data-diff="normal">보통</button>
-            <button class="diff-btn" data-diff="hard">어려움</button>
+          <div class="difficulty-section">
+            <p class="difficulty-label">난이도 선택</p>
+            <div class="difficulty-buttons">
+              <button class="diff-btn" data-diff="easy">쉬움</button>
+              <button class="diff-btn active" data-diff="normal">보통</button>
+              <button class="diff-btn" data-diff="hard">어려움</button>
+            </div>
           </div>
-        </div>
 
-        <button class="btn-primary" id="start-btn">게임 시작</button>
+          <button class="cta-btn" id="start-btn">게임 시작</button>
 
-        <div class="best-badge">
-          최고 점수: <span id="start-best-value">0</span>
+          <div class="best-badge">
+            최고 점수: <span id="start-best-value">0</span>
+          </div>
         </div>
       </div>
 
       <!-- ── PAUSE SCREEN ── -->
       <div id="pause-screen" class="overlay hidden">
-        <p class="pause-title">일시정지</p>
-        <p class="pause-hint">재개 버튼을 누르거나 Esc를 눌러 계속하세요</p>
-        <button class="btn-primary" id="resume-btn">재개하기</button>
-        <button class="btn-secondary" id="pause-menu-btn">메인 메뉴</button>
+        <div class="overlay-content">
+          <p class="over-title">일시정지</p>
+          <p class="game-hint">재개 버튼을 누르거나 Esc를 눌러 계속하세요</p>
+          <button class="cta-btn" id="resume-btn">재개하기</button>
+          <button class="btn-secondary" id="pause-menu-btn">메인 메뉴</button>
+        </div>
       </div>
 
       <!-- ── GAME OVER SCREEN ── -->
       <div id="gameover-screen" class="overlay hidden">
-        <p id="result-title" class="result-title win">승리!</p>
-        <p id="final-score" class="final-score">11 : 7</p>
-        <p id="result-subtitle" class="result-subtitle">완벽한 플레이! 🎉</p>
+        <div class="overlay-content">
+          <p id="result-title" class="over-title">승리!</p>
+          <p id="final-score" class="final-score">11 : 7</p>
+          <p id="result-subtitle" class="game-desc">완벽한 플레이! 🎉</p>
 
-        <div class="best-badge" style="margin-top:4px">
-          최고 점수: <span id="best-badge-value">0</span>
-        </div>
+          <div class="best-badge">
+            최고 점수: <span id="best-badge-value">0</span>
+          </div>
 
-        <div class="gameover-buttons">
-          <button class="btn-primary" id="restart-btn">다시 시작</button>
-          <button class="btn-secondary" id="menu-btn">메인 메뉴</button>
+          <div class="gameover-buttons">
+            <button class="cta-btn" id="restart-btn">다시 시작</button>
+            <button class="btn-secondary" id="menu-btn">메인 메뉴</button>
+          </div>
         </div>
       </div>
 
@@ -92,7 +98,8 @@
 
   </div><!-- /app -->
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/js/theme-init.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="/js/supabase-config.js"></script>
 <script src="/js/leaderboard.js"></script>
 <script src="js/game.js"></script>

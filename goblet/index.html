@@ -6,7 +6,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="theme-color" content="#0D1117" media="(prefers-color-scheme: dark)">
   <meta name="theme-color" content="#FFFFFF" media="(prefers-color-scheme: light)">
-  <title>오목 - OMOK</title>
+  <title>고블렛 - GOBLET</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎮</text></svg>">
   <link rel="stylesheet" href="/css/tokens.css">
   <link rel="stylesheet" href="/css/nav.css">
@@ -23,9 +23,9 @@
   <!-- ── Start Screen ── -->
   <div class="overlay" id="start-screen">
     <div class="overlay-content">
-      <div class="game-logo-css"><span class="icon-omok"></span></div>
-      <div class="game-title">OMOK</div>
-      <div class="game-desc">오목 · Gomoku</div>
+      <div class="game-logo-css"><span class="icon-goblet"></span></div>
+      <div class="game-title">GOBLET</div>
+      <div class="game-desc">고블렛 · Gobblet Gobblers</div>
 
       <div class="stats-box">
         <div class="stat-item">
@@ -44,7 +44,7 @@
         </div>
       </div>
 
-      <button class="cta-btn" id="btn-start">게임 시작</button>
+      <button class="cta-btn" id="btn-start">AI 대전</button>
       <button class="btn-online" id="btn-online">🌐 온라인 대전</button>
     </div>
   </div>
@@ -53,7 +53,7 @@
   <div class="overlay hidden" id="lobby-screen">
     <div class="screen-content">
       <div class="lobby-title">ONLINE</div>
-      <div class="lobby-subtitle">친구와 실시간 오목 대전</div>
+      <div class="lobby-subtitle">친구와 실시간 고블렛 대전</div>
 
       <div id="lobby-main">
         <div class="room-list-section">
@@ -106,14 +106,13 @@
     </div>
   </div>
 
-  <!-- ── Game Screen (always rendered) ── -->
-  <div id="game-screen">
+  <!-- ── Game Screen ── -->
+  <div class="overlay hidden" id="game-screen">
 
     <!-- Header -->
     <div class="game-header">
-      <div class="header-title">OMOK</div>
+      <div class="header-title">GOBLET</div>
       <div class="header-actions">
-        <button class="btn btn-small" id="btn-undo" title="무르기">← 무르기</button>
         <button class="btn btn-small" id="btn-restart" title="새 게임">새 게임</button>
         <button class="btn btn-small" id="btn-home" title="홈">홈</button>
       </div>
@@ -122,15 +121,27 @@
     <!-- Status bar -->
     <div class="status-bar">
       <div class="turn-indicator">
-        <div class="stone-dot black" id="turn-dot"></div>
-        <span id="turn-label">당신 (흑)</span>
+        <div class="turn-dot player1" id="turn-dot"></div>
+        <span id="turn-label">Player 1 (파랑)</span>
       </div>
-      <div class="status-text" id="status-text">흑이 먼저 시작합니다</div>
+      <div class="status-text" id="status-text">파랑이 먼저 시작합니다</div>
+    </div>
+
+    <!-- Player 2 Reserve (top) -->
+    <div class="reserve" id="reserve-2">
+      <div class="reserve-label">Player 2</div>
+      <div class="reserve-pieces" id="reserve-pieces-2"></div>
     </div>
 
     <!-- Board -->
-    <div class="canvas-wrapper">
-      <canvas id="board"></canvas>
+    <div class="board-container">
+      <div class="board" id="board"></div>
+    </div>
+
+    <!-- Player 1 Reserve (bottom) -->
+    <div class="reserve" id="reserve-1">
+      <div class="reserve-label">Player 1</div>
+      <div class="reserve-pieces" id="reserve-pieces-1"></div>
     </div>
 
     <!-- Mini stats -->

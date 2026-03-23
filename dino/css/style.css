@@ -197,35 +197,62 @@ body {
   pointer-events: none;
 }
 
-.overlay-icon {
-  font-size: 52px;
-  line-height: 1;
-  margin-bottom: 16px;
+.overlay-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 40px 32px;
+  max-width: 360px;
+  width: 90%;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
 }
 
-.overlay-title {
-  font-size: 32px;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  background: linear-gradient(135deg, var(--accent), #a78bfa);
+.game-title {
+  font-size: 52px;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  background: linear-gradient(135deg, #3B82F6, #8B5CF6, #EC4899);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  margin-bottom: 6px;
+  line-height: 1;
 }
 
-.overlay-subtitle {
-  font-size: 13px;
-  color: var(--text-secondary);
-  margin-bottom: 28px;
-  text-align: center;
-  line-height: 1.5;
+.game-desc { font-size: 16px; color: var(--text-secondary); text-align: center; line-height: 1.6; }
+.game-hint { font-size: 13px; color: var(--text-muted); letter-spacing: 0.5px; }
+.over-title { font-size: 32px; font-weight: 800; color: var(--text-primary); }
+
+.cta-btn {
+  padding: 14px 48px;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: inherit;
+  color: #fff;
+  background: var(--accent);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: filter 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: 0 4px 20px var(--accent-glow);
+  letter-spacing: 0.5px;
+  width: 100%;
+  max-width: 280px;
+}
+.cta-btn:hover { filter: brightness(1.1); }
+.cta-btn:active { transform: scale(0.97); }
+
+.overlay-icon {
+  font-size: 52px;
+  line-height: 1;
 }
 
 .overlay-stats {
   display: flex;
   gap: 24px;
-  margin-bottom: 28px;
 }
 
 .stat-block {
@@ -252,38 +279,6 @@ body {
 
 .stat-value.accent {
   color: var(--accent);
-}
-
-.overlay-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 12px 32px;
-  border-radius: 10px;
-  border: none;
-  background: var(--accent);
-  color: #fff;
-  font-family: inherit;
-  font-size: 15px;
-  font-weight: 700;
-  cursor: pointer;
-  letter-spacing: 0.02em;
-  transition: opacity 0.15s, transform 0.1s;
-  -webkit-tap-highlight-color: transparent;
-  min-width: 160px;
-}
-
-.overlay-btn:active {
-  opacity: 0.85;
-  transform: scale(0.97);
-}
-
-.overlay-hint {
-  font-size: 11px;
-  color: var(--text-muted);
-  margin-top: 12px;
-  text-align: center;
 }
 
 /* ---------- Night badge ---------- */

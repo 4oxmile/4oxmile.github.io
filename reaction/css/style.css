@@ -1,4 +1,13 @@
+/* ═══════════════════════════════════════════════════
+   REACTION — 반응속도 테스트
+   2048 디자인 기반 공통 스타일 + 게임 전용 스타일
+   ═══════════════════════════════════════════════════ */
 
+/* Theme overrides: now in shared /css/tokens.css */
+
+/* ===========================
+   Reset & Base
+   =========================== */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -35,16 +44,16 @@ body {
   flex-direction: column;
 }
 
-/* ===== OVERLAY SCREENS ===== */
+/* ===========================
+   Overlay Screens (공통)
+   =========================== */
 .overlay {
   position: absolute;
   inset: 0;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   z-index: 20;
-  padding: 32px 24px;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   background: var(--overlay-bg);
@@ -56,43 +65,88 @@ body {
   pointer-events: none;
 }
 
-/* ===== START SCREEN ===== */
-#start-screen {
-  gap: 0;
+.overlay-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 40px 32px;
+  max-width: 360px;
+  width: 90%;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
 }
 
-.game-icon {
-  font-size: 72px;
-  line-height: 1;
-  margin-bottom: 20px;
-  animation: float 3s ease-in-out infinite;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-}
-
+/* ===========================
+   Game Title (gradient)
+   =========================== */
 .game-title {
   font-size: 52px;
   font-weight: 900;
-  letter-spacing: 4px;
+  letter-spacing: 2px;
   background: linear-gradient(135deg, #3B82F6, #8B5CF6, #EC4899);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  margin-bottom: 12px;
+  line-height: 1;
   text-align: center;
 }
 
-.game-subtitle {
-  font-size: 15px;
+.game-desc {
+  font-size: 16px;
   color: var(--text-secondary);
   text-align: center;
-  margin-bottom: 40px;
   line-height: 1.6;
 }
 
+.game-hint {
+  font-size: 13px;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+}
+
+/* ===========================
+   CTA Button (공통)
+   =========================== */
+.cta-btn {
+  padding: 14px 48px;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: inherit;
+  color: #fff;
+  background: var(--accent);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: filter 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: 0 4px 20px var(--accent-glow);
+  letter-spacing: 0.5px;
+  width: 100%;
+  max-width: 280px;
+}
+
+.cta-btn:hover {
+  filter: brightness(1.1);
+}
+
+.cta-btn:active {
+  transform: scale(0.97);
+}
+
+/* ===========================
+   Game Over Title (공통)
+   =========================== */
+.over-title {
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+/* ===========================
+   Start Screen — 게임 전용
+   =========================== */
 .best-record-badge {
   display: flex;
   align-items: center;
@@ -101,7 +155,6 @@ body {
   border: 1px solid var(--border);
   border-radius: 20px;
   padding: 8px 20px;
-  margin-bottom: 40px;
   font-size: 13px;
   color: var(--text-secondary);
 }
@@ -112,28 +165,9 @@ body {
   font-size: 15px;
 }
 
-.btn-start {
-  width: 100%;
-  max-width: 280px;
-  padding: 18px 32px;
-  border-radius: 16px;
-  border: none;
-  background: linear-gradient(135deg, #3B82F6, #8B5CF6);
-  color: #fff;
-  font-size: 18px;
-  font-weight: 700;
-  cursor: pointer;
-  letter-spacing: 1px;
-  box-shadow: 0 0 20px var(--accent-glow), 0 8px 32px rgba(59, 130, 246, 0.35);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-
-.btn-start:active {
-  transform: scale(0.97);
-  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.25);
-}
-
-/* ===== GAME AREA ===== */
+/* ===========================
+   Game Area — 게임 전용
+   =========================== */
 #game-area {
   flex: 1;
   display: flex;
@@ -159,7 +193,9 @@ body {
   background: linear-gradient(160deg, #4A1F1F, #922B21, #C0392B);
 }
 
-/* ===== GAME HEADER (always visible) ===== */
+/* ===========================
+   Game Header
+   =========================== */
 .game-header {
   padding: 20px 20px 12px;
   display: flex;
@@ -218,7 +254,9 @@ body {
   font-weight: 700;
 }
 
-/* ===== GAME CONTENT AREA ===== */
+/* ===========================
+   Game Content Area
+   =========================== */
 .game-content {
   flex: 1;
   display: flex;
@@ -282,7 +320,9 @@ body {
   margin-top: 8px;
 }
 
-/* ===== ROUND LOG (bottom strip) ===== */
+/* ===========================
+   Round Log (bottom strip)
+   =========================== */
 .round-log {
   padding: 12px 20px 20px;
   display: flex;
@@ -308,27 +348,22 @@ body {
   border-color: rgba(255,255,255,0.35);
 }
 
-/* ===== RESULTS OVERLAY ===== */
-#results-screen {
-  gap: 0;
-  padding: 32px 24px 40px;
+/* ===========================
+   Results Overlay — 게임 전용
+   =========================== */
+.results-content {
+  max-width: 380px;
+  width: 92%;
+  max-height: 85dvh;
   overflow-y: auto;
-}
-
-.results-title {
-  font-size: 28px;
-  font-weight: 900;
-  background: linear-gradient(135deg, #3B82F6, #8B5CF6, #EC4899);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin-bottom: 8px;
-  letter-spacing: 1px;
+  padding: 32px 24px;
+  gap: 0;
 }
 
 .results-avg-label {
   font-size: 13px;
   color: var(--text-muted);
+  margin-top: 4px;
   margin-bottom: 4px;
   text-transform: uppercase;
   letter-spacing: 1.5px;
@@ -353,7 +388,7 @@ body {
   font-size: 22px;
   font-weight: 800;
   color: var(--accent);
-  margin-bottom: 28px;
+  margin-bottom: 20px;
   margin-top: 6px;
 }
 
@@ -362,7 +397,7 @@ body {
   grid-template-columns: 1fr 1fr;
   gap: 12px;
   width: 100%;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
 .result-card {
@@ -402,7 +437,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  margin-bottom: 28px;
+  margin-bottom: 24px;
 }
 
 .rounds-list-title {
@@ -457,7 +492,7 @@ body {
   font-weight: 700;
   color: var(--accent);
   letter-spacing: 0.5px;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   display: none;
 }
 
@@ -471,28 +506,9 @@ body {
   to { transform: scale(1); opacity: 1; }
 }
 
-.btn-retry {
-  width: 100%;
-  max-width: 280px;
-  padding: 18px 32px;
-  border-radius: 16px;
-  border: none;
-  background: linear-gradient(135deg, #3B82F6, #8B5CF6);
-  color: #fff;
-  font-size: 18px;
-  font-weight: 700;
-  cursor: pointer;
-  letter-spacing: 0.5px;
-  box-shadow: 0 0 20px var(--accent-glow), 0 8px 32px rgba(59, 130, 246, 0.35);
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-
-.btn-retry:active {
-  transform: scale(0.97);
-  box-shadow: 0 4px 16px rgba(59, 130, 246, 0.25);
-}
-
-/* ===== ANIMATIONS ===== */
+/* ===========================
+   Animations
+   =========================== */
 @keyframes fade-in-up {
   from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
@@ -525,7 +541,9 @@ body {
   animation: shake 0.45s ease-in-out;
 }
 
-/* ===== IDLE STATE STYLES ===== */
+/* ===========================
+   Idle State
+   =========================== */
 #game-area.state-idle .state-label,
 #game-area.state-idle .state-sublabel {
   color: var(--text-secondary);

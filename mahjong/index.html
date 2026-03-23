@@ -18,35 +18,35 @@
 <body>
   <div id="app">
     <div id="start-screen" class="overlay active">
-      <div class="title-wrap">
-        <div class="game-logo-css">🀄</div>
-        <h1 class="screen-title">MAHJONG</h1>
-        <p class="screen-subtitle">같은 타일 쌍을 모두 제거하세요</p>
+      <div class="overlay-content">
+        <div class="game-logo-css"><span class="icon-mahjong"></span></div>
+        <h1 class="game-title">MAHJONG</h1>
+        <p class="game-desc">같은 타일 쌍을 모두 제거하세요</p>
+        <div class="start-tiles-preview">
+          <div class="preview-tile red">中</div>
+          <div class="preview-tile green">發</div>
+          <div class="preview-tile">白</div>
+          <div class="preview-tile gold">春</div>
+        </div>
+        <button class="cta-btn start-btn">게임 시작</button>
       </div>
-      <div class="start-tiles-preview">
-        <div class="preview-tile red">中</div>
-        <div class="preview-tile green">發</div>
-        <div class="preview-tile">白</div>
-        <div class="preview-tile gold">春</div>
-      </div>
-      <button class="start-btn">게임 시작</button>
     </div>
 
     <div id="win-screen" class="overlay">
-      <div class="win-icon">🏆</div>
-      <h2 class="win-title">완성!</h2>
-      <div class="win-stats">
-        <div class="stat-row">
-          <span class="stat-label">걸린 시간</span>
-          <span class="stat-value" id="win-time">00:00</span>
+      <div class="overlay-content">
+        <div class="win-icon">🏆</div>
+        <h2 class="over-title">완성!</h2>
+        <div class="win-stats">
+          <div class="stat-row">
+            <span class="stat-label">걸린 시간</span>
+            <span class="stat-value" id="win-time">00:00</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">제거한 쌍</span>
+            <span class="stat-value" id="win-pairs">72</span>
+          </div>
         </div>
-        <div class="stat-row">
-          <span class="stat-label">제거한 쌍</span>
-          <span class="stat-value" id="win-pairs">72</span>
-        </div>
-      </div>
-      <div class="win-actions">
-        <button class="btn-primary" id="win-again-btn">다시 하기</button>
+        <button class="cta-btn" id="win-again-btn">다시 하기</button>
       </div>
     </div>
 
@@ -101,7 +101,8 @@
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/js/theme-init.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="/js/supabase-config.js"></script>
   <script src="/js/leaderboard.js"></script>
   <script src="js/game.js"></script>
