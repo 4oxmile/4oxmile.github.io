@@ -107,68 +107,60 @@ body {
 }
 
 .overlay-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 40px 32px;
+  max-width: 360px;
+  width: 90%;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
   text-align: center;
-  padding: 32px;
 }
 
 .game-title {
   font-size: 52px;
-  font-weight: 800;
-  letter-spacing: 10px;
+  font-weight: 900;
+  letter-spacing: -0.03em;
   background: linear-gradient(135deg, #3B82F6, #8B5CF6, #EC4899);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  margin-bottom: 12px;
+  line-height: 1;
 }
 
-.game-desc {
-  font-size: 15px;
-  color: var(--text-secondary);
-  line-height: 1.6;
-  margin-bottom: 28px;
-}
+.game-desc { font-size: 16px; color: var(--text-secondary); text-align: center; line-height: 1.6; }
+.game-hint { font-size: 13px; color: var(--text-muted); letter-spacing: 0.5px; }
+.over-title { font-size: 32px; font-weight: 800; color: var(--text-primary); }
 
-.primary-btn {
-  display: inline-block;
-  padding: 14px 40px;
+.cta-btn {
+  padding: 14px 48px;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: inherit;
+  color: #fff;
+  background: var(--accent);
   border: none;
   border-radius: 12px;
-  background: var(--accent);
-  color: #FFFFFF;
-  font-size: 17px;
-  font-weight: 700;
   cursor: pointer;
-  transition: background 0.15s, transform 0.1s;
-  -webkit-tap-highlight-color: transparent;
-  touch-action: manipulation;
-  box-shadow: 0 0 20px var(--accent-glow);
+  transition: filter 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+  box-shadow: 0 4px 20px var(--accent-glow);
+  letter-spacing: 0.5px;
+  width: 100%;
+  max-width: 280px;
 }
-
-.primary-btn:active {
-  background: #2563EB;
-  transform: scale(0.95);
-}
+.cta-btn:hover { filter: brightness(1.1); }
+.cta-btn:active { transform: scale(0.97); }
 
 .start-info, .best-info {
-  margin-top: 16px;
   font-size: 14px;
   color: var(--text-muted);
 }
 
 /* Victory */
-.victory-title {
-  font-size: 40px;
-  font-weight: 800;
-  letter-spacing: 6px;
-  background: linear-gradient(135deg, #F59E0B, #EF4444, #F59E0B);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin-bottom: 24px;
-  animation: victoryPulse 1s ease infinite alternate;
-}
-
 @keyframes victoryPulse {
   from { transform: scale(1); }
   to { transform: scale(1.05); }
