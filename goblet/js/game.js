@@ -355,25 +355,22 @@ function renderReserves() {
 
     for (let size = 2; size >= 0; size--) {
       const count = reserves[player][size];
-      const piece = document.createElement('div');
-      piece.className = `reserve-piece piece-${SIZE_NAMES[size]} piece-player${player}`;
+      for (let i = 0; i < 2; i++) {
+        const piece = document.createElement('div');
+        piece.className = `reserve-piece piece-${SIZE_NAMES[size]} piece-player${player}`;
 
-      if (count === 0) {
-        piece.classList.add('disabled');
+        if (i >= count) {
+          piece.classList.add('disabled');
+        }
+
+        if (i < count && selectedPiece && selectedPiece.type === 'reserve' &&
+            selectedPiece.player === player && selectedPiece.size === size) {
+          piece.classList.add('selected');
+        }
+
+        piece.addEventListener('click', () => onReserveClick(player, size));
+        container.appendChild(piece);
       }
-
-      if (selectedPiece && selectedPiece.type === 'reserve' &&
-          selectedPiece.player === player && selectedPiece.size === size) {
-        piece.classList.add('selected');
-      }
-
-      const badge = document.createElement('span');
-      badge.className = 'piece-count';
-      badge.textContent = count;
-      piece.appendChild(badge);
-
-      piece.addEventListener('click', () => onReserveClick(player, size));
-      container.appendChild(piece);
     }
   }
 }
