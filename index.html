@@ -29,6 +29,24 @@
         --border: #D0D7DE;
       }
     }
+    html[data-theme="dark"] {
+      --bg-primary: #0D1117;
+      --bg-secondary: #161B22;
+      --text-primary: #F0F6FC;
+      --text-secondary: #8B949E;
+      --text-muted: #484F58;
+      --accent: #3B82F6;
+      --border: #30363D;
+    }
+    html[data-theme="light"] {
+      --bg-primary: #FFFFFF;
+      --bg-secondary: #F6F8FA;
+      --text-primary: #1B1E28;
+      --text-secondary: #57606A;
+      --text-muted: #8C959F;
+      --accent: #3182F6;
+      --border: #D0D7DE;
+    }
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html, body { width: 100%; min-height: 100%; }
     body {
@@ -111,10 +129,34 @@
       font-size: 12px;
       color: var(--text-muted);
     }
+    .theme-toggle-btn {
+      position: fixed;
+      top: 12px;
+      right: 12px;
+      z-index: 15;
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+      cursor: pointer;
+      font-size: 16px;
+      transition: background 0.15s, color 0.15s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .theme-toggle-btn:hover {
+      background: var(--border);
+      color: var(--text-primary);
+    }
   </style>
   <link rel="stylesheet" href="/css/game-icons.css">
 </head>
 <body>
+<button id="theme-toggle" class="theme-toggle-btn" aria-label="테마 전환">🖥️</button>
   <div class="container">
     <h1 class="site-title">GAMES</h1>
     <p class="site-desc">브라우저에서 바로 플레이</p>
@@ -301,14 +343,7 @@
           <div class="game-desc">사방에서 날아오는 화살을 피하세요</div>
         </div>
       </a>
-      <a href="/fruit/" class="game-card">
-        <span class="game-icon"><span class="icon-fruit"></span></span>
-        <div class="game-info">
-          <div class="game-name">FRUIT</div>
-          <div class="game-desc">드래그로 과일을 베세요</div>
-        </div>
-      </a>
-      <a href="/target/" class="game-card">
+<a href="/target/" class="game-card">
         <span class="game-icon"><span class="icon-target"></span></span>
         <div class="game-info">
           <div class="game-name">TARGET</div>
@@ -371,13 +406,6 @@
           <div class="game-desc">타일을 회전해 물길을 연결하세요</div>
         </div>
       </a>
-      <a href="/yacht/" class="game-card">
-        <span class="game-icon"><span class="icon-yacht"></span></span>
-        <div class="game-info">
-          <div class="game-name">YACHT DICE</div>
-          <div class="game-desc">5개 주사위로 12가지 점수 도전</div>
-        </div>
-      </a>
       <a href="/simon/" class="game-card">
         <span class="game-icon"><span class="icon-simon"></span></span>
         <div class="game-info">
@@ -399,9 +427,50 @@
           <div class="game-desc">같은 타일 쌍을 모두 제거하세요</div>
         </div>
       </a>
+      <a href="/goblet/" class="game-card">
+        <span class="game-icon"><span class="icon-goblet"></span></span>
+        <div class="game-info">
+          <div class="game-name">GOBLET</div>
+          <div class="game-desc">큰 말로 작은 말을 덮어 3목을 완성하세요</div>
+        </div>
+      </a>
+      <a href="/skippity/" class="game-card">
+        <span class="game-icon"><span class="icon-skippity"></span></span>
+        <div class="game-info">
+          <div class="game-name">SKIPPITY</div>
+          <div class="game-desc">말을 뛰어넘어 5색 세트를 모으세요</div>
+        </div>
+      </a>
     </div>
     <div class="footer">4ox.kr</div>
   </div>
+  <script>
+  // Theme toggle: dark ↔ light
+  (function(){
+    var THEME_KEY = 'theme';
+    var btn = document.getElementById('theme-toggle');
+    var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    function isDark() {
+      var t = localStorage.getItem(THEME_KEY);
+      if (t === 'dark') return true;
+      if (t === 'light') return false;
+      return prefersDark;
+    }
+
+    function apply(dark) {
+      document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+      localStorage.setItem(THEME_KEY, dark ? 'dark' : 'light');
+      btn.textContent = dark ? '☀️' : '🌙';
+    }
+
+    btn.addEventListener('click', function() {
+      apply(!isDark());
+    });
+
+    apply(isDark());
+  })();
+  </script>
   <script>
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/sw.js');

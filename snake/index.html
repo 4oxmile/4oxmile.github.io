@@ -66,38 +66,41 @@
 
     <!-- Start overlay -->
     <div class="overlay" id="startScreen">
-      <div class="game-logo-css"><span class="icon-snake"></span></div>
-      <h1 class="game-title">SNAKE</h1>
-      <p class="subtitle">스와이프로 뱀을 조종하세요!</p>
-      <button class="start-btn" id="startBtn">
-        게임 시작
-        <span class="tap-hint">탭하여 시작</span>
-      </button>
+      <div class="overlay-content">
+        <div class="game-logo-css"><span class="icon-snake"></span></div>
+        <h1 class="game-title">SNAKE</h1>
+        <p class="game-desc">스와이프로 뱀을 조종하세요!</p>
+        <button class="cta-btn" id="startBtn">게임 시작</button>
+        <p class="game-hint">화면 스와이프 또는 D패드로 조종</p>
+      </div>
     </div>
 
     <!-- Game over overlay -->
     <div class="overlay hidden" id="gameOverScreen">
-      <h2 class="over-title">게임 오버</h2>
+      <div class="overlay-content">
+        <h2 class="over-title">게임 오버</h2>
 
-      <div class="over-scores">
-        <div class="over-score-block">
-          <span class="label">점수</span>
-          <span class="value" id="overScore">0</span>
+        <div class="over-scores">
+          <div class="over-score-block">
+            <span class="label">점수</span>
+            <span class="value" id="overScore">0</span>
+          </div>
+          <div class="over-score-block highlight">
+            <span class="label">최고 기록</span>
+            <span class="value" id="overBest">0</span>
+          </div>
         </div>
-        <div class="over-score-block highlight">
-          <span class="label">최고 기록</span>
-          <span class="value" id="overBest">0</span>
-        </div>
+
+        <div class="new-record-badge hidden" id="newRecord">신기록 달성!</div>
+
+        <button class="cta-btn" id="retryBtn">다시 시작</button>
       </div>
-
-      <div class="new-record-badge hidden" id="newRecord">신기록 달성!</div>
-
-      <button class="retry-btn" id="retryBtn">다시 시작</button>
     </div>
 
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/js/theme-init.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="/js/supabase-config.js"></script>
 <script src="/js/leaderboard.js"></script>
 <script src="js/game.js"></script>

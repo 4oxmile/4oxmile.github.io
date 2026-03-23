@@ -23,7 +23,7 @@
 
 ## 게임 목록
 
-총 **40개** 게임이 포함되어 있습니다.
+총 **41개** 게임이 포함되어 있습니다.
 
 ### 퍼즐 / 전략
 
@@ -43,7 +43,6 @@
 | **[BLACKJACK](https://4ox.kr/blackjack/)** | 딜러를 이겨 칩을 모으세요 |
 | **[MAHJONG](https://4ox.kr/mahjong/)** | 같은 타일 쌍을 모두 제거하세요 |
 | **[PIPE](https://4ox.kr/pipe/)** | 타일을 회전해 물길을 연결하세요 |
-| **[YACHT DICE](https://4ox.kr/yacht/)** | 5개 주사위로 12가지 점수 도전 |
 | **[SIMON](https://4ox.kr/simon/)** | 색깔 패턴을 기억하고 따라하세요 |
 
 ### 보드 / 대전 (vs AI)
@@ -57,6 +56,8 @@
 | **[CONNECT4](https://4ox.kr/connect4/)** | 4개의 칩을 일렬로 연결하세요 |
 | **[TICTACTOE](https://4ox.kr/tictactoe/)** | AI와 틱택토 대결 |
 | **[PONG](https://4ox.kr/pong/)** | AI와 탁구 대결 |
+| **[GOBLET](https://4ox.kr/goblet/)** | 큰 말로 작은 말을 덮어 3목을 완성하세요 |
+| **[SKIPPITY](https://4ox.kr/skippity/)** | 말을 뛰어넘어 5색 세트를 모으세요 |
 
 ### 아케이드 / 액션
 
@@ -93,7 +94,7 @@
 - **Backend** : [Supabase](https://supabase.com) (리더보드 및 클릭 집계)
 - **Hosting** : GitHub Pages
 - **Font** : Pretendard, System UI
-- **Design System** : 공유 CSS 토큰 (`css/tokens.css`) 기반 다크/라이트 모드, 접근성(reduced-motion) 지원
+- **Design System** : 공유 CSS 토큰 (`css/tokens.css`) 기반 다크/라이트 모드, 접근성(reduced-motion) 지원. 오버레이 스크린에 `.overlay-content` 카드 + `.game-title` / `.cta-btn` 표준 클래스 적용 (MEMORY, OTHELLO, PUZZLE, SNAKE, TARGET, DODGE, MOLE, PONG 포함)
 
 ---
 

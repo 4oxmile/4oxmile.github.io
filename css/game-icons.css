@@ -54,7 +54,7 @@
   50%       { transform: translateY(-5px); }
 }
 @keyframes dino-blink {
-  0%, 42%, 46%, 100% { background: #F0F6FC; }
+  0%, 42%, 46%, 100% { background: var(--bg-primary, #0D1117); }
   44% { background: #535353; }
 }
 @keyframes note-bounce {
@@ -186,34 +186,45 @@
   position: relative;
   width: 36px;
   height: 36px;
-  animation: wiggle 2.2s ease-in-out infinite;
 }
-/* body segments using box-shadow trick */
+/* head with eye and tongue */
 .icon-snake::before {
   content: '';
   position: absolute;
   width: 10px;
   height: 10px;
-  border-radius: 3px;
-  background: radial-gradient(circle at 35% 35%, #4ADE80, #16A34A);
-  top: 4px;
-  left: 13px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 60% 35%, #86EFAC, #4ADE80);
+  top: 1px;
+  left: 19px;
   box-shadow:
-    -12px 8px 0 #22C55E,
-    2px 16px 0 #16A34A,
-    -10px 24px 0 #22C55E;
+    5px 2px 0 -3px #1E293B,
+    9px 3px 0 -3.5px #EF4444,
+    11px 1px 0 -3.5px #EF4444,
+    11px 5px 0 -3.5px #EF4444;
 }
-/* head */
+/* body segments - S curve */
 .icon-snake::after {
   content: '';
   position: absolute;
-  width: 12px;
-  height: 12px;
-  border-radius: 4px;
-  background: radial-gradient(circle at 35% 35%, #86EFAC, #22C55E);
-  box-shadow: 0 0 8px rgba(34,197,94,0.6);
-  top: 1px;
-  left: 22px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #22C55E;
+  top: 9px;
+  left: 21px;
+  box-shadow:
+    -4px 4px 0 0 #22C55E,
+    -9px 6px 0 0 #16A34A,
+    -12px 10px 0 0 #16A34A,
+    -8px 14px 0 0 #22C55E,
+    -3px 16px 0 0 #22C55E,
+    0px 19px 0 -1px #16A34A;
+  animation: snake-slither 2s ease-in-out infinite;
+}
+@keyframes snake-slither {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(1.5px); }
 }
 
 /* ─── 5. Flappy ─────────────────────────────────────────────── */
@@ -839,7 +850,7 @@
   box-shadow: 0 0 8px rgba(245,158,11,0.5);
 }
 
-/* ─── 23. Dino ──────────────────────────────────────────────── */
+/* ─── 23. Dino (pixel-art T-Rex matching in-game sprite) ───── */
 .icon-dino {
   display: block;
   position: relative;
@@ -847,77 +858,95 @@
   height: 36px;
   animation: dino-run 0.7s ease-in-out infinite;
 }
-/* head + eye (eye blinks via animation on this element) */
+/* T-Rex body — pixel art via box-shadow (2px per pixel) */
 .icon-dino::before {
   content: '';
   position: absolute;
-  /* eye dot — animated blink */
-  width: 3px;
-  height: 3px;
-  border-radius: 50%;
-  background: #F0F6FC;
-  top: 5px;
-  right: 5px;
-  z-index: 2;
-  animation: dino-blink 3s ease-in-out infinite;
+  width: 2px;
+  height: 2px;
+  top: 3px;
+  left: 7px;
+  background: transparent;
   box-shadow:
-    /* head block */ -5px -1px 0 6px #535353,
-    /* head top-right */ 1px -2px 0 5px #535353,
-    /* neck */ -10px 6px 0 4px #535353,
-    /* arm */ -7px 11px 0 1.5px #535353;
+    /* row 0: head top */
+    8px 0 #535353, 10px 0 #535353, 12px 0 #535353, 14px 0 #535353, 16px 0 #535353, 18px 0 #535353,
+    /* row 1: head */
+    6px 2px #535353, 8px 2px #535353, 10px 2px #535353, 12px 2px #535353, 14px 2px #535353, 16px 2px #535353, 18px 2px #535353, 20px 2px #535353,
+    /* row 2: head + eye gap at 8px */
+    6px 4px #535353, 10px 4px #535353, 12px 4px #535353, 14px 4px #535353, 16px 4px #535353, 18px 4px #535353, 20px 4px #535353,
+    /* row 3: head bottom */
+    6px 6px #535353, 8px 6px #535353, 10px 6px #535353, 12px 6px #535353, 14px 6px #535353, 16px 6px #535353, 18px 6px #535353, 20px 6px #535353,
+    /* row 4: jaw */
+    6px 8px #535353, 8px 8px #535353, 10px 8px #535353, 12px 8px #535353, 14px 8px #535353,
+    /* row 5: arm + neck */
+    0 10px #535353, 6px 10px #535353, 8px 10px #535353, 10px 10px #535353, 12px 10px #535353, 14px 10px #535353, 16px 10px #535353,
+    /* row 6: arm + body */
+    0 12px #535353, 4px 12px #535353, 6px 12px #535353, 8px 12px #535353, 10px 12px #535353, 12px 12px #535353, 14px 12px #535353, 16px 12px #535353, 18px 12px #535353,
+    /* row 7: full body */
+    0 14px #535353, 2px 14px #535353, 4px 14px #535353, 6px 14px #535353, 8px 14px #535353, 10px 14px #535353, 12px 14px #535353, 14px 14px #535353, 16px 14px #535353, 18px 14px #535353, 20px 14px #535353,
+    /* row 8: full body */
+    0 16px #535353, 2px 16px #535353, 4px 16px #535353, 6px 16px #535353, 8px 16px #535353, 10px 16px #535353, 12px 16px #535353, 14px 16px #535353, 16px 16px #535353, 18px 16px #535353, 20px 16px #535353,
+    /* row 9: body taper */
+    2px 18px #535353, 4px 18px #535353, 6px 18px #535353, 8px 18px #535353, 10px 18px #535353, 12px 18px #535353, 14px 18px #535353, 16px 18px #535353, 18px 18px #535353, 20px 18px #535353,
+    /* row 10 */
+    4px 20px #535353, 6px 20px #535353, 8px 20px #535353, 10px 20px #535353, 12px 20px #535353, 14px 20px #535353, 16px 20px #535353, 18px 20px #535353,
+    /* row 11 */
+    4px 22px #535353, 6px 22px #535353, 8px 22px #535353, 10px 22px #535353, 12px 22px #535353, 14px 22px #535353, 16px 22px #535353,
+    /* row 12: legs */
+    6px 24px #535353, 8px 24px #535353, 12px 24px #535353, 14px 24px #535353,
+    /* row 13: legs */
+    6px 26px #535353, 8px 26px #535353, 12px 26px #535353, 14px 26px #535353,
+    /* row 14: feet */
+    6px 28px #535353, 8px 28px #535353, 14px 28px #535353, 16px 28px #535353;
 }
-/* body + tail + legs */
+/* eye (blinks) */
 .icon-dino::after {
   content: '';
   position: absolute;
-  width: 20px;
-  height: 12px;
-  background: #535353;
-  border-radius: 2px;
-  top: 14px;
-  left: 2px;
-  box-shadow:
-    /* tail */ -4px -3px 0 1.5px #535353,
-    /* tail tip */ -6px -5px 0 1px #535353,
-    /* left leg */ 5px 11px 0 1.5px #535353,
-    /* left foot */ 4px 14px 0 1px #535353,
-    /* right leg */ 13px 11px 0 1.5px #535353,
-    /* right foot */ 12px 14px 0 1px #535353;
+  width: 2px;
+  height: 2px;
+  top: 7px;
+  left: 15px;
+  background: var(--bg-primary, #0D1117);
+  z-index: 1;
+  animation: dino-blink 3s ease-in-out infinite;
 }
 
-/* ─── 24. Rhythm ────────────────────────────────────────────── */
+/* ─── 24. Rhythm (4-lane falling notes) ─────────────────────── */
 .icon-rhythm {
   display: block;
   position: relative;
   width: 36px;
   height: 36px;
-  animation: note-bounce 1.2s ease-in-out infinite;
 }
-/* eighth note stem + flag */
+/* Four note bars at staggered heights */
 .icon-rhythm::before {
   content: '';
   position: absolute;
-  width: 3px;
-  height: 20px;
-  background: linear-gradient(180deg, #EC4899, #DB2777);
-  border-radius: 2px;
-  top: 4px;
-  left: 11px;
+  width: 6px;
+  height: 10px;
+  background: #EC4899;
+  border-radius: 3px;
+  top: 3px;
+  left: 2px;
+  animation: note-bounce 1.2s ease-in-out infinite;
   box-shadow:
-    /* note head */ -3px 17px 0 5px #DB2777,
-    /* beam */ 10px -2px 0 2px #EC4899,
-    /* second stem */ 12px 0 0 3px #EC4899,
-    /* second head */ 9px 12px 0 5px #DB2777;
+    8px 10px 0 0 #A855F7,
+    16px 4px 0 0 #3B82F6,
+    24px 16px 0 0 #F59E0B;
 }
+/* Hit-zone line at bottom */
 .icon-rhythm::after {
   content: '';
   position: absolute;
-  width: 3px;
-  height: 14px;
-  background: #EC4899;
-  border-radius: 2px;
-  top: 6px;
-  left: 24px;
+  width: 32px;
+  height: 2px;
+  background: linear-gradient(90deg, #EC4899, #A855F7, #3B82F6, #F59E0B);
+  border-radius: 1px;
+  bottom: 4px;
+  left: 2px;
+  opacity: 0.7;
+  box-shadow: 0 0 6px rgba(168, 85, 247, 0.4);
 }
 
 /* ─── 25. Dodge ─────────────────────────────────────────────── */
@@ -1281,68 +1310,66 @@
   animation: float 2.5s ease-in-out infinite;
 }
 
-/* ─── Pipe Puzzle ─────────────────────────────────────────── */
+/* ─── Pipe Puzzle (T-junction with water flow) ───────────── */
 .icon-pipe {
   display: block; position: relative; width: 36px; height: 36px;
+  animation: float 2.5s ease-in-out infinite;
 }
+/* Horizontal pipe: source(green) → water(blue) */
 .icon-pipe::before {
   content: '';
   position: absolute;
-  /* Horizontal bar across the middle */
-  top: 50%; left: 2px;
-  width: calc(100% - 4px); height: 8px;
-  transform: translateY(-50%);
-  background: linear-gradient(90deg, #22C55E, #3B82F6);
+  top: 8px; left: 3px;
+  width: 30px; height: 8px;
+  background: linear-gradient(90deg, #22C55E, #3B82F6, #60A5FA);
   border-radius: 4px;
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.4);
 }
+/* Vertical arm going down from center */
 .icon-pipe::after {
   content: '';
   position: absolute;
-  /* Vertical bar forming a cross */
-  left: 50%; top: 2px;
-  height: calc(100% - 4px); width: 8px;
-  transform: translateX(-50%);
-  background: linear-gradient(180deg, #3B82F6, #22C55E);
-  border-radius: 4px;
-  animation: spin-slow 4s linear infinite;
-  transform-origin: center center;
+  top: 12px; left: 14px;
+  width: 8px; height: 18px;
+  background: linear-gradient(180deg, #3B82F6, #818CF8);
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 0 6px rgba(59, 130, 246, 0.3);
 }
 
-/* ─── Yacht Dice ──────────────────────────────────────────── */
-.icon-yacht {
+/* ─── Skippity ────────────────────────────────────────────── */
+.icon-skippity {
   display: block; position: relative; width: 36px; height: 36px;
 }
-.icon-yacht::before {
+.icon-skippity::before {
   content: '';
   position: absolute;
+  width: 9px; height: 9px; border-radius: 50%;
+  background: #EF4444;
   top: 4px; left: 4px;
-  width: 28px; height: 28px;
-  background: #F8FAFC;
-  border-radius: 6px;
   box-shadow:
-    /* dots: 3-face pattern */
-    -6px -6px 0 2px #1E293B,
-    0px 0px 0 2px #1E293B,
-    6px 6px 0 2px #1E293B,
-    2px 2px 8px rgba(0,0,0,0.3);
+    11px 0 0 0 #3B82F6,
+    22px 0 0 0 #22C55E,
+    0px 11px 0 0 #EAB308,
+    11px 11px 0 0 #A855F7,
+    22px 11px 0 0 #EF4444,
+    0px 22px 0 0 #22C55E,
+    11px 22px 0 0 #3B82F6,
+    22px 22px 0 0 #EAB308;
 }
-.icon-yacht::after {
+.icon-skippity::after {
   content: '';
   position: absolute;
-  top: 1px; left: 1px;
-  width: 14px; height: 14px;
-  background: #F8FAFC;
-  border-radius: 4px;
-  box-shadow:
-    0px 0px 0 2px #1E293B inset,
-    4px 1px 0 1px #1E293B,
-    10px 1px 0 1px #1E293B;
-  opacity: 0.5;
-  animation: dice-bounce 1.5s ease-in-out infinite;
+  top: 9px; left: 15px;
+  width: 7px; height: 7px;
+  background: transparent;
+  border-top: 2px solid #F0F6FC;
+  border-right: 2px solid #F0F6FC;
+  transform: rotate(45deg);
+  animation: skip-jump 1.5s ease-in-out infinite;
 }
-@keyframes dice-bounce {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-3px) rotate(10deg); }
+@keyframes skip-jump {
+  0%, 100% { opacity: 1; transform: rotate(45deg) translate(0, 0); }
+  50% { opacity: 0.5; transform: rotate(45deg) translate(3px, -3px); }
 }
 
 /* ─── Simon ───────────────────────────────────────────────── */
@@ -1452,6 +1479,30 @@
   height: 30px;
   line-height: 30px;
   text-align: center;
+}
+
+/* ─── Goblet Gobblers ────────────────────────────────────── */
+.icon-goblet {
+  display: block; position: relative; width: 36px; height: 36px;
+  animation: float 2.5s ease-in-out infinite;
+}
+.icon-goblet::before {
+  content: '';
+  position: absolute;
+  top: 2px; left: 2px;
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, #F472B6, #EC4899);
+  box-shadow: 0 0 8px rgba(236, 72, 153, 0.5);
+}
+.icon-goblet::after {
+  content: '';
+  position: absolute;
+  top: 10px; left: 10px;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, #60A5FA, #3B82F6);
+  box-shadow: 0 0 6px rgba(59, 130, 246, 0.5);
 }
 
 .game-logo-css > [class^="icon-"] {
