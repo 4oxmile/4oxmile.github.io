@@ -29,8 +29,6 @@ body {
   height: 100dvh;
   overflow: hidden;
   background: var(--bg-secondary);
-  border-left: 1px solid var(--border);
-  border-right: 1px solid var(--border);
 }
 
 /* ─── Overlay Screens ────────────────────────────────── */

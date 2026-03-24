@@ -42,8 +42,6 @@ body {
   flex-direction: column;
   position: relative;
   background-color: var(--bg-secondary);
-  border-left: 1px solid var(--border);
-  border-right: 1px solid var(--border);
 }
 
 /* ── Header ── */

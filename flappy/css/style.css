@@ -31,8 +31,6 @@ body {
   flex-direction: column;
   overflow: hidden;
   background: var(--bg-secondary);
-  border-left: 1px solid var(--border);
-  border-right: 1px solid var(--border);
 }
 
 /* Score bar */

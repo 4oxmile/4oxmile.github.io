@@ -33,8 +33,6 @@ html, body {
   height: 100dvh;
   overflow: hidden;
   background: var(--board-bg);
-  border-left: 1px solid var(--border);
-  border-right: 1px solid var(--border);
 }
 
 #game-canvas {
