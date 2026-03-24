@@ -50,7 +50,7 @@ window.Game = (function () {
       if (onlineMode) { showMenu(); return; }
       startGame();
     });
-    $('back-btn').addEventListener('click', () => { window.location.href = '/'; });
+    $('back-btn').addEventListener('click', showMenu);
     $('restart-btn').addEventListener('click', () => {
       if (onlineMode) return; // no restart in online
       startGame();
