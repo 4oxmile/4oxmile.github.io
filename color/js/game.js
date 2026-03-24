@@ -319,7 +319,7 @@ function endGame() {
   dom.goRecord.classList.toggle('visible', isNew);
 
   showScreen('gameover');
-  if(typeof Leaderboard!=='undefined')Leaderboard.ready('colorfind',state.score);
+  if(typeof Leaderboard!=='undefined')Leaderboard.ready('color',state.score);
 }
 
 function pauseGame() {

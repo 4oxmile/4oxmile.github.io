@@ -417,7 +417,7 @@ function triggerWin() {
     winBestEl.textContent = isNewRecord ? fmtTime(clearTime) : fmtTime(best);
     newRecordBadge.classList.toggle('hidden', !isNewRecord);
     overlayWin.classList.remove('hidden');
-    if(typeof Leaderboard!=='undefined')Leaderboard.ready('minesweeper_'+currentDifficulty,clearTime,{ascending:true,format:'time',label:'시간'});
+    if(typeof Leaderboard!=='undefined')Leaderboard.ready('mine_'+currentDifficulty,clearTime,{ascending:true,format:'time',label:'시간'});
   }, delay + 200);
 }
 

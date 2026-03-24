@@ -15,7 +15,7 @@ window.Leaderboard = (() => {
     puzzle:      { ascending: true, label: '이동' },
     sokoban:     { ascending: false, label: '레벨' },
     maze:        { ascending: true, format: 'time', label: '시간' },
-    minesweeper: { ascending: true, format: 'time', label: '시간' },
+    mine: { ascending: true, format: 'time', label: '시간' },
     sudoku:      { ascending: true, format: 'time', label: '시간' },
     reaction:    { ascending: true, format: 'ms10', label: '시간' },
     aim:         { ascending: true, format: 'ms10', label: '시간' },
@@ -26,9 +26,9 @@ window.Leaderboard = (() => {
     reaction:           { min: 1000 },    // 100ms avg minimum (human limit)
     aim:                { min: 1200 },    // 120ms avg minimum (need mouse move)
     target:             { max: 15000 },   // 30s game, reasonable cap
-    minesweeper_easy:   { min: 3 },       // can't clear in < 3s
-    minesweeper_medium: { min: 10 },
-    minesweeper_hard:   { min: 20 },
+    mine_easy:   { min: 3 },       // can't clear in < 3s
+    mine_medium: { min: 10 },
+    mine_hard:   { min: 20 },
     sudoku:             { min: 15 },      // can't solve in < 15s
     maze:               { min: 2 },
   };

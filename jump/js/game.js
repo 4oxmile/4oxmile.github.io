@@ -180,7 +180,7 @@ function gameOver() {
 
   pauseBtn().style.display = 'none';
   showOverlay('result');
-  if(typeof Leaderboard!=='undefined')Leaderboard.ready('doodle',score);
+  if(typeof Leaderboard!=='undefined')Leaderboard.ready('jump',score);
 
   if (animId) {
     cancelAnimationFrame(animId);

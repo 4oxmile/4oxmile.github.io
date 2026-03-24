@@ -30,7 +30,7 @@
 | 게임 | 설명 |
 |------|------|
 | **[2048](https://4ox.kr/2048/)** | 스와이프로 숫자를 합쳐보세요 |
-| **[MINE](https://4ox.kr/minesweeper/)** | 지뢰를 피해 모든 칸을 열어보세요 |
+| **[MINE](https://4ox.kr/mine/)** | 지뢰를 피해 모든 칸을 열어보세요 |
 | **[SUDOKU](https://4ox.kr/sudoku/)** | 가로 세로 구역에 1~9 채우기 |
 | **[PUZZLE](https://4ox.kr/puzzle/)** | 숫자 타일을 순서대로 맞추기 |
 | **[SOKOBAN](https://4ox.kr/sokoban/)** | 상자를 밀어서 목적지에 배치 |
@@ -68,7 +68,7 @@
 | **[FLAPPY](https://4ox.kr/flappy/)** | 탭하여 새를 날려보세요 |
 | **[BREAKOUT](https://4ox.kr/breakout/)** | 패들로 공을 쳐서 벽돌 깨기 |
 | **[DINO](https://4ox.kr/dino/)** | 장애물을 점프해서 피하기 |
-| **[JUMP](https://4ox.kr/doodle/)** | 발판을 밟고 계속 위로 올라가기 |
+| **[JUMP](https://4ox.kr/jump/)** | 발판을 밟고 계속 위로 올라가기 |
 | **[CROSSY](https://4ox.kr/crossy/)** | 타이밍 맞춰 도로를 건너세요 |
 | **[DODGE](https://4ox.kr/dodge/)** | 사방에서 날아오는 화살을 피하세요 |
 | **[STACK](https://4ox.kr/stack/)** | 블록을 정확히 쌓아 올리세요 |
@@ -81,7 +81,7 @@
 | **[REACTION](https://4ox.kr/reaction/)** | 반응속도를 테스트해보세요 |
 | **[AIM](https://4ox.kr/aim/)** | 랜덤 위치의 원을 빠르게 클릭 |
 | **[MOLE](https://4ox.kr/mole/)** | 두더지를 빠르게 잡으세요 |
-| **[COLOR](https://4ox.kr/colorfind/)** | 색이 다른 타일을 찾으세요 |
+| **[COLOR](https://4ox.kr/color/)** | 색이 다른 타일을 찾으세요 |
 | **[RHYTHM](https://4ox.kr/rhythm/)** | 박자에 맞춰 노트를 탭하세요 |
 | **[FRUIT](https://4ox.kr/fruit/)** | 드래그로 과일을 베세요 |
 | **[TARGET](https://4ox.kr/target/)** | 무작위 과녁을 빠르게 맞추세요 |

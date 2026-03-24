@@ -318,7 +318,7 @@
 }
 
 /* ─── 8. Minesweeper ────────────────────────────────────────── */
-.icon-minesweeper {
+.icon-mine {
   display: block;
   position: relative;
   width: 36px;
@@ -326,7 +326,7 @@
   animation: pulse-scale 2.5s ease-in-out infinite;
 }
 /* bomb body */
-.icon-minesweeper::before {
+.icon-mine::before {
   content: '';
   position: absolute;
   width: 24px;
@@ -338,7 +338,7 @@
   left: 6px;
 }
 /* fuse + spikes */
-.icon-minesweeper::after {
+.icon-mine::after {
   content: '';
   position: absolute;
   width: 4px;
@@ -778,7 +778,7 @@
 }
 
 /* ─── 21. Colorfind ─────────────────────────────────────────── */
-.icon-colorfind {
+.icon-color {
   display: block;
   position: relative;
   width: 36px;
@@ -786,7 +786,7 @@
   animation: pulse-scale 2.2s ease-in-out infinite;
 }
 /* colorful 3x3 grid */
-.icon-colorfind::before {
+.icon-color::before {
   content: '';
   position: absolute;
   width: 10px;
@@ -805,7 +805,7 @@
     26px 26px 0 #3B82F6;
 }
 /* odd-one-out highlighted */
-.icon-colorfind::after {
+.icon-color::after {
   content: '';
   position: absolute;
   width: 10px;
@@ -818,7 +818,7 @@
 }
 
 /* ─── 22. Doodle / Jump ─────────────────────────────────────── */
-.icon-doodle {
+.icon-jump {
   display: block;
   position: relative;
   width: 36px;
@@ -826,7 +826,7 @@
   animation: bounce-y 1.4s ease-in-out infinite;
 }
 /* platform */
-.icon-doodle::before {
+.icon-jump::before {
   content: '';
   position: absolute;
   width: 22px;
@@ -838,7 +838,7 @@
   box-shadow: 0 2px 6px rgba(16,185,129,0.5);
 }
 /* character (small rounded rect) */
-.icon-doodle::after {
+.icon-jump::after {
   content: '';
   position: absolute;
   width: 12px;
