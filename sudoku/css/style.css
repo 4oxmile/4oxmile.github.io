@@ -152,8 +152,6 @@ body {
   transition: filter 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
   box-shadow: 0 4px 20px var(--accent-glow);
   letter-spacing: 0.5px;
-  width: 100%;
-  max-width: 280px;
 }
 
 .cta-btn:hover { filter: brightness(1.1); }
