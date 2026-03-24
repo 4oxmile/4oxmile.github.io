@@ -111,6 +111,8 @@ body {
    CTA Button (공통)
    =========================== */
 .cta-btn {
+  width: 100%;
+  max-width: 320px;
   padding: 14px 48px;
   font-size: 16px;
   font-weight: 700;

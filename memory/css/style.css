@@ -28,7 +28,7 @@ body {
 .game-desc{font-size:16px;color:var(--text-secondary);text-align:center;line-height:1.6}
 .game-hint{font-size:13px;color:var(--text-muted);letter-spacing:0.5px}
 .over-title{font-size:32px;font-weight:800;color:var(--text-primary)}
-.cta-btn{padding:14px 48px;font-size:16px;font-weight:700;font-family:inherit;color:#fff;background:var(--accent);border:none;border-radius:12px;cursor:pointer;transition:filter .15s,transform .15s,box-shadow .15s;box-shadow:0 4px 20px var(--accent-glow);letter-spacing:.5px;width:100%;max-width:280px}
+.cta-btn{padding:14px 48px;font-size:16px;font-weight:700;font-family:inherit;color:#fff;background:var(--accent);border:none;border-radius:12px;cursor:pointer;transition:filter .15s,transform .15s,box-shadow .15s;box-shadow:0 4px 20px var(--accent-glow);letter-spacing:.5px;width:100%;max-width:320px}
 .cta-btn:hover{filter:brightness(1.1)}
 .cta-btn:active{transform:scale(0.97)}
 

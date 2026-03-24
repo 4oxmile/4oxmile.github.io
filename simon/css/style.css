@@ -188,6 +188,8 @@ body {
 
 /* Shared button */
 .cta-btn {
+  width: 100%;
+  max-width: 320px;
   padding: 14px 48px; font-size: 16px; font-weight: 700; font-family: inherit;
   color: #fff; background: var(--accent); border: none; border-radius: 12px;
   cursor: pointer; transition: filter 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
