@@ -628,67 +628,6 @@ body {
 }
 
 /* ═══════════════════════════════════════════════════════════════════
-   BOTTOM CONTROLS
-   ═══════════════════════════════════════════════════════════════════ */
-#bottom-controls {
-  display: flex;
-  gap: 6px;
-  padding: 10px 16px calc(14px + env(safe-area-inset-bottom, 0px));
-  background: var(--bg-secondary);
-  border-top: 1px solid var(--border);
-  flex-shrink: 0;
-}
-
-.ctrl-btn {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 3px;
-  padding: 8px 4px;
-  border: 1.5px solid var(--border);
-  border-radius: 10px;
-  background: var(--btn-bg);
-  color: var(--text-secondary);
-  font-family: inherit;
-  cursor: pointer;
-  transition: background 0.15s ease, color 0.15s ease, transform 0.1s ease;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.ctrl-btn:hover {
-  background: var(--btn-active);
-  color: var(--text-primary);
-}
-
-.ctrl-btn:active {
-  transform: scale(0.94);
-}
-
-.ctrl-btn:disabled {
-  opacity: 0.38;
-  pointer-events: none;
-}
-
-.ctrl-btn-icon {
-  font-size: 1.1rem;
-  line-height: 1;
-}
-
-.ctrl-btn-label {
-  font-size: 0.58rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
-
-.ctrl-btn.available {
-  border-color: #22c55e;
-  color: #22c55e;
-}
-
-/* ═══════════════════════════════════════════════════════════════════
    SCROLLBAR
    ═══════════════════════════════════════════════════════════════════ */
 ::-webkit-scrollbar {
