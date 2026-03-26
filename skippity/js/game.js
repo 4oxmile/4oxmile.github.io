@@ -598,6 +598,7 @@ window.Game = (function () {
     const aiLabel = $('ai-label');
     if (aiLabel) aiLabel.textContent = 'AI';
     renderStats();
+    hideAllOverlays();
     $('start-overlay').classList.remove('hidden');
   }
 
