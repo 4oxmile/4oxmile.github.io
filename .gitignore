@@ -13,6 +13,10 @@ Desktop.ini
 # Claude Code / OMC
 .claude/
 .omc/
+.serena/
+
+# Agent artifacts
+docs/
 
 # Node (if added later)
 node_modules/
